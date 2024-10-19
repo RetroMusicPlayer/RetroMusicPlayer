@@ -329,7 +329,7 @@
     <string name="pref_header_library">Bibliotheek</string>
     <string name="pref_header_lockscreen">Vergrendelscherm</string>
     <string name="pref_header_playlists">Afspeellijsten</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pauzeert het nummer wanneer het volume afneemt tot nul en begint met afspelen als het volume level stijgt. Werkt ook buiten de app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pauzeer op nul</string>
     <string name="pref_keep_screen_on_summary">Houd er rekening mee dat het inschakelen van deze functie de levensduur van de batterij kan beïnvloeden</string>
     <string name="pref_keep_screen_on_title">Houd het scherm aan</string>
@@ -360,7 +360,7 @@
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Licentie details voor open source software</string>
     <string name="pref_summary_pause_history">Wanneer ingeschakeld, zullen nieuw afgespeelde nummers niet zichtbaar zijn in de geschiedenis</string>
-    <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
+    <string name="pref_summary_remember_tab">Navigeer naar het laatst gebruikte tabblad bij opstarten</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Toon Nieuwe Muziek Mix op het startscherm</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
@@ -370,7 +370,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">Als er ruimte is in het nu afspelen scherm, zet volume knoppen aan</string>
     <string name="pref_summary_wallpaper_accent">Haal accentkleur uit achtergrond</string>
-    <string name="pref_summary_whitelist">Only show music from /Music Folder</string>
+    <string name="pref_summary_whitelist">Toon alleen muziek uit de /Muziek Folder</string>
     <string name="pref_title_album_art_on_lockscreen">Laat album cover zien</string>
     <string name="pref_title_album_artists_only">Navigeer via Album Artiest</string>
     <string name="pref_title_album_cover_style">Album cover thema</string>
@@ -381,7 +381,7 @@
     <string name="pref_title_audio_fade">Fade audio</string>
     <string name="pref_title_auto_download_artist_images">Automatisch downloaden artisten afbeeldingen</string>
     <string name="pref_title_blacklist">Zwarte lijst</string>
-    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
+    <string name="pref_title_bluetooth_playback">Bluetooth afspelen</string>
     <string name="pref_title_blurred_album_art">Vervaag album cover</string>
     <string name="pref_title_circle_button">Ronde afspeelknop</string>
     <string name="pref_title_classic_notification">Klassiek notificatie design</string>
@@ -391,11 +391,11 @@
     <string name="pref_title_custom_font">Gebruik Manrope lettertype</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
-    <string name="pref_title_extra_controls">Extra controls</string>
-    <string name="pref_title_extra_song_info">Song info</string>
+    <string name="pref_title_extra_controls">Extra opties</string>
+    <string name="pref_title_extra_song_info">Nummer info</string>
     <string name="pref_title_gapless_playback">Afspelen zonder pauzes</string>
     <string name="pref_title_general_theme">Basis thema</string>
-    <string name="pref_title_home_album_grid_style">Album grid</string>
+    <string name="pref_title_home_album_grid_style">Album raster</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
     <string name="pref_title_home_banner">Banner</string>
     <string name="pref_title_ignore_media_store_artwork">Negeer media store covers</string>
@@ -409,7 +409,7 @@
     <string name="pref_title_pause_history">Pauzeer geschiedenis</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
-    <string name="pref_title_suggestions">Show suggestions</string>
+    <string name="pref_title_suggestions">Suggesties tonen</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
     <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
     <string name="pref_title_tab_text_mode">Tab titles mode</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Achtergrond accentkleur</string>
     <string name="pref_title_whitelist">Whitelist music</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
     <string name="profile">Profiel</string>
     <string name="purchase">Kopen</string>
     <string name="queue">Wachtrij</string>
@@ -445,13 +445,15 @@
     <string name="reset_artist_image">Reset artiest afbeelding</string>
     <string name="restore">Herstellen</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
+    <string name="restored_previous_purchase_please_restart">Vorige aankoop hersteld. Gelieve de app te herstarten om alle functies te benutten.</string>
     <string name="restored_previous_purchases">Teruggezette aankopen</string>
     <string name="restoring_purchase">Aankoop herstellen…</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Beltoon (Optioneel)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Bestand verwijderen gefaald: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Kan SAF URI niet ophalen</string>
@@ -460,7 +462,7 @@
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s heeft toegang tot de SD-kaart nodig</string>
     <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
-    <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
+    <string name="saf_guide_slide2_title">Selecteer uw SD-kaart in het navigatie menu</string>
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
     <string name="saf_write_failed">File write failed: %s</string>
@@ -498,7 +500,7 @@
     <string name="sort_order_composer">Componist</string>
     <string name="sort_order_date">Datum toegevoegd</string>
     <string name="sort_order_date_modified">Datum aangepast</string>
-    <string name="sort_order_default">Default</string>
+    <string name="sort_order_default">Standaard</string>
     <string name="sort_order_num_songs">Aantal nummers</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Jaar</string>
@@ -509,7 +511,7 @@
     <string name="start_play_music">Begin muziek afspelen.</string>
     <string name="suggestion_songs">Suggesties</string>
     <string name="support_development">Ondersteun ontwikkelaars</string>
-    <string name="swipe_to_unlock">Swipe to unlock</string>
+    <string name="swipe_to_unlock">Swipe om te ontgrendelen</string>
     <string name="synced_lyrics">Synced lyrics</string>
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
@@ -538,10 +540,10 @@
     <string name="update_image">Update afbeelding</string>
     <string name="updating">Bijwerken...</string>
     <string name="user_images_description">User Images</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">Gebruikersnaam</string>
     <string name="username">Gebruikersnaam</string>
     <string name="version">Versie</string>
-    <string name="vertical_flip">Vertical flip</string>
+    <string name="vertical_flip">Verticaal omdraaien</string>
     <string name="view_on_telegram">Bekijk op Telegram</string>
     <string name="volume">Volume</string>
     <string name="web_search">Web zoekopdracht</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">Je moet ten minste één categorie selecteren.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

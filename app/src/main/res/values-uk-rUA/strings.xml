@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">Про застосунок %s</string>
+    <string name="about_album_label">Про альбом %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
     <string name="accent_color">Акцентний колір</string>
     <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
@@ -50,7 +50,7 @@
     <string name="action_sort_order">Порядок сортування</string>
     <string name="action_tag_editor">Редактор тегів</string>
     <string name="action_toggle_favorite">Перемкнути улюблене</string>
-    <string name="action_toggle_shuffle">Перемкнути режим змішування</string>
+    <string name="action_toggle_shuffle">Перемкнути режим</string>
     <string name="adaptive">Адаптивний</string>
     <string name="add_action">Додати</string>
     <string name="add_playlist_title">"Додати до списку відтворення"</string>
@@ -62,8 +62,8 @@
     <plurals name="albumSongs">
         <item quantity="one">Пісня</item>
         <item quantity="few">Пісні</item>
-        <item quantity="many">Пісні</item>
-        <item quantity="other">Пісні</item>
+        <item quantity="many">Пісень</item>
+        <item quantity="other">Пісень</item>
     </plurals>
     <string name="album_artist">Виконавець альбому</string>
     <string name="albums">Альбоми</string>
@@ -110,7 +110,7 @@
     <string name="bug_report_no_password">Введіть свій дійсний пароль користувача GitHub</string>
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
-    <string name="bug_report_success">Повідомлення про помилку успішне</string>
+    <string name="bug_report_success">Звіт про помилку надіслано</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані застосунку\" або надішліть лист на ел. пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
@@ -456,6 +456,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Застосунку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рингтон</string>
     <string name="ringtone_title">Мелодія (Необов\'язково)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Помилка видалення файлу: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Неможливо отримати URI SAF</string>
@@ -562,4 +564,6 @@
     <string name="you_have_to_select_at_least_one_category">Виберіть принаймні одну категорію.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вас буде перенаправлено на сайт відстеження проблем.</string>
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
+    <string name="could_not_write_tags_to_file">Не вдалося записати теги у файл!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

@@ -434,7 +434,7 @@
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$d</b> ออกจากเพลย์ลิสต์?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">รายการปัญหา</string>
@@ -450,6 +450,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">ต้องการสิทธิ์เพื่อตั้งค่าริงโทน</string>
     <string name="ringtone_title">ริงโทน (Optional)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">ลบไฟล์ %s ไม่สำเร็จ</string>
     <!-- SAF -->
     <string name="saf_error_uri">ไม่สามารถขอข้อมูลจาก SAF URI ได้</string>
@@ -556,4 +558,6 @@
     <string name="you_have_to_select_at_least_one_category">คุณต้องเลือกอย่างน้อยหนึ่งหมวดหมู่</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">ท่านจะติดตามการรายงานปัญหาจากเว็บไซต์</string>
     <string name="your_account_data_is_only_used_for_authentication">ข้อมูลบัญชีของท่านจะใช้สำหรับการเข้าสู่ระบบเท่านั้น</string>
+    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

@@ -89,8 +89,8 @@
     <string name="biography">简介</string>
     <string name="black_theme_name">纯黑</string>
     <string name="blacklist">黑名单</string>
-    <string name="bluetooth_summary">应用需要附近设备权限才能检查蓝牙设备</string>
-    <string name="bluetooth_title">附近设备</string>
+    <string name="bluetooth_summary">此应用需打开查找附近设备权限以寻找蓝牙设备</string>
+    <string name="bluetooth_title">附近的蓝牙设备</string>
     <string name="blur">模糊</string>
     <string name="blur_card">模糊卡片</string>
     <string name="bug_report_failed">无法提交报告</string>
@@ -104,7 +104,7 @@
     <string name="bug_report_no_password">请您输入有效的 GitHub 密码</string>
     <string name="bug_report_no_title">请输入问题标题</string>
     <string name="bug_report_no_username">请您输入有效的 GitHub 用户名</string>
-    <string name="bug_report_success">错误报告成功</string>
+    <string name="bug_report_success">成功报告错误</string>
     <string name="bug_report_summary">发生未知错误。很抱歉让您遇到此错误，如一直崩溃，请尝试“清除应用数据”或发送邮件</string>
     <string name="bug_report_use_account">使用 GitHub 帐户发送</string>
     <string name="buy_now">立即购买</string>
@@ -162,8 +162,8 @@
     <string name="do_you_want_to_clear_the_blacklist">您想清空黑名单吗？</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[确定从黑名单中移除 <b>%1$s</b> 吗？]]></string>
     <string name="donate">捐赠</string>
-    <string name="donate_summary">如果您认为应用还不错，可以通过捐赠支持我们</string>
-    <string name="donation_header">用以下方式捐赠：</string>
+    <string name="donate_summary">如果您认为此应用还不错，请捐赠支持我们</string>
+    <string name="donation_header">请使用以下方式捐赠：</string>
     <string name="done">完成</string>
     <string name="drive_mode">驾驶模式</string>
     <string name="edit_fab">编辑按钮</string>
@@ -176,7 +176,7 @@
     <string name="error_empty_name">您的名字不能为空！</string>
     <string name="error_load_failed">加载失败</string>
     <string name="error_share_file">无法分享文件</string>
-    <string name="expanded">展开</string>
+    <string name="expanded">已展开</string>
     <string name="faq">常见问题和解答</string>
     <string name="favorites">收藏夹</string>
     <string name="file_already_exists">文件已存在</string>
@@ -185,7 +185,7 @@
     <string name="flat">扁平</string>
     <string name="folders">文件夹</string>
     <string name="follow_system">跟随系统</string>
-    <string name="for_you">私人订制</string>
+    <string name="for_you">推荐</string>
     <string name="free">免费</string>
     <string name="full">全屏</string>
     <string name="full_card">填充卡片</string>
@@ -206,7 +206,7 @@
     <string name="grid_size_8">8</string>
     <string name="grid_style_label">网格样式</string>
     <string name="help_summary">需要更多帮助？</string>
-    <string name="hinge">旋转</string>
+    <string name="hinge">翻页</string>
     <string name="history">历史记录</string>
     <string name="history_cleared">已清除历史记录</string>
     <string name="history_undo_button">撤销</string>
@@ -226,11 +226,11 @@
     <string name="label_file_name">文件名</string>
     <string name="label_file_path">文件路径</string>
     <string name="label_file_size">文件大小</string>
-    <string name="label_last_modified">最后修改</string>
+    <string name="label_last_modified">修改时间</string>
     <string name="label_more_from">来自 %s 的更多歌曲</string>
     <string name="label_sampling_rate">采样率</string>
     <string name="label_track_length">长度</string>
-    <string name="labeled">有标签</string>
+    <string name="labeled">已标记</string>
     <string name="last_added">最近添加</string>
     <string name="last_song">最后一首</string>
     <string name="lets_go">让我们开始吧</string>
@@ -242,7 +242,7 @@
     <string name="loading_products">正在加载产品...</string>
     <string name="login">登录</string>
     <string name="lyrics">歌词</string>
-    <string name="made_with_love">用❤️创造，印度出品</string>
+    <string name="made_with_love">❤️印度制造，情意绵长。❤️</string>
     <string name="material">质感</string>
     <string name="md_error_label">错误</string>
     <string name="md_storage_perm_error">权限错误</string>
@@ -451,6 +451,8 @@
     <string name="retro_music_pro">Retro Music 高级版</string>
     <string name="ringtone_summary">应用需要系统设置访问权限，才能将音乐设置为为铃声</string>
     <string name="ringtone_title">铃声（可选）</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">文件删除失败：%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">无法获取 SAF URI</string>
@@ -557,4 +559,6 @@
     <string name="you_have_to_select_at_least_one_category">请至少选择一个分类。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">将跳转至问题追踪网站。</string>
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
+    <string name="could_not_write_tags_to_file">无法将标签写入音乐文件！</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

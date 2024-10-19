@@ -253,7 +253,7 @@
     <string name="message_pro_feature">%s bir Pro özelliğidir.</string>
     <string name="message_restore_success">Geri yükleme başarıyla tamamlandı.</string>
     <string name="message_updated">Güncellendi</string>
-    <string name="message_welcome"><![CDATA[Merhaba! <br>%s\'e<br> hoşgeldin]]></string>
+    <string name="message_welcome"><![CDATA[Merhaba! <br>%s'e<br> hoşgeldin]]></string>
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
@@ -293,7 +293,7 @@
     <string name="past_three_months">Son 3 ay</string>
     <string name="paste_lyrics_here">Sözleri buraya yapıştır</string>
     <string name="paste_timeframe_lyrics_here">Zaman dilimli şarkı sözlerini buraya yapıştır</string>
-    <string name="peek">Peek</string>
+    <string name="peek">Göz at</string>
     <string name="permission_bluetooth_denied">Yakındaki cihazlara erişim izni reddedildi.</string>
     <string name="permission_external_storage_denied">Harici depolama izni reddedildi.</string>
     <string name="permission_summary">Uygulamanın müzik çalması için cihazınızın depolama erişimine ihtiyacı var</string>
@@ -338,7 +338,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Çalmakta olan şarkı albüm kapağını kilit ekranı duvar kağıdı olarak kullanın</string>
     <string name="pref_summary_album_artists_only">Sanatçı kategorisinde Albüm Sanatçılarını göster</string>
     <string name="pref_summary_audio_ducking">Sistem sesi çalındığında veya bir bildirim alındığında sesi kısın</string>
-    <string name="pref_summary_audio_fade">Fade audio when song is paused or played</string>
+    <string name="pref_summary_audio_fade">Şarkı duraklatıldığında veya çalındığında sesi kısma</string>
     <string name="pref_summary_blacklist">Kara listedeki klasörlerin içeriği kütüphanenizden gizlenir.</string>
     <string name="pref_summary_bluetooth_playback">Bluetooth cihazına bağlanır bağlanmaz çalmaya başla</string>
     <string name="pref_summary_blurred_album_art">Albüm kapağını kilit ekranında bulanıklaştır. Üçüncü taraf uygulamalar ve widget\'lar ile sorunlara neden olabilir</string>
@@ -357,7 +357,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Albüm kapağı kalitesini artırabilir, ancak fotoğrafın yavaş yüklenmesine neden olur. Bunu, yalnızca düşük çözünürlüklü resimlerle ilgili sorunlarınız varsa etkinleştirin.</string>
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
     <string name="pref_summary_lock_screen">Retro Müzik\'in özel kilit ekranı kontrollerini kullanın</string>
-    <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
+    <string name="pref_summary_manage_audio_focus">Çalınan herhangi birşeyden bağımsız olarak sesi arka planda çalmaya devam et</string>
     <string name="pref_summary_open_source_licences">Açık kaynaklı yazılım için lisans detayları</string>
     <string name="pref_summary_pause_history">Etkinleştirildiğinde, yeni çalınan şarkılar geçmişte gösterilmez</string>
     <string name="pref_summary_remember_tab">Başlangıçta son kullanılan sekmeye git</string>
@@ -402,7 +402,7 @@
     <string name="pref_title_last_added_interval">Son eklenen çalma listesi aralığı</string>
     <string name="pref_title_lock_screen">Tam ekran kontrolleri</string>
     <string name="pref_title_lyrics_screen_on">Şarkı sözlerini gösterirken ekranı açık tut</string>
-    <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_lyrics_type">Şarkı sözü tipi</string>
     <string name="pref_title_manage_audio_focus">Her zaman oynat</string>
     <string name="pref_title_now_playing_screen_appearance">Şimdi oynatılıyor teması</string>
     <string name="pref_title_open_source_licences">Açık kaynak lisansları</string>
@@ -421,7 +421,7 @@
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Beyaz liste müziği</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Siyah tema, Şimdi çalınan temalar, Atlıkarınca efekti ve daha fazlası..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Satın al</string>
     <string name="queue">Kuyruk</string>
@@ -452,6 +452,8 @@
     <string name="retro_music_pro">Retro Müzik Pro</string>
     <string name="ringtone_summary">Müziği zil sesi yapmak için uygulamanın cihaz ayarlarına erişim yetkisi gereklidir</string>
     <string name="ringtone_title">Zil sesi (İsteğe Bağlı)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Dosya silme başarısız oldu: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF url\'si alınamıyor.</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="your_account_data_is_only_used_for_authentication">Hesap verileriniz sadece kimlik doğrulama için kullanılır.</string>
+    <string name="could_not_write_tags_to_file">Etiketler müzik dosyasına yazılamadı!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

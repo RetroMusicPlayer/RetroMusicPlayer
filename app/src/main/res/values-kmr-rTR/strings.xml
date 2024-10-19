@@ -17,9 +17,9 @@
     <string name="action_delete_from_device">Ji amûrê jê bibe</string>
     <string name="action_details">Hûrgilî</string>
     <string name="action_edit">Serrast bike</string>
-    <string name="action_go_to_album">Biçe bo albumê</string>
+    <string name="action_go_to_album">Biçe bo album</string>
     <string name="action_go_to_artist">Biçe bo hunermend</string>
-    <string name="action_go_to_genre">Biçe bo cureyê</string>
+    <string name="action_go_to_genre">Biçe bo cure</string>
     <string name="action_go_to_lyrics">Biçe bo peyvên stranê</string>
     <string name="action_go_to_start_directory">Biçe rêberiya destpêkê</string>
     <string name="action_grant">Piştgirî bike</string>
@@ -268,7 +268,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="no_backups_found">Hilanîn nehate dîtin</string>
     <string name="no_equalizer">Yeksaneker nehate dîtin</string>
     <string name="no_genres">Cure tune ne</string>
-    <string name="no_lyrics_found">Peyên stranê nehatin dîtin</string>
+    <string name="no_lyrics_found">Peyvên stranê nehatin dîtin</string>
     <string name="no_playing_queue">Tu stran nayên lêdan</string>
     <string name="no_playlists">Rêzokên lêdanê tune ne</string>
     <string name="no_purchase_found">Kirîn nehate dîtin.</string>
@@ -411,7 +411,7 @@ têne guhertin</string>
     <string name="pref_title_pause_history">Dîrokê rawestîne</string>
     <string name="pref_title_remember_tab">Rûgera dawî bi bîr bîne</string>
     <string name="pref_title_show_lyrics">Peyvên stranê nîşan bide</string>
-    <string name="pref_title_suggestions">Pêşniyaran nîşan bide</string>
+    <string name="pref_title_suggestions">Pêşniyariyan nîşan bide</string>
     <string name="pref_title_swipe_anywhere_now_playing">Ji bo guhertina stranê li her derê kaş bike</string>
     <string name="pref_title_swipe_to_dismiss">Paşguh bike bi riya kaşandina berjêr</string>
     <string name="pref_title_tab_text_mode">Awaya sernavê rûgeran</string>
@@ -454,6 +454,8 @@ têne guhertin</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ji bo ku muzîkê wekî dengê zengilê saz bikî pêdivî bi mafdayînê heye ku bigihîje sazkariyên amûra te</string>
     <string name="ringtone_title">Dengê zengilê (Vebijêrkî)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Jêbirina pelê bi ser neket: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Nikare girêdana SAF bi dest bixe</string>
@@ -509,7 +511,7 @@ têne guhertin</string>
     <string name="speech_prompt">Di pirtûkxaneya xwe de bigere</string>
     <string name="stack">Lodkirin</string>
     <string name="start_play_music">Lêdana muzîkê bide destpêkirin.</string>
-    <string name="suggestion_songs">Pêşniyar</string>
+    <string name="suggestion_songs">Pêşniyarî</string>
     <string name="support_development">Piştgiriya pêşdebirinê bike</string>
     <string name="swipe_to_unlock">Kaş bike ji bo vekirinê</string>
     <string name="synced_lyrics">Peyvên hevdemkirî</string>
@@ -560,4 +562,6 @@ têne guhertin</string>
     <string name="you_have_to_select_at_least_one_category">Divê tu herî kêm yek beş hilbijêrî.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Tu yê ji bo malpera şopandina pirsgirêkê werî beralîkirin.</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
+    <string name="could_not_write_tags_to_file">Nikare etîketan li pelê muzîkê binivîsîne!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

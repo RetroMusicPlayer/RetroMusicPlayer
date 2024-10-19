@@ -119,7 +119,7 @@
     <string name="cascading">Cascata</string>
     <string name="changelog">Lista de mudanças</string>
     <string name="changelog_summary">Veja o que há de novo</string>
-    <string name="choose_image">Chotos Imagem</string>
+    <string name="choose_image">Escolher Imagem</string>
     <string name="choose_restore_title">Selecione o que será restaurado</string>
     <string name="circle">Círculo</string>
     <string name="circular">Circular</string>
@@ -177,7 +177,7 @@
     <string name="error_delete_backup">Não foi possível excluir o backup</string>
     <string name="error_empty_name">Seu nome não pode estar em branco!</string>
     <string name="error_load_failed">Falha ao carregar</string>
-    <string name="error_share_file">Não foi possível salvar o arquivo</string>
+    <string name="error_share_file">Não foi possível compartilhar o arquivo</string>
     <string name="expanded">Expandido</string>
     <string name="faq">Perguntas frequentes</string>
     <string name="favorites">Favoritos</string>
@@ -197,7 +197,7 @@
     <string name="genres">Gêneros</string>
     <string name="git_hub_summary">Bifurcação do projeto no GitHub</string>
     <string name="gradient">Degradê</string>
-    <string name="grant_access">Conceder acesso</string>
+    <string name="grant_access">Permitir acesso</string>
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -452,6 +452,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">O aplicativo precisa de permissão para acessar as configurações do seu dispositivo para definir músicas como toque</string>
     <string name="ringtone_title">Toque (opcional)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Falha ao excluir arquivo: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Não foi possível obter URI SAF</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">Você precisa selecionar ao menos uma categoria.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
+    <string name="could_not_write_tags_to_file">Não foi possível gravar as tags no arquivo de música!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

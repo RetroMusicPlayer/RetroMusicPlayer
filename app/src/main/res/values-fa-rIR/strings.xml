@@ -16,7 +16,7 @@
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف از دستگاه</string>
     <string name="action_details">جزئيات</string>
-    <string name="action_edit">ویرایش</string>
+    <string name="action_edit">اصلاح</string>
     <string name="action_go_to_album">رفتن به آلبوم</string>
     <string name="action_go_to_artist">رفتن به صفحه هنرمند</string>
     <string name="action_go_to_genre">رفتن به ژانر موسیقی</string>
@@ -24,7 +24,7 @@
     <string name="action_go_to_start_directory">رفتن به منوی شروع و آغاز</string>
     <string name="action_grant">اجازه دادن</string>
     <string name="action_grid_size">اندازه ی شبکه</string>
-    <string name="action_grid_size_land">اندازه جدول‌بندی (زمین)</string>
+    <string name="action_grid_size_land">اندازه جدول‌بندی (افقی)</string>
     <string name="action_new_playlist">لیست پخش جدید</string>
     <string name="action_next">بعدی</string>
     <string name="action_play">پخش</string>
@@ -33,7 +33,7 @@
     <string name="action_play_pause">پخش/توقف</string>
     <string name="action_previous">قبلی</string>
     <string name="action_remove_from_favorites">حذف از علاقه‌مندی‌ها</string>
-    <string name="action_remove_from_playing_queue">حذف از لیست پخش</string>
+    <string name="action_remove_from_playing_queue">حذف از صف پخش</string>
     <string name="action_remove_from_playlist">حذف از لیست پخش</string>
     <string name="action_rename">تغییر نام</string>
     <string name="action_save_playing_queue">ذخیره صف پلی لیست</string>
@@ -71,7 +71,7 @@
     </plurals>
     <string name="always">همیشه</string>
     <string name="app_share">به اشتراک گذاری برنامه</string>
-    <string name="app_shortcut_shuffle_all_short">حالت مخلوط</string>
+    <string name="app_shortcut_shuffle_all_short">حالت تصادفی</string>
     <string name="app_shortcut_top_tracks_short">بهترین اهنگ ها</string>
     <string name="app_widget_big_name">تصویر کامل</string>
     <string name="app_widget_card_name">کارت</string>
@@ -261,8 +261,8 @@
     <string name="new_playlist_title">فهرست پخش جدید %d</string>
     <string name="new_start_directory">دایرکتوری شروع جدید است%s.</string>
     <string name="next_song">آهنگ بعدی</string>
-    <string name="no_albums">شما آلبومی ندارید</string>
-    <string name="no_artists">شما هنرمندی ندارید</string>
+    <string name="no_albums">شما هیچ آلبومی ندارید</string>
+    <string name="no_artists">شما هیچ هنرمندی ندارید</string>
     <string name="no_audio_ID">"ابتدا یک آهنگ پخش کنید ، سپس دوباره امتحان کنید."</string>
     <string name="no_backups_found">هیچ نسخه پشتیبانی یافت نشد</string>
     <string name="no_equalizer">هیچ اکولایزری یافت نشد</string>
@@ -280,7 +280,7 @@
     <string name="nothing_to_scan">هیچ چیزی برای اسکن نیست.</string>
     <string name="nothing_to_see">اینچا چیزی برای دیدن نیست</string>
     <string name="notification">اعلان</string>
-    <string name="notification_settings_summary">اعلان‌ها را سفارشی‌سازی کنید</string>
+    <string name="notification_settings_summary">اعلان‌ها را شخصی‌سازی کنید</string>
     <string name="now_playing">صفحه در حال پخش</string>
     <string name="now_playing_queue">لیست درحال پخش</string>
     <string name="now_playing_summary">صفحه پخش اهنگ را شخصی سازی کنید</string>
@@ -331,7 +331,7 @@
     <string name="pref_header_playlists">لیست پخش آهنگ ها</string>
     <string name="pref_keep_pause_on_zero_volume_summary">آهنگ به محض اینکه صدای گوشی به صفر می‌رسد متوقف می‌شود و به هنگام بالا رفتن صدا موزیک پخش می‌شود</string>
     <string name="pref_keep_pause_on_zero_volume_title">متوقف شدن صدا هنگامیکه صدای گوشی صفر است</string>
-    <string name="pref_keep_screen_on_summary">اینو به یاد داشته باشید فعال کردن این قابلیت مصرف باتری را بالا می برد</string>
+    <string name="pref_keep_screen_on_summary">به یاد داشته باشید فعال کردن این قابلیت مصرف باتری را بالا می برد</string>
     <string name="pref_keep_screen_on_title">روشن نگهداشتن صفحه</string>
     <string name="pref_language_name">انتخاب زبان</string>
     <string name="pref_snow_fall_title">اثر بارش برف</string>
@@ -346,7 +346,7 @@
     <string name="pref_summary_classic_notification">از طراحی اعلان کلاسیک استفاده کنید</string>
     <string name="pref_summary_colored_app">رنگ‌های پس‌زمینه و دکمه کنترل با توجه به هنر آلبوم از صفحه در حال پخش تغییر می‌کنند</string>
     <string name="pref_summary_colored_app_shortcuts">میانبرهای برنامه را با رنگ تاکیدی رنگ می کند. هر بار که رنگ را تغییر می‌دهید، لطفاً آن را تغییر دهید تا تأثیر بگذارد</string>
-    <string name="pref_summary_colored_notification">"به اعلان های جلذ آلبوم\u2019 رنگ های متنوع بدهید"</string>
+    <string name="pref_summary_colored_notification">"به اعلان های جلد آلبوم\u2019 رنگ های متنوع بدهید"</string>
     <string name="pref_summary_cross_fade">مدت زمان تقاطع بین آهنگ ها</string>
     <string name="pref_summary_desaturated_color">طبق دستورالعمل طراحی Material، خطوط در رنگ‌های حالت تاریک باید غیراشباع باشند</string>
     <string name="pref_summary_expand_now_playing_panel">با کلیک بر روی اعلان، به جای صفحه اصلی، صفحه در حال پخش نمایش داده می شود</string>
@@ -416,7 +416,7 @@
     <string name="pref_title_toggle_carousel_effect">جلوه چرخ فلک</string>
     <string name="pref_title_toggle_full_screen">برنامه تمام‌صفحه</string>
     <string name="pref_title_toggle_toggle_headset">پخش خودکار</string>
-    <string name="pref_title_toggle_toggle_shuffle">حالت مخلوط</string>
+    <string name="pref_title_toggle_toggle_shuffle">حالت تصادفی</string>
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
@@ -452,6 +452,8 @@
     <string name="retro_music_pro">پخش‌کننده موسیقی Retro نسخه ویژه</string>
     <string name="ringtone_summary">برنامه برای دسترسی به تنظیمات دستگاه شما برای تنظیم موسیقی به عنوان آهنگ زنگ نیاز به مجوز دارد</string>
     <string name="ringtone_title">آهنگ زنگ (اختیاری)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">حذف پرونده انجام نشد:%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">نمی توان آدرس را دریافت کرد</string>
@@ -548,7 +550,7 @@
     <string name="website">وب سایت</string>
     <string name="website_summary">وب سایت ما را نگاه کنید</string>
     <string name="welcome">خوش آمدید</string>
-    <string name="what_do_you_want_to_share">چه چیزی را میخوای به اشتراک بگذاری؟</string>
+    <string name="what_do_you_want_to_share">چه چیزی را میخواهید به اشتراک بگذارید؟</string>
     <string name="whats_new">چه چیزی جدیده</string>
     <string name="window">پنجره</string>
     <string name="window_corner_edges">گوشه های گرد</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">شما باید حداقل یک دسته را انتخاب کنید.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
+    <string name="could_not_write_tags_to_file">برچسب روی فایل اضافه نشد!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

@@ -12,7 +12,7 @@
     <string name="action_cancel">Cancelar</string>
     <string name="action_cast">Emitir</string>
     <string name="action_clear_playing_queue">Limpiar cola de reproducción</string>
-    <string name="action_cycle_repeat">Cambiar a modo repetición</string>
+    <string name="action_cycle_repeat">Modo de repetición</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_delete_from_device">Eliminar del dispositivo</string>
     <string name="action_details">Detalles</string>
@@ -34,10 +34,10 @@
     <string name="action_previous">Anterior</string>
     <string name="action_remove_from_favorites">Eliminar de favoritos</string>
     <string name="action_remove_from_playing_queue">Eliminar de la cola de reproducción</string>
-    <string name="action_remove_from_playlist">Remover de la lista de reproducción</string>
+    <string name="action_remove_from_playlist">Quitar de la lista de reproducción</string>
     <string name="action_rename">Renombrar</string>
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
-    <string name="action_scan">Examinar</string>
+    <string name="action_scan">Escanear</string>
     <string name="action_search">Buscar</string>
     <string name="action_set">Iniciar</string>
     <string name="action_set_as_ringtone">Establecer como tono de llamada</string>
@@ -46,7 +46,7 @@
     <string name="action_share">Compartir</string>
     <string name="action_shuffle_all">Mezclar todo</string>
     <string name="action_shuffle_playlist">Mezclar lista de reproducción</string>
-    <string name="action_sleep_timer">Temporizador de sueño</string>
+    <string name="action_sleep_timer">Temporizador de apagado</string>
     <string name="action_sort_order">Ordenar por</string>
     <string name="action_tag_editor">Editor de etiquetas</string>
     <string name="action_toggle_favorite">Alternar favoritos</string>
@@ -95,7 +95,7 @@
     <string name="bluetooth_title">Dispositivos cercanos</string>
     <string name="blur">Desenfoque</string>
     <string name="blur_card">Tarjeta con desenfoque</string>
-    <string name="bug_report_failed">No se puede enviar el informe</string>
+    <string name="bug_report_failed">No es posible enviar el informe</string>
     <string name="bug_report_failed_invalid_token">Token de acceso no válido. Por favor, contacta con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_issues_not_available">Las incidencias no están habilitadas para el repositorio seleccionado. Por favor, póngase en contacto con el desarrollador de la aplicación.</string>
     <string name="bug_report_failed_unknown">Se ha producido un error inesperado. Por favor, contacta con el desarrollador de la aplicación</string>
@@ -216,7 +216,7 @@
     <string name="horizontal_flip">Giro horizontal</string>
     <string name="image">Imagen</string>
     <string name="image_gradient">Imagen de degradado</string>
-    <string name="image_settings_summary">Cambiar los ajustes de descarga de imágenes del artista</string>
+    <string name="image_settings_summary">Cambia los ajustes de descarga de imágenes del artista</string>
     <string name="import_label">Importar</string>
     <string name="import_playlist">Importar lista de reproducción</string>
     <string name="import_playlist_message">Importa todas las listas de reproducción del almacenamiento Android con canciones, si las listas ya existen, las canciones se fusionarán.</string>
@@ -248,7 +248,7 @@
     <string name="material">Material</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Error de permisos</string>
-    <string name="message_backup_create_success">Copia de seguridad creada con correctamente.</string>
+    <string name="message_backup_create_success">Copia de seguridad creada correctamente.</string>
     <string name="message_limit_tabs">No más de 5 artículos</string>
     <string name="message_pro_feature">%s es una característica Pro.</string>
     <string name="message_restore_success">La restauración se ha completado con éxito.</string>
@@ -452,6 +452,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">La aplicación necesita permiso para acceder a la configuración de tu dispositivo para establecer música como Tono de Llamada</string>
     <string name="ringtone_title">Tono de Llamada (Opcional)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">La eliminación del archivo: %s falló</string>
     <!-- SAF -->
     <string name="saf_error_uri">No se puede obtener SAF URI</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">Tienes que seleccionar al menos una categoría.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web para reportar incidencias.</string>
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
+    <string name="could_not_write_tags_to_file">¡No se pudo escribir etiquetas en el archivo de música!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>

@@ -8,8 +8,8 @@
     <string name="action_add_to_blacklist">Ausschließen</string>
     <string name="action_add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="action_add_to_playing_queue">Zur Wiedergabeliste hinzufügen</string>
-    <string name="action_add_to_playlist">Zur Playlist hinzufügen</string>
-    <string name="action_cancel">Timer stoppen</string>
+    <string name="action_add_to_playlist">Zur playlist hinzufügen</string>
+    <string name="action_cancel">Abbrechen</string>
     <string name="action_cast">Übertragen</string>
     <string name="action_clear_playing_queue">Wiedergabeliste leeren</string>
     <string name="action_cycle_repeat">Wiederholungsmodus wechseln</string>
@@ -29,7 +29,7 @@
     <string name="action_next">Nächstes</string>
     <string name="action_play">Abspielen</string>
     <string name="action_play_all">Alles abspielen</string>
-    <string name="action_play_next">Spiele danach ab</string>
+    <string name="action_play_next">Als Nächstes abspielen</string>
     <string name="action_play_pause">Abspielen/Pausieren</string>
     <string name="action_previous">Vorheriges</string>
     <string name="action_remove_from_favorites">Aus Favoriten entfernen</string>
@@ -45,7 +45,7 @@
     <string name="action_settings">"Einstellungen"</string>
     <string name="action_share">Teilen</string>
     <string name="action_shuffle_all">Alle zufällig wiedergeben</string>
-    <string name="action_shuffle_playlist">Playlist zufällig abspielen</string>
+    <string name="action_shuffle_playlist">Wiedergabeliste zufällig abspielen</string>
     <string name="action_sleep_timer">Einschlafmodus</string>
     <string name="action_sort_order">Sortierreihenfolge</string>
     <string name="action_tag_editor">Tag-Editor</string>
@@ -89,9 +89,9 @@
     <string name="backup_restore_title"><![CDATA[Sichern & Wiederherstellen]]></string>
     <string name="backup_title">Sicherungen</string>
     <string name="biography">Biografie</string>
-    <string name="black_theme_name">Einfach Schwarz</string>
+    <string name="black_theme_name">AMOLED-Modus</string>
     <string name="blacklist">Ausschlussliste</string>
-    <string name="bluetooth_summary">Die App benötigt in der Nähe befindliche Geräte, um nach Bluetooth-Geräten zu suchen</string>
+    <string name="bluetooth_summary">Die App benötigt die Berechtigung für Geräte in der Nähe, um in der Umgebung nach Bluetooth-Geräten zu suchen</string>
     <string name="bluetooth_title">Geräte in der Nähe</string>
     <string name="blur">Weichzeichner</string>
     <string name="blur_card">Weichgezeichnete Karte</string>
@@ -110,7 +110,7 @@
     <string name="bug_report_summary">Ein unerwarteter Fehler ist aufgetreten. Sorry, dass du ihn entdeckt hast. Wenn er weiterhin auftritt, App-\"Speicherinhalt löschen\" oder eine E-Mail schicken </string>
     <string name="bug_report_use_account">Über GitHub-Konto senden</string>
     <string name="buy_now">Jetzt kaufen</string>
-    <string name="cancel_current_timer">Timer stoppen</string>
+    <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Farbige Karte</string>
     <string name="card_square">Quadratische Karte</string>
@@ -255,7 +255,7 @@
     <string name="message_updated">Aktualisiert</string>
     <string name="message_welcome"><![CDATA[Hallo! <br>Willkommen bei %s]]></string>
     <string name="my_name">Name</string>
-    <string name="my_top_tracks">Meistgespielt</string>
+    <string name="my_top_tracks">Am häufigsten gespielt</string>
     <string name="never">Nie</string>
     <string name="new_music_mix">Neuer Musik-Mix</string>
     <string name="new_playlist_title">Neue Playlist</string>
@@ -305,10 +305,10 @@
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Folge der Pinterest-Seite für Retro Music Design-Ideen</string>
     <string name="plain">Einfach</string>
-    <string name="playList_already_exits">Playlist bereits vorhanden</string>
+    <string name="playList_already_exits">Playlist existiert bereits</string>
     <string name="playback_pitch">Tonhöhe</string>
     <string name="playback_settings">Wiedergabe-Einstellungen</string>
-    <string name="playback_speed">Abspielgeschwindigkeit</string>
+    <string name="playback_speed">Wiedergabegeschwindigkeit</string>
     <string name="playing_notification_description">Die Wiedergabe-Benachrichtigung ermöglicht Play-/Pause-Steuerung etc.</string>
     <string name="playing_notification_name">Wiedergabe-Benachrichtigung</string>
     <string name="playlist_created_sucessfully">%s erfolgreich erstellt</string>
@@ -452,6 +452,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Die App benötigt die Berechtigung zum Ändern von Systemeinstellungen, um Musik als Klingelton festlegen zu können</string>
     <string name="ringtone_title">Klingelton (optional)</string>
+    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Löschen der Datei fehlgeschlagen: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Kann SAF URI nicht abrufen</string>
@@ -482,7 +484,7 @@
     <string name="share_summary">Teile die App mit deinen Freunden und Verwandten</string>
     <string name="share_to_stories">In Stories teilen</string>
     <string name="show_album_artists">Album-Interpreten anzeigen</string>
-    <string name="shuffle">Zufallswiedergabe</string>
+    <string name="shuffle">Zufällige Wiedergabe</string>
     <string name="simple">Einfach</string>
     <string name="sleep_timer_canceled">Einschlafmodus abgebrochen.</string>
     <string name="sleep_timer_set">Einschlafmodus auf %d Minuten gesetzt.</string>
@@ -508,7 +510,7 @@
     <string name="stack">Gestapelt</string>
     <string name="start_play_music">Spiele Musik ab.</string>
     <string name="suggestion_songs">Empfehlungen</string>
-    <string name="support_development">Entwicklung unterstützen</string>
+    <string name="support_development">Unterstütze die Entwicklung</string>
     <string name="swipe_to_unlock">Zum Entsperren Wischen</string>
     <string name="synced_lyrics">Synchronisierter Liedtext</string>
     <string name="telegram_group">Telegram</string>
@@ -558,4 +560,6 @@
     <string name="you_have_to_select_at_least_one_category">Du musst mindestens eine Kategorie auswählen.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Problembehandlungs-Seite weitergeleitet.</string>
     <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt.</string>
+    <string name="could_not_write_tags_to_file">Konnte Tags nicht in der Musikdatei speichern!</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
 </resources>
