@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="search"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_arrow_forward"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/action_search"
+                    android:inputType="text|textAutoComplete"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textAppearance="@style/TextViewSubtitle1">
+
+                    <requestFocus />
+                </com.google.android.material.textfield.TextInputEditText>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/voiceSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?roundSelector"
+                        android:padding="12dp"
+                        app:srcCompat="@drawable/ic_mic"
+                        app:tint="?attr/colorControlNormal"
+                        tools:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/clearText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?roundSelector"
+                        android:padding="12dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_close"
+                        app:tint="?attr/colorControlNormal"
+                        tools:visibility="visible" />
+                </FrameLayout>
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:scrollbars="none"
+            android:overScrollMode="@integer/overScrollMode">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/searchFilterGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_audio"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/songs" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_artists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/artists" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_albums"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/albums" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_album_artists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/album_artist" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_genres"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genres" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_playlists"
+                    style="@style/SearchChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playlists" />
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <code.name.monkey.retromusic.views.insets.InsetsRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="@integer/overScrollMode"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:paddingBottom="@dimen/mini_player_height"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_results"
+        android:textAppearance="@style/TextViewHeadline6"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/keyboardPopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="62dp"
+        android:text="@string/keyboard"
+        android:textAppearance="@style/TextViewHeadline6"
+        app:icon="@drawable/ic_keyboard" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

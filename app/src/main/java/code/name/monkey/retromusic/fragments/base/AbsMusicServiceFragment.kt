@@ -17,11 +17,13 @@ package code.name.monkey.retromusic.fragments.base
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 
@@ -32,6 +34,23 @@ import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 open class AbsMusicServiceFragment(@LayoutRes layout: Int) : Fragment(layout),
     IMusicServiceEventListener {
 
+    val mainActivity: MainActivity
+        get() = activity as MainActivity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    if (!mainActivity.handleBackPress()) {
+                        remove()
+                        mainActivity.onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
     val navOptions by lazy {
         navOptions {
             launchSingleTop = false

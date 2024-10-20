@@ -19,16 +19,21 @@ import androidx.fragment.app.FragmentActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.fragments.LibraryViewModel
+import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.repository.RealRepository
 import code.name.monkey.retromusic.util.MusicUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import java.io.File
 
 object SongsMenuHelper : KoinComponent {
     fun handleMenuClick(
@@ -64,6 +69,10 @@ object SongsMenuHelper : KoinComponent {
                 )
                 return true
             }
+
+            R.id.action_add_to_blacklist -> {
+                addAlbumToBlackList(activity,songs)
+            }
             R.id.action_delete_from_device -> {
                 DeleteSongsDialog.create(songs)
                     .show(activity.supportFragmentManager, "DELETE_SONGS")
@@ -71,5 +80,21 @@ object SongsMenuHelper : KoinComponent {
             }
         }
         return false
+    }
+    private fun addAlbumToBlackList(
+        activity:FragmentActivity,
+        songs: List<Song>
+    ):Boolean{
+        for (song in songs)
+        BlacklistStore.getInstance(activity).addPath(File(song.data))
+        reloadTabs(activity)
+        return true
+    }
+    private fun reloadTabs(activity: FragmentActivity) {
+        var libraryViewModel = activity?.getViewModel() as LibraryViewModel
+        libraryViewModel.forceReload(ReloadType.Songs)
+        libraryViewModel.forceReload(ReloadType.HomeSections)
+        libraryViewModel.forceReload(ReloadType.Artists)
+        libraryViewModel.forceReload(ReloadType.Albums)
     }
 }

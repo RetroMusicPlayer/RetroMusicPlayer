@@ -22,6 +22,7 @@ import org.jaudiotagger.audio.exceptions.CannotWriteException
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException
 import org.jaudiotagger.tag.FieldDataInvalidException
+import org.jaudiotagger.tag.FieldKey
 import org.jaudiotagger.tag.TagException
 import org.jaudiotagger.tag.images.AndroidArtwork
 import org.jaudiotagger.tag.images.Artwork
@@ -157,7 +158,11 @@ class TagWriter {
                         if (info.fieldKeyValueMap != null) {
                             for ((key, value) in info.fieldKeyValueMap) {
                                 try {
-                                    tag.setField(key, value)
+                                    if (key == FieldKey.YEAR && value == "") {
+                                        tag.setField(key, " ")
+                                    }
+                                    else
+                                        tag.setField(key, value)
                                 } catch (e: FieldDataInvalidException) {
                                     withContext(Dispatchers.Main) {
                                         context.showToast(R.string.could_not_write_tags_to_file)

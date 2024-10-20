@@ -33,6 +33,11 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_add_to_blacklist"
+        android:title="@string/action_add_to_blacklist"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@id/action_multi_select_adapter_check_all"
         android:icon="@drawable/ic_select_all"
         android:title="@string/select_all"
