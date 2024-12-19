@@ -273,7 +273,7 @@
     <string name="no_purchase_found">No se encontraron compras.</string>
     <string name="no_results">Sin resultados</string>
     <string name="no_songs">No tienes canciones</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Sin resultados de búsqueda</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Letras normales</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> no aparece en el almacén de medios.]]></string>
