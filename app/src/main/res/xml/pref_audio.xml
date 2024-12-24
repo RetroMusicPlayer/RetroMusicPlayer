@@ -54,4 +54,11 @@
         android:summary="@string/pref_summary_bluetooth_playback"
         android:title="@string/pref_title_bluetooth_playback" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="true"
+        android:key="disable_shuffle"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_disable_shuffle"
+        android:title="@string/pref_title_disable_shuffle" />
+
 </androidx.preference.PreferenceScreen>

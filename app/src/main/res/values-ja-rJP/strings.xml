@@ -349,6 +349,7 @@
     <string name="pref_summary_colored_notification">"\u30b8\u30e3\u30b1\u30c3\u30c8\u304b\u3089\u62bd\u51fa\u3055\u308c\u305f\u8272\u3067\u901a\u77e5\u3092\u7740\u8272\u3059\u308b"</string>
     <string name="pref_summary_cross_fade">曲間でクロスフェードする時間</string>
     <string name="pref_summary_desaturated_color">マテリアルデザインのガイドラインに従いダークモードで彩度の低い色を使用する</string>
+    <string name="pref_summary_disable_shuffle">シャッフルボタンを使用していない場合はシャッフルをオフにする</string>
     <string name="pref_summary_expand_now_playing_panel">通知をタップすることでアプリのトップ画面ではなく、再生画面を表示するようにする</string>
     <string name="pref_summary_extra_controls">ミニプレイヤー専用のコントロールボタンを追加する</string>
     <string name="pref_summary_extra_song_info">ファイル形式、ビットレート、サンプリング周波数などの曲のメタデータを再生画面に表示する</string>
@@ -391,6 +392,7 @@
     <string name="pref_title_cross_fade">クロスフェード (ベータ版)</string>
     <string name="pref_title_custom_font">フォントに Manrope を使用する</string>
     <string name="pref_title_desaturated_color">彩度の低い色</string>
+    <string name="pref_title_disable_shuffle">選択されていない場合はシャッフルをオフにする</string>
     <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
     <string name="pref_title_extra_controls">追加コントロール</string>
     <string name="pref_title_extra_song_info">曲の情報を表示</string>

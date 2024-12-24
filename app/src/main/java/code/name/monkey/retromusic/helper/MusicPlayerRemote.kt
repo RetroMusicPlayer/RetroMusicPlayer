@@ -31,6 +31,7 @@ import code.name.monkey.retromusic.service.CastPlayer
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.logE
+import code.name.monkey.retromusic.util.PreferenceUtil.disableShuffle
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -211,7 +212,8 @@ object MusicPlayerRemote : KoinComponent {
      */
     @JvmStatic
     fun openQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean) {
-        doOpenQueue(queue, startPosition, startPlaying, MusicService.SHUFFLE_MODE_NONE)
+        val shuffleMode = if (disableShuffle) MusicService.SHUFFLE_MODE_NONE else null
+        doOpenQueue(queue, startPosition, startPlaying, shuffleMode)
     }
 
     @JvmStatic
@@ -229,7 +231,7 @@ object MusicPlayerRemote : KoinComponent {
         doOpenQueue(queue, startPosition, startPlaying, shuffleMode)
     }
 
-    private fun doOpenQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean, shuffleMode: Int) {
+    private fun doOpenQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean, shuffleMode: Int?) {
         if (!tryToHandleOpenPlayingQueue(
                 queue,
                 startPosition,
@@ -237,7 +239,7 @@ object MusicPlayerRemote : KoinComponent {
             ) && musicService != null
         ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
-            setShuffleMode(shuffleMode)
+            shuffleMode?.let { setShuffleMode(shuffleMode) }
         }
     }
 

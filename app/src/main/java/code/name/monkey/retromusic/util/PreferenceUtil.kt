@@ -747,6 +747,9 @@ object PreferenceUtil {
 
     val swipeDownToDismiss
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
+
+    val disableShuffle
+        get() = sharedPreferences.getBoolean(DISABLE_SHUFFLE, true)
 }
 
 enum class CoverLyricsType {

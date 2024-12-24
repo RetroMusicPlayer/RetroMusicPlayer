@@ -395,6 +395,7 @@
     <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
     <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
+    <string name="pref_summary_disable_shuffle">Automatically disable shuffle unless the shuffle playback button is used</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
@@ -421,6 +422,7 @@
     <string name="pref_title_colored_app">Adaptive color</string>
     <string name="pref_title_colored_notification">Colored notification</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
+    <string name="pref_title_disable_shuffle">Disable shuffle unless selected</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
