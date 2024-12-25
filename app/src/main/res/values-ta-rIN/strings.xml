@@ -60,7 +60,7 @@
     <string name="added_x_titles_to_playing_queue">%1$d பாடல்கள் வரிசையில் சேர்க்கப்பட்டுள்ளது.</string>
     <string name="album">தொகுப்பு</string>
     <plurals name="albumSongs">
-        <item quantity="one">Song</item>
+        <item quantity="one">பாடல்</item>
         <item quantity="other">பாடல்கள்</item>
     </plurals>
     <string name="album_artist">பாடல் ஆசிரியர்</string>
@@ -146,12 +146,12 @@
     <string name="customactivityoncrash_error_activity_error_details_share">தவற்றின் விவரத்தை பகிர்</string>
     <string name="dark_theme_name">இலங்கருப்பு</string>
     <string name="delete_playlist_title">இசைப் பட்டியலை நீக்கு</string>
-    <string name="delete_playlist_x"><![CDATA[இசைப்பட்டியல் <b>%1$s</b>\'யை நீக்கு?]]></string>
+    <string name="delete_playlist_x"><![CDATA[இசைப்பட்டியல் <b>%1$s</b>'யை நீக்கு?]]></string>
     <string name="delete_playlists_title">இசைப்பட்டியல்களை நீக்கு</string>
     <string name="delete_song_title">பாடலை நீக்கு</string>
-    <string name="delete_song_x"><![CDATA[பாடல் <b>%1$s</b>\'யை நீக்கு?]]></string>
+    <string name="delete_song_x"><![CDATA[பாடல் <b>%1$s</b>'யை நீக்கு?]]></string>
     <string name="delete_songs_title">பாடல்களை நீக்கு</string>
-    <string name="delete_x_playlists"><![CDATA[இசைப்பட்டியல் <b>%1$d</b>\'யை நீக்கு?]]></string>
+    <string name="delete_x_playlists"><![CDATA[இசைப்பட்டியல் <b>%1$d</b>'யை நீக்கு?]]></string>
     <string name="delete_x_songs"><![CDATA[பாடல்கள் <b>%1$d</b> நீக்கு?]]></string>
     <string name="deleted_x_songs">நீக்கப்பட்ட பாடல்கள் %1$d</string>
     <string name="deleting_songs">பாடல்கள் நீக்கப்படுகிறது</string>
@@ -290,7 +290,7 @@
     <string name="other_settings_summary">Advanced testing features</string>
     <string name="others">Other</string>
     <string name="over_cover">Over Cover</string>
-    <string name="password">Password</string>
+    <string name="password">கடவுச்சொல்</string>
     <string name="past_three_months">Past 3 months</string>
     <string name="paste_lyrics_here">Paste Lyrics Here</string>
     <string name="paste_timeframe_lyrics_here">Paste timeframe lyrics here</string>
