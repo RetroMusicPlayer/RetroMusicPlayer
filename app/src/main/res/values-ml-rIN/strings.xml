@@ -76,7 +76,7 @@
     <string name="app_widget_big_name">പൂർണ്ണ ചിത്രം</string>
     <string name="app_widget_card_name">കാർഡ്</string>
     <string name="app_widget_classic_name">ക്ലാസിക്</string>
-    <string name="app_widget_md3_name">MD3</string>
+    <string name="app_widget_md3_name">എംഡി3</string>
     <string name="app_widget_small_name">ചെറുത്</string>
     <string name="app_widget_text_name">Minimal Text</string>
     <string name="artist">ആർട്ടിസ്റ്റ്</string>
@@ -109,7 +109,7 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">Send using GitHub account</string>
-    <string name="buy_now">Buy now</string>
+    <string name="buy_now">ഇപ്പോൾ വാങ്ങുക</string>
     <string name="cancel_current_timer">Cancel</string>
     <string name="card">കാർഡ്</string>
     <string name="card_color_style">Colored Card</string>
@@ -121,7 +121,7 @@
     <string name="changelog_summary">Check out What\'s New</string>
     <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
-    <string name="circle">Circle</string>
+    <string name="circle">വട്ടം</string>
     <string name="circular">Circular</string>
     <string name="classic">ക്ലാസിക്</string>
     <string name="clear_action">Clear</string>
