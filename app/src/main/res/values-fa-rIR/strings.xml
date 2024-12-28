@@ -2,8 +2,8 @@
 <resources>
     <string name="about_album_label">درباره %s...</string>
     <string name="about_settings_summary">تیم، پیوندهای اجتماعی</string>
-    <string name="accent_color">رنگ تشدید کننده</string>
-    <string name="accent_color_desc">رنگ تشدید کننده به صورت پیش فرض بنفش انتخاب شده</string>
+    <string name="accent_color">رنگ تاکیدی محیط</string>
+    <string name="accent_color_desc">رنگ تاکیدی محیط به صورت پیشفرض، رنگ بنفش است</string>
     <string name="action_about">درباره</string>
     <string name="action_add_to_blacklist">افزودن به لیست سیاه</string>
     <string name="action_add_to_favorites">افزودن به موارد مورد علاقه</string>
@@ -11,8 +11,8 @@
     <string name="action_add_to_playlist">افزودن به لیست پخش</string>
     <string name="action_cancel">انصراف</string>
     <string name="action_cast">پخش و نمایش تصویر</string>
-    <string name="action_clear_playing_queue">لیست پخش اهنگ هارا پاک کنید</string>
-    <string name="action_cycle_repeat">حالت چرخش تکراری اهنگ ها</string>
+    <string name="action_clear_playing_queue">پاک کردن لیست پخش آهنگ</string>
+    <string name="action_cycle_repeat">حالت پخش چرخشی آهنگ ها</string>
     <string name="action_delete">حذف</string>
     <string name="action_delete_from_device">حذف از دستگاه</string>
     <string name="action_details">جزئيات</string>
@@ -23,7 +23,7 @@
     <string name="action_go_to_lyrics">رفتن به متن ترانه</string>
     <string name="action_go_to_start_directory">رفتن به منوی شروع و آغاز</string>
     <string name="action_grant">اجازه دادن</string>
-    <string name="action_grid_size">اندازه ی شبکه</string>
+    <string name="action_grid_size">اندازه‌ی جدول</string>
     <string name="action_grid_size_land">اندازه جدول‌بندی (افقی)</string>
     <string name="action_new_playlist">لیست پخش جدید</string>
     <string name="action_next">بعدی</string>
@@ -273,7 +273,7 @@
     <string name="no_purchase_found">خریدها یافت نشد</string>
     <string name="no_results">بدون نتیجه</string>
     <string name="no_songs">شما هیچ آهنگی ندارید</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">نتیجه جستجو یافت نشد</string>
     <string name="normal">معمولی</string>
     <string name="normal_lyrics">متن معمولی آهنگ</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> در فروشگاه رسانه فهرست نشده است.]]></string>
@@ -362,7 +362,7 @@
     <string name="pref_summary_open_source_licences">جزئیات مجوز برای نرم‌افزار منبع باز</string>
     <string name="pref_summary_pause_history">وقتی فعال باشد، آهنگ‌های تازه پخش شده در تاریخ نمایش داده نمی‌شوند</string>
     <string name="pref_summary_remember_tab">در شروع به آخرین برگه استفاده شده بروید</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">نشان دادن فیلد سرچ در پلی‌لیست</string>
     <string name="pref_summary_show_lyrics">نمایش متن های همگام‌سازی شده روی جلد آلبوم</string>
     <string name="pref_summary_suggestions">نمایش ترکیب موسیقی جدید در صفحه اصلی</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تغییر آهنگ را با کشیدن انگشت در هر نقطه ای از صفحه در حال پخش فعال می کند</string>
@@ -410,7 +410,7 @@
     <string name="pref_title_open_source_licences">مجوزهای منبع باز</string>
     <string name="pref_title_pause_history">توقف تاریخچه</string>
     <string name="pref_title_remember_tab">به خاطر سپردن آخرین برگه</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">فعالسازی جستجو در پلی‌لیست</string>
     <string name="pref_title_show_lyrics">نمایش متن ترانه</string>
     <string name="pref_title_suggestions">نمایش پیشنهادات</string>
     <string name="pref_title_swipe_anywhere_now_playing">برای تغییر آهنگ، انگشت خود را به هر جایی بکشید</string>
@@ -455,8 +455,8 @@
     <string name="retro_music_pro">پخش‌کننده موسیقی Retro نسخه ویژه</string>
     <string name="ringtone_summary">برنامه برای دسترسی به تنظیمات دستگاه شما برای تنظیم موسیقی به عنوان آهنگ زنگ نیاز به مجوز دارد</string>
     <string name="ringtone_title">آهنگ زنگ (اختیاری)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">این برنامه برای تنظیم تایمر خواب نیازمند دسترسی به برنامه‌ریزی آلارم دارد</string>
+    <string name="permission_alarm_title">آلارم (انتخابی)</string>
     <string name="saf_delete_failed">حذف پرونده انجام نشد:%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">نمی توان آدرس را دریافت کرد</string>
@@ -564,5 +564,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">شما به وب سایت ردیاب مشکل هدایت می شوید.</string>
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
     <string name="could_not_write_tags_to_file">برچسب روی فایل اضافه نشد!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">دسترسی به تنظیم آلارم وجود ندارد، لطفا به پلیر رترو میوزیک این دسترسی را بدهید.</string>
 </resources>
