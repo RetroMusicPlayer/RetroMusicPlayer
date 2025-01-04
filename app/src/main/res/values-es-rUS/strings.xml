@@ -9,7 +9,7 @@
     <string name="action_add_to_favorites">Agregar a Favoritos.</string>
     <string name="action_add_to_playing_queue">Agregar a la cola de reproducción.</string>
     <string name="action_add_to_playlist">Agregar a playlist 2008</string>
-    <string name="action_cancel">Cancelar </string>
+    <string name="action_cancel">Cancelar</string>
     <string name="action_cast"> Lanzamiento</string>
     <string name="action_clear_playing_queue">Limpiar la cola de reproducción</string>
     <string name="action_cycle_repeat">Modo de repetición cíclica</string>
