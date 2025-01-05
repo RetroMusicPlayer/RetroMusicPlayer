@@ -500,8 +500,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             )
             return
         }
+        val isBottomNavView = (navigationView is BottomNavigationView)
         if (visible xor navigationView.isVisible) {
-            val mAnimate = animate && bottomSheetBehavior.state == STATE_COLLAPSED
+            val mAnimate = animate && isBottomNavView && bottomSheetBehavior.state == STATE_COLLAPSED
             if (mAnimate) {
                 if (visible) {
                     binding.navigationView.bringToFront()
@@ -511,7 +512,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 }
             } else {
                 binding.navigationView.isVisible = visible
-                if (visible && bottomSheetBehavior.state != STATE_EXPANDED) {
+                if (visible && isBottomNavView && bottomSheetBehavior.state != STATE_EXPANDED) {
                     binding.navigationView.bringToFront()
                 }
             }
