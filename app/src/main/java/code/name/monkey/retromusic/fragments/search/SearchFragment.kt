@@ -26,6 +26,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.getSystemService
 import androidx.core.view.*
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -68,6 +69,7 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         libraryViewModel.clearSearchResult()
         setupRecyclerView()
 
+        binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
         binding.voiceSearch.setOnClickListener { startMicSearch() }
         binding.clearText.setOnClickListener {
             binding.searchView.clearText()

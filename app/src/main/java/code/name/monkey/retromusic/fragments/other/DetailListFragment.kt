@@ -254,6 +254,7 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            android.R.id.home -> findNavController().navigateUp()
             R.id.action_clear_history -> {
                 if (binding.recyclerView.adapter?.itemCount!! > 0) {
                     libraryViewModel.clearHistory()

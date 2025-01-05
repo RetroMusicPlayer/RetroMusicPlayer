@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,6 +59,7 @@ class GenreDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playlist_
         binding.container.transitionName = "genre"
         genre = arguments.extraGenre
         binding.toolbar.title = arguments.extraGenre.name
+        binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
         setupRecyclerView()
         detailsViewModel.getSongs().observe(viewLifecycleOwner) {
             songs(it)

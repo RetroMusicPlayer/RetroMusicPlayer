@@ -76,6 +76,7 @@ class PlaylistDetailsFragment : AbsMainActivityFragment(R.layout.fragment_playli
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).addTarget(view)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
         mainActivity.setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
         binding.toolbar.title = null
 //        binding.container.transitionName = playlist.playlistEntity.playlistName
 
