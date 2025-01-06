@@ -219,7 +219,6 @@
     <string name="import_playlist">Import playlist</string>
     <string name="import_playlist_message">Android မီဒီယာစတိုးမှ Playlist များကိုသီချင်းများနှင့်အတူ import လုပ်သွားမည်ဖြစ်ပြီး ရှိပြီးသား Playlist ဖြစ်ပါကသီချင်းများကိုထည့်ပေါင်းသွားပါမည်။</string>
     <string name="inserted_x_songs_into_playlist_x">Playlist %2$s သို့သီချင်း %1$d ပုဒ်ထည့်ပြီးပါပြီ</string>
-    <string name="instagram_page_summary">သင့်ရဲ့ Retro Music setup ကို Instagram တွင်ပြသလိုက်ပါ</string>
     <string name="keyboard">ကီးဘုတ်</string>
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">အမျိုးအစား</string>
@@ -505,6 +504,8 @@
     <string name="sort_order_num_songs">အပုဒ်အရေအတွက်</string>
     <string name="sort_order_num_songs_desc">အပုဒ်အရေအတွက်ပြောင်းပြန်</string>
     <string name="sort_order_year">ထွက်ရှိသည့်နှစ်</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">ကြီးရာမှငယ်ရာ</string>
     <string name="speech_not_supported">ဆောရီး! သင့် device သည် အသံဖြင့်ပြောဆိုခြင်းအား အထောက်အပံ့မပေးထားပါ</string>
     <string name="speech_prompt">သင့် Library တွင်ရှာဖွေခြင်း</string>
