@@ -219,7 +219,6 @@
     <string name="import_playlist">Impor daftar putar</string>
     <string name="import_playlist_message">Ini mengimpor semua daftar putar yang terdaftar di Media Penyimpanan Android dengan lagu, jika daftar putar sudah ada, lagu akan digabungkan.</string>
     <string name="inserted_x_songs_into_playlist_x">Memasukkan %1$d lagu ke dalam daftar putar %2$s.</string>
-    <string name="instagram_page_summary">Bagikan pengaturan Retro Music Anda untuk dipamerkan di Instagram</string>
     <string name="keyboard">Papan ketik</string>
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Format</string>
@@ -505,6 +504,8 @@
     <string name="sort_order_num_songs">Jumlah lagu</string>
     <string name="sort_order_num_songs_desc">Desc jumlah lagu</string>
     <string name="sort_order_year">Tahun</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sortir turun</string>
     <string name="speech_not_supported">Maaf! Perangkat Anda tidak mendukung input suara</string>
     <string name="speech_prompt">Cari pustaka Anda</string>
