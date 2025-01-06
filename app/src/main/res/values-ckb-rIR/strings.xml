@@ -221,7 +221,6 @@
     <string name="import_playlist">Import playlist</string>
     <string name="import_playlist_message">It imports all playlists listed in the Android Media Store with songs, if the playlists already exists, the songs will get merged.</string>
     <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
-    <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
     <string name="keyboard">تەختەکلیل</string>
     <string name="label_bit_rate">لەرەلەر</string>
     <string name="label_file_format">جۆر</string>
@@ -507,6 +506,8 @@
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">ساڵ</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="speech_prompt">Search your library</string>
