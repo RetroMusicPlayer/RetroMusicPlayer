@@ -222,7 +222,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="import_playlist">Rêzoka lêdanê têxe</string>
     <string name="import_playlist_message">Ew têxistina hemû rêzokên lêdanê yên ku di Android Media Store de hatine rêzkirin bi stranan re pêk tîne, ku rêzokên lêdanê jixwe hebin, wê stran werin yekkirin.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d stran ketin nav rêzokên lêdanê ya %2$s.</string>
-    <string name="instagram_page_summary">Sazkiriyên rûkarê Retro Music ya xwe li ser Instagram parve bike</string>
     <string name="keyboard">Kilîtdank</string>
     <string name="label_bit_rate">Leza bit</string>
     <string name="label_file_format">Format</string>
@@ -509,6 +508,8 @@ têne guhertin</string>
     <string name="sort_order_num_songs">Jimara stranan</string>
     <string name="sort_order_num_songs_desc">Jimara stranan (berjêr)</string>
     <string name="sort_order_year">Sal</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Berjêr (Z-A)</string>
     <string name="speech_not_supported">Bibore! Amûra te piştgiriya têketina axaftinê nake</string>
     <string name="speech_prompt">Di pirtûkxaneya xwe de bigere</string>
