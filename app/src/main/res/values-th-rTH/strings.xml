@@ -219,7 +219,6 @@
     <string name="import_playlist">นำเข้าเพลย์ลิสต์</string>
     <string name="import_playlist_message">นำเข้าเพลย์ลิสต์ทั้งหมดจากในเครื่อง, หากซ้ำจะทำการรวมข้อมูลให้</string>
     <string name="inserted_x_songs_into_playlist_x">เพิ่ม %1$d เพลงเข้าสู่เพลย์ลิสต์ %2$s แล้ว</string>
-    <string name="instagram_page_summary">แชร์การตั้งค่า Retro Music บน Instagram</string>
     <string name="keyboard">คีย์บอร์ด</string>
     <string name="label_bit_rate">บิตเรท</string>
     <string name="label_file_format">รูปแบบไฟล์</string>
@@ -437,7 +436,7 @@
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$d</b> ออกจากเพลย์ลิสต์?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">รายการปัญหา</string>
@@ -505,6 +504,8 @@
     <string name="sort_order_num_songs">จำนวนเพลง</string>
     <string name="sort_order_num_songs_desc">จำนวนเพลง (มากไปน้อย)</string>
     <string name="sort_order_year">ปี</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Z-A</string>
     <string name="speech_not_supported">ขออภัยเครื่องของท่านไม่รองรับ Speech Input</string>
     <string name="speech_prompt">ค้นหาคลังเพลง</string>
