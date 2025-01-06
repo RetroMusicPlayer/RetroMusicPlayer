@@ -221,7 +221,6 @@
     <string name="import_playlist">Importeer afspeellijst</string>
     <string name="import_playlist_message">Het importeert alle afspeellijsten binnenin de Android Media Store met nummers. Als de afspeellijst al bestaat, worden de nummers samengevoegd.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d liedjes toegevoegd aan afspeellijst %2$s.</string>
-    <string name="instagram_page_summary">Deel jouw Retro Music setup om anderen te emotioneren op Instagram</string>
     <string name="keyboard">Keyboard</string>
     <string name="label_bit_rate">Bitrate</string>
     <string name="label_file_format">Formaat</string>
@@ -507,6 +506,8 @@
     <string name="sort_order_num_songs">Aantal nummers</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Jaar</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descending</string>
     <string name="speech_not_supported">Sorry! Je apparaat ondersteunt geen spraak invoer</string>
     <string name="speech_prompt">Zoek door je bibliotheek</string>
