@@ -222,7 +222,6 @@
     <string name="import_playlist">Импортиране на плейлиста</string>
     <string name="import_playlist_message">Импортира всички плейлисти с песни в Android Media Store. Ако плейлистите вече съществуват, песните ще бъдат обединени.</string>
     <string name="inserted_x_songs_into_playlist_x">Плейлист %2$s съдържа %1$d песни.</string>
-    <string name="instagram_page_summary">Споделете отзива си в приложението Retro Music в Instagram</string>
     <string name="keyboard">Клавиатура</string>
     <string name="label_bit_rate">Битрейт</string>
     <string name="label_file_format">Формат</string>
@@ -508,6 +507,8 @@
     <string name="sort_order_num_songs">Брой песни</string>
     <string name="sort_order_num_songs_desc">Намаляващ брой песни</string>
     <string name="sort_order_year">Година</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Низходящо</string>
     <string name="speech_not_supported">Съжалявам! Вашето устройство не поддържа гласово въвеждане</string>
     <string name="speech_prompt">Търсете във вашата библиотека</string>
