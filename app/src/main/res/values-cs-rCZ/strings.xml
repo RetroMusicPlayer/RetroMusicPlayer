@@ -225,7 +225,6 @@
     <string name="import_playlist">Importovat seznam skladeb</string>
     <string name="import_playlist_message">Importuje všechny seznamy skladeb uvedené v Android Media store, pokud seznam již existuje, seznamy se sloučí.</string>
     <string name="inserted_x_songs_into_playlist_x">Do playlistu %2$s byly vloženy %1$d skladby.</string>
-    <string name="instagram_page_summary">Sdílejte své nastavení Retro Music na Instagramu</string>
     <string name="keyboard">Klávesnice</string>
     <string name="label_bit_rate">Datový tok</string>
     <string name="label_file_format">Formát</string>
@@ -511,6 +510,8 @@
     <string name="sort_order_num_songs">Počet skladeb</string>
     <string name="sort_order_num_songs_desc">Počet skladeb sestupně</string>
     <string name="sort_order_year">Rok</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sestupně</string>
     <string name="speech_not_supported">Promiňte! Vaše zařízení nepodporuje vstup řeči</string>
     <string name="speech_prompt">Prohledat knihovnu</string>
