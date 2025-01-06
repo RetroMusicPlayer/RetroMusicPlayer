@@ -220,7 +220,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="import_playlist">Nhập danh sách phát</string>
     <string name="import_playlist_message">Nhập tất cả danh sách phát có trong Android Media Store cùng với các bài hát, nếu danh sách phát đã tồn tại, các bài hát sẽ được gộp lại.</string>
     <string name="inserted_x_songs_into_playlist_x">Đã chèn %1$d bài hát vào danh sách phát %2$s.</string>
-    <string name="instagram_page_summary">Chia sẻ thiết lập Retro Music của bạn trong Instagram</string>
     <string name="keyboard">Bàn phím</string>
     <string name="label_bit_rate">Tốc độ bit</string>
     <string name="label_file_format">Định dạng</string>
@@ -506,6 +505,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_num_songs">Số bài hát</string>
     <string name="sort_order_num_songs_desc">Số bài hát giảm</string>
     <string name="sort_order_year">Năm</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Giảm dần</string>
     <string name="speech_not_supported">Xin lỗi! Thiết bị không hỗ trợ nhập liệu bằng giọng nói</string>
     <string name="speech_prompt">Tìm kiếm trong thư viện của bạn</string>
