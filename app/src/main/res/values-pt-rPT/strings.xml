@@ -221,7 +221,6 @@
     <string name="import_playlist">Importar lista</string>
     <string name="import_playlist_message">Importar todas as lista em Android Media Store com músicas. Se as listas já existirem, as músicas vão ser unidas.</string>
     <string name="inserted_x_songs_into_playlist_x">Inseridas %1$d músicas na lista %2$s.</string>
-    <string name="instagram_page_summary">Partilhar a sua configuração de Música Retro para mostrar no Instagram</string>
     <string name="keyboard">Teclado</string>
     <string name="label_bit_rate">Taxa de bits</string>
     <string name="label_file_format">Formato</string>
@@ -507,6 +506,8 @@
     <string name="sort_order_num_songs">Contagem de músicas</string>
     <string name="sort_order_num_songs_desc">Contagem decrescente</string>
     <string name="sort_order_year">Ano</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descendente</string>
     <string name="speech_not_supported">O seu dispositivo não suporta entrada de fala</string>
     <string name="speech_prompt">Procurar na sua biblioteca</string>
