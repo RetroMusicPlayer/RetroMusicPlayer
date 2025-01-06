@@ -223,7 +223,6 @@
     <string name="import_playlist">Importare listă de redare</string>
     <string name="import_playlist_message">Importă toate listele de redare listate în Android Media Store cu melodii, dacă listele de redare există deja, melodiile vor fi îmbinate.</string>
     <string name="inserted_x_songs_into_playlist_x">Au fost insertate %1$d cântece în playlist-ul %2$s.</string>
-    <string name="instagram_page_summary">Partajați configurația Retro Music pentru a o publica pe Instagram</string>
     <string name="keyboard">Tastatură</string>
     <string name="label_bit_rate">Rată de biți</string>
     <string name="label_file_format">Format</string>
@@ -509,6 +508,8 @@
     <string name="sort_order_num_songs">Numărul pieselor</string>
     <string name="sort_order_num_songs_desc">Numărul descrierilor de melodii</string>
     <string name="sort_order_year">An</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descrescător</string>
     <string name="speech_not_supported">Scuze! Dispozitivul tau nu suporta comenzi vocale</string>
     <string name="speech_prompt">Caută în colecția ta</string>
