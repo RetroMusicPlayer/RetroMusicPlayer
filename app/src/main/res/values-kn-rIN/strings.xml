@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">%s ನ ಬಗ್ಗೆ</string>
+    <string name="about_album_label">%s ನ ಬಗ್ಗೆ%s</string>
     <string name="about_settings_summary">ತಂಡ, ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಲಿಂಕ್‌ಗಳು</string>
     <string name="accent_color">ಪ್ರಧಾನ ಬಣ್ಣ</string>
     <string name="accent_color_desc">ಪ್ರಧಾನ ಬಣ್ಣ, ಇದು ನೇರಳೆ ಬಣ್ಣಕ್ಕೆ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿರುತ್ತದೆ</string>
@@ -222,7 +222,6 @@
     <string name="import_playlist_message">ಇದು ಹಾಡುಗಳೊಂದಿಗೆ ಆಂಡ್ರಾಯ್ಡ್ ಮೀಡಿಯಾ ಸ್ಟೋರ್‌ನಲ್ಲಿ ಪಟ್ಟಿ ಮಾಡಲಾದ ಎಲ್ಲಾ ಪ್ಲೇಲಿಸ್ಟ್ಗಳನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳುತ್ತದೆ, 
 ಪ್ಲೇಲಿಸ್ಟ್ಗಳು ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದ್ದರೆ, ಹಾಡುಗಳು ವಿಲೀನಗೊಳ್ಳುತ್ತವೆ.</string>
     <string name="inserted_x_songs_into_playlist_x">%2$s ಪ್ಲೇಲಿಸ್ಟ್ ಗೆ %1$d ಹಾಡುಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ.</string>
-    <string name="instagram_page_summary">Instagram ನಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲು ನಿಮ್ಮ Retro Music ಸೆಟಪ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</string>
     <string name="keyboard">ಕೀಬೋರ್ಡ್‌</string>
     <string name="label_bit_rate">ಬಿಟ್ ರೇಟ್</string>
     <string name="label_file_format">ಸ್ವರೂಪ</string>
@@ -508,6 +507,8 @@
     <string name="sort_order_num_songs">ಹಾಡಿನ ಎಣಿಕೆ</string>
     <string name="sort_order_num_songs_desc">ಹಾಡುಗಳ ಎಣಿಕೆ ಅವರೋಹಣ ಕ್ರಮ</string>
     <string name="sort_order_year">ವರ್ಷ</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">ಅವರೋಹಣ ಕ್ರಮ</string>
     <string name="speech_not_supported">ಕ್ಷಮಿಸಿ! ನಿಮ್ಮ ಸಾಧನವು ಧ್ವನಿ ಇನ್‌ಪುಟ್ ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ</string>
     <string name="speech_prompt">ನಿಮ್ಮ ಸಂಗ್ರಹವನ್ನು ಹುಡುಕಿ</string>
