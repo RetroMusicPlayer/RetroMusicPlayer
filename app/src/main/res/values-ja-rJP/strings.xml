@@ -220,7 +220,6 @@
     <string name="import_playlist">プレイリストをインポート</string>
     <string name="import_playlist_message">Android Media Storeにリストされているすべてのプレイリストを読み込み、プレイリストがすでに存在する場合は、曲がマージされます。</string>
     <string name="inserted_x_songs_into_playlist_x">プレイリスト %2$s に %1$d 曲を追加しました</string>
-    <string name="instagram_page_summary">あなたのRetro Music設定を共有してInstagramにショーケースしましょう</string>
     <string name="keyboard">キーボードを表示</string>
     <string name="label_bit_rate">ビットレート</string>
     <string name="label_file_format">フォーマット</string>
@@ -506,6 +505,8 @@
     <string name="sort_order_num_songs">曲数順（昇順）</string>
     <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">降順</string>
     <string name="speech_not_supported">ごめんなさい! このデバイスは音声入力に対応しておりません</string>
     <string name="speech_prompt">ライブラリを検索</string>
