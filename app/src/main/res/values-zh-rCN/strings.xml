@@ -219,7 +219,6 @@
     <string name="import_playlist">导入播放列表</string>
     <string name="import_playlist_message">这会导入 Android 媒体存储中的所有播放列表，并合并重复的播放列表</string>
     <string name="inserted_x_songs_into_playlist_x">已将 %1$d 首歌曲加入列表 %2$s。</string>
-    <string name="instagram_page_summary">将您的 Retro Music 配置晒到 Instagram</string>
     <string name="keyboard">键盘</string>
     <string name="label_bit_rate">比特率</string>
     <string name="label_file_format">格式</string>
@@ -506,6 +505,8 @@
     <string name="sort_order_num_songs">歌曲数量</string>
     <string name="sort_order_num_songs_desc">歌曲数量降序</string>
     <string name="sort_order_year">年份</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">降序</string>
     <string name="speech_not_supported">抱歉！您的设备不支持语音输入</string>
     <string name="speech_prompt">搜索媒体库</string>
