@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Song count</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">År</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sjunkande</string>
     <string name="speech_not_supported">Hoppsan! Din enhet stöder inte talinmatning</string>
     <string name="speech_prompt">Sök i ditt bibliotek</string>

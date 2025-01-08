@@ -504,6 +504,8 @@
     <string name="sort_order_num_songs">จำนวนเพลง</string>
     <string name="sort_order_num_songs_desc">จำนวนเพลง (มากไปน้อย)</string>
     <string name="sort_order_year">ปี</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Z-A</string>
     <string name="speech_not_supported">ขออภัยเครื่องของท่านไม่รองรับ Speech Input</string>
     <string name="speech_prompt">ค้นหาคลังเพลง</string>

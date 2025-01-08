@@ -510,6 +510,8 @@
     <string name="sort_order_num_songs">Počet skladeb</string>
     <string name="sort_order_num_songs_desc">Počet skladeb sestupně</string>
     <string name="sort_order_year">Rok</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sestupně</string>
     <string name="speech_not_supported">Promiňte! Vaše zařízení nepodporuje vstup řeči</string>
     <string name="speech_prompt">Prohledat knihovnu</string>

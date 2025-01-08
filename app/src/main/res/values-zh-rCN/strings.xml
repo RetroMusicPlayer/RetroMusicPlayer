@@ -505,6 +505,8 @@
     <string name="sort_order_num_songs">歌曲数量</string>
     <string name="sort_order_num_songs_desc">歌曲数量降序</string>
     <string name="sort_order_year">年份</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">降序</string>
     <string name="speech_not_supported">抱歉！您的设备不支持语音输入</string>
     <string name="speech_prompt">搜索媒体库</string>

@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Número de canciones</string>
     <string name="sort_order_num_songs_desc">Número de canciones descendente</string>
     <string name="sort_order_year">Año</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descendente</string>
     <string name="speech_not_supported">¡Lo siento! Tu dispositivo no es compatible con la entrada de voz</string>
     <string name="speech_prompt">Buscar en tu biblioteca</string>

@@ -505,6 +505,8 @@
     <string name="sort_order_num_songs">曲数順（昇順）</string>
     <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">降順</string>
     <string name="speech_not_supported">ごめんなさい! このデバイスは音声入力に対応しておりません</string>
     <string name="speech_prompt">ライブラリを検索</string>

@@ -507,6 +507,8 @@
     <string name="sort_order_num_songs">Брой песни</string>
     <string name="sort_order_num_songs_desc">Намаляващ брой песни</string>
     <string name="sort_order_year">Година</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Низходящо</string>
     <string name="speech_not_supported">Съжалявам! Вашето устройство не поддържа гласово въвеждане</string>
     <string name="speech_prompt">Търсете във вашата библиотека</string>

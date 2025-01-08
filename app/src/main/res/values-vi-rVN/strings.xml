@@ -505,6 +505,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_num_songs">Số bài hát</string>
     <string name="sort_order_num_songs_desc">Số bài hát giảm</string>
     <string name="sort_order_year">Năm</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Giảm dần</string>
     <string name="speech_not_supported">Xin lỗi! Thiết bị không hỗ trợ nhập liệu bằng giọng nói</string>
     <string name="speech_prompt">Tìm kiếm trong thư viện của bạn</string>

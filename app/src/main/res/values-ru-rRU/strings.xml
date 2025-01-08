@@ -510,6 +510,8 @@
     <string name="sort_order_num_songs">Количество треков</string>
     <string name="sort_order_num_songs_desc">Количество треков по убыванию</string>
     <string name="sort_order_year">Год</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">По убыванию</string>
     <string name="speech_not_supported">Извините! Ваше устройство не поддерживает голосовой ввод</string>
     <string name="speech_prompt">Поиск в вашей библиотеке</string>
