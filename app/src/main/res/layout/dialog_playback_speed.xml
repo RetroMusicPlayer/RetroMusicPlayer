@@ -34,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:stepSize="0.05"
-        android:valueFrom="0.25"
-        android:valueTo="4.00"
+        android:stepSize="0.01"
+        android:valueFrom="0.75"
+        android:valueTo="2.00"
         app:labelBehavior="gone"
         app:tickVisible="false" />
 
@@ -48,7 +48,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textAppearance="@style/TextViewBody1"
-        tools:text="1.00" />
+        tools:text="1.0" />
 
     <TextView
         android:id="@+id/playback_pitch_title"
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:stepSize="0.05"
+        android:stepSize="0.01"
         android:valueFrom="0.50"
         android:valueTo="2.00"
         app:labelBehavior="gone"
@@ -78,5 +78,5 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textAppearance="@style/TextViewBody1"
-        tools:text="1.00" />
+        tools:text="1.0" />
 </LinearLayout>

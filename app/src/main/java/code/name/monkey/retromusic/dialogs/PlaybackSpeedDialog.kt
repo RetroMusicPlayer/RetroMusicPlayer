@@ -10,6 +10,7 @@ import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.slider.Slider
+import java.text.DecimalFormat
 
 class PlaybackSpeedDialog : DialogFragment() {
 
@@ -18,10 +19,26 @@ class PlaybackSpeedDialog : DialogFragment() {
         binding.playbackSpeedSlider.accent()
         binding.playbackPitchSlider.accent()
         binding.playbackSpeedSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            binding.speedValue.text = "$value"
+            // Format as a float with 2 decimal places
+            // If the decimal part is "00", format it to 1 decimal place
+            // Otherwise, use the 2 decimal places format
+            val formattedSpeedValue = DecimalFormat("#.##").format(value)
+            if (formattedSpeedValue.split(".").getOrElse(1) { "00" } == "00") {
+                binding.speedValue.text = DecimalFormat("#.0#").format(value)
+            } else {
+                binding.speedValue.text = formattedSpeedValue
+            }
         })
         binding.playbackPitchSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            binding.pitchValue.text = "$value"
+            // Format as a float with 2 decimal places
+            // If the decimal part is "00", format it to 1 decimal place
+            // Otherwise, use the 2 decimal places format
+            val formattedPitchValue = DecimalFormat("#.##").format(value)
+            if (formattedPitchValue.split(".").getOrElse(1) { "00" } == "00") {
+                binding.pitchValue.text = DecimalFormat("#.0#").format(value)
+            } else {
+                binding.pitchValue.text = formattedPitchValue
+            }
         })
         binding.playbackSpeedSlider.value = PreferenceUtil.playbackSpeed
         binding.playbackPitchSlider.value = PreferenceUtil.playbackPitch
