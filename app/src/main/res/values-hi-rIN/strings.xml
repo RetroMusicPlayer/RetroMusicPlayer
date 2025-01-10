@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">गाने की गिनती</string>
     <string name="sort_order_num_songs_desc">गानों की संख्या घटती हुई</string>
     <string name="sort_order_year">वर्ष</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">अवरोही</string>
     <string name="speech_not_supported">क्षमा! आपका उपकरण स्पीच इनपुट का समर्थन नहीं करता है।</string>
     <string name="speech_prompt">अपनी लाइब्रेरी खोजें</string>

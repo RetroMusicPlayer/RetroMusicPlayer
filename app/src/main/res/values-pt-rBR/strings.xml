@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Quantidade de músicas (crescente)</string>
     <string name="sort_order_num_songs_desc">Quantidade de músicas (decrescente)</string>
     <string name="sort_order_year">Ano</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Nome (decrescente)</string>
     <string name="speech_not_supported">Desculpe! O seu dispositivo não suporta entrada de voz</string>
     <string name="speech_prompt">Pesquisar sua biblioteca</string>

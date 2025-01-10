@@ -510,6 +510,8 @@
     <string name="sort_order_num_songs">Кількість пісень</string>
     <string name="sort_order_num_songs_desc">Опис кількості пісень</string>
     <string name="sort_order_year">Рік</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">За спаданням</string>
     <string name="speech_not_supported">Вибачте! Ваш пристрій не підтримує введення мови</string>
     <string name="speech_prompt">Пошук у бібліотеці</string>

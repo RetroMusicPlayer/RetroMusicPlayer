@@ -504,6 +504,8 @@
     <string name="sort_order_num_songs">အပုဒ်အရေအတွက်</string>
     <string name="sort_order_num_songs_desc">အပုဒ်အရေအတွက်ပြောင်းပြန်</string>
     <string name="sort_order_year">ထွက်ရှိသည့်နှစ်</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">ကြီးရာမှငယ်ရာ</string>
     <string name="speech_not_supported">ဆောရီး! သင့် device သည် အသံဖြင့်ပြောဆိုခြင်းအား အထောက်အပံ့မပေးထားပါ</string>
     <string name="speech_prompt">သင့် Library တွင်ရှာဖွေခြင်း</string>

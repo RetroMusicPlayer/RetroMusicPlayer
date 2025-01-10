@@ -504,6 +504,8 @@
     <string name="sort_order_num_songs">歌曲數量</string>
     <string name="sort_order_num_songs_desc">歌曲數量資訊</string>
     <string name="sort_order_year">年份</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">遞減</string>
     <string name="speech_not_supported">抱歉！您的裝置不支援語音輸入</string>
     <string name="speech_prompt">搜尋音樂庫</string>

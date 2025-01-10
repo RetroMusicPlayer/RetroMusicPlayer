@@ -508,6 +508,8 @@
     <string name="sort_order_num_songs">Broj pjesama</string>
     <string name="sort_order_num_songs_desc">Song count desc</string>
     <string name="sort_order_year">Godina</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Silazno</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="speech_prompt">Search your library</string>

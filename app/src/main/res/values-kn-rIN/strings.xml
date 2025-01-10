@@ -507,6 +507,8 @@
     <string name="sort_order_num_songs">ಹಾಡಿನ ಎಣಿಕೆ</string>
     <string name="sort_order_num_songs_desc">ಹಾಡುಗಳ ಎಣಿಕೆ ಅವರೋಹಣ ಕ್ರಮ</string>
     <string name="sort_order_year">ವರ್ಷ</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">ಅವರೋಹಣ ಕ್ರಮ</string>
     <string name="speech_not_supported">ಕ್ಷಮಿಸಿ! ನಿಮ್ಮ ಸಾಧನವು ಧ್ವನಿ ಇನ್‌ಪುಟ್ ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ</string>
     <string name="speech_prompt">ನಿಮ್ಮ ಸಂಗ್ರಹವನ್ನು ಹುಡುಕಿ</string>

@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Titel-Nummer</string>
     <string name="sort_order_num_songs_desc">Titel-Nummer absteigend</string>
     <string name="sort_order_year">Jahr</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Absteigend</string>
     <string name="speech_not_supported">Tut uns leid! Dein Gerät unterstützt keine Spracheingabe</string>
     <string name="speech_prompt">Bibliothek durchsuchen</string>

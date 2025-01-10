@@ -508,6 +508,8 @@ têne guhertin</string>
     <string name="sort_order_num_songs">Jimara stranan</string>
     <string name="sort_order_num_songs_desc">Jimara stranan (berjêr)</string>
     <string name="sort_order_year">Sal</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Berjêr (Z-A)</string>
     <string name="speech_not_supported">Bibore! Amûra te piştgiriya têketina axaftinê nake</string>
     <string name="speech_prompt">Di pirtûkxaneya xwe de bigere</string>

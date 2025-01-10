@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Zenék darabszáma</string>
     <string name="sort_order_num_songs_desc">Zenék darabszáma szerint csökkenő sorrendben</string>
     <string name="sort_order_year">Év</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Csökkenő</string>
     <string name="speech_not_supported">Sajnálom! A készülék nem támogatja a beszéd alapú bevitelt.</string>
     <string name="speech_prompt">Keresés a könyvtárban</string>

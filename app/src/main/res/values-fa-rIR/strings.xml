@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">تعداد آهنگ</string>
     <string name="sort_order_num_songs_desc">کاهش تعداد آهنگ</string>
     <string name="sort_order_year">سال</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">نزولی</string>
     <string name="speech_not_supported">متاسفم! دستگاه شما از ورودی گفتار پشتیبانی نمی کند</string>
     <string name="speech_prompt">جستجو کتابخانه شما</string>

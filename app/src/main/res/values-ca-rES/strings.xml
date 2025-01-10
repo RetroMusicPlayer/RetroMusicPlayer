@@ -506,6 +506,8 @@
     <string name="sort_order_num_songs">Nombre de cançons</string>
     <string name="sort_order_num_songs_desc">Nombre de cançons (descendent)</string>
     <string name="sort_order_year">Any</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descendent</string>
     <string name="speech_not_supported">El vostre dispositiu no permet l’entrada de veu</string>
     <string name="speech_prompt">Cerca a la biblioteca</string>

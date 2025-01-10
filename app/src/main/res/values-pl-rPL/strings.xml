@@ -510,6 +510,8 @@
     <string name="sort_order_num_songs">Liczba utworów</string>
     <string name="sort_order_num_songs_desc">Liczba utworów malejąco</string>
     <string name="sort_order_year">Rok</string>
+    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Malejąco</string>
     <string name="speech_not_supported">Twoje urządzenie nie obsługuje wprowadzania głosowego</string>
     <string name="speech_prompt">Przeszukaj swoją bibliotekę</string>
