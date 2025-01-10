@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.util
 
 import android.content.ContentUris
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -9,7 +10,6 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
-import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -325,17 +325,23 @@ object MusicUtil : KoinComponent {
     fun insertAlbumArt(
         context: Context,
         albumId: Long,
-        path: String?,
+        path: String?
     ) {
         val contentResolver = context.contentResolver
         val artworkUri = "content://media/external/audio/albumart".toUri()
         contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null)
-        val values = contentValuesOf(
-            "album_id" to albumId,
-            "_data" to path
-        )
-        contentResolver.insert(artworkUri, values)
-        contentResolver.notifyChange(artworkUri, null)
+
+        val values = ContentValues().apply {
+            put("album_id", albumId)
+            put("_data", path)
+        }
+
+        try {
+            contentResolver.insert(artworkUri, values)
+            contentResolver.notifyChange(artworkUri, null)
+        } catch (e: IllegalArgumentException) {
+           Log.e("MusicUtil", "Failed to insert album art", e)
+        }
     }
 
     fun isArtistNameUnknown(artistName: String?): Boolean {
