@@ -33,13 +33,13 @@
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:text="@tools:sample/date/hhmmss" />
 
-    <com.google.android.material.slider.Slider
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:maxHeight="2dp"
-        style="@style/Widget.Retro.Slider"
+        style="@style/MusicProgressSlider"
         android:progressDrawable="@drawable/color_progress_seek"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
