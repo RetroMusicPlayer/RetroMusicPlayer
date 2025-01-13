@@ -271,7 +271,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_purchase_found">Không tìm thấy giao dịch mua.</string>
     <string name="no_results">Không có kết quả</string>
     <string name="no_songs">Không có bài hát</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Không có kết quả tìm kiếm</string>
     <string name="normal">Tiêu chuẩn</string>
     <string name="normal_lyrics">Lời chuẩn</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> không được liệt kê trong thư mục nhạc.]]></string>
@@ -378,12 +378,12 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_app_shortcuts">Đổi màu lối tắt ứng dụng</string>
     <string name="pref_title_appbar_mode">Header style</string>
     <string name="pref_title_audio_ducking">Giảm âm lượng khi có âm báo</string>
-    <string name="pref_title_audio_fade">Fade audio</string>
+    <string name="pref_title_audio_fade">Âm thanh phai dần</string>
     <string name="pref_title_auto_download_artist_images">Tự động tải xuống hình ảnh nghệ sĩ</string>
     <string name="pref_title_blacklist">Danh sách đen</string>
     <string name="pref_title_bluetooth_playback">Tự động phát Bluetooth</string>
     <string name="pref_title_blurred_album_art">Làm mờ bìa album</string>
-    <string name="pref_title_circle_button">Circular play button</string>
+    <string name="pref_title_circle_button">Nút chơi nhạc tròn</string>
     <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
@@ -402,7 +402,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_last_added_interval">Làm mới danh sách thêm gần đây sau</string>
     <string name="pref_title_lock_screen">Điều khiển toàn màn hình.</string>
     <string name="pref_title_lyrics_screen_on">Giữ màn hình luôn bật khi lời bài hát hiển thị</string>
-    <string name="pref_title_lyrics_type">Lyrics type</string>
+    <string name="pref_title_lyrics_type">Kiểu lời bài hát</string>
     <string name="pref_title_manage_audio_focus">Luôn luôn phát</string>
     <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
@@ -433,7 +433,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="remove_action">Loại bỏ</string>
     <string name="remove_cover">Xoá ảnh bìa</string>
     <string name="remove_from_blacklist">Xóa khỏi danh sách đen</string>
-    <string name="remove_image">Remove Image</string>
+    <string name="remove_image">Bỏ ảnh</string>
     <string name="remove_song_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Xoá bài hát <b>%1$s</b> khỏi danh sách phát?]]></string>
     <string name="remove_songs_from_playlist_title">Xoá bài hát khỏi danh sách phát</string>
@@ -453,7 +453,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ứng dụng cần quyền truy cập cài đặt thiết bị của bạn để đặt nhạc làm Nhạc chuông</string>
     <string name="ringtone_title">Nhạc chuông (Tùy chọn)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_summary">Ứng dụng cần quyền để lên lịch báo thức chính xác để đặt giờ ngủ</string>
     <string name="permission_alarm_title">Alarm (Optional)</string>
     <string name="saf_delete_failed">Xóa tệp thất bại: %s</string>
     <!-- SAF -->
@@ -505,8 +505,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_num_songs">Số bài hát</string>
     <string name="sort_order_num_songs_desc">Số bài hát giảm</string>
     <string name="sort_order_year">Năm</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Năm tăng dần</string>
+    <string name="sort_order_year_desc">Năm giảm dần</string>
     <string name="sort_order_z_a">Giảm dần</string>
     <string name="speech_not_supported">Xin lỗi! Thiết bị không hỗ trợ nhập liệu bằng giọng nói</string>
     <string name="speech_prompt">Tìm kiếm trong thư viện của bạn</string>
@@ -542,7 +542,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="up_next">Tiếp theo</string>
     <string name="update_image">Cập nhật hình ảnh</string>
     <string name="updating">Đang cập nhật...</string>
-    <string name="user_images_description">User Images</string>
+    <string name="user_images_description">Ảnh người dùng</string>
     <string name="user_name">Người dùng</string>
     <string name="username">Tên người dùng</string>
     <string name="version">Phiên bản</string>
