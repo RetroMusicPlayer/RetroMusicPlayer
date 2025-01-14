@@ -319,7 +319,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_filter_song_summary">Lọc bài hát theo độ dài</string>
     <string name="pref_filter_song_title">Lọc theo thời lượng bài hát</string>
     <string name="pref_header_advanced">Nâng cao</string>
-    <string name="pref_header_album">Kiểu Album</string>
+    <string name="pref_header_album">Kiểu album</string>
     <string name="pref_header_audio">Âm thanh</string>
     <string name="pref_header_blacklist">Danh sách đen</string>
     <string name="pref_header_controls">Điều khiển</string>
@@ -376,7 +376,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_album_cover_style">Chủ đề bìa album</string>
     <string name="pref_title_album_cover_transform">Kiểu bìa album đang phát</string>
     <string name="pref_title_app_shortcuts">Đổi màu lối tắt ứng dụng</string>
-    <string name="pref_title_appbar_mode">Header style</string>
+    <string name="pref_title_appbar_mode">Kiểu tiêu đề</string>
     <string name="pref_title_audio_ducking">Giảm âm lượng khi có âm báo</string>
     <string name="pref_title_audio_fade">Âm thanh phai dần</string>
     <string name="pref_title_auto_download_artist_images">Tự động tải xuống hình ảnh nghệ sĩ</string>
@@ -406,13 +406,13 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_manage_audio_focus">Luôn luôn phát</string>
     <string name="pref_title_now_playing_screen_appearance">Giao diện màn hình phát</string>
     <string name="pref_title_open_source_licences">Giấy phép nguồn mở</string>
-    <string name="pref_title_pause_history">Pause history</string>
-    <string name="pref_title_remember_tab">Remember last tab</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_pause_history">Tạm dừng lịch sử</string>
+    <string name="pref_title_remember_tab">Nhớ thẻ cuối</string>
+    <string name="pref_title_enable_search_playlist">Cho phép tìm kiếm trong danh sách phát</string>
     <string name="pref_title_show_lyrics">Hiện lời bài hát</string>
     <string name="pref_title_suggestions">Hiển thị đề xuất</string>
-    <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
-    <string name="pref_title_swipe_to_dismiss">Dismiss with swipe down</string>
+    <string name="pref_title_swipe_anywhere_now_playing">Vuốt bất cứ đâu để chuyển bài</string>
+    <string name="pref_title_swipe_to_dismiss">Ẩn bằng trượt xuống</string>
     <string name="pref_title_tab_text_mode">Chế độ tiêu đề thẻ</string>
     <string name="pref_title_toggle_carousel_effect">Hiệu ứng quay vòng</string>
     <string name="pref_title_toggle_full_screen">Toàn màn hình</string>
@@ -420,9 +420,9 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_toggle_shuffle">Chế độ ngẫu nhiên</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_wallpaper_accent">Màu chủ đạo của hình nền</string>
-    <string name="pref_title_whitelist">Whitelist music</string>
+    <string name="pref_title_whitelist">Nhạc danh sách trắng</string>
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
+    <string name="pro_summary">Giao diện đen, giao diện đang phát, hiệu ứng quay vòng và hơn nữa..</string>
     <string name="profile">Hồ sơ</string>
     <string name="purchase">Mua</string>
     <string name="queue">Danh sách chờ phát</string>
@@ -453,8 +453,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ứng dụng cần quyền truy cập cài đặt thiết bị của bạn để đặt nhạc làm Nhạc chuông</string>
     <string name="ringtone_title">Nhạc chuông (Tùy chọn)</string>
-    <string name="permission_alarm_summary">Ứng dụng cần quyền để lên lịch báo thức chính xác để đặt giờ ngủ</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">Ứng dụng cần được cấp quyền để lên lịch báo thức chính xác để hẹn giờ ngừng phát</string>
+    <string name="permission_alarm_title">Báo thức (Không bắt buộc)</string>
     <string name="saf_delete_failed">Xóa tệp thất bại: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Không thể lấy SAF URI</string>
@@ -563,6 +563,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="you_have_to_select_at_least_one_category">Bạn phải chọn ít nhất một danh mục.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Bạn sẽ được chuyển tiếp đến trang web theo dõi vấn đề.</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
-    <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="could_not_write_tags_to_file">Không thể ghi thẻ vào tệp nhạc!</string>
+    <string name="sleep_timer_no_permission">Không được cấp quyền để lên lịch báo thức, vui lòng cho phép Retro Music.</string>
 </resources>
