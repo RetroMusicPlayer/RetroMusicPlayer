@@ -331,6 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Jeda saat nol</string>
     <string name="pref_keep_screen_on_summary">Perlu diingat bahwa mengaktifkan fitur ini dapat memengaruhi masa pakai baterai</string>
     <string name="pref_keep_screen_on_title">Biarkan layar tetap menyala</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Pilih bahasa</string>
     <string name="pref_snow_fall_title">Efek hujan salju</string>
     <string name="pref_summary_album_art_on_lockscreen">Gunakan sampul album lagu yang sedang diputar sebagai wallpaper layar kunci</string>
