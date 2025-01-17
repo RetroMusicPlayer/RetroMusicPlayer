@@ -333,6 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">शून्य पर गाना रुकें</string>
     <string name="pref_keep_screen_on_summary">ध्यान रखें कि इस सुविधा को सक्षम करने से बैटरी प्रभावित हो सकती है</string>
     <string name="pref_keep_screen_on_title">स्क्रीन को बंद न होने दें</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">भाषा चुनिए</string>
     <string name="pref_snow_fall_title">बर्फबारी का असर</string>
     <string name="pref_summary_album_art_on_lockscreen">लॉकस्क्रीन वॉलपेपर के रूप में वर्तमान में चल रहे गीत एल्बम कवर का उपयोग करें</string>
