@@ -334,6 +334,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Пауза при сила на звука нула</string>
     <string name="pref_keep_screen_on_summary">Моля, обърнете внимание, че активирането на тази функция може да повлияе на живота на батерията.</string>
     <string name="pref_keep_screen_on_title">Остави екрана включен</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Избери език</string>
     <string name="pref_snow_fall_title">Ефект на снеговалеж</string>
     <string name="pref_summary_album_art_on_lockscreen">Използвайте обложката на албума на текущата песен като тапет на заключен екран</string>
