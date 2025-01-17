@@ -333,6 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pauzeer op nul</string>
     <string name="pref_keep_screen_on_summary">Houd er rekening mee dat het inschakelen van deze functie de levensduur van de batterij kan beïnvloeden</string>
     <string name="pref_keep_screen_on_title">Houd het scherm aan</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Taal selecteren</string>
     <string name="pref_snow_fall_title">Sneeuwval effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Gebruik de huidige cover als vergrendelscherm achtergrond.</string>
