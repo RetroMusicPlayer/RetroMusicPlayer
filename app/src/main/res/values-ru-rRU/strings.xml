@@ -337,6 +337,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Пауза при нулевой громкости</string>
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на время работы от батареи</string>
     <string name="pref_keep_screen_on_title">Оставлять экран включённым</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Выберите язык</string>
     <string name="pref_snow_fall_title">Эффект снегопада</string>
     <string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущего трека в качестве обоев на экране блокировки</string>
