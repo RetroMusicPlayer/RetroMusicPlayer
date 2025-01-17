@@ -331,6 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">靜音時暫停</string>
     <string name="pref_keep_screen_on_summary">請注意，這項功能可能影響電池續航力</string>
     <string name="pref_keep_screen_on_title">保持螢幕開啟</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">選取語言</string>
     <string name="pref_snow_fall_title">下雪效果</string>
     <string name="pref_summary_album_art_on_lockscreen">以現正播放的歌曲專輯封面作為鎖定螢幕桌布</string>
