@@ -331,6 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">သုည၌ရပ်ခြင်း</string>
     <string name="pref_keep_screen_on_summary">ဤ feature ဖွင့်ထားပါက ဘက်ထရီသက်တမ်းထိခိုက်နိုင်ပါသည်</string>
     <string name="pref_keep_screen_on_title">Screen တစ်ချိန်လုံးဖွင့်ထားမည်</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">ဘာသာစကားရွေးချယ်မည်</string>
     <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">ယခု play နေသောသီချင်း Album cover ပုံအား Lockscreen wallpaper အဖြစ်ထားမည်</string>
