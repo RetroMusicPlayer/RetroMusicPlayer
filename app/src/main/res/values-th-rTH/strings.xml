@@ -331,6 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">หยุดเพลงเมื่อเสียงถูกลดเป็นศูนย์ </string>
     <string name="pref_keep_screen_on_summary">หากเปิดการใช้งานระยะเวลาในการใช้งานของแบตเตอร์รี่จะลดลง</string>
     <string name="pref_keep_screen_on_title">เปิดจอไว้เสมอ</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">เลือกภาษา</string>
     <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">ใช้รูปปกของอัลบัมของเพลงที่กำลังเล่นอยู่เป็นวอลเปเปอร์หน้าล็อคสกรีน</string>
@@ -436,7 +438,7 @@
     <string name="remove_song_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
     <string name="remove_song_x_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="remove_songs_from_playlist_title">ลบเพลงออกจากเพลย์ลิสต์</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$d</b> ออกจากเพลย์ลิสต์?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[ลบเพลง <b>%1$s</b> ออกจากเพลย์ลิสต์?]]></string>
     <string name="rename_playlist_title">เปลี่ยนขื่อเพลย์ลิสต์</string>
     <string name="replace_cover">Replace Cover</string>
     <string name="report_an_issue">รายการปัญหา</string>
