@@ -335,6 +335,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
     <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
