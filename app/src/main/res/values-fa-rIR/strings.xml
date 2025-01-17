@@ -333,6 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">متوقف شدن صدا هنگامیکه صدای گوشی صفر است</string>
     <string name="pref_keep_screen_on_summary">به یاد داشته باشید فعال کردن این قابلیت مصرف باتری را بالا می برد</string>
     <string name="pref_keep_screen_on_title">روشن نگهداشتن صفحه</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">انتخاب زبان</string>
     <string name="pref_snow_fall_title">اثر بارش برف</string>
     <string name="pref_summary_album_art_on_lockscreen">از عکس آهنگ کنونی به عنوان نمایه ی صفحه ی قفل استفاده کنید</string>
