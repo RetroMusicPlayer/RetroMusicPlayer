@@ -333,6 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Beim Stummschalten pausieren</string>
     <string name="pref_keep_screen_on_summary">Beachte, dass sich diese Funktion auf die Akkulaufzeit auswirkt</string>
     <string name="pref_keep_screen_on_title">Bildschirm anlassen</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Sprachauswahl</string>
     <string name="pref_snow_fall_title">Schneefall-Effekt</string>
     <string name="pref_summary_album_art_on_lockscreen">Album-Cover des gespielten Titels als Sperrbildschirm-Hintergrund verwenden</string>
