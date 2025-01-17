@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">%s ನ ಬಗ್ಗೆ</string>
+    <string name="about_album_label">%s ನ ಬಗ್ಗೆ%s</string>
     <string name="about_settings_summary">ತಂಡ, ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಲಿಂಕ್‌ಗಳು</string>
     <string name="accent_color">ಪ್ರಧಾನ ಬಣ್ಣ</string>
     <string name="accent_color_desc">ಪ್ರಧಾನ ಬಣ್ಣ, ಇದು ನೇರಳೆ ಬಣ್ಣಕ್ಕೆ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿರುತ್ತದೆ</string>
@@ -334,6 +334,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">ಶೂನ್ಯದಲ್ಲಿ ವಿರಾಮಗೊಳಿಸುತ್ತದೆ</string>
     <string name="pref_keep_screen_on_summary">ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವುದರಿಂದ ಬ್ಯಾಟರಿ ಬಾಳಿಕೆ ಪರಿಣಾಮ ಬೀರಬಹುದು ಎಂಬುದನ್ನು ನೆನಪಿನಲ್ಲಿಡಿ</string>
     <string name="pref_keep_screen_on_title">ಸ್ಕ್ರೀನ್ ಆನ್‌ನಲ್ಲಿರಿಸಿ</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ</string>
     <string name="pref_snow_fall_title">ಹಿಮಪಾತದ ಪರಿಣಾಮ</string>
     <string name="pref_summary_album_art_on_lockscreen">ಲಾಕ್‌ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಆಗಿ ಪ್ರಸ್ತುತ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಹಾಡಿನ ಆಲ್ಬಮ್ ಕವರ್ ಅನ್ನು ಬಳಸಿ</string>
