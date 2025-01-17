@@ -332,6 +332,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">音量をゼロで一時停止</string>
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
+    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">言語を選択</string>
     <string name="pref_snow_fall_title">雪エフェクト</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
