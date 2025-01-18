@@ -17,6 +17,8 @@ class PlaybackSpeedDialog : DialogFragment() {
         val binding = DialogPlaybackSpeedBinding.inflate(layoutInflater)
         binding.playbackSpeedSlider.accent()
         binding.playbackPitchSlider.accent()
+        PreferenceUtil.playbackSpeed.toString().also { binding.speedValue.text = it }
+        PreferenceUtil.playbackPitch.toString().also { binding.pitchValue.text = it }
         binding.playbackSpeedSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
             binding.speedValue.text = "$value"
         })
