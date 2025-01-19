@@ -51,6 +51,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
       sInstance = new BlacklistStore(context.getApplicationContext());
       if (!PreferenceUtil.INSTANCE.isInitializedBlacklist()) {
         // blacklisted by default
+        sInstance.addPathImpl(new File(Environment.getExternalStorageDirectory(), "Android"));
         sInstance.addPathImpl(
             getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
         sInstance.addPathImpl(
