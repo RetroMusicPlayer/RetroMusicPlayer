@@ -363,7 +363,7 @@
     <string name="pref_summary_open_source_licences">Detalles de licencia para software de código abierto</string>
     <string name="pref_summary_pause_history">Cuando se activa, las canciones recién reproducidas no se muestran en el historial</string>
     <string name="pref_summary_remember_tab">Navegar a la última pestaña usada al iniciar</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist"></string>
     <string name="pref_summary_show_lyrics">Mostrar letras sincronizadas sobre la portada del álbum</string>
     <string name="pref_summary_suggestions">Mostrar mezcla de nueva música en la pantalla de inicio</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permite cambiar de canción deslizando el dedo en cualquier parte de la pantalla de reproducción</string>
