@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">درباره %s...</string>
+    <string name="about_album_label">Persian </string>
     <string name="about_settings_summary">تیم، پیوندهای اجتماعی</string>
     <string name="accent_color">رنگ تاکیدی محیط</string>
     <string name="accent_color_desc">رنگ تاکیدی محیط به صورت پیشفرض، رنگ بنفش است</string>
@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">متوقف شدن صدا هنگامیکه صدای گوشی صفر است</string>
     <string name="pref_keep_screen_on_summary">به یاد داشته باشید فعال کردن این قابلیت مصرف باتری را بالا می برد</string>
     <string name="pref_keep_screen_on_title">روشن نگهداشتن صفحه</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary"></string>
+    <string name="pref_show_when_locked_title"></string>
     <string name="pref_language_name">انتخاب زبان</string>
     <string name="pref_snow_fall_title">اثر بارش برف</string>
     <string name="pref_summary_album_art_on_lockscreen">از عکس آهنگ کنونی به عنوان نمایه ی صفحه ی قفل استفاده کنید</string>
@@ -508,8 +508,8 @@
     <string name="sort_order_num_songs">تعداد آهنگ</string>
     <string name="sort_order_num_songs_desc">کاهش تعداد آهنگ</string>
     <string name="sort_order_year">سال</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc"></string>
+    <string name="sort_order_year_desc"></string>
     <string name="sort_order_z_a">نزولی</string>
     <string name="speech_not_supported">متاسفم! دستگاه شما از ورودی گفتار پشتیبانی نمی کند</string>
     <string name="speech_prompt">جستجو کتابخانه شما</string>
