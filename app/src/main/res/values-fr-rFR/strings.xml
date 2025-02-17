@@ -272,7 +272,7 @@
     <string name="no_purchase_found">Aucun achat trouvé.</string>
     <string name="no_results">Aucun résultat</string>
     <string name="no_songs">Aucun morceau</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Aucun résultat</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Paroles normales</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> N'est pas répertorié dans le stockage des médias.]]></string>
@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pause si muet</string>
     <string name="pref_keep_screen_on_summary">Veuillez garder en tête que l\'activation de cette fonctionnalité peut réduire la durée de vie de la batterie</string>
     <string name="pref_keep_screen_on_title">Garder l\'écran allumé</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Nécessite un redémarrage de l\'application pour prendre effet. Le lecteur doit être au premier plan avant le verrouillage pour que cette fonctionnalité fonctionne</string>
+    <string name="pref_show_when_locked_title">Afficher l\'interface du lecteur lorsque verrouillé</string>
     <string name="pref_language_name">Choisir la langue</string>
     <string name="pref_snow_fall_title">Effet neige qui tombe</string>
     <string name="pref_summary_album_art_on_lockscreen">Utiliser la couverture d\'album du morceau en cours de lecture comme fond sur l\'écran de verrouillage</string>
@@ -363,7 +363,7 @@
     <string name="pref_summary_open_source_licences">Détails des licences pour les logiciels open source</string>
     <string name="pref_summary_pause_history">Lorsque cette option est activée, les nouvelles chansons jouées n\'apparaîtront pas dans l\'historique</string>
     <string name="pref_summary_remember_tab">Afficher le dernier onglet au démarrage</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Afficher un champ de recherche dans une liste de lecture</string>
     <string name="pref_summary_show_lyrics">Afficher les paroles sur la pochette de l\'album</string>
     <string name="pref_summary_suggestions">Afficher une sélection de nouveaux morceaux sur l\'écran d\'accueil</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Active le changement de morceau en balayant n\'importe où sur l\'écran de lecture en cours</string>
@@ -411,7 +411,7 @@
     <string name="pref_title_open_source_licences">Licences open source</string>
     <string name="pref_title_pause_history">Mettre l\'historique en pause</string>
     <string name="pref_title_remember_tab">Se souvenir du dernier onglet</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Activer la recherche dans les playlists</string>
     <string name="pref_title_show_lyrics">Afficher les paroles</string>
     <string name="pref_title_suggestions">Afficher les suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Balayer n\'importe où pour changer de morceau</string>
@@ -456,8 +456,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'application a besoin d\'accéder au stockage de votre appareil pour configurer un morceau comme sonnerie</string>
     <string name="ringtone_title">Sonnerie (optionnel)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">L\'application a besoin d\'une autorisation pour programmer des alarmes exactes pour définir des minuteurs de veille</string>
+    <string name="permission_alarm_title">Alarme (facultatif)</string>
     <string name="saf_delete_failed">La suppression du fichier a échoué : %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Impossible d\'obtenir l\'URI SAF</string>
@@ -508,8 +508,8 @@
     <string name="sort_order_num_songs">Nombre de morceaux</string>
     <string name="sort_order_num_songs_desc">Nombre de morceaux décroissant</string>
     <string name="sort_order_year">Année</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Année ascendant</string>
+    <string name="sort_order_year_desc">Année descendant</string>
     <string name="sort_order_z_a">Descendant</string>
     <string name="speech_not_supported">Désolé, votre appareil ne supporte pas l\'entrée vocale</string>
     <string name="speech_prompt">Rechercher dans votre bibliothèque</string>
@@ -567,5 +567,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
     <string name="could_not_write_tags_to_file">Impossible d\'ajouter l\'étiquette au fichier!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">Aucune permission pour programmer des alarmes, veuillez autoriser Retro Music.</string>
 </resources>
