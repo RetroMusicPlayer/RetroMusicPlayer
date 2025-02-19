@@ -287,7 +287,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="only_on_wifi">Chỉ khi dùng Wi-Fi</string>
     <string name="other_settings_summary">Tính năng nâng cao đang kiểm tra</string>
     <string name="others">Khác</string>
-    <string name="over_cover">Over Cover</string>
+    <string name="over_cover">Che phủ</string>
     <string name="password">Mật khẩu</string>
     <string name="past_three_months">Mỗi tháng</string>
     <string name="paste_lyrics_here">Dán lời ở đây</string>
@@ -332,8 +332,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_keep_pause_on_zero_volume_title">Tạm dừng phát khi tắt âm lượng</string>
     <string name="pref_keep_screen_on_summary">Lưu ý rằng việc bật tính năng này có thể ảnh hưởng đến tuổi thọ pin</string>
     <string name="pref_keep_screen_on_title">Giữ màn hình luôn bật</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Cần phải khởi động lại ứng dụng để có hiệu lực. Trình phát phải ở chế độ nền trước khi khóa để tính năng này hoạt động</string>
+    <string name="pref_show_when_locked_title">Hiển thị giao diện trình phát khi bị khóa</string>
     <string name="pref_language_name">Chọn ngôn ngữ</string>
     <string name="pref_snow_fall_title">Hiệu ứng tuyết rơi</string>
     <string name="pref_summary_album_art_on_lockscreen">Sử dụng ảnh bìa album bài hát đang phát làm ảnh nền màn hình khóa.</string>
@@ -362,7 +362,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_open_source_licences">Chi tiết giấy phép của phần mềm mã nguồn mở</string>
     <string name="pref_summary_pause_history">Khi được bật, những bài hát mới phát sẽ không xuất hiện trong lịch sử</string>
     <string name="pref_summary_remember_tab">Điều hướng đến tab được sử dụng gần nhất lúc bắt đầu</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Hiển thị trường tìm kiếm trong danh sách phát</string>
     <string name="pref_summary_show_lyrics">Hiển thị lời bài hát đã đồng bộ trên bìa album</string>
     <string name="pref_summary_suggestions">Hiện bản phối nhạc mới trên trang chủ</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Cho phép chuyển bài bằng cách vuốt ở bất kì đâu tại màn hình phát</string>
