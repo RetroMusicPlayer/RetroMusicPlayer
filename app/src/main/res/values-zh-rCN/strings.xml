@@ -331,8 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">静音暂停</string>
     <string name="pref_keep_screen_on_summary">请注意，启用此功能可能会降低电池续航时间</string>
     <string name="pref_keep_screen_on_title">保持屏幕常亮</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">需重启后生效。在锁定使该特性生效前播放器必须处于前端</string>
+    <string name="pref_show_when_locked_title">锁屏时显示播放界面</string>
     <string name="pref_language_name">选择语言</string>
     <string name="pref_snow_fall_title">降雪效果</string>
     <string name="pref_summary_album_art_on_lockscreen">将正在播放的歌曲专辑封面设置为锁屏壁纸</string>
@@ -362,7 +362,7 @@
     <string name="pref_summary_open_source_licences">开源许可详情</string>
     <string name="pref_summary_pause_history">启用后，新播放的歌曲不会显示在历史记录中</string>
     <string name="pref_summary_remember_tab">启动时打开上次使用的页面</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">在播放列表显示搜索框</string>
     <string name="pref_summary_show_lyrics">在专辑封面上显示同步歌词</string>
     <string name="pref_summary_suggestions">在主屏上显示新歌混烧</string>
     <string name="pref_summary_swipe_anywhere_now_playing">在正在播放界面中启用任意位置滑动切歌</string>
@@ -410,7 +410,7 @@
     <string name="pref_title_open_source_licences">开源许可</string>
     <string name="pref_title_pause_history">暂停历史记录</string>
     <string name="pref_title_remember_tab">记住最后打开页面</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">在播放列表搜索</string>
     <string name="pref_title_show_lyrics">显示歌词</string>
     <string name="pref_title_suggestions">显示建议</string>
     <string name="pref_title_swipe_anywhere_now_playing">任意位置滑动切歌</string>
@@ -456,7 +456,7 @@
     <string name="ringtone_summary">应用需要系统设置访问权限，才能将音乐设置为为铃声</string>
     <string name="ringtone_title">铃声（可选）</string>
     <string name="permission_alarm_summary">应用程序需要权限来安排准确的闹钟以设置睡眠定时器</string>
-    <string name="permission_alarm_title">闹铃（可选）</string>
+    <string name="permission_alarm_title">闹铃(可选）</string>
     <string name="saf_delete_failed">文件删除失败：%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">无法获取 SAF URI</string>
@@ -507,8 +507,8 @@
     <string name="sort_order_num_songs">歌曲数量</string>
     <string name="sort_order_num_songs_desc">歌曲数量降序</string>
     <string name="sort_order_year">年份</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">按年份升序</string>
+    <string name="sort_order_year_desc">按年份降序</string>
     <string name="sort_order_z_a">降序</string>
     <string name="speech_not_supported">抱歉！您的设备不支持语音输入</string>
     <string name="speech_prompt">搜索媒体库</string>
@@ -517,7 +517,7 @@
     <string name="suggestion_songs">建议</string>
     <string name="support_development">支持开发者</string>
     <string name="swipe_to_unlock">滑动以解锁</string>
-    <string name="synced_lyrics">滚动歌词</string>
+    <string name="synced_lyrics">歌词同步</string>
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">加入 Telegram 群组，讨论错误，提出建议，水群聊天等等</string>
     <string name="thank_you">谢谢您！</string>
