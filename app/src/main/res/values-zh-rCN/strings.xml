@@ -331,7 +331,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">静音暂停</string>
     <string name="pref_keep_screen_on_summary">请注意，启用此功能可能会降低电池续航时间</string>
     <string name="pref_keep_screen_on_title">保持屏幕常亮</string>
-    <string name="pref_show_when_locked_summary">需重启后生效。在锁定使该特性生效前播放器必须处于前端</string>
+    <string name="pref_show_when_locked_summary">需重启后生效。在锁定使该功能生效前播放器必须处于前端</string>
     <string name="pref_show_when_locked_title">锁屏时显示播放界面</string>
     <string name="pref_language_name">选择语言</string>
     <string name="pref_snow_fall_title">降雪效果</string>
@@ -532,7 +532,7 @@
     <string name="today">今日</string>
     <string name="top_albums">热门专辑</string>
     <string name="top_artists">热门艺术家</string>
-    <string name="track_hint">"音轨（2 代表第 2 条音轨，3004 代表第 3 张盘的第 4 条音轨）"</string>
+    <string name="track_hint">"音轨(2 代表第音轨2或3004代表CD3的音轨4）"</string>
     <string name="track_list">音轨编号</string>
     <string name="translate">翻译</string>
     <string name="translate_community">帮助我们将应用翻译成您的语言</string>
@@ -544,7 +544,7 @@
     <string name="up_next">下一首</string>
     <string name="update_image">更新图片</string>
     <string name="updating">正在更新…</string>
-    <string name="user_images_description">用户图像</string>
+    <string name="user_images_description">用户图片</string>
     <string name="user_name">用户名</string>
     <string name="username">用户名</string>
     <string name="version">版本</string>
