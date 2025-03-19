@@ -332,7 +332,7 @@
     <string name="pref_keep_screen_on_summary">Perlu diingat bahwa mengaktifkan fitur ini dapat memengaruhi masa pakai baterai</string>
     <string name="pref_keep_screen_on_title">Biarkan layar tetap menyala</string>
     <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_title">Tampilan saat memutar di layar kunci</string>
     <string name="pref_language_name">Pilih bahasa</string>
     <string name="pref_snow_fall_title">Efek hujan salju</string>
     <string name="pref_summary_album_art_on_lockscreen">Gunakan sampul album lagu yang sedang diputar sebagai wallpaper layar kunci</string>
@@ -361,7 +361,7 @@
     <string name="pref_summary_open_source_licences">Detail lisensi untuk perangkat lunak sumber terbuka</string>
     <string name="pref_summary_pause_history">Saat diaktifkan, lagu yang baru diputar tidak akan muncul di riwayat</string>
     <string name="pref_summary_remember_tab">Arahkan ke tab yang terakhir digunakan saat memulai</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Tampilkan kolom pencarian dalam daftar putar</string>
     <string name="pref_summary_show_lyrics">Tampilkan lirik yang disinkronkan di atas sampul album</string>
     <string name="pref_summary_suggestions">Tampilkan Campuran Musik Baru di layar beranda</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Memungkinkan mengubah lagu dengan menggeser di mana saja di layar yang sedang diputar</string>
@@ -409,7 +409,7 @@
     <string name="pref_title_open_source_licences">Lisensi sumber terbuka</string>
     <string name="pref_title_pause_history">Jeda riwayat</string>
     <string name="pref_title_remember_tab">Ingat tab terakhir</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Aktifkan pencarian di daftar putar</string>
     <string name="pref_title_show_lyrics">Tampilkan lirik</string>
     <string name="pref_title_suggestions">Tampilkan Saran</string>
     <string name="pref_title_swipe_anywhere_now_playing">Geser ke mana saja untuk mengubah lagu</string>
@@ -506,7 +506,7 @@
     <string name="sort_order_num_songs">Jumlah lagu</string>
     <string name="sort_order_num_songs_desc">Desc jumlah lagu</string>
     <string name="sort_order_year">Tahun</string>
-    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_asc">Aktifkan pencarian di daftar putar</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sortir turun</string>
     <string name="speech_not_supported">Maaf! Perangkat Anda tidak mendukung input suara</string>
