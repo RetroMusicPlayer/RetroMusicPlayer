@@ -42,7 +42,7 @@
     <string name="action_set">Mulai</string>
     <string name="action_set_as_ringtone">Atur sebagai nada dering</string>
     <string name="action_set_as_start_directory">Atur sebagai direktori awal</string>
-    <string name="action_settings">"Setelan"</string>
+    <string name="action_settings">"Pengaturan"</string>
     <string name="action_share">Bagikan</string>
     <string name="action_shuffle_all">Acak semua</string>
     <string name="action_shuffle_playlist">Acak daftar putar</string>
