@@ -173,7 +173,7 @@
     <string name="edit_synced_lyrics">Editar Letras Sincronizadas</string>
     <string name="empty">Vazio</string>
     <string name="equalizer">Equalizador</string>
-    <string name="error_create_backup">Não foi possível criar um backup</string>
+    <string name="error_create_backup">Não foi possível criar o backup</string>
     <string name="error_delete_backup">Não foi possível excluir o backup</string>
     <string name="error_empty_name">Seu nome não pode estar em branco!</string>
     <string name="error_load_failed">Falha ao carregar</string>
@@ -248,7 +248,7 @@
     <string name="md_error_label">Erro</string>
     <string name="md_storage_perm_error">Erro de permissão</string>
     <string name="message_backup_create_success">Backup criado com sucesso.</string>
-    <string name="message_limit_tabs">Não mais do que 5 itens</string>
+    <string name="message_limit_tabs">Não mais que 5 itens</string>
     <string name="message_pro_feature">%s é um recurso Pro.</string>
     <string name="message_restore_success">Restauração concluída com sucesso.</string>
     <string name="message_updated">Atualizado</string>
@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pausar em zero</string>
     <string name="pref_keep_screen_on_summary">Tenha em mente que ativar este recurso pode afetar a duração da bateria</string>
     <string name="pref_keep_screen_on_title">Manter a tela ligada</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">É necessário reiniciar o aplicativo para aplicar as alterações. Antes de bloquear a tela, certifique-se de que o reprodutor esteja aberto e em uso para que esse recurso funcione</string>
+    <string name="pref_show_when_locked_title">Exibir a interface do reprodutor quando a tela estiver bloqueada</string>
     <string name="pref_language_name">Selecione o idioma</string>
     <string name="pref_snow_fall_title">Efeito de queda de neve</string>
     <string name="pref_summary_album_art_on_lockscreen">Usar a capa do álbum da música em reprodução como papel de parede na tela de bloqueio</string>
@@ -363,11 +363,11 @@
     <string name="pref_summary_open_source_licences">Detalhes da licença para software de código aberto</string>
     <string name="pref_summary_pause_history">Quando ativado, as músicas tocadas recentemente não serão exibidas no histórico</string>
     <string name="pref_summary_remember_tab">Navegar para a última guia usada ao iniciar</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Exibir um campo de busca na playlist</string>
     <string name="pref_summary_show_lyrics">Exibir letras sincronizadas sobre a capa do álbum</string>
     <string name="pref_summary_suggestions">Mostrar \"Mix de Novas Músicas\" na tela inicial</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permite mudar a música deslizando em qualquer lugar na tela em reprodução</string>
-    <string name="pref_summary_swipe_to_dismiss">Deslize para baixo para dispensar o mini player</string>
+    <string name="pref_summary_swipe_to_dismiss">Deslize para baixo para fechar o mini reprodutor</string>
     <string name="pref_summary_toggle_full_screen">Modo imersivo</string>
     <string name="pref_summary_toggle_headset">Começar a reproduzir imediatamente após os fones de ouvido forem conectados</string>
     <string name="pref_summary_toggle_shuffle">O modo aleatório será desativado ao reproduzir uma nova lista de músicas</string>
@@ -411,11 +411,11 @@
     <string name="pref_title_open_source_licences">Licenças de código aberto</string>
     <string name="pref_title_pause_history">Pausar histórico</string>
     <string name="pref_title_remember_tab">Lembrar a última guia</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Habilitar busca na playlist</string>
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
     <string name="pref_title_swipe_anywhere_now_playing">Deslize em qualquer lugar para mudar a música</string>
-    <string name="pref_title_swipe_to_dismiss">Dispensar com deslize para baixo</string>
+    <string name="pref_title_swipe_to_dismiss">Fechar com deslize para baixo</string>
     <string name="pref_title_tab_text_mode">Modo de títulos nas guias</string>
     <string name="pref_title_toggle_carousel_effect">Efeito carrossel</string>
     <string name="pref_title_toggle_full_screen">Aplicativo em tela cheia</string>
@@ -456,8 +456,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">O aplicativo precisa de permissão para acessar as configurações do seu dispositivo para definir músicas como toque</string>
     <string name="ringtone_title">Toque (opcional)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">O aplicativo precisa de permissão para agendar alarmes precisos para configurar os temporizadores de sono</string>
+    <string name="permission_alarm_title">Alarme (Opcional)</string>
     <string name="saf_delete_failed">Falha ao excluir arquivo: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Não foi possível obter URI SAF</string>
@@ -508,8 +508,8 @@
     <string name="sort_order_num_songs">Quantidade de músicas (crescente)</string>
     <string name="sort_order_num_songs_desc">Quantidade de músicas (decrescente)</string>
     <string name="sort_order_year">Ano</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Ordenação por ano (crescente)</string>
+    <string name="sort_order_year_desc">Ordenação por ano (decrescente)</string>
     <string name="sort_order_z_a">Nome (decrescente)</string>
     <string name="speech_not_supported">Desculpe! O seu dispositivo não suporta entrada de voz</string>
     <string name="speech_prompt">Pesquisar sua biblioteca</string>
@@ -567,5 +567,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website de rastreio de problemas.</string>
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
     <string name="could_not_write_tags_to_file">Não foi possível gravar as tags no arquivo de música!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">Sem permissão para agendar alarmes. Por favor, permita o Retro Music.</string>
 </resources>
