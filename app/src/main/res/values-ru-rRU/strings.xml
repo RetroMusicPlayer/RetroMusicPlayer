@@ -276,7 +276,7 @@
     <string name="no_purchase_found">Покупки отсутствуют.</string>
     <string name="no_results">Нет результатов</string>
     <string name="no_songs">У вас нет треков</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Нет результатов поиска</string>
     <string name="normal">Обычная</string>
     <string name="normal_lyrics">Обычный текст</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> не найден в хранилище медиа.]]></string>
@@ -337,8 +337,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Пауза при нулевой громкости</string>
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на время работы от батареи</string>
     <string name="pref_keep_screen_on_title">Оставлять экран включённым</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Для принятия эффекта необходим перезапуска приложения. Плеер должен на переднем плане перед блокировкой, чтобы функция работала</string>
+    <string name="pref_show_when_locked_title">Показывать интерфейс плеера при блокировке</string>
     <string name="pref_language_name">Выберите язык</string>
     <string name="pref_snow_fall_title">Эффект снегопада</string>
     <string name="pref_summary_album_art_on_lockscreen">Использовать обложку альбома текущего трека в качестве обоев на экране блокировки</string>
@@ -367,7 +367,7 @@
     <string name="pref_summary_open_source_licences">Сведения о лицензиях на ПО с открытым исходным кодом</string>
     <string name="pref_summary_pause_history">Если включено, то новые треки не будут отображаться в истории</string>
     <string name="pref_summary_remember_tab">При открытии приложения переходить на последнюю использованную вкладку</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Показывать строку поиска в плейлисте</string>
     <string name="pref_summary_show_lyrics">Показывать синхронизированный текст песни поверх обложки альбома</string>
     <string name="pref_summary_suggestions">Показывать Новый Микс на главном экране</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Включает смену трека по свайпу в любом месте на экране воспроизведения</string>
@@ -415,7 +415,7 @@
     <string name="pref_title_open_source_licences">Лицензии с открытым исходным кодом</string>
     <string name="pref_title_pause_history">Приостановить историю</string>
     <string name="pref_title_remember_tab">Запоминать последнюю использованную вкладку</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Включить поиск в плейлисте</string>
     <string name="pref_title_show_lyrics">Показать текст песни</string>
     <string name="pref_title_suggestions">Показывать предложения</string>
     <string name="pref_title_swipe_anywhere_now_playing">Проведите пальцем в любом месте, чтобы сменить песню</string>
@@ -460,8 +460,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Приложению требуется разрешение на доступ к изменению настроек вашего устройства, чтобы устанавливать музыку в качестве мелодии звонка</string>
     <string name="ringtone_title">Мелодия звонка (необязательно)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">Приложению нужно разрешение на установку будильников, чтобы устанавливать таймеры сна</string>
+    <string name="permission_alarm_title">Будильник (необязательно)</string>
     <string name="saf_delete_failed">Ошибка при удалении файла: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Не удается получить SAF URI</string>
@@ -512,8 +512,8 @@
     <string name="sort_order_num_songs">Количество треков</string>
     <string name="sort_order_num_songs_desc">Количество треков по убыванию</string>
     <string name="sort_order_year">Год</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Год по возрастанию</string>
+    <string name="sort_order_year_desc">Год по убыванию</string>
     <string name="sort_order_z_a">По убыванию</string>
     <string name="speech_not_supported">Извините! Ваше устройство не поддерживает голосовой ввод</string>
     <string name="speech_prompt">Поиск в вашей библиотеке</string>
@@ -571,5 +571,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="your_account_data_is_only_used_for_authentication">Данные вашей учётной записи используются только для аутентификации.</string>
     <string name="could_not_write_tags_to_file">Не удалось записать теги в музыкальный файл!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">Нет расписание на установку будильников, пожалуйста, представьте разрешение.</string>
 </resources>
