@@ -270,7 +270,7 @@
     <string name="no_purchase_found">没有找到购买记录</string>
     <string name="no_results">暂无结果</string>
     <string name="no_songs">暂无歌曲</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">无搜索结果</string>
     <string name="normal">正常</string>
     <string name="normal_lyrics">正常歌词</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> 未在媒体存储中列出。]]></string>
