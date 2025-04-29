@@ -456,7 +456,7 @@
     <string name="ringtone_summary">音楽を着信音に設定するには、端末の設定にアクセスする権限が必要です</string>
     <string name="ringtone_title">着信音（オプション）</string>
     <string name="permission_alarm_summary">スリープタイマーを設定するには、アプリに正確なアラームをスケジュールする許可が必要です</string>
-    <string name="permission_alarm_title">アラーム(任意)</string>
+    <string name="permission_alarm_title">アラーム（オプション）</string>
     <string name="saf_delete_failed">ファイルの削除に失敗しました。%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF URIを取得できません</string>
@@ -507,8 +507,8 @@
     <string name="sort_order_num_songs">曲数順（昇順）</string>
     <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
-    <string name="sort_order_year_asc">昇順(年)</string>
-    <string name="sort_order_year_desc">降順(年)</string>
+    <string name="sort_order_year_asc">年（昇順）</string>
+    <string name="sort_order_year_desc">年（降順）</string>
     <string name="sort_order_z_a">降順</string>
     <string name="speech_not_supported">ごめんなさい! このデバイスは音声入力に対応しておりません</string>
     <string name="speech_prompt">ライブラリを検索</string>
