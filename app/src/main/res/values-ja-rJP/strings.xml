@@ -254,7 +254,7 @@
     <string name="message_welcome"><![CDATA[こんにちは！ <br> %s へようこそ]]></string>
     <string name="my_name">名前</string>
     <string name="my_top_tracks">最近のお気に入り</string>
-    <string name="never">決して</string>
+    <string name="never">しない</string>
     <string name="new_music_mix">新曲ミックス</string>
     <string name="new_playlist_title">新しいプレイリスト</string>
     <string name="new_start_directory">%s は新しい開始ディレクトリです。</string>
@@ -271,7 +271,7 @@
     <string name="no_purchase_found">購入が見つかりません。</string>
     <string name="no_results">結果なし</string>
     <string name="no_songs">曲がありません</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">検索結果が見つかりませんでした</string>
     <string name="normal">通常</string>
     <string name="normal_lyrics">通常の歌詞</string>
     <string name="not_listed_in_media_store"><![CDATA[メディアストアに <b>%s</b> がリストされたされていません。]]></string>
@@ -332,8 +332,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">音量をゼロで一時停止</string>
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_keep_screen_on_title">画面をオンのままにする</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">有効にするにはアプリの再起動が必要です。この機能を使用するには、ロックする前にプレーヤーをフォアグラウンドにする必要があります</string>
+    <string name="pref_show_when_locked_title">ロックされているときにプレーヤーインターフェースを表示する</string>
     <string name="pref_language_name">言語を選択</string>
     <string name="pref_snow_fall_title">雪エフェクト</string>
     <string name="pref_summary_album_art_on_lockscreen">再生中のジャケットをロック画面の壁紙に適用する</string>
@@ -362,7 +362,7 @@
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
     <string name="pref_summary_remember_tab">開始時に最後に表示したタブに移動します</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">プレイリストに検索フィールドを表示する</string>
     <string name="pref_summary_show_lyrics">同期歌詞をアルバムカバーに重ねて表示します</string>
     <string name="pref_summary_suggestions">新曲ミックスをホーム画面に表示する</string>
     <string name="pref_summary_swipe_anywhere_now_playing">再生中画面のどこかをスワイプして、楽曲の変更を行います</string>
@@ -410,7 +410,7 @@
     <string name="pref_title_open_source_licences">オープンソースライセンス</string>
     <string name="pref_title_pause_history">視聴履歴を一時停止</string>
     <string name="pref_title_remember_tab">最後に開いたタブを記憶する</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">プレイリスト内の検索を有効にする</string>
     <string name="pref_title_show_lyrics">歌詞を表示する</string>
     <string name="pref_title_suggestions">提案を表示する</string>
     <string name="pref_title_swipe_anywhere_now_playing">画面のどこかをスワイプして曲変更する</string>
@@ -455,8 +455,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">音楽を着信音に設定するには、端末の設定にアクセスする権限が必要です</string>
     <string name="ringtone_title">着信音（オプション）</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">スリープタイマーを設定するには、アプリに正確なアラームをスケジュールする許可が必要です</string>
+    <string name="permission_alarm_title">アラーム(任意)</string>
     <string name="saf_delete_failed">ファイルの削除に失敗しました。%s</string>
     <!-- SAF -->
     <string name="saf_error_uri">SAF URIを取得できません</string>
@@ -507,8 +507,8 @@
     <string name="sort_order_num_songs">曲数順（昇順）</string>
     <string name="sort_order_num_songs_desc">曲数順（降順）</string>
     <string name="sort_order_year">年</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">昇順(年)</string>
+    <string name="sort_order_year_desc">降順(年)</string>
     <string name="sort_order_z_a">降順</string>
     <string name="speech_not_supported">ごめんなさい! このデバイスは音声入力に対応しておりません</string>
     <string name="speech_prompt">ライブラリを検索</string>
@@ -566,5 +566,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">issue trackerのウェブサイトに移動します</string>
     <string name="your_account_data_is_only_used_for_authentication">あなたのアカウントは認証にのみ使用されます</string>
     <string name="could_not_write_tags_to_file">音楽ファイルにタグを書き込めませんでした!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">アラームをスケジュールする権限がありません。設定からRetro Musicを許可してください。</string>
 </resources>
