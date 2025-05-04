@@ -337,7 +337,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">Zatrzymaj przy wyłączonym dźwięku</string>
     <string name="pref_keep_screen_on_summary">Ta opcja może mieć wpływ na zużycie baterii</string>
     <string name="pref_keep_screen_on_title">Pozostaw ekran włączony</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_summary">Wymaga ponownego uruchomienia aplikacji. Odtwarzacz musi być na pierwszym planie przed zablokowaniem ekranu</string>
     <string name="pref_show_when_locked_title">Pokaż interfejs odtwarzacza na zablokowanym ekranie</string>
     <string name="pref_language_name">Wybierz język</string>
     <string name="pref_snow_fall_title">Efekt „padającego śniegu”</string>
@@ -460,7 +460,7 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Potrzebujemy uprawnień do ustawień Twojego urządzenia, aby ustawić utwór jako dzwonek</string>
     <string name="ringtone_title">Dzwonek (opcjonalny)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
+    <string name="permission_alarm_summary">Aplikacja potrzebuje uprawnień do planowania alarmów, aby ustawiać wyłączniki czasowe</string>
     <string name="permission_alarm_title">Alarmy i przypomnienia (opcjonalne)</string>
     <string name="saf_delete_failed">Nie udało się usunąć pliku: %s</string>
     <!-- SAF -->
