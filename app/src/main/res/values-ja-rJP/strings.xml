@@ -163,14 +163,14 @@
     <string name="do_you_want_to_clear_the_blacklist">ブラックリストを削除しますか?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b> をブラックリストから削除しますか?]]></string>
     <string name="donate">寄付する</string>
-    <string name="donate_summary">私が自分の仕事に払う価値があると思うなら、あなたはここにお金を残すことができます</string>
-    <string name="donation_header">俺を購入：</string>
+    <string name="donate_summary">もし私の活動に価値を感じていただけたら、こちらからご支援いただけると嬉しいです</string>
+    <string name="donation_header">活動を支援する：</string>
     <string name="done">完了</string>
     <string name="drive_mode">運転モード</string>
     <string name="edit_fab">ボタンを編集</string>
     <string name="edit_normal_lyrics">歌詞を編集</string>
     <string name="edit_synced_lyrics">同期された歌詞を編集</string>
-    <string name="empty">空の</string>
+    <string name="empty">空</string>
     <string name="equalizer">イコライザー</string>
     <string name="error_create_backup">バックアップを作成できませんでした</string>
     <string name="error_delete_backup">バックアップを削除できませんでした</string>
@@ -261,7 +261,7 @@
     <string name="next_song">次の曲</string>
     <string name="no_albums">アルバムがありません</string>
     <string name="no_artists">アーティストがありません</string>
-    <string name="no_audio_ID">"音楽再生してから、再度お試しください"</string>
+    <string name="no_audio_ID">"音楽を再生してから、再度お試しください。"</string>
     <string name="no_backups_found">バックアップが見つかりませんでした</string>
     <string name="no_equalizer">イコライザが見つかりませんでした</string>
     <string name="no_genres">ジャンルがありません</string>
@@ -274,7 +274,7 @@
     <string name="no_search_results">検索結果が見つかりませんでした</string>
     <string name="normal">通常</string>
     <string name="normal_lyrics">通常の歌詞</string>
-    <string name="not_listed_in_media_store"><![CDATA[メディアストアに <b>%s</b> がリストされたされていません。]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[メディアストアに <b>%s</b> がリストされていません。]]></string>
     <string name="not_recently_played">最近再生されていない曲</string>
     <string name="nothing_to_scan">スキャン対象がありません</string>
     <string name="nothing_to_see">表示するものがありません</string>
@@ -284,7 +284,7 @@
     <string name="now_playing_queue">再生中のキュー</string>
     <string name="now_playing_summary">再生中の画面をカスタマイズ</string>
     <string name="now_playing_themes">9種類以上の再生中テーマ</string>
-    <string name="only_on_wifi">Wi-Fi時のみ</string>
+    <string name="only_on_wifi">Wi-Fi使用時のみ</string>
     <string name="other_settings_summary">高度な試験的機能</string>
     <string name="others">その他</string>
     <string name="over_cover">カバーに重ねて表示</string>
@@ -308,7 +308,7 @@
     <string name="playback_pitch">音程</string>
     <string name="playback_settings">再生設定</string>
     <string name="playback_speed">再生速度</string>
-    <string name="playing_notification_description">再生中の通知は再生/停止の操作が利用できます</string>
+    <string name="playing_notification_description">再生中の通知では、再生・一時停止などの操作が可能です。</string>
     <string name="playing_notification_name">再生中の通知</string>
     <string name="playlist_created_sucessfully">%s の作成に成功しました</string>
     <string name="playlist_is_empty">プレイリストが空です</string>
