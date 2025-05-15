@@ -4,11 +4,11 @@
     <string name="about_settings_summary">Equipo, redes sociales</string>
     <string name="accent_color">Color de énfasis</string>
     <string name="accent_color_desc">El color de énfasis del tema, por defecto es morado</string>
-    <string name="action_about">About</string>
+    <string name="action_about">Acerca</string>
     <string name="action_add_to_blacklist">Agregar a la lista negra</string>
     <string name="action_add_to_favorites">Agregar a Favoritos</string>
     <string name="action_add_to_playing_queue">Agregar a la cola de reproducción</string>
-    <string name="action_add_to_playlist">Agregar a playlist 2008</string>
+    <string name="action_add_to_playlist">Agregar a lista de reproducción</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_cast">Lanzamiento</string>
     <string name="action_clear_playing_queue">Limpiar cola de reproducción</string>
@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pausar en cero</string>
     <string name="pref_keep_screen_on_summary">Ten en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_keep_screen_on_title">Mantener la pantalla encendida</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Se requiere reiniciar la aplicación para que tome efecto. El reproductor debe estar en primer plano antes de bloquear la pantalla para que esta función funcione</string>
+    <string name="pref_show_when_locked_title">Mostrar la interfaz del reproductor cuando sea bloqueado</string>
     <string name="pref_language_name">Seleccionar idioma</string>
     <string name="pref_snow_fall_title">Efecto de nieve</string>
     <string name="pref_summary_album_art_on_lockscreen">Usar la portada del álbum de la canción en reproducción como fondo de la pantalla de bloqueo</string>
@@ -508,8 +508,8 @@
     <string name="sort_order_num_songs">Número de canciones</string>
     <string name="sort_order_num_songs_desc">Número de canciones descendente</string>
     <string name="sort_order_year">Año</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Año ascendiente</string>
+    <string name="sort_order_year_desc">Año descendiente</string>
     <string name="sort_order_z_a">Descendente</string>
     <string name="speech_not_supported">¡Lo siento! Tu dispositivo no es compatible con la entrada de voz</string>
     <string name="speech_prompt">Buscar en tu biblioteca</string>
