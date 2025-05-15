@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pausar en cero</string>
     <string name="pref_keep_screen_on_summary">Tenga en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_keep_screen_on_title">Mantener la pantalla encendida</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Se requiere reiniciar la app para tener afecto. El reproductor debe de estar en primer plano antes de bloquear la pantalla para que esta función funcione</string>
+    <string name="pref_show_when_locked_title">Mostrar la interfaz del reproductor cuando esté bloqueado</string>
     <string name="pref_language_name">Seleccionar idioma</string>
     <string name="pref_snow_fall_title">Efecto de nieve</string>
     <string name="pref_summary_album_art_on_lockscreen">Usar la portada del álbum de la canción en reproducción como fondo de la pantalla de bloqueo</string>
@@ -363,7 +363,7 @@
     <string name="pref_summary_open_source_licences">Detalles de licencia para software de código abierto</string>
     <string name="pref_summary_pause_history">Cuando se activa, las canciones recién reproducidas no se muestran en el historial</string>
     <string name="pref_summary_remember_tab">Navegar a la última pestaña usada al iniciar</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Mostrar campo de búsqueda en una lista de reproducción</string>
     <string name="pref_summary_show_lyrics">Mostrar letras sincronizadas sobre la portada del álbum</string>
     <string name="pref_summary_suggestions">Mostrar mezcla de nueva música en la pantalla de inicio</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permite cambiar de canción deslizando el dedo en cualquier parte de la pantalla de reproducción</string>
@@ -411,7 +411,7 @@
     <string name="pref_title_open_source_licences">Licencias de código abierto</string>
     <string name="pref_title_pause_history">Pausar historial</string>
     <string name="pref_title_remember_tab">Recordar la última pestaña</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Habilitar búsqueda en lista de reproducción</string>
     <string name="pref_title_show_lyrics">Mostrar Letras</string>
     <string name="pref_title_suggestions">Mostrar sugerencias</string>
     <string name="pref_title_swipe_anywhere_now_playing">Desliza hacia cualquier lugar para cambiar la canción</string>
@@ -456,8 +456,8 @@
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">La aplicación necesita permiso para acceder a la configuración de tu dispositivo para establecer música como Tono de Llamada</string>
     <string name="ringtone_title">Tono de Llamada (Opcional)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">La aplicación necesita permiso para programar alarmas exactas y establecer temporizadores de sueño</string>
+    <string name="permission_alarm_title">Alarma (Opcional)</string>
     <string name="saf_delete_failed">La eliminación del archivo: %s falló</string>
     <!-- SAF -->
     <string name="saf_error_uri">No se puede obtener SAF URI</string>
@@ -508,8 +508,8 @@
     <string name="sort_order_num_songs">Número de canciones</string>
     <string name="sort_order_num_songs_desc">Número de canciones descendente</string>
     <string name="sort_order_year">Año</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Año ascendente</string>
+    <string name="sort_order_year_desc">Año descendente</string>
     <string name="sort_order_z_a">Descendente</string>
     <string name="speech_not_supported">¡Lo siento! Tu dispositivo no es compatible con la entrada de voz</string>
     <string name="speech_prompt">Buscar en tu biblioteca</string>
@@ -567,5 +567,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web para reportar incidencias.</string>
     <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación.</string>
     <string name="could_not_write_tags_to_file">¡No se pudo escribir etiquetas en el archivo de música!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">Sin permiso para agendar alarmas, por favor active el permiso.</string>
 </resources>
