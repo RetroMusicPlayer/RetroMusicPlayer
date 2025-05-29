@@ -8,7 +8,7 @@
     <string name="action_add_to_blacklist">Ausschließen</string>
     <string name="action_add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="action_add_to_playing_queue">Zur Wiedergabeliste hinzufügen</string>
-    <string name="action_add_to_playlist">Zur playlist hinzufügen</string>
+    <string name="action_add_to_playlist">Zur Playlist hinzufügen</string>
     <string name="action_cancel">Abbrechen</string>
     <string name="action_cast">Übertragen</string>
     <string name="action_clear_playing_queue">Wiedergabeliste leeren</string>
@@ -34,7 +34,7 @@
     <string name="action_previous">Vorheriges</string>
     <string name="action_remove_from_favorites">Aus Favoriten entfernen</string>
     <string name="action_remove_from_playing_queue">Von Wiedergabeliste entfernen</string>
-    <string name="action_remove_from_playlist">Von Playlist entfernen</string>
+    <string name="action_remove_from_playlist">Aus Playlist entfernen</string>
     <string name="action_rename">Umbenennen</string>
     <string name="action_save_playing_queue">Wiedergabeliste speichern</string>
     <string name="action_scan">Scannen</string>
@@ -333,7 +333,7 @@
     <string name="pref_keep_pause_on_zero_volume_title">Beim Stummschalten pausieren</string>
     <string name="pref_keep_screen_on_summary">Beachte, dass sich diese Funktion auf die Akkulaufzeit auswirkt</string>
     <string name="pref_keep_screen_on_title">Bildschirm anlassen</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
+    <string name="pref_show_when_locked_summary">Erfordert einen Neustart der App. Retro Music muss im Vordergrund geöffnet sein, damit diese Funktion funktioniert</string>
     <string name="pref_show_when_locked_title">Show the player interface when locked</string>
     <string name="pref_language_name">Sprachauswahl</string>
     <string name="pref_snow_fall_title">Schneefall-Effekt</string>
