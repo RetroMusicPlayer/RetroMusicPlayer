@@ -571,4 +571,12 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="close">Close</string>
+    <string name="scanning_folders_files">Scanning Folders And Files...></string>
+    <string name="scanning_path">Scanning Path:</string>
+    <string name="ready_to_scan">Ready to scan</string>
+    <string name="found">Found:</string>
+    <string name="scan_failed">"Scanning Error\\n  "</string>
+
 </resources>

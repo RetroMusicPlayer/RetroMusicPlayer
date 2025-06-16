@@ -2,6 +2,7 @@
 #buildscripts dependencies
 advrecyclerview = "1.0.0"
 jetradarmobile_androidSnowfall_version = "1.2.1"
+lottieVersion = "3.4.0"
 tankery_circularSeekBar_version = "1.4.2"
 retrofit_version = "2.9.0"
 afollestad_dialog_version = "3.3.0"
@@ -83,6 +84,7 @@ afollestad-material-dialogs-input = { module = "com.afollestad.material-dialogs:
 afollestad-material-cab = { module = "com.afollestad:material-cab", version.ref = "afollestad_materialCab_version" }
 
 #Retrofit and apos
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit_version" }
 okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3_loggingInterceptor_version" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit_version" }

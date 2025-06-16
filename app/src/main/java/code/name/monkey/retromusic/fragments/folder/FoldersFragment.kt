@@ -17,8 +17,10 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.*
 import android.webkit.MimeTypeMap
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -26,6 +28,7 @@ import androidx.core.os.BundleCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -47,11 +50,13 @@ import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueueKeepShuffleMode
+import code.name.monkey.retromusic.helper.ScanMusicBottomSheet
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
 import code.name.monkey.retromusic.interfaces.IScrollHelper
+import code.name.monkey.retromusic.misc.FolderMediaScannerCompletionListener
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
@@ -74,10 +79,13 @@ import java.io.FileFilter
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
+import kotlin.getValue
+import kotlin.text.get
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,
-    LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener, IScrollHelper {
+    LoaderManager.LoaderCallbacks<List<File>>, StorageClickListener, IScrollHelper,
+    ScanMusicBottomSheet.ScanMusicStartListener {
     private var _binding: FragmentFolderBinding? = null
     private val binding get() = _binding!!
 
@@ -95,7 +103,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         }
     }
     private var storageItems = ArrayList<Storage>()
-
+    private val scanViewModel: ScanViewModel by activityViewModels() // Or appropriate scope
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFolderBinding.bind(view)
@@ -137,6 +145,22 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 )
             )
             LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this)
+        }
+    }
+
+    // For Every Scan Click call this function to show DailogSheet
+    private fun showScanDailogSheet(selectedFile: File)
+    {
+        // Make sure the selectedFile actually exists and is valid before creating the dialog
+        if (selectedFile.exists()) {
+            val scanBottomSheet = ScanMusicBottomSheet.newInstance(selectedFile)
+
+            // Set the listener if your Fragment implements ScanMusicStartListener
+            scanBottomSheet.listener = this // 'this' assumes your current class implements ScanMusicStartListener
+
+            scanBottomSheet.show(childFragmentManager, "ScanMusicBottomSheetTag") // Or parentFragmentManager
+        } else {
+            Toast.makeText(requireContext(), "Selected file/folder does not exist.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -214,9 +238,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
 
                     R.id.action_scan -> {
-                        lifecycleScope.launch {
-                            listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
-                        }
+                        showScanDailogSheet(file)
                         return@setOnMenuItemClickListener true
                     }
                 }
@@ -246,9 +268,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                     }
 
                     R.id.action_scan -> {
-                        lifecycleScope.launch {
-                            listPaths(file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
-                        }
+                        showScanDailogSheet(file)
                         return@setOnMenuItemClickListener true
                     }
                 }
@@ -298,13 +318,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                                 .setAction(
                                     R.string.action_scan
                                 ) {
-                                    lifecycleScope.launch {
-                                        listPaths(mFile, AUDIO_FILE_FILTER) { paths ->
-                                            scanPaths(
-                                                paths
-                                            )
-                                        }
-                                    }
+                                    showScanDailogSheet(mFile)
+
                                 }
                                 .setActionTextColor(accentColor(requireActivity()))
                                 .show()
@@ -373,9 +388,8 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             R.id.action_scan -> {
                 val crumb = activeCrumb
                 if (crumb != null) {
-                    lifecycleScope.launch {
-                        listPaths(crumb.file, AUDIO_FILE_FILTER) { paths -> scanPaths(paths) }
-                    }
+                    showScanDailogSheet(crumb.file)
+
                 }
                 return true
             }
@@ -427,19 +441,45 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
 
 
+    // Your scanPaths method (ensure it handles empty toBeScanned and uses Dispatchers.IO for MediaScanner)
     private fun scanPaths(toBeScanned: Array<String?>) {
+        Log.d("FoldersFragment", "scanPaths called with ${toBeScanned.size} paths on thread ${Thread.currentThread().name}")
         if (activity == null) {
+            Log.w("FoldersFragment", "scanPaths: Activity is null.")
+            scanViewModel.notifyScanFinishedWithError("Context is null") // Consider if scan should "finish" here
             return
         }
+
         if (toBeScanned.isEmpty()) {
-            showToast(R.string.nothing_to_scan)
-        } else {
-            MediaScannerConnection.scanFile(
-                requireContext(),
-                toBeScanned,
-                null,
-                UpdateToastMediaScannerCompletionListener(activity, listOf(*toBeScanned))
-            )
+            Log.i("FoldersFragment", "scanPaths: Nothing to scan.")
+            // Show toast or UI update on Main thread
+            lifecycleScope.launch(Dispatchers.Main) { // Or ensure showToast is main-safe
+                Toast.makeText(requireContext(), R.string.nothing_to_scan, Toast.LENGTH_SHORT).show()
+            }
+            scanViewModel.notifyScanFinishedWithError("Scan Paths is empty")// Crucial: Stop animation if nothing to scan
+            return
+        }
+
+        // scanViewModel.notifyActualMediaScanStarted() // Optional: more granular progress
+
+        // Launch a coroutine for MediaScannerConnection if not already inside one from onMusicScanStart
+        // Since scanPaths can be called from different contexts, making it self-contained is good.
+        lifecycleScope.launch { // This launch is fine, withContext inside will specify IO
+            Log.d("FoldersFragment", "scanPaths: Coroutine for MediaScannerConnection. Current thread: ${Thread.currentThread().name}")
+            withContext(Dispatchers.IO) {
+                Log.d("FoldersFragment", "scanPaths: MediaScannerConnection will run on thread: ${Thread.currentThread().name}")
+                MediaScannerConnection.scanFile(
+                    requireContext().applicationContext,
+                    toBeScanned,
+                    null,
+                    FolderMediaScannerCompletionListener(
+                        requireContext().applicationContext,
+                        listOf(*toBeScanned), // Ensure no nulls if listener expects non-null
+                        scanViewModel
+                    )
+                )
+            }
+            // MediaScanner is async, completion handled by listener.
         }
     }
 
@@ -498,29 +538,31 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private suspend fun listPaths(
         file: File,
-        fileFilter: FileFilter,
-        doOnPathListed: (paths: Array<String?>) -> Unit,
-    ) {
-        val paths = try {
-            val paths: Array<String?>
-            if (file.isDirectory) {
-                val files = FileUtil.listFilesDeep(file, fileFilter)
-                paths = arrayOfNulls(files.size)
-                for (i in files.indices) {
-                    val f = files[i]
-                    paths[i] = FileUtil.safeGetCanonicalPath(f)
+        fileFilter: FileFilter
+    ): Array<String?> { // Return the paths directly
+        // Ensure this heavy lifting happens on an IO thread
+        return withContext(Dispatchers.IO) {
+            try {
+                val pathsListed: Array<String?>
+                if (file.isDirectory) {
+                    //Log.d("FoldersFragment", "listPathsSuspending: Listing files in directory ${file.path} on thread ${Thread.currentThread().name}")
+                    val files = FileUtil.listFilesDeep(file, fileFilter)
+                    pathsListed = arrayOfNulls(files.size)
+                    for (i in files.indices) {
+                        val f = files[i]
+                        pathsListed[i] = FileUtil.safeGetCanonicalPath(f)
+                    }
+                    //Log.d("FoldersFragment", "listPathsSuspending: Found ${pathsListed.size} paths in directory ${file.path}")
+                } else {
+                    pathsListed = arrayOfNulls(1)
+                    pathsListed[0] = file.path
+                    //Log.d("FoldersFragment", "listPathsSuspending: Path is a file ${file.path}")
                 }
-            } else {
-                paths = arrayOfNulls(1)
-                paths[0] = file.path
+                pathsListed
+            } catch (e: Exception) {
+                Log.e("FoldersFragment", "Error in listPathsSuspending for ${file.path}", e)
+                arrayOf() // Return empty array on error
             }
-            paths
-        } catch (e: Exception) {
-            e.printStackTrace()
-            arrayOf()
-        }
-        withContext(Dispatchers.Main) {
-            doOnPathListed(paths)
         }
     }
 
@@ -604,6 +646,42 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         storageAdapter = StorageAdapter(storageItems, this)
         binding.recyclerView.adapter = storageAdapter
         binding.breadCrumbs.clearCrumbs()
+    }
+
+    override fun onMusicScanStart(fileToScan: File) {
+        scanViewModel.notifyScanStarted()
+
+
+        //Log.d("FoldersFragment", "onMusicScanStart: Initiating scan for ${fileToScan} on thread ${Thread.currentThread().name}")
+        // This lifecycleScope.launch will inherit the dispatcher of its caller if not specified,
+        // which is usually Dispatchers.Main if called from UI event.
+        // The important part is that listPathsSuspending will internally switch to Dispatchers.IO.
+        lifecycleScope.launch {
+            // Inform ViewModel that scan *process* is starting (e.g. path listing + actual scan)
+            // This is where you might show a generic "Processing..." if listPaths itself is long,
+            // separate from the "Scanning..." for MediaScanner.
+            // scanViewModel.notifyOverallScanProcessStarted() // Example new LiveData
+
+            //Log.d("FoldersFragment", "onMusicScanStart: Coroutine launched for listPaths. Current thread: ${Thread.currentThread().name}")
+
+            val pathsToScan = listPaths(fileToScan,AUDIO_FILE_FILTER)
+
+            // After listPathsSuspending finishes (on whatever thread its coroutine was running,
+            // its internal work was on Dispatchers.IO), we are back in this launch block.
+            // It's good practice to ensure scanPaths is also explicitly on Main if it updates UI initially,
+            // OR ensure its internal structure handles its own threading correctly (which your scanPaths does).
+
+            //Log.d("FoldersFragment", "onMusicScanStart: listPathsSuspending completed. Found ${pathsToScan.size} paths. Current thread: ${Thread.currentThread().name}")
+
+            // scanPaths already handles its own threading for MediaScannerConnection (uses Dispatchers.IO internally)
+            // and its listener updates ViewModel using postValue.
+            scanPaths(pathsToScan)
+
+            // No need to call scanViewModel.notifyScanFinished() here.
+            // The FolderMediaScannerCompletionListener will call it when the actual media scanning is done.
+            // If pathsToScan is empty, scanPaths should handle it and potentially call notifyScanFinished.
+        }
+        //Log.d("FoldersFragment", "onMusicScanStart: Method returned. Coroutine for listPaths and scanPaths is running/scheduled.")
     }
 
     companion object {
