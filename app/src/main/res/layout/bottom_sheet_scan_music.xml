@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,14 +16,15 @@
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:paddingBottom="16dp"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        app:lottie_rawRes="@raw/scanner"
-        app:lottie_autoPlay="true"
-        android:visibility="gone"
-        app:lottie_loop="true"/>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        />
+
 
     <TextView
         android:id="@+id/tv_loading"
@@ -63,8 +66,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:visibility="gone"
-        android:text="@string/close"
-        android:backgroundTint="@color/md_red_A400"
+        android:text="@string/done"
+        android:backgroundTint="@color/md_green_500"
         />
 
 

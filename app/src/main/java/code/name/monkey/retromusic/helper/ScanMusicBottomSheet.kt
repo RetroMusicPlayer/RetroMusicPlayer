@@ -43,7 +43,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: BottomSheetScanMusicBinding? = null
     private val binding get() = _binding!!
-    // The File object that will be passed
+
     private var targetFile: File? = null
 
     interface ScanMusicStartListener {
@@ -53,8 +53,8 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
 
     var listener: ScanMusicStartListener? = null
 
-    // In ScanMusicBottomSheet
-    private lateinit var scanViewModel: ScanViewModel // Init with by activityViewModels() or by viewModels()
+
+    private lateinit var scanViewModel: ScanViewModel
 
 
 
@@ -62,25 +62,17 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         isCancelable = false
 
-        // Retrieve the File from arguments
         arguments?.let {
-            // Check for Serializable because File is Serializable
-            // For API 33+ you can use getSerializable(String, Class<T>)
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 targetFile = it.getSerializable(ARG_TARGET_FILE, File::class.java)
             } else {
-                @Suppress("DEPRECATION") // Suppress for older APIs
+                @Suppress("DEPRECATION")
                 targetFile = it.getSerializable(ARG_TARGET_FILE) as? File
             }
         }
 
-        if (targetFile == null) {
-            Log.e("ScanMusicBottomSheet", "Error: Target file not provided or couldn't be deserialized.")
-            // Handle the error, e.g., dismiss the dialog or show an error message
-            // Toast.makeText(requireContext(), "Error: No scan target specified.", Toast.LENGTH_LONG).show()
-            // dismissAllowingStateLoss()
-            // return
-        }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,97 +84,73 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // It's important to do this in onViewCreated or later,
-        // after the dialog's view hierarchy is established.
+
 
         scanViewModel =
-            ViewModelProvider(requireActivity())[ScanViewModel::class.java] // Or appropriate scope
-
-        // In your Fragment or Activity observing the ScanViewModel
-// scanViewModel = ... (initialized)
+            ViewModelProvider(requireActivity())[ScanViewModel::class.java]
 
         scanViewModel.scanStatus.observe(viewLifecycleOwner) { result ->
-            Log.d("MyFragment", "Scan status changed: $result")
+
             when (result) {
                 is ScanResult.NotStarted -> {
-                    // Initial state or reset: Update UI accordingly
-                    //binding.tvLoading.text = "Ready to scan"
 
                 }
                 is ScanResult.InProgress -> {
-                    // Scan is running: Show animation, update text
                     binding.tvLoading.text =
                         getString(R.string.scanning_folders_files)
                     binding.tvLoading.show()
-                    binding.animationView.show()
-                    binding.animationView.playAnimation()
+                    binding.progressCircular.show()
                     binding.btnStar.visibility = View.GONE
                     binding.btnClose.visibility = View.GONE
                 }
                 is ScanResult.Path -> {
                     binding.tvPath.text = buildString {
-        append(getString(R.string.scanning_path))
-        append(" ")
-        append(result.path)
-    }
+                                    append(getString(R.string.scanning_path))
+                                    append(" ")
+                                    append(result.path)
+                                    }
                 }
                 is ScanResult.Success -> {
-                    // Scan succeeded: Stop animation, show success message, items count
-                    binding.tvLoading.text = buildString {
-        append(result.message)
-        append(" ( ")
-                        append(getString(R.string.found))
-        append(result.itemsScanned)
-        append(")")
-    }
-                    binding.animationView.pauseAnimation()
-                   // binding.animationView.visibility = View.GONE
+                    binding.tvLoading.text = result.message
+                    binding.progressCircular.hide()
                     binding.btnStar.visibility = View.GONE
                     binding.tvPath.hide()
-                    binding.btnClose.show() // Show a close/done button
+                    binding.btnClose.show()
                     scanViewModel.resetScanStatus()
-                    //Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
                 }
                 is ScanResult.Error -> {
-                    // Scan failed: Stop animation, show error message
-                    binding.tvLoading.text = buildString {
-        append(getString(R.string.scan_failed))
-        append(result.errorMessage)
-    }
-                    binding.animationView.cancelAnimation()
-                    binding.animationView.visibility = View.GONE
-                    binding.btnStar.visibility = View.VISIBLE // Allow retry or show error
+                    binding.tvLoading.text = result.errorMessage
+                    binding.progressCircular.hide()
+                    binding.btnStar.visibility = View.GONE
                     binding.btnClose.show()
-                    //Toast.makeText(requireContext(), "Scan failed: ${result.errorMessage}", Toast.LENGTH_LONG).show()
+                    scanViewModel.resetScanStatus()
                 }
             }
         }
 
         dialog?.setOnShowListener { dialogInterface ->
             val bottomSheetDialog = dialogInterface as? BottomSheetDialog
-
             val bottomSheet = bottomSheetDialog?.findViewById<FrameLayout>(
                 com.google.android.material.R.id.design_bottom_sheet
             )
             if (bottomSheet != null) {
                 val behavior = BottomSheetBehavior.from(bottomSheet)
-                behavior.isDraggable = false // This prevents dragging (and thus swipe-to-dismiss)
+                behavior.isDraggable = false
             }
         }
         binding.btnStar.accentColor()
         binding.tvLoading.text = getString(R.string.ready_to_scan)
         binding.tvLoading.show()
+        binding.progressCircular.accentColor()
+        binding.progressCircular.hide()
         binding.btnStar.setOnClickListener {
-
             binding.tvPath.show()
             listener?.onMusicScanStart(targetFile!!)
-
         }
 
         binding.btnClose.setOnClickListener {
             dismiss()
         }
-
 
     }
 
@@ -196,18 +164,11 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
     companion object {
         private const val ARG_TARGET_FILE = "arg_target_file"
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param targetFile The file or directory to be scanned.
-         * @return A new instance of fragment ScanMusicBottomSheet.
-         */
-        @JvmStatic // If you need to call this from Java
+        @JvmStatic
         fun newInstance(targetFile: File): ScanMusicBottomSheet {
             val fragment = ScanMusicBottomSheet()
             val args = Bundle()
-            args.putSerializable(ARG_TARGET_FILE, targetFile) // File is Serializable
+            args.putSerializable(ARG_TARGET_FILE, targetFile)
             fragment.arguments = args
             return fragment
         }

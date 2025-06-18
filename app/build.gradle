@@ -163,7 +163,6 @@ dependencies {
 
     implementation libs.chrisbanes.insetter
 
-    implementation libs.lottie
 
     implementation libs.org.eclipse.egit.github.core
     implementation libs.jaudiotagger
