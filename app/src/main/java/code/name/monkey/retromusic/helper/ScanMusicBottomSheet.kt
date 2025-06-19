@@ -38,7 +38,6 @@ import java.io.File
 import kotlin.jvm.java
 import kotlin.let
 
-
 class ScanMusicBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: BottomSheetScanMusicBinding? = null
@@ -104,11 +103,10 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                     binding.btnClose.visibility = View.GONE
                 }
                 is ScanResult.Path -> {
-                    binding.tvPath.text = buildString {
-                                    append(getString(R.string.scanning_path))
-                                    append(" ")
-                                    append(result.path)
-                                    }
+
+                    val scanPath = getString(R.string.scanning_path, result.path)
+                    binding.tvPath.text = scanPath
+
                 }
                 is ScanResult.Success -> {
                     binding.tvLoading.text = result.message
