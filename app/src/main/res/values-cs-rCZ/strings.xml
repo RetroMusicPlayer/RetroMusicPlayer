@@ -358,7 +358,6 @@
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
-    <string name="pref_summary_gapless_playback">"Může způsobit problémy s přehráváním u některých zařízení."</string>
     <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Může zvýšit kvalitu obalu alba, ale způsobí pomalejší načítání snímků. Tuto možnost povolte pouze v případě potíží s uměleckými díly s nízkým rozlišením.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
@@ -400,7 +399,6 @@
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
-    <string name="pref_title_gapless_playback">Přehrávání bez mezery</string>
     <string name="pref_title_general_theme">Hlavní téma</string>
     <string name="pref_title_home_album_grid_style">Mřížka alb</string>
     <string name="pref_title_home_artist_grid_style">Mřížka umělců</string>
