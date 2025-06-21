@@ -356,7 +356,6 @@ têne guhertin</string>
     <string name="pref_summary_expand_now_playing_panel">Tikandina li ser agahiyan wê niha tê lêdan li şûna dîmendera sereke nîşan bidê</string>
     <string name="pref_summary_extra_controls">Bêtir kontrol ji bo lêdera biçûk tevlî bike</string>
     <string name="pref_summary_extra_song_info">Bêtir zanyariyên stranê, wekî formata pelê, leza bitê û frekansê nîşan bide</string>
-    <string name="pref_summary_gapless_playback">"Dibe ku li ser hinek amûran bibe sedema pirsgirêkên lêdanê."</string>
     <string name="pref_summary_home_banner">Wêneya navrûyê veşêre an jî nîşan bide</string>
     <string name="pref_summary_ignore_media_store_artwork">Dikare kalîteya bergê albûmê bilind bike, lê dibe sedema ku demên barkirina wêneyê hêdî bibe. Tenê ku pirsgirêkên te bi bergê albumên bi çareseriya kêm re hebin vê yekê çalak bike</string>
     <string name="pref_summary_library_categories">Dîtin û rêzkirina beşên pirtûkxaneyê pevsaz bike.</string>
@@ -398,7 +397,6 @@ têne guhertin</string>
     <string name="pref_title_expand_now_playing_panel">Dîmendera lêdanê nîşan bide</string>
     <string name="pref_title_extra_controls">Bêtir kontrol</string>
     <string name="pref_title_extra_song_info">Zanyariyên stranê</string>
-    <string name="pref_title_gapless_playback">Lêdana bê navber</string>
     <string name="pref_title_general_theme">Rûkara sepanê</string>
     <string name="pref_title_home_album_grid_style">Berga albumê</string>
     <string name="pref_title_home_artist_grid_style">Tora sereke ya hunermend</string>
