@@ -355,7 +355,6 @@
     <string name="pref_summary_expand_now_playing_panel">Щракването върху известие ще покаже екрана за възпроизвеждане вместо началния екран</string>
     <string name="pref_summary_extra_controls">Добавете още контроли за миниплейъра</string>
     <string name="pref_summary_extra_song_info">Показване на допълнителна информация за песента като файлов формат, битрейт и честота</string>
-    <string name="pref_summary_gapless_playback">"Може да причини проблеми с възпроизвеждането на някои устройства."</string>
     <string name="pref_summary_home_banner">Показвай начален бутон</string>
     <string name="pref_summary_ignore_media_store_artwork">Може да подобри качеството на обложката на албума, но да доведе до по-бавно зареждане на изображението. Активирайте това само ако имате проблеми със снимки с ниска резолюция</string>
     <string name="pref_summary_library_categories">Персонализирайте вида и реда на разделите в библиотеката.</string>
@@ -397,7 +396,6 @@
     <string name="pref_title_expand_now_playing_panel">Показване на екрана за възпроизвеждане</string>
     <string name="pref_title_extra_controls">Допълнителен контрол</string>
     <string name="pref_title_extra_song_info">Инфо за песента</string>
-    <string name="pref_title_gapless_playback">Непрекъснато възпроизвеждане</string>
     <string name="pref_title_general_theme">Тема приложения</string>
     <string name="pref_title_home_album_grid_style">Решетка на албума</string>
     <string name="pref_title_home_artist_grid_style">Решетка на изпълнителя</string>
