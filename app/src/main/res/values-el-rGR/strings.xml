@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Κάνοντας κλικ στην ειδοποίηση θα εμφανίζεται η οθόνη αναπαραγωγής αντί της αρχικής οθόνης</string>
     <string name="pref_summary_extra_controls">Προσθήκη επιπλέον ελέγχων για τον μίνι αναπαραγωγέα</string>
     <string name="pref_summary_extra_song_info">Εμφάνιση επιπλέον πληροφοριών τραγουδιού, όπως μορφή αρχείου, ρυθμό μετάδοσης δεδομένων και συχνότητα</string>
-    <string name="pref_summary_gapless_playback">"Μπορεί να προκαλέσει προβλήματα στην αναπαραγωγή σε κάποιες συσκευές."</string>
     <string name="pref_summary_home_banner">Προβολή ή απόκρυψη πανό αρχικής οθόνης</string>
     <string name="pref_summary_ignore_media_store_artwork">Μπορεί να αυξήσει την ποιότητα των εξώφυλλων άλμπουμ, αλλά προκαλεί αργή φόρτωση εικόνων. Ενεργοποιήστε αυτή την επιλογή μόνο εάν αντιμετωπίζετε προβλήματα με εξώφυλλα χαμηλής ανάλυσης</string>
     <string name="pref_summary_library_categories">Ρυθμίστε την ορατότητα και τη σειρά των κατηγοριών βιβλιοθήκης.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Εμφάνιση οθόνης αναπαραγωγής</string>
     <string name="pref_title_extra_controls">Πρόσθετα στοιχεία ελέγχου</string>
     <string name="pref_title_extra_song_info">Πληροφορίες τραγουδιού</string>
-    <string name="pref_title_gapless_playback">Αναπαραγωγή χωρίς κενά</string>
     <string name="pref_title_general_theme">Γενικό θέμα</string>
     <string name="pref_title_home_album_grid_style">Πλέγμα άλμπουμ</string>
     <string name="pref_title_home_artist_grid_style">Πλέγμα καλλιτέχνη</string>
