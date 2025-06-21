@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Ang pag-click sa notification ay deretso sa nagpe-play ngayon ng screen sa halip na sa home screen</string>
     <string name="pref_summary_extra_controls">Magdagdag ng mga karagdagang kontrol para sa mini player</string>
     <string name="pref_summary_extra_song_info">Magpakita ng karagdagang impormasyon ng Kanta, gaya ng format file, bitrate at dalas</string>
-    <string name="pref_summary_gapless_playback">"Maaaring magdulot ng mga isyu sa pag-playback sa ilang device."</string>
     <string name="pref_summary_home_banner">Ipakita o itago ang home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Maaaring pataasin ang kalidad ng album cover, ngunit nagiging sanhi ng mas mabagal na oras ng paglo-load ng larawan. Paganahin lamang ito kung mayroon kang mga problema sa mga likhang sining na may mababang resolusyon</string>
     <string name="pref_summary_library_categories">I-configure ang visibility at pagkakasunud-sunod ng mga kategorya ng librerya.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Ipakita ang now playing screen</string>
     <string name="pref_title_extra_controls">Mga karagdagang kontrol</string>
     <string name="pref_title_extra_song_info">Impormasyon ng kanta</string>
-    <string name="pref_title_gapless_playback">Walang puwang na pag-playback</string>
     <string name="pref_title_general_theme">Theme ng app</string>
     <string name="pref_title_home_album_grid_style">Grid ng Album</string>
     <string name="pref_title_home_artist_grid_style">Grid ng Artista</string>
