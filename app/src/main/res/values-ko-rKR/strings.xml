@@ -352,7 +352,6 @@
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
-    <string name="pref_summary_gapless_playback">"몇몇 기기에서 재생 문제를 유발할 수 있습니다."</string>
     <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">앨범 커버의 품질을 향상시킬 수 있지만 이미지를 불러오는 시간이 늘어납니다. 저해상도 이미지를 불러오는 데 문제가 있는 경우에만 사용하십시오.</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
@@ -394,7 +393,6 @@
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
-    <string name="pref_title_gapless_playback">지연없이 재생하기</string>
     <string name="pref_title_general_theme">기본 테마</string>
     <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artist grid</string>
