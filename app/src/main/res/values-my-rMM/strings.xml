@@ -352,7 +352,6 @@
     <string name="pref_summary_expand_now_playing_panel">Notification ကိုနှိပ်သည့်အခါ Home screen သို့ရောက်မည့်အစား Now Playing screen သို့တိုက်ရိုက်ရောက်သွားမည်</string>
     <string name="pref_summary_extra_controls">Mini player တွင် ထိန်းချုပ်ခလုတ်အပိုများထပ်ပေါင်းမည်</string>
     <string name="pref_summary_extra_song_info">သီချင်းဖိုင်၏အသေးစိတ်အချက်အလက်များ ပြသမည်၊ ဥပမာ - ဖိုင်အမျိုးအစား၊ bitrate နှင့် ကြိမ်နှုန်း</string>
-    <string name="pref_summary_gapless_playback">"အချို့ device များတွင် playback ပြဿနာများဖြစ်ပေါ်နိုင်သည်"</string>
     <string name="pref_summary_home_banner">Home banner အား ပြသခြင်း၊ ဖျောက်ထားခြင်း</string>
     <string name="pref_summary_ignore_media_store_artwork">Album cover အရည်အသွေးပိုမိုကောင်းမွန်လာနိုင်သော်လည်း Loading time ပိုကြာနိုင်သည်။ အရည်အသွေးနိမ့်သောပုံများနှင့်အဆင်မပြေမှသာလျှင် ဤခလုတ်ကိုဖွင့်ပါ။</string>
     <string name="pref_summary_library_categories">Library category များ ဖော်ခြင်း၊ ဖျောက်ခြင်းနှင့် အထားအသိုများ ချိန်ညှိမည်</string>
@@ -394,7 +393,6 @@
     <string name="pref_title_expand_now_playing_panel">Now Playing screen ပြသခြင်း</string>
     <string name="pref_title_extra_controls">အပိုထိန်းချုပ်မှုများ</string>
     <string name="pref_title_extra_song_info">သီချင်းဖိုင်အချက်အလက် </string>
-    <string name="pref_title_gapless_playback">လစ်ဟာမှုမရှိ play ခြင်း</string>
     <string name="pref_title_general_theme">App theme</string>
     <string name="pref_title_home_album_grid_style">Album အကွက်ပုံစံ</string>
     <string name="pref_title_home_artist_grid_style">အဆိုတော်အကွက်ပုံစံ</string>
