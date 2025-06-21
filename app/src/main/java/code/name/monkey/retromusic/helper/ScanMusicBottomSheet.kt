@@ -99,7 +99,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                         getString(R.string.scanning_folders_files)
                     binding.tvLoading.show()
                     binding.progressCircular.show()
-                    binding.btnStar.visibility = View.GONE
+
                     binding.btnClose.visibility = View.GONE
                 }
                 is ScanResult.Path -> {
@@ -111,7 +111,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                 is ScanResult.Success -> {
                     binding.tvLoading.text = result.message
                     binding.progressCircular.hide()
-                    binding.btnStar.visibility = View.GONE
+
                     binding.tvPath.hide()
                     binding.btnClose.show()
                     scanViewModel.resetScanStatus()
@@ -119,7 +119,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                 is ScanResult.Error -> {
                     binding.tvLoading.text = result.errorMessage
                     binding.progressCircular.hide()
-                    binding.btnStar.visibility = View.GONE
+
                     binding.btnClose.show()
                     scanViewModel.resetScanStatus()
                 }
@@ -136,20 +136,16 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                 behavior.isDraggable = false
             }
         }
-        binding.btnStar.accentColor()
+
         binding.tvLoading.text = getString(R.string.ready_to_scan)
         binding.tvLoading.show()
         binding.progressCircular.accentColor()
         binding.progressCircular.hide()
-        binding.btnStar.setOnClickListener {
-            binding.tvPath.show()
-            listener?.onMusicScanStart(targetFile!!)
-        }
-
         binding.btnClose.setOnClickListener {
             dismiss()
         }
-
+        binding.tvPath.show()
+        listener?.onMusicScanStart(targetFile!!)
     }
 
     override fun onDestroyView() {

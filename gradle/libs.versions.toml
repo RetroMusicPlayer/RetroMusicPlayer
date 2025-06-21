@@ -2,7 +2,6 @@
 #buildscripts dependencies
 advrecyclerview = "1.0.0"
 jetradarmobile_androidSnowfall_version = "1.2.1"
-lottieVersion = "3.4.0"
 tankery_circularSeekBar_version = "1.4.2"
 retrofit_version = "2.9.0"
 afollestad_dialog_version = "3.3.0"

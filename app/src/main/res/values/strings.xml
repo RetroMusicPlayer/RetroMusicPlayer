@@ -584,5 +584,7 @@
     <string name="context_is_null">Context is null</string>
     <string name="no_media_found">Not any media found</string>
     <string name="complete">Complete</string>
+    <string name="scan_complete">Scan complete:</string>
+    <string name="media_items_found">" media items found."</string>
 
 </resources>
