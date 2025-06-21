@@ -358,7 +358,6 @@
     <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
     <string name="pref_summary_extra_controls">Додати додаткові елементи керування до міні-програвача</string>
     <string name="pref_summary_extra_song_info">Показати додаткову інформацію про пісню, таку як формат файлів, бітрейт та частоту</string>
-    <string name="pref_summary_gapless_playback">"Може викликати проблеми з відтворенням на деяких пристроях."</string>
     <string name="pref_summary_home_banner">Сховати головний банер</string>
     <string name="pref_summary_ignore_media_store_artwork">Може збільшити якість обкладинки альбому, але збільшує час завантаження зображення. Використовуйте тільки якщо у вас проблеми з обкладинками низької роздільної здатності</string>
     <string name="pref_summary_library_categories">Налаштувати видимість та порядок категорій бібліотеки.</string>
@@ -400,7 +399,6 @@
     <string name="pref_title_expand_now_playing_panel">Показувати на екрані відтворення</string>
     <string name="pref_title_extra_controls">Додаткові елементи керування</string>
     <string name="pref_title_extra_song_info">Інформація про пісню</string>
-    <string name="pref_title_gapless_playback">Безперервне відтворення</string>
     <string name="pref_title_general_theme">Тема застосунку</string>
     <string name="pref_title_home_album_grid_style">Сітка альбому</string>
     <string name="pref_title_home_artist_grid_style">Домашня сітка виконавця</string>
