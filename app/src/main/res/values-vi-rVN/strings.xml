@@ -353,7 +353,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
     <string name="pref_summary_extra_song_info">Hiển thị thêm thông tin Bài hát, như là định dạng, tốc độ bit và tần số</string>
-    <string name="pref_summary_gapless_playback">"Có thể gây ra vấn đề phát lại trên một số thiết bị."</string>
     <string name="pref_summary_home_banner">Hiện hoặc ẩn banner màn hình chính</string>
     <string name="pref_summary_ignore_media_store_artwork">Có thể tăng chất lượng hiển thị ảnh bìa album, nhưng sẽ làm thời gian tải hình ảnh chậm hơn. Chỉ bật tính năng này nếu bạn không thích chất lượng ảnh gốc</string>
     <string name="pref_summary_library_categories">Khả năng hiển thị và thứ tự của các danh mục trong thư viện.</string>
@@ -395,7 +394,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
     <string name="pref_title_extra_song_info">Thông tin bài hát</string>
-    <string name="pref_title_gapless_playback">Phát không gián đoạn</string>
     <string name="pref_title_general_theme">Chủ đề ứng dụng</string>
     <string name="pref_title_home_album_grid_style">Lưới Album</string>
     <string name="pref_title_home_artist_grid_style">Lưới nghệ sĩ trang chủ</string>
