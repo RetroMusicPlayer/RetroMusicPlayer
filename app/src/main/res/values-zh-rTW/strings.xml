@@ -352,7 +352,6 @@
     <string name="pref_summary_expand_now_playing_panel">按兩下通知欄以顯示現正播放畫面，而非首頁</string>
     <string name="pref_summary_extra_controls">於迷你播放列顯示更多控制鍵</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資訊，例如檔案格式、位元速率、頻率</string>
-    <string name="pref_summary_gapless_playback">"可能會在某些裝置上發生播放問題。"</string>
     <string name="pref_summary_home_banner">顯示或隱藏首頁橫幅</string>
     <string name="pref_summary_ignore_media_store_artwork">可提升專輯封面的成像品質，但會造成較長的讀取時間。建議只有在低畫質專輯封面發生問題時再啟用此選項</string>
     <string name="pref_summary_library_categories">調整音樂庫類別的顯示和排序。</string>
@@ -394,7 +393,6 @@
     <string name="pref_title_expand_now_playing_panel">顯示現正播放畫面</string>
     <string name="pref_title_extra_controls">更多控制項</string>
     <string name="pref_title_extra_song_info">音樂資訊</string>
-    <string name="pref_title_gapless_playback">無縫播放</string>
     <string name="pref_title_general_theme">佈景主題</string>
     <string name="pref_title_home_album_grid_style">專輯網格</string>
     <string name="pref_title_home_artist_grid_style">藝人網格</string>
