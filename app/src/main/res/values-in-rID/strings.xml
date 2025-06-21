@@ -352,7 +352,6 @@
     <string name="pref_summary_expand_now_playing_panel">Menekan notifikasi akan menampilkan layar putar sekarang daripada layar beranda</string>
     <string name="pref_summary_extra_controls">Tambahkan kontrol ekstra untuk pemutar mini</string>
     <string name="pref_summary_extra_song_info">Tampilkan informasi Lagu tambahan seperti format berkas, kecepatan bit, dan frekuensi</string>
-    <string name="pref_summary_gapless_playback">"Dapat menyebabkan masalah pemutaran pada beberapa perangkat."</string>
     <string name="pref_summary_home_banner">Tampilkan atau sembunyikan spanduk beranda</string>
     <string name="pref_summary_ignore_media_store_artwork">Dapat meningkatkan kualitas sampul album, namun menyebabkan waktu pemuatan lebih lambat. Aktifkan jika Anda bermasalah dengan resolusi gambar album yang rendah</string>
     <string name="pref_summary_library_categories">Mengkonfigurasi visibilitas dan susunan kategori perpustakaan.</string>
@@ -394,7 +393,6 @@
     <string name="pref_title_expand_now_playing_panel">Tampilkan layar pemutaran</string>
     <string name="pref_title_extra_controls">Kontrol tambahan</string>
     <string name="pref_title_extra_song_info">Info lagu</string>
-    <string name="pref_title_gapless_playback">Pemutaran tanpa jeda</string>
     <string name="pref_title_general_theme">Tema aplikasi</string>
     <string name="pref_title_home_album_grid_style">Kisi album</string>
     <string name="pref_title_home_artist_grid_style">Kisi artis</string>
