@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Bildirime tıklamak ana ekran yerine şimdi oynatılıyor ekranını gösterecek</string>
     <string name="pref_summary_extra_controls">Mini oynatıcı için ekstra kontroller ekle</string>
     <string name="pref_summary_extra_song_info">Dosya formatı, bit hızı ve frekans gibi fazladan şarkı bilgilerini göster</string>
-    <string name="pref_summary_gapless_playback">"Bazı cihazlarda oynatma sorunlarına neden olabilir"</string>
     <string name="pref_summary_home_banner">Ana sayfa afişini etkinleştir</string>
     <string name="pref_summary_ignore_media_store_artwork">Albüm kapağı kalitesini artırabilir, ancak fotoğrafın yavaş yüklenmesine neden olur. Bunu, yalnızca düşük çözünürlüklü resimlerle ilgili sorunlarınız varsa etkinleştirin.</string>
     <string name="pref_summary_library_categories">Kütüphane kategorilerinin görünürlük ve sırasını yapılandırın</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Şimdi oynatılıyor ekranını göster</string>
     <string name="pref_title_extra_controls">Ekstra kontroller</string>
     <string name="pref_title_extra_song_info">Şarkı bilgisi</string>
-    <string name="pref_title_gapless_playback">Aralıksız oynatma</string>
     <string name="pref_title_general_theme">Uygulama teması</string>
     <string name="pref_title_home_album_grid_style">Albüm kapağı</string>
     <string name="pref_title_home_artist_grid_style">Ana sayfa sanatçı ızgarası</string>
