@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">با کلیک بر روی اعلان، به جای صفحه اصلی، صفحه در حال پخش نمایش داده می شود</string>
     <string name="pref_summary_extra_controls">اضافه کردن کنترل های اضافی برای پخش‌کننده کوچک</string>
     <string name="pref_summary_extra_song_info">نمایش اطلاعات اضافی آهنگ، مانند فرمت فایل، میزان بیت و فرکانس</string>
-    <string name="pref_summary_gapless_playback">"می تواند باعث مشکلات پخش در برخی دستگاه ها شود."</string>
     <string name="pref_summary_home_banner">نمایش یا عدم نمایش نوار</string>
     <string name="pref_summary_ignore_media_store_artwork">می تواند کیفیت جلد آلبوم را افزایش دهد، اما باعث کندی بارگذاری تصویر می شود. فقط اگر با آثار هنری با وضوح پایین مشکل دارید این را فعال کنید</string>
     <string name="pref_summary_library_categories">قابلیت مشاهده و ترتیب دسته‌های کتابخانه را پیکربندی کنید.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">نمایش در حال پخش صفحه نمایش</string>
     <string name="pref_title_extra_controls">کنترل های اضافی</string>
     <string name="pref_title_extra_song_info">اطلاعات آهنگ</string>
-    <string name="pref_title_gapless_playback">پخش بدون شکاف</string>
     <string name="pref_title_general_theme">تم برنامه</string>
     <string name="pref_title_home_album_grid_style">تصویر آلبوم</string>
     <string name="pref_title_home_artist_grid_style">صفحه هنرمند</string>
