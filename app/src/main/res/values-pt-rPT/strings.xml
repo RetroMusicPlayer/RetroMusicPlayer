@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Tocar na notificação vai mostrar o ecrã A reproduzir em vez do ecrã inicial</string>
     <string name="pref_summary_extra_controls">Adicionar controlos extras para o mini leitor</string>
     <string name="pref_summary_extra_song_info">Mostrar info. extras da música, como o formato, taxa de bits e frequência</string>
-    <string name="pref_summary_gapless_playback">"Pode causar problemas na reprodução nalguns dispositivos."</string>
     <string name="pref_summary_home_banner">Mostrar ou ocultar o banner inicial</string>
     <string name="pref_summary_ignore_media_store_artwork">Pode aumentar a qualidade da capa do álbum, mas aumenta o tempo de carregamento. Ligue apenas se tiver problemas com capas de baixa resolução</string>
     <string name="pref_summary_library_categories">Configurar visibilidade e ordem das categorias.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Mostrar ecrã A reproduzir</string>
     <string name="pref_title_extra_controls">Controlos adicionais</string>
     <string name="pref_title_extra_song_info">Info. da música</string>
-    <string name="pref_title_gapless_playback">Reprodução contínua</string>
     <string name="pref_title_general_theme">Tema da aplicação</string>
     <string name="pref_title_home_album_grid_style">Álbuns em grelha</string>
     <string name="pref_title_home_artist_grid_style">Artistas em grelha</string>
