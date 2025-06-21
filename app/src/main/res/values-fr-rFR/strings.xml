@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Toucher la notification affichera l\'écran de lecture en cours au lieu de l\'écran d\'accueil</string>
     <string name="pref_summary_extra_controls">Ajouter des contrôles supplémentaires pour le mini lecteur</string>
     <string name="pref_summary_extra_song_info">Afficher les informations supplémentaires du morceau, comme le format de fichier, le débit et la fréquence</string>
-    <string name="pref_summary_gapless_playback">"Peut causer des problèmes de lecture sur certains appareils."</string>
     <string name="pref_summary_home_banner">Montrer ou cacher la bannière d\'accueil</string>
     <string name="pref_summary_ignore_media_store_artwork">Peut améliorer la qualité de la pochette de l\'album, mais ralenti le chargement des images. N\'activez ceci que si vous avez des problèmes avec les images basse résolution</string>
     <string name="pref_summary_library_categories">Configurer la visibilité et l\'ordre des catégories de la librairie.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Afficher l\'écran de lecture en cours</string>
     <string name="pref_title_extra_controls">Contrôles supplémentaires</string>
     <string name="pref_title_extra_song_info">Détails sur la musique</string>
-    <string name="pref_title_gapless_playback">Lecture sans blanc</string>
     <string name="pref_title_general_theme">Thème de l\'application</string>
     <string name="pref_title_home_album_grid_style">Grille d\'album</string>
     <string name="pref_title_home_artist_grid_style">Disposition de la grille d\'artistes sur l\'accueil</string>
