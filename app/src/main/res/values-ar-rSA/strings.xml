@@ -580,4 +580,5 @@
     <string name="could_not_write_tags_to_file">تعذر كتابة العلامات إلى ملف الموسيقى!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
     <string name="scanning_path">%1$s :مسار المسح</string>
+    <string name="scan_complete">اكتمل الفحص: تم العثور على %1$d من العناصر.</string>
 </resources>

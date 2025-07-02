@@ -51,10 +51,7 @@ public class FolderMediaScannerCompletionListener implements MediaScannerConnect
         if (scanCount >= totalPaths) {
 
             if (scanViewModel != null) {
-                scanViewModel.notifyScanFinishedSuccessfully(
-                        context.getString(R.string.scan_complete) + " " + actualFilesFoundInScan + context.getString(R.string.media_items_found),
-                        actualFilesFoundInScan
-                );
+                scanViewModel.notifyScanFinishedSuccessfully(context.getString(R.string.scan_complete, actualFilesFoundInScan));
 
             }
         }

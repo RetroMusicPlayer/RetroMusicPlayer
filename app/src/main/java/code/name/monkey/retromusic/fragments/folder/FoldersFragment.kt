@@ -162,8 +162,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
             scanBottomSheet.show(childFragmentManager, "ScanMusicBottomSheetTag")
         } else {
-            Toast.makeText(requireContext(),
-                getString(R.string.selected_file_folder_does_not_exist), Toast.LENGTH_SHORT).show()
+            return
         }
     }
 
@@ -446,12 +445,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     private fun scanPaths(toBeScanned: Array<String?>) {
 
         if (activity == null) {
-            scanViewModel.notifyScanFinishedWithError(getString(R.string.context_is_null))
+
             return
         }
 
         if (toBeScanned.isEmpty()) {
-            scanViewModel.notifyScanFinishedWithError(getString(R.string.no_media_found))
+
             return
         }
 

@@ -116,13 +116,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                     binding.btnClose.show()
                     scanViewModel.resetScanStatus()
                 }
-                is ScanResult.Error -> {
-                    binding.tvLoading.text = result.errorMessage
-                    binding.progressCircular.hide()
 
-                    binding.btnClose.show()
-                    scanViewModel.resetScanStatus()
-                }
             }
         }
 
@@ -137,7 +131,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
-        binding.tvLoading.text = getString(R.string.ready_to_scan)
+        //binding.tvLoading.text = getString(R.string.ready_to_scan)
         binding.tvLoading.show()
         binding.progressCircular.accentColor()
         binding.progressCircular.hide()

@@ -17,8 +17,7 @@ import androidx.lifecycle.LiveData
 
 sealed class ScanResult {
     object InProgress : ScanResult()
-    data class Success(val message: String, val itemsScanned: Int = 0) : ScanResult()
-    data class Error(val errorMessage: String) : ScanResult()
+    data class Success(val message: String) : ScanResult()
     data class Path(val path: String) : ScanResult()
     object NotStarted : ScanResult()
 }
@@ -33,13 +32,10 @@ class ScanViewModel : ViewModel() {
         _scanStatus.postValue(ScanResult.InProgress)
     }
 
-    fun notifyScanFinishedSuccessfully(message: String, count: Int = 0) {
-        _scanStatus.postValue(ScanResult.Success(message, count))
+    fun notifyScanFinishedSuccessfully(message: String) {
+        _scanStatus.postValue(ScanResult.Success(message))
     }
 
-    fun notifyScanFinishedWithError(errorMessage: String) {
-        _scanStatus.postValue(ScanResult.Error(errorMessage))
-    }
 
     fun pathScanned(filePath: String) {
         _scanStatus.postValue(ScanResult.Path(filePath))
