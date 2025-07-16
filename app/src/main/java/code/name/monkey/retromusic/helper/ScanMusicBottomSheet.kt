@@ -10,6 +10,7 @@ package code.name.monkey.retromusic.helper
  * Email = pinankhpatel@gmail.com
  */
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -71,8 +72,8 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
-
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -127,11 +128,19 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
             )
             if (bottomSheet != null) {
                 val behavior = BottomSheetBehavior.from(bottomSheet)
+
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    val layoutParams = bottomSheet.layoutParams
+                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    bottomSheet.layoutParams = layoutParams
+                    behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+
                 behavior.isDraggable = false
             }
         }
 
-        //binding.tvLoading.text = getString(R.string.ready_to_scan)
+
         binding.tvLoading.show()
         binding.progressCircular.accentColor()
         binding.progressCircular.hide()
