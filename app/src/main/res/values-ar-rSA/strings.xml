@@ -345,7 +345,7 @@
     <string name="pref_keep_screen_on_summary">ضع في اعتبارك أن تمكين هذه الميزة قد يؤثر على عمر البطارية</string>
     <string name="pref_keep_screen_on_title">ابقاء الشاشة تعمل</string>
     <string name="pref_show_when_locked_summary">يتطلب إعادة تشغيل التطبيق ليعمل. يجب أن يكون المشغل في المقدمة قبل القفل لتعمل هذه الميزة</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_title">إظهار واجهة المشغل عند القفل</string>
     <string name="pref_language_name">حدد اللغة</string>
     <string name="pref_snow_fall_title">تأثير سقوط الثلوج</string>
     <string name="pref_summary_album_art_on_lockscreen">استخدم غلاف ألبوم الأغنية قيد التشغيل حاليًا كخلفية لشاشة القفل</string>
@@ -373,7 +373,7 @@
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
     <string name="pref_summary_pause_history">عند التمكين، لن تظهر الأغاني المشغلة حديثا في المحفوظات</string>
     <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">إظهار حقل البحث في قائمة التشغيل</string>
     <string name="pref_summary_show_lyrics">عرض كلمات الأغاني المتزامنة على غلاف الألبوم</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تمكين تغيير الأغنية بالسحب في أي مكان على الشاشة المشغلة الآن</string>
