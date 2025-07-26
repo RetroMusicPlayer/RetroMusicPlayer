@@ -566,4 +566,6 @@
     <string name="your_account_data_is_only_used_for_authentication">اطلاعات حساب شما فقط برای احراز هویت استفاده می شود.</string>
     <string name="could_not_write_tags_to_file">برچسب روی فایل اضافه نشد!</string>
     <string name="sleep_timer_no_permission">دسترسی به تنظیم آلارم وجود ندارد، لطفا به پلیر رترو میوزیک این دسترسی را بدهید.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
 </resources>
