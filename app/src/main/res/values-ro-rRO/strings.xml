@@ -568,4 +568,6 @@
     <string name="your_account_data_is_only_used_for_authentication">Datele contului tău sunt folosite doar pentru autentificare.</string>
     <string name="could_not_write_tags_to_file">Nu s-au putut scrie etichetele în fișierul muzical!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
 </resources>
