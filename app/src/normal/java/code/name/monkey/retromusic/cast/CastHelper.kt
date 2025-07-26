@@ -24,7 +24,7 @@ object CastHelper {
         val song = this
         val baseUrl: URL
         try {
-            baseUrl = URL(CAST_URL_PROTOCOL, RetroUtil.getIpAddress(true), SERVER_PORT, "")
+            baseUrl = URL(CAST_URL_PROTOCOL, RetroUtil.getIpAddress(true), getCurrentServerPort(), "")
         } catch (e: MalformedURLException) {
             return null
         }
