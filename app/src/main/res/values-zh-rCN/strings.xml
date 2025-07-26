@@ -565,4 +565,6 @@
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="could_not_write_tags_to_file">无法将标签写入音乐文件！</string>
     <string name="sleep_timer_no_permission">无权限设定闹钟，请允许 Retro Music 执行</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
 </resources>
