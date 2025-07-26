@@ -28,7 +28,6 @@ class ScanViewModel : ViewModel() {
     val scanStatus: LiveData<ScanResult> = _scanStatus
 
     fun notifyScanStarted() {
-
         _scanStatus.postValue(ScanResult.InProgress)
     }
 

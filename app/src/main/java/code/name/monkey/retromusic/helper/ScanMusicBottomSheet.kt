@@ -93,7 +93,6 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
 
             when (result) {
                 is ScanResult.NotStarted -> {
-
                 }
                 is ScanResult.InProgress -> {
                     binding.tvLoading.text =
@@ -104,10 +103,7 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                     binding.btnClose.visibility = View.GONE
                 }
                 is ScanResult.Path -> {
-
-                    val scanPath = getString(R.string.scanning_path, result.path)
-                    binding.tvPath.text = scanPath
-
+                    binding.tvPath.text = result.path
                 }
                 is ScanResult.Success -> {
                     binding.tvLoading.text = result.message
@@ -117,7 +113,6 @@ class ScanMusicBottomSheet : BottomSheetDialogFragment() {
                     binding.btnClose.show()
                     scanViewModel.resetScanStatus()
                 }
-
             }
         }
 

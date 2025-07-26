@@ -154,15 +154,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private fun showScanDialogSheet(selectedFile: File)
     {
-
         if (selectedFile.exists()) {
             val scanBottomSheet = ScanMusicBottomSheet.newInstance(selectedFile)
 
             scanBottomSheet.listener = this
 
             scanBottomSheet.show(childFragmentManager, "ScanMusicBottomSheetTag")
-        } else {
-            return
         }
     }
 
@@ -282,7 +279,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     override fun onFileSelected(file: File) {
         var mFile = file
-        mFile = tryGetCanonicalFile(mFile)
+        mFile = tryGetCanonicalFile(mFile) // important as we compare the path value later
         if (mFile.isDirectory) {
             setCrumb(Crumb(mFile), true)
         } else {
