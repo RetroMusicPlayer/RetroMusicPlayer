@@ -566,4 +566,6 @@
     <string name="your_account_data_is_only_used_for_authentication">Τα δεδομένα του λογαριασμού σας χρησιμοποιούνται μόνο για έλεγχο ταυτότητας.</string>
     <string name="could_not_write_tags_to_file">Δεν ήταν δυνατή η εγγραφή ετικετών στο αρχείο μουσικής!</string>
     <string name="sleep_timer_no_permission">Χωρίς άδεια για προγραμματισμό συναγερμών, παρακαλώ επιτρέψτε στο Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
 </resources>
