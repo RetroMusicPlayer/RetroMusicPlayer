@@ -163,6 +163,7 @@ dependencies {
 
     implementation libs.chrisbanes.insetter
 
+
     implementation libs.org.eclipse.egit.github.core
     implementation libs.jaudiotagger
     normalImplementation libs.android.lab.library
