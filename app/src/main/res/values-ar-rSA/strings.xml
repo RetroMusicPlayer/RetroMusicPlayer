@@ -283,7 +283,7 @@
     <string name="no_purchase_found">لم يتم العثور على عملية شراء.</string>
     <string name="no_results">لا يوجد نتائج</string>
     <string name="no_songs">لا يوجد أغاني</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">لم يتم العثور على نتائج للبحث</string>
     <string name="normal">الافتراضي</string>
     <string name="normal_lyrics">كلمات عادية</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> غير مدرج في مخزن الوسائط]]></string>
