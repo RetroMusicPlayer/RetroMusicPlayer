@@ -352,7 +352,6 @@
     <string name="pref_summary_expand_now_playing_panel">คลิกที่การแจ้งเตือนจะแสดงหน้าจอ Now Playing แทนที่จะแสดงหน้าแรก</string>
     <string name="pref_summary_extra_controls">เพิ่มปุ่มควบคุมเพิ่มเติมใน mini player</string>
     <string name="pref_summary_extra_song_info">แสดงข้อมูลเพลงเพิ่มเติม เช่น ประเภทไฟล์, ความถี่ และ บิตเรท</string>
-    <string name="pref_summary_gapless_playback">"สามารถทำให้เกิดข้อพลาดได้ในบางเครื่อง!"</string>
     <string name="pref_summary_home_banner">แสดงหรือซ่อนแบนเนอร์หน้าแรก</string>
     <string name="pref_summary_ignore_media_store_artwork">เพิ่มคุณภาพของรูปปกอัลบัม แต่จะส่งผลให้โหลดรูปภาพช้าขึ้น</string>
     <string name="pref_summary_library_categories">ตั้งค่าการแสดงผลและจัดเรียงของหมวดหมู่คลังเพลง</string>
@@ -394,7 +393,6 @@
     <string name="pref_title_expand_now_playing_panel">แสดงหน้าจอ Now Playing</string>
     <string name="pref_title_extra_controls">ปุ่มควบความเพิ่มเติม</string>
     <string name="pref_title_extra_song_info">รายละเอียดเพลง</string>
-    <string name="pref_title_gapless_playback">การเล่นแบบ Gapless</string>
     <string name="pref_title_general_theme">ธีมของ App</string>
     <string name="pref_title_home_album_grid_style">อัลบัมกริด</string>
     <string name="pref_title_home_artist_grid_style">กริดของหน้าศิลปิน</string>

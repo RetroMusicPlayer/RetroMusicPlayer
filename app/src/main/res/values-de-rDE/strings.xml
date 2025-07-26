@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Beim Tippen auf die Benachrichtigung wird der Wiedergabe-Bildschirm statt des Willkommensbildschirms angezeigt</string>
     <string name="pref_summary_extra_controls">Zusätzliche Steuerelemente für Mini-Player hinzufügen</string>
     <string name="pref_summary_extra_song_info">Zeige zusätzliche Titel-Informationen wie Dateiformat, Bitrate und Frequenz an</string>
-    <string name="pref_summary_gapless_playback">"Kann auf manchen Geräten Abspielprobleme verursachen."</string>
     <string name="pref_summary_home_banner">Willkommensbildschirm-Banner anzeigen oder ausblenden</string>
     <string name="pref_summary_ignore_media_store_artwork">Kann die Qualität des Album-Covers erhöhen, aber verursacht längere Bild-Ladezeiten. Nur aktivieren, falls Probleme mit niedrig aufgelösten Bildern bestehen</string>
     <string name="pref_summary_library_categories">Konfiguriere Sichtbarkeit und Reihenfolge der Bibliothekskategorien.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Wiedergabe-Bildschirm anzeigen</string>
     <string name="pref_title_extra_controls">Zusätzliche Steuerelemente</string>
     <string name="pref_title_extra_song_info">Titel-Info</string>
-    <string name="pref_title_gapless_playback">Unterbrechungsfreie Wiedergabe</string>
     <string name="pref_title_general_theme">App-Design</string>
     <string name="pref_title_home_album_grid_style">Alben-Darstellung</string>
     <string name="pref_title_home_artist_grid_style">Interpreten-Darstellung</string>

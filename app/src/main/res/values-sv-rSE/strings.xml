@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">När du klickar på notisen visas spelarskärmen istället för hemskärmen</string>
     <string name="pref_summary_extra_controls">Lägg till extra kontroller för minispelaren</string>
     <string name="pref_summary_extra_song_info">Visa extra låtinformation, till exempel filformat, bitrate och frekvens</string>
-    <string name="pref_summary_gapless_playback">"Kan orsaka uppspelningsproblem på vissa enheter."</string>
     <string name="pref_summary_home_banner">Visar en banner på hemfliken</string>
     <string name="pref_summary_ignore_media_store_artwork">Kan öka albumomslagens kvalitet, men orsakar långsammare laddningstider för bilder. Aktivera endast om du har problem med lågupplösta bilder</string>
     <string name="pref_summary_library_categories">Konfigurera synlighet och ordning för bibliotekskategorier.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Öppna spelaren</string>
     <string name="pref_title_extra_controls">Extra kontroller</string>
     <string name="pref_title_extra_song_info">Låtinfo</string>
-    <string name="pref_title_gapless_playback">Sömlös uppspelning</string>
     <string name="pref_title_general_theme">Apptema</string>
     <string name="pref_title_home_album_grid_style">Album grid</string>
     <string name="pref_title_home_artist_grid_style">Artistruntnät för hem</string>

@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Az értesítésre kattintva a kezdőképernyő helyett a lejátszási képernyő jelenik meg</string>
     <string name="pref_summary_extra_controls">Extra vezérlők hozzáadása a mini lejátszóhoz</string>
     <string name="pref_summary_extra_song_info">Mutasson további dalinformációkat, például a fájl formátumát, bitrátáját és frekvenciáját</string>
-    <string name="pref_summary_gapless_playback">"Egyes eszközökön lejátszási problémákat okozhat."</string>
     <string name="pref_summary_home_banner">Kezdőlap banner mutatása/elrejtése</string>
     <string name="pref_summary_ignore_media_store_artwork">Növelheti az albumborító minőségét, de lassabb kép betöltési időt eredményez. Csak akkor engedélyezze ezt, ha problémái vannak az alacsony felbontású borítókkal kapcsolatban.</string>
     <string name="pref_summary_library_categories">A könyvtári kategóriák sorrendjének és láthatóságának beállítása.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Most játszott képernyő mutatása</string>
     <string name="pref_title_extra_controls">Extra vezérlők</string>
     <string name="pref_title_extra_song_info">Dalinformáció</string>
-    <string name="pref_title_gapless_playback">Szünetmentes lejátszás</string>
     <string name="pref_title_general_theme">Alkalmazás téma</string>
     <string name="pref_title_home_album_grid_style">Album rács</string>
     <string name="pref_title_home_artist_grid_style">Kezdőlapi előadó rács</string>

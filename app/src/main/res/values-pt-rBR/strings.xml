@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Clicar na notificação irá mostrar a tela de reprodução ao invés da tela inicial</string>
     <string name="pref_summary_extra_controls">Adicionar botões extras para o mini reprodutor</string>
     <string name="pref_summary_extra_song_info">Mostrar informações extras da música, como formato de arquivo, taxa de bits e frequência</string>
-    <string name="pref_summary_gapless_playback">"Pode causar problemas de reprodução em alguns dispositivos."</string>
     <string name="pref_summary_home_banner">Mostrar ou esconder o mural inicial</string>
     <string name="pref_summary_ignore_media_store_artwork">Pode aumentar a qualidade da capa do álbum, mas diminui a velocidade de carregamento. Ative isso apenas se você tiver problemas com capas de baixa resolução</string>
     <string name="pref_summary_library_categories">Configurar visibilidade e ordem das categorias da biblioteca.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Mostrar tela de reprodução</string>
     <string name="pref_title_extra_controls">Controles extras</string>
     <string name="pref_title_extra_song_info">Informações da música</string>
-    <string name="pref_title_gapless_playback">Reprodução sem pausas</string>
     <string name="pref_title_general_theme">Tema do aplicativo</string>
     <string name="pref_title_home_album_grid_style">Álbum em grade</string>
     <string name="pref_title_home_artist_grid_style">Artistas em grade</string>

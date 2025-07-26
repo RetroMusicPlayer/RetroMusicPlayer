@@ -356,7 +356,6 @@
     <string name="pref_summary_expand_now_playing_panel">Apăsând pe notificare se va afișa ecranul cu actuala melodia redată, în locul ecranului principal</string>
     <string name="pref_summary_extra_controls">Adaugă controale suplementare pentru mini player</string>
     <string name="pref_summary_extra_song_info">Afișează informații suplimentare despre piesă, cum ar fi formatul fișierului, rata de biți și frecvența</string>
-    <string name="pref_summary_gapless_playback">"Poate cauza probleme de redare pe unele dispozitive."</string>
     <string name="pref_summary_home_banner">Arată sau ascunde banner-ul acasă</string>
     <string name="pref_summary_ignore_media_store_artwork">Poate mări calitatea copertei de album, dar cauzează încărcarea mai lentă a imaginilor. Activați această opțiune doar dacă aveți probleme cu coperta de album cu rezoluție mică.</string>
     <string name="pref_summary_library_categories">Configurează vizibilitatea și ordinea categoriilor de librării.</string>
@@ -398,7 +397,6 @@
     <string name="pref_title_expand_now_playing_panel">Arată ecranul de redare actuală</string>
     <string name="pref_title_extra_controls">Comenzi suplimentare</string>
     <string name="pref_title_extra_song_info">Informații melodie</string>
-    <string name="pref_title_gapless_playback">Redare \"Gapless\"</string>
     <string name="pref_title_general_theme">Temă</string>
     <string name="pref_title_home_album_grid_style">Grilă album</string>
     <string name="pref_title_home_artist_grid_style">Grila Artist</string>

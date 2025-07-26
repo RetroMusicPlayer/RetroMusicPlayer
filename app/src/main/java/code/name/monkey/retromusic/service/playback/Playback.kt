@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.service.playback
 
+import android.net.Uri
 import code.name.monkey.retromusic.model.Song
 
 
@@ -29,7 +30,7 @@ interface Playback {
         song: Song, force: Boolean, completion: (success: Boolean) -> Unit,
     )
 
-    fun setNextDataSource(path: String?)
+    fun setNextDataSource(path: Uri?)
 
     var callbacks: PlaybackCallbacks?
 

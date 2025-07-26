@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">通知をタップすることでアプリのトップ画面ではなく、再生画面を表示するようにする</string>
     <string name="pref_summary_extra_controls">ミニプレイヤー専用のコントロールボタンを追加する</string>
     <string name="pref_summary_extra_song_info">ファイル形式、ビットレート、サンプリング周波数などの曲のメタデータを再生画面に表示する</string>
-    <string name="pref_summary_gapless_playback">"一部のデバイスでは再生に問題が発生する場合があります"</string>
     <string name="pref_summary_home_banner">ホーム画面を切り替える</string>
     <string name="pref_summary_ignore_media_store_artwork">アルバムジャケットのクオリティを上げますが、読み込みに時間がかかる場合があります。低解像度の画像で問題がある場合に有効です。</string>
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
     <string name="pref_title_extra_controls">追加コントロール</string>
     <string name="pref_title_extra_song_info">曲の情報を表示</string>
-    <string name="pref_title_gapless_playback">ギャップレス再生</string>
     <string name="pref_title_general_theme">アプリのテーマ</string>
     <string name="pref_title_home_album_grid_style">アルバムの表示</string>
     <string name="pref_title_home_artist_grid_style">アーティストの表示</string>

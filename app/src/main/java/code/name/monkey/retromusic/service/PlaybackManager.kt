@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.media.audiofx.AudioEffect
+import android.net.Uri
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -88,7 +89,7 @@ class PlaybackManager(val context: Context) {
         playback?.setDataSource(song, force, completion)
     }
 
-    fun setNextDataSource(trackUri: String?) {
+    fun setNextDataSource(trackUri: Uri?) {
         playback?.setNextDataSource(trackUri)
     }
 
@@ -101,14 +102,14 @@ class PlaybackManager(val context: Context) {
      * @return Whether switched playback
      */
     fun maybeSwitchToCrossFade(crossFadeDuration: Int): Boolean {
-        /* Switch to MultiPlayer if CrossFade duration is 0 and
-                Playback is not an instance of MultiPlayer */
-        if (playback !is MultiPlayer && crossFadeDuration == 0) {
+        /* Switch to RetroExoPlayer if CrossFade duration is 0 and
+                Playback is not an instance of RetroExoPlayer */
+        if (playback !is RetroExoPlayer && crossFadeDuration == 0) {
             if (playback != null) {
                 playback?.release()
             }
             playback = null
-            playback = MultiPlayer(context)
+            playback = RetroExoPlayer(context)
             return true
         } else if (playback !is CrossFadePlayer && crossFadeDuration > 0) {
             if (playback != null) {
@@ -171,9 +172,9 @@ class PlaybackManager(val context: Context) {
     }
 
     private fun createLocalPlayback(): Playback {
-        // Set MultiPlayer when crossfade duration is 0 i.e. off
+        // Set RetroExoPlayer when crossfade duration is 0 i.e. off
         return if (PreferenceUtil.crossFadeDuration == 0) {
-            MultiPlayer(context)
+            RetroExoPlayer(context)
         } else {
             CrossFadePlayer(context)
         }

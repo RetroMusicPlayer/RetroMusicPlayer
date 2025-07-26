@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.service
 
+import android.net.Uri
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 
@@ -19,7 +20,7 @@ class CastPlayer : Playback {
     ) {
     }
 
-    override fun setNextDataSource(path: String?) {}
+    override fun setNextDataSource(path: Uri?) {}
 
     override var callbacks: Playback.PlaybackCallbacks? = null
 

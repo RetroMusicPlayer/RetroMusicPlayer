@@ -275,7 +275,6 @@
     <string name="pref_summary_desaturated_color">根據物質設計指南(Material Design guide)，在暗黑模式下的顏色應完全去飽和化</string>
     <string name="pref_summary_extra_controls">在迷你播放器增加控制項</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資料，如檔案格式、位元率及頻率</string>
-    <string name="pref_summary_gapless_playback">"或會引致某些裝置播放功能無法正常運作。"</string>
     <string name="pref_summary_home_banner">切換首頁橫幅樣式</string>
     <string name="pref_summary_ignore_media_store_artwork">可以提升專輯圖片質素，但這會引致加長圖片載入時間。建議只有當您的載入專輯圖片時質素較差時啟用</string>
     <string name="pref_summary_library_categories">修改類別的可視性及順序。</string>
@@ -300,7 +299,6 @@
     <string name="pref_title_desaturated_color">飽和色</string>
     <string name="pref_title_extra_controls">額外控制項</string>
     <string name="pref_title_extra_song_info">歌曲內容</string>
-    <string name="pref_title_gapless_playback">無縫播放</string>
     <string name="pref_title_general_theme">應用主題</string>
     <string name="pref_title_home_artist_grid_style">首頁歌手網格</string>
     <string name="pref_title_home_banner">首頁橫幅</string>

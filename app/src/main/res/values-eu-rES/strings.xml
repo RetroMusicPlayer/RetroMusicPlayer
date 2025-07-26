@@ -283,7 +283,6 @@
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Gehitu kontrol gehigarriak erreproduzitzaile txikirako</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
-    <string name="pref_summary_gapless_playback">"Erreprodukzio arazoak sor ditzake gailu batzuetan"</string>
     <string name="pref_summary_home_banner">Txandakatu hasierako banner estiloa</string>
     <string name="pref_summary_ignore_media_store_artwork">Album azalaren kalitatea hobetu dezake, baina irudien kargatze-denbora moteltzen du. Soilik bereizmen baxuko azalekin arazoa baduzu aktibatu</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
@@ -309,7 +308,6 @@
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Kontrol gehigarriak</string>
     <string name="pref_title_extra_song_info">Song info</string>
-    <string name="pref_title_gapless_playback">Tarterik gabeko erreprodukzioa</string>
     <string name="pref_title_general_theme">Aplikazioaren gaia</string>
     <string name="pref_title_home_artist_grid_style">Hasierako artista sareta</string>
     <string name="pref_title_home_banner">Hasierako bannerra</string>

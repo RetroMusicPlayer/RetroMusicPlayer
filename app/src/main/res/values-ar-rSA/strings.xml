@@ -365,7 +365,6 @@
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
     <string name="pref_summary_extra_song_info">إظهار معلومات الأغنية الإضافية، مثل تنسيق الملف، معدل البت، والتواتر</string>
-    <string name="pref_summary_gapless_playback">"يمكن أن يسبب مشاكل في التشغيل على بعض الأجهزة."</string>
     <string name="pref_summary_home_banner">تفعيل وضع البانر في الشاشة الرئيسية</string>
     <string name="pref_summary_ignore_media_store_artwork">يمكنك أن تزيد من جودة غلاف الألبوم ، لكنه يسبب بطئ في التحميل للصور. قم بتمكين هذا فقط إذا كنت تواجه مشاكل مع صور ألبومات منخفضة الدقة</string>
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
@@ -407,7 +406,6 @@
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
     <string name="pref_title_extra_song_info">معلومات الأغنية</string>
-    <string name="pref_title_gapless_playback">تشغيل متتابع</string>
     <string name="pref_title_general_theme">سمات التطبيق</string>
     <string name="pref_title_home_album_grid_style">صورة الألبوم</string>
     <string name="pref_title_home_artist_grid_style">شبكة الفنان الرئيسية</string>

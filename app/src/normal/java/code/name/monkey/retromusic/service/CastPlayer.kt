@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.service
 
+import android.net.Uri
 import code.name.monkey.retromusic.cast.CastHelper.toMediaInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
@@ -48,7 +49,7 @@ class CastPlayer(castSession: CastSession) : Playback, RemoteMediaClient.Callbac
         }
     }
 
-    override fun setNextDataSource(path: String?) {}
+    override fun setNextDataSource(path: Uri?) {}
 
     override fun start(): Boolean {
         isActuallyPlaying = true

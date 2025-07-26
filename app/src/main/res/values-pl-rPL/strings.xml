@@ -358,7 +358,6 @@
     <string name="pref_summary_expand_now_playing_panel">Kliknięcie powiadomienia pokaże odtwarzacz zamiast ekranu głównego</string>
     <string name="pref_summary_extra_controls">Dodaj dodatkowe przyciski do miniodtwarzacza</string>
     <string name="pref_summary_extra_song_info">Pokaż dodatkowe informacje o utworze, takie jak format pliku, próbkowanie i jakość</string>
-    <string name="pref_summary_gapless_playback">"Może powodować problemy z odtwarzaniem na niektórych urządzeniach."</string>
     <string name="pref_summary_home_banner">Pokaż lub ukryj baner ekranu głównego</string>
     <string name="pref_summary_ignore_media_store_artwork">Może zwiększyć jakość okładki albumu, ale powoduje spowolnienie ładowania obrazu. Włącz tę opcję tylko jeśli masz problemy z okładkami o niskiej rozdzielczości.</string>
     <string name="pref_summary_library_categories">Dostosuj widoczność i kolejność kategorii bibliotek.</string>
@@ -400,7 +399,6 @@
     <string name="pref_title_expand_now_playing_panel">Wyświetl teraz odtwarzane</string>
     <string name="pref_title_extra_controls">Dodatkowe przyciski kontroli</string>
     <string name="pref_title_extra_song_info">Informacje o utworze</string>
-    <string name="pref_title_gapless_playback">Odtwarzanie bez przerw</string>
     <string name="pref_title_general_theme">Motyw aplikacji</string>
     <string name="pref_title_home_album_grid_style">Siatka albumu</string>
     <string name="pref_title_home_artist_grid_style">Siatka wykonawców</string>

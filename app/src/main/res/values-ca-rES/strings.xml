@@ -354,7 +354,6 @@
     <string name="pref_summary_expand_now_playing_panel">Si feu clic a la notificació, es mostrarà la pantalla de la reproducció en curs en lloc de la pantalla d\'inici</string>
     <string name="pref_summary_extra_controls">Afegiu controls addicionals per al mini reproductor</string>
     <string name="pref_summary_extra_song_info">Mostra informació addicional de la cançó, com ara el format del fitxer, la taxa de bits i la freqüència</string>
-    <string name="pref_summary_gapless_playback">"Pot causar problemes de reproducció en alguns dispositius."</string>
     <string name="pref_summary_home_banner">Mostra o amaga el bàner d\'inici</string>
     <string name="pref_summary_ignore_media_store_artwork">Pot augmentar la qualitat de la portada de l\'àlbum, però fa que els temps de càrrega de la imatge siguin més lents. Activeu-ho només si teniu problemes amb portades d\'àlbum de baixa resolució</string>
     <string name="pref_summary_library_categories">Configura la visibilitat i l\'ordre de les categories de la biblioteca.</string>
@@ -396,7 +395,6 @@
     <string name="pref_title_expand_now_playing_panel">Mostra la pantalla de reproducció en curs</string>
     <string name="pref_title_extra_controls">Controls addicionals</string>
     <string name="pref_title_extra_song_info">Informació de la cançó</string>
-    <string name="pref_title_gapless_playback">Reproducció sense pauses</string>
     <string name="pref_title_general_theme">Tema de l\'aplicació</string>
     <string name="pref_title_home_album_grid_style">Graella d\'àlbums</string>
     <string name="pref_title_home_artist_grid_style">Graella d\'artistes</string>

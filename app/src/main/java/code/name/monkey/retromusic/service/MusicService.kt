@@ -835,7 +835,7 @@ class MusicService : MediaBrowserServiceCompat(),
     fun prepareNextImpl() {
         try {
             val nextPosition = getNextPosition(false)
-            playbackManager.setNextDataSource(getSongAt(nextPosition).uri.toString())
+            playbackManager.setNextDataSource(getSongAt(nextPosition).uri)
             this.nextPosition = nextPosition
         } catch (ignored: Exception) {
         }

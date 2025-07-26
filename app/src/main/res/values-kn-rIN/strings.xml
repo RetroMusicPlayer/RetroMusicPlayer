@@ -355,7 +355,6 @@
     <string name="pref_summary_expand_now_playing_panel">ಅಧಿಸೂಚನೆಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡುವುದರಿಂದ ಹೋಮ್ ಸ್ಕ್ರೀನ್ ಬದಲಿಗೆ ಪ್ಲೇಯಿಂಗ್ ಸ್ಕ್ರೀನ್ ಅನ್ನು ತೋರಿಸುತ್ತದೆ</string>
     <string name="pref_summary_extra_controls">ಮಿನಿ ಪ್ಲೇಯರ್‌ಗೆ ಹೆಚ್ಚುವರಿ ನಿಯಂತ್ರಣಗಳನ್ನು ಸೇರಿಸಿ</string>
     <string name="pref_summary_extra_song_info">ಫೈಲ್ ಫಾರ್ಮ್ಯಾಟ್, ಬಿಟ್ರೇಟ್ ಮತ್ತು ಆವರ್ತನದಂತಹ ಹೆಚ್ಚುವರಿ ಸಾಂಗ್ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ</string>
-    <string name="pref_summary_gapless_playback">"ಕೆಲವು ಸಾಧನಗಳಲ್ಲಿ ಪ್ಲೇಬ್ಯಾಕ್ ಸಮಸ್ಯೆಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದು."</string>
     <string name="pref_summary_home_banner">ಹೋಮ್ ಬ್ಯಾನರ್ ಅನ್ನು ತೋರಿಸಿ ಅಥವಾ ಮರೆಮಾಡಿ</string>
     <string name="pref_summary_ignore_media_store_artwork">ಆಲ್ಬಮ್ ಕವರ್ ಗುಣಮಟ್ಟವನ್ನು ಹೆಚ್ಚಿಸಬಹುದು, ಆದರೆ ಚಿತ್ರಗಳ ಲೋಡಿಂಗ್ ಸಮಯವನ್ನು ಹೆಚ್ಚು ಮಾಡುತ್ತದೆ. ಕಡಿಮೆ ರೆಸಲ್ಯೂಶನ್ ಕಲಾಕೃತಿಯಲ್ಲಿ ನಿಮಗೆ ಸಮಸ್ಯೆಗಳಿದ್ದರೆ ಮಾತ್ರ ಇದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ</string>
     <string name="pref_summary_library_categories">ಸಂಗ್ರಹಣೆಯ ವರ್ಗಗಳ ಗೋಚರತೆ ಮತ್ತು ಕ್ರಮವನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ.</string>
@@ -397,7 +396,6 @@
     <string name="pref_title_expand_now_playing_panel">ಈಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಪರದೆಯನ್ನು ತೋರಿಸಿ</string>
     <string name="pref_title_extra_controls">ಹೆಚ್ಚುವರಿ ನಿಯಂತ್ರಣಗಳು</string>
     <string name="pref_title_extra_song_info">ಹಾಡಿನ ಮಾಹಿತಿ</string>
-    <string name="pref_title_gapless_playback">ಅಂತರವಿಲ್ಲದ ಪ್ಲೇಬ್ಯಾಕ್</string>
     <string name="pref_title_general_theme">ಆ್ಯಪ್‌ ಥೀಮ್</string>
     <string name="pref_title_home_album_grid_style">ಆಲ್ಬಮ್ ಗ್ರಿಡ್</string>
     <string name="pref_title_home_artist_grid_style">ಕಲಾವಿದ ಗ್ರಿಡ್</string>

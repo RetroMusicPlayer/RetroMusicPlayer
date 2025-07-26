@@ -278,7 +278,6 @@
     <string name="pref_summary_expand_now_playing_panel">నోటిఫికేషన్‌పై క్లిక్ చేస్తే హోమ్ స్క్రీన్‌కు బదులుగా ఇప్పుడు ప్లే స్క్రీన్ కనిపిస్తుంది</string>
     <string name="pref_summary_extra_controls">మినీ ప్లేయర్ కోసం అదనపు నియంత్రణలను జోడించండి</string>
     <string name="pref_summary_extra_song_info">ఫైల్ ఫార్మాట్, బిట్రేట్ మరియు ఫ్రీక్వెన్సీ వంటి అదనపు పాట సమాచారాన్ని చూపించు</string>
-    <string name="pref_summary_gapless_playback">"కొన్ని పరికరాల్లో ప్లేబ్యాక్ సమస్యలను కలిగిస్తుంది."</string>
     <string name="pref_summary_home_banner">హోమ్ బ్యానర్ శైలిని టోగుల్ చేయండి</string>
     <string name="pref_summary_ignore_media_store_artwork">ఆల్బమ్ కవర్ నాణ్యతను పెంచగలదు, కానీ నెమ్మదిగా చిత్రం లోడింగ్ సమయాలకు కారణమవుతుంది.  మీకు తక్కువ రిజల్యూషన్ కళాకృతులతో సమస్యలు ఉంటే మాత్రమే దీన్ని ప్రారంభించండి</string>
     <string name="pref_summary_library_categories">లైబ్రరీ వర్గాల దృశ్యమానత మరియు క్రమాన్ని కాన్ఫిగర్ చేయండి.</string>
@@ -304,7 +303,6 @@
     <string name="pref_title_expand_now_playing_panel">ఇప్పుడు ప్లే స్క్రీన్ చూపించు</string>
     <string name="pref_title_extra_controls">అదనపు నియంత్రణలు</string>
     <string name="pref_title_extra_song_info">పాట సమాచారం</string>
-    <string name="pref_title_gapless_playback">గ్యాప్‌లెస్ ప్లేబ్యాక్</string>
     <string name="pref_title_general_theme">అనువర్తన థీమ్</string>
     <string name="pref_title_home_artist_grid_style">హోమ్ ఆర్టిస్ట్ గ్రిడ్</string>
     <string name="pref_title_home_banner">హోమ్ బ్యానర్</string>
