@@ -577,6 +577,6 @@
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
     <string name="could_not_write_tags_to_file">تعذر كتابة العلامات إلى ملف الموسيقى!</string>
     <string name="sleep_timer_no_permission">لا يوجد إذن لجدولة التنبيهات، يرجى السماح لـ Retro Music.</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scanning_folders_files">جارٍ فحص المجلدات والملفات…</string>
     <string name="scan_complete">اكتمل المسح: %1$d تم العثور على وسائط صوتية.</string>
 </resources>
