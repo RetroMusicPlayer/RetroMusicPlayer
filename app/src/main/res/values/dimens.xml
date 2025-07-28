@@ -37,8 +37,8 @@
     <dimen name="app_widget_md3_height">90dp</dimen>
     <dimen name="app_widget_md3_image_size">70dp</dimen>
 
-    <dimen name="app_widget_circle_min_width">180dp</dimen>
-    <dimen name="app_widget_circle_min_height">100dp</dimen>
+    <dimen name="app_widget_circle_min_width">110dp</dimen>
+    <dimen name="app_widget_circle_min_height">110dp</dimen>
     <dimen name="app_widget_circle_max_width">250dp</dimen>
     <dimen name="app_widget_circle_max_height">250dp</dimen>
 
