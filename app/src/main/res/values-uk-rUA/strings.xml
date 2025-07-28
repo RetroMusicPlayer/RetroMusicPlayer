@@ -111,7 +111,7 @@
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
     <string name="bug_report_success">Звіт про помилку надіслано</string>
-    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані застосунку\" або надішліть лист на ел. пошту </string>
+    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте «Очистити дані застосунку» або надішліть лист на пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
     <string name="cancel_current_timer">Відмінити</string>
@@ -556,7 +556,7 @@
     <string name="volume">Гучність</string>
     <string name="web_search">Пошук в інтернеті</string>
     <string name="website">Сайт</string>
-    <string name="website_summary">Відвідайте наш веб-сайт</string>
+    <string name="website_summary">Відвідайте наш вебсайт</string>
     <string name="welcome">Вітаємо вас,</string>
     <string name="what_do_you_want_to_share">Чим ви хочете поділитися?</string>
     <string name="whats_new">Що нового</string>
@@ -570,6 +570,6 @@
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
     <string name="could_not_write_tags_to_file">Не вдалося записати теги у файл!</string>
     <string name="sleep_timer_no_permission">Немає дозволу на планування будильників, надайте дозвіл Retro Music.</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
-    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="scanning_folders_files">Сканування тек і файлів…</string>
+    <string name="scan_complete">Сканування завершено: знайдено %1$d медіа елементів.</string>
 </resources>
