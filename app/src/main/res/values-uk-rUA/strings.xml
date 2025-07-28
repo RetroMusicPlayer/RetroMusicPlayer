@@ -3,7 +3,7 @@
     <string name="about_album_label">Про альбом %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
     <string name="accent_color">Акцентний колір</string>
-    <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
+    <string name="accent_color_desc">Акцентний колір, типово — фіолетовий</string>
     <string name="action_about">Про застосунок</string>
     <string name="action_add_to_blacklist">Додати до чорного списку</string>
     <string name="action_add_to_favorites">Додати в обране</string>
@@ -351,12 +351,12 @@
     <string name="pref_summary_carousel_effect">Ефект каруселі для обкладинок альбомів на екрані відтворення. Теми \"Картка\" та \"Розмита картка\" не працюватимуть</string>
     <string name="pref_summary_classic_notification">Використовувати класичне оформлення сповіщення</string>
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
-    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни набрали чинності</string>
+    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у акцентний колір. Кожного разу, коли ви змінюєте колір, вмикайте це, щоб зміни набрали чинності</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
     <string name="pref_summary_cross_fade">Тривалість переходу між піснями</string>
     <string name="pref_summary_desaturated_color">Для Material Design лінії в темному режимі мають бути ненасичені</string>
     <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
-    <string name="pref_summary_extra_controls">Додати додаткові елементи керування до міні-програвача</string>
+    <string name="pref_summary_extra_controls">Додати додаткові елементи керування до мініпрогравача</string>
     <string name="pref_summary_extra_song_info">Показати додаткову інформацію про пісню, таку як формат файлів, бітрейт та частоту</string>
     <string name="pref_summary_home_banner">Сховати головний банер</string>
     <string name="pref_summary_ignore_media_store_artwork">Може збільшити якість обкладинки альбому, але збільшує час завантаження зображення. Використовуйте тільки якщо у вас проблеми з обкладинками низької роздільної здатності</string>
@@ -506,7 +506,7 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>
     <string name="sort_order_date_modified">Дата змінення</string>
-    <string name="sort_order_default">За замовчуванням</string>
+    <string name="sort_order_default">Типово</string>
     <string name="sort_order_num_songs">Кількість пісень</string>
     <string name="sort_order_num_songs_desc">Опис кількості пісень</string>
     <string name="sort_order_year">Рік</string>
@@ -550,7 +550,7 @@
     <string name="user_images_description">Зображення користувача</string>
     <string name="user_name">Ім\'я користувача</string>
     <string name="username">Ім\'я користувача</string>
-    <string name="version">Версія додатку</string>
+    <string name="version">Версія застосунку</string>
     <string name="vertical_flip">Вертикальне сальто</string>
     <string name="view_on_telegram">Переглянути в Telegram</string>
     <string name="volume">Гучність</string>
