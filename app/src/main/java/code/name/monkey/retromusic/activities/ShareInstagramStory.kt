@@ -14,12 +14,16 @@
  */
 package code.name.monkey.retromusic.activities
 
+import android.content.ContentValues
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore.Images.Media
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.MenuItem
 import androidx.core.net.toUri
 import androidx.core.os.BundleCompat
@@ -83,15 +87,14 @@ class ShareInstagramStory : AbsThemeActivity() {
             binding.shareTitle.text = songFinal.title
             binding.shareText.text = songFinal.artistName
             binding.shareButton.setOnClickListener {
-                val path: String = Media.insertImage(
-                    contentResolver,
-                    binding.mainContent.drawToBitmap(Bitmap.Config.ARGB_8888),
-                    "Design", null
-                )
-                Share.shareStoryToSocial(
-                    this@ShareInstagramStory,
-                    path.toUri()
-                )
+                val bitmap = binding.mainContent.drawToBitmap(Bitmap.Config.ARGB_8888)
+                val uri = saveBitmapToMediaStore(bitmap, "Design")
+                uri?.let { imageUri ->
+                    Share.shareStoryToSocial(
+                        this@ShareInstagramStory,
+                        imageUri
+                    )
+                }
             }
         }
         binding.shareButton.setTextColor(
@@ -102,6 +105,24 @@ class ShareInstagramStory : AbsThemeActivity() {
         )
         binding.shareButton.backgroundTintList =
             ColorStateList.valueOf(accentColor())
+    }
+
+    private fun saveBitmapToMediaStore(bitmap: Bitmap, displayName: String): Uri? {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "$displayName.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+        }
+
+        val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        uri?.let { imageUri ->
+            contentResolver.openOutputStream(imageUri)?.use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
+        }
+        return uri
     }
 
     private fun setColors(color: Int) {

@@ -41,6 +41,7 @@ abstract class AbsMultiSelectAdapter<V : RecyclerView.ViewHolder?, I>(
         return true
     }
 
+    @Suppress("DEPRECATION")
     override fun onDestroyActionMode(mode: ActionMode?) {
         clearChecked()
         activity.window.statusBarColor = when {

@@ -57,6 +57,7 @@ fun provideOkHttp(context: Context, cache: Cache): OkHttpClient {
 }
 
 fun provideLastFmRetrofit(client: OkHttpClient): Retrofit {
+    @Suppress("DEPRECATION")
     val gson = GsonBuilder()
         .setLenient()
         .create()

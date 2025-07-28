@@ -32,6 +32,7 @@ fun AppCompatActivity.keepScreenOn(keepScreenOn: Boolean) {
     }
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.maybeShowWhenLocked() {
     if (PreferenceUtil.isShowWhenLockedEnabled) {
         if (VersionUtils.hasOreoMR1()) {
@@ -95,6 +96,7 @@ private fun AppCompatActivity.hideStatusBar(fullscreen: Boolean) {
     }
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.setDrawBehindSystemBars() {
     if (VersionUtils.hasOreo()) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -113,6 +115,7 @@ fun AppCompatActivity.setDrawBehindSystemBars() {
     }
 }
 
+@Suppress("DEPRECATION")
 fun FragmentActivity.setTaskDescriptionColor(color: Int) {
     var colorFinal = color
     // Task description requires fully opaque color
@@ -187,6 +190,7 @@ fun AppCompatActivity.setLightNavigationBarAuto(bgColor: Int) {
  *
  * @param color the new statusbar color (will be shifted down on Lollipop and above)
  */
+@Suppress("DEPRECATION")
 fun AppCompatActivity.setStatusBarColor(color: Int) {
     val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
     if (statusBar != null) {
@@ -213,6 +217,7 @@ fun AppCompatActivity.setStatusBarColorAuto() {
     setLightStatusBarAuto(surfaceColor())
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.setNavigationBarColor(color: Int) {
     if (VersionUtils.hasOreo()) {
         window.navigationBarColor = color
@@ -222,12 +227,14 @@ fun AppCompatActivity.setNavigationBarColor(color: Int) {
     setLightNavigationBarAuto(color)
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.setNavigationBarColorPreOreo(color: Int) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
         window.navigationBarColor = ColorUtil.darkenColor(color)
     }
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.setStatusBarColorPreMarshmallow(color: Int) {
     val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
     if (statusBar != null) {

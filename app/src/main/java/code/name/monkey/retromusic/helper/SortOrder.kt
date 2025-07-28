@@ -199,7 +199,7 @@ class SortOrder {
         companion object {
 
             /* Playlist sort order A-Z */
-            const val PLAYLIST_A_Z = MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER
+            const val PLAYLIST_A_Z = "name ASC"
 
             /* Playlist sort order Z-A */
             const val PLAYLIST_Z_A = "$PLAYLIST_A_Z DESC"

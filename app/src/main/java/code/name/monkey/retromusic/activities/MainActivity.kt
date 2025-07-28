@@ -153,7 +153,7 @@ class MainActivity : AbsCastActivity() {
             if (uri != null && uri.toString().isNotEmpty()) {
                 MusicPlayerRemote.playFromUri(this@MainActivity, uri)
                 handled = true
-            } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
+            } else if ("vnd.android.cursor.dir/playlist" == mimeType) {
                 val id = parseLongFromIntent(intent, "playlistId", "playlist")
                 if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)

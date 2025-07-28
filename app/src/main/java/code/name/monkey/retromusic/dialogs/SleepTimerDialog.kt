@@ -100,6 +100,7 @@ class SleepTimerDialog : DialogFragment() {
                 setNegativeButton(R.string.action_cancel) { _, _ ->
                     timerUpdater.cancel()
                     val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
+                    @Suppress("KotlinConstantConditions")
                     if (previous != null) {
                         val am = requireContext().getSystemService<AlarmManager>()
                         am?.cancel(previous)
@@ -132,6 +133,7 @@ class SleepTimerDialog : DialogFragment() {
                     PreferenceUtil.nextSleepTimerElapsedRealTime = nextSleepTimerElapsedTime.toInt()
                     val am = requireContext().getSystemService<AlarmManager>()
 
+                    @Suppress("KotlinConstantConditions")
                     if (VersionUtils.hasS() && am?.canScheduleExactAlarms() != true) {
                         Toast.makeText(
                             requireContext(),
