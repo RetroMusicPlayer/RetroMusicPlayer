@@ -15,7 +15,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId namespace
-        versionCode 10650
+        versionCode 10651
         versionName '6.5.0'
 
         buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
@@ -166,7 +166,6 @@ dependencies {
 
     implementation libs.org.eclipse.egit.github.core
     implementation libs.jaudiotagger
-    normalImplementation libs.android.lab.library
     implementation libs.slidableactivity
     implementation libs.material.intro
     implementation libs.dhaval2404.imagepicker
@@ -175,4 +174,6 @@ dependencies {
     implementation libs.tankery.circularSeekBar
 
     implementation libs.androidx.exoplayer
+    implementation(libs.google.play.billing)
+
 }

@@ -18,7 +18,6 @@ koinAndroid = "3.5.6"
 kotlinGradlePlugin = "2.1.21"
 
 kotlinxCoroutinesAndroid = "1.10.2"
-android_tab_library_version = "2.2.0"
 fast_scroll_libraryVersion = "1.2.0"
 lifecycle_version = "2.9.1"
 okhttp3_loggingInterceptor_version = "5.0.0-alpha.16"
@@ -36,6 +35,7 @@ appcompat_version = "1.7.1"
 google_play_review_version = "2.0.2"
 room_version = "2.7.1"
 core_version = "1.16.0"
+google-play-billing-version = "7.0.0"
 
 #plugins
 devTools_ksp_version = "2.1.21-2.0.1"
@@ -98,7 +98,6 @@ jetradarmobile-android-snowfall = { module = "com.github.jetradarmobile:android-
 chrisbanes-insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "chrisbanes_insetter_version" }
 org-eclipse-egit-github-core = { module = "org.eclipse.mylyn.github:org.eclipse.egit.github.core", version.ref = "orgEclipseEgitGithubCore" }
 jaudiotagger = { module = "com.github.Adonai:jaudiotagger", version.ref = "jaudiotagger" }
-android-lab-library = { module = "com.anjlab.android.iab.v3:library", version.ref = "android_tab_library_version" }
 slidableactivity = { module = "com.r0adkll:slidableactivity", version.ref = "slidableactivity" }
 material-intro = { module = "com.heinrichreimersoftware:material-intro", version.ref = "materialIntro" }
 dhaval2404-imagepicker = { module = "com.github.dhaval2404:imagepicker", version.ref = "dhaval2404_imagepicker_version" }
@@ -107,6 +106,7 @@ customactivityoncrash = { module = "cat.ereza:customactivityoncrash", version.re
 tankery-circularSeekBar = { module = "me.tankery.lib:circularSeekBar", version.ref = "tankery_circularSeekBar_version" }
 androidx-mediarouter = { group = "androidx.mediarouter", name = "mediarouter", version.ref = "mediarouter" }
 nanohttpd = { group = "org.nanohttpd", name = "nanohttpd", version.ref = "nanohttpd" }
+google-play-billing = { module = "com.android.billingclient:billing", version.ref = "google-play-billing-version" }
 
 
 #androidx
