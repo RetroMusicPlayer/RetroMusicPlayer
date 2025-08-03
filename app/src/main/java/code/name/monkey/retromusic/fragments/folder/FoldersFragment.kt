@@ -210,9 +210,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     override fun onFileMenuClicked(file: File, view: View) {
         val popupMenu = PopupMenu(requireActivity(), view)
         if (file.isDirectory) {
-            if (saveLastDirectory) {
-                lastDirectory = file;
-            }
             popupMenu.inflate(R.menu.menu_item_directory)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (val itemId = item.itemId) {
@@ -292,9 +289,6 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         var mFile = file
         mFile = tryGetCanonicalFile(mFile) // important as we compare the path value later
         if (mFile.isDirectory) {
-            if (saveLastDirectory) {
-                lastDirectory = mFile;
-            }
             setCrumb(Crumb(mFile), true)
         } else {
             val fileFilter = FileFilter { pathname: File ->
