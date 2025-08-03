@@ -627,6 +627,23 @@ object PreferenceUtil {
             )
         }
 
+    var lastDirectory: File
+        get() {
+            val folderPath = FoldersFragment.defaultStartDirectory.path
+            val filePath: String = sharedPreferences.getStringOrDefault(LAST_DIRECTORY, folderPath)
+            return File(filePath)
+        }
+        set(value) = sharedPreferences.edit {
+            putString(
+                LAST_DIRECTORY,
+                FileUtil.safeGetCanonicalPath(value)
+            )
+        }
+
+    var saveLastDirectory: Boolean
+        get() = sharedPreferences.getBoolean(SAVE_LAST_DIRECTORY, false)
+        set(value) = sharedPreferences.edit { putBoolean(SAVE_LAST_DIRECTORY, value) }
+
     fun getRecentlyPlayedCutoffTimeMillis(): Long {
         val calendarUtil = CalendarUtil()
         val interval: Long = when (sharedPreferences.getString(RECENTLY_PLAYED_CUTOFF, "")) {

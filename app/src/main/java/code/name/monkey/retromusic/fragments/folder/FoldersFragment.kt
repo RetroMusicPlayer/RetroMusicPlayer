@@ -66,6 +66,8 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.FileUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.startDirectory
+import code.name.monkey.retromusic.util.PreferenceUtil.lastDirectory
+import code.name.monkey.retromusic.util.PreferenceUtil.saveLastDirectory
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.util.getExternalStorageDirectory
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
@@ -107,6 +109,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     }
     private var storageItems = ArrayList<Storage>()
     private val scanViewModel: ScanViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFolderBinding.bind(view)
@@ -132,10 +135,15 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
                 }
             })
         if (savedInstanceState == null) {
+            val restoreDir = if (saveLastDirectory) {
+                lastDirectory;
+            } else {
+                startDirectory;
+            }
             switchToFileAdapter()
             setCrumb(
                 Crumb(
-                    FileUtil.safeGetCanonicalFile(startDirectory)
+                    FileUtil.safeGetCanonicalFile( restoreDir )
                 ),
                 true
             )
@@ -202,6 +210,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     override fun onFileMenuClicked(file: File, view: View) {
         val popupMenu = PopupMenu(requireActivity(), view)
         if (file.isDirectory) {
+            if (saveLastDirectory) {
+                lastDirectory = file;
+            }
             popupMenu.inflate(R.menu.menu_item_directory)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (val itemId = item.itemId) {
@@ -281,6 +292,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
         var mFile = file
         mFile = tryGetCanonicalFile(mFile) // important as we compare the path value later
         if (mFile.isDirectory) {
+            if (saveLastDirectory) {
+                lastDirectory = mFile;
+            }
             setCrumb(Crumb(mFile), true)
         } else {
             val fileFilter = FileFilter { pathname: File ->
@@ -472,6 +486,9 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
             return
         }
         val path = crumb.file.path
+        if (saveLastDirectory) {
+            lastDirectory = crumb.file;
+        }
         if (path == "/" || path == "/storage" || path == "/storage/emulated") {
             switchToStorageAdapter()
         } else {

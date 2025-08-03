@@ -571,5 +571,7 @@
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
     <string name="scanning_folders_files">Scanning folders and files…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 
 </resources>
