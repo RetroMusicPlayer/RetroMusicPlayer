@@ -565,4 +565,8 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="your_account_data_is_only_used_for_authentication">Dữ liệu tài khoản của bạn chỉ được sử dụng để xác thực.</string>
     <string name="could_not_write_tags_to_file">Không thể ghi thẻ vào tệp nhạc!</string>
     <string name="sleep_timer_no_permission">Không được cấp quyền để lên lịch báo thức, vui lòng cho phép Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
