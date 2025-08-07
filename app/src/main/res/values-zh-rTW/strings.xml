@@ -241,7 +241,7 @@
     <string name="loading_products">正在載入…</string>
     <string name="login">登入</string>
     <string name="lyrics">歌詞</string>
-    <string name="made_with_love">Made with ❤️ in India</string>
+    <string name="made_with_love">來自印度，用❤️製造</string>
     <string name="material">材質風</string>
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
@@ -564,4 +564,8 @@
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
     <string name="could_not_write_tags_to_file">無法寫入資訊至音樂檔案！</string>
     <string name="sleep_timer_no_permission">尚未給予 Retro Music 取用鬧鐘的權限。</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
