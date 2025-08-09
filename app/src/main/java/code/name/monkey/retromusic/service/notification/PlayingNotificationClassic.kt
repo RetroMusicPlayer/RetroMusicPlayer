@@ -96,7 +96,6 @@ class PlayingNotificationClassic(
             )
         val deleteIntent = buildPendingIntent(context, ACTION_QUIT, null)
 
-        setSmallIcon(R.drawable.ic_notification)
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setCategory(NotificationCompat.CATEGORY_SERVICE)

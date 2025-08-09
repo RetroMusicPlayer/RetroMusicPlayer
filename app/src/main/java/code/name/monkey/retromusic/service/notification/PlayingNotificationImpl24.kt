@@ -93,7 +93,6 @@ class PlayingNotificationImpl24(
             context.getString(R.string.action_cancel),
             retrievePlaybackAction(ACTION_QUIT)
         )
-        setSmallIcon(R.drawable.ic_notification)
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setShowWhen(false)
