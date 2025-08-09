@@ -202,7 +202,7 @@ class SortOrder {
             const val PLAYLIST_A_Z = "name ASC"
 
             /* Playlist sort order Z-A */
-            const val PLAYLIST_Z_A = "$PLAYLIST_A_Z DESC"
+            const val PLAYLIST_Z_A = "name DESC"
 
             /* Playlist sort order number of songs */
             const val PLAYLIST_SONG_COUNT = "playlist_song_count"

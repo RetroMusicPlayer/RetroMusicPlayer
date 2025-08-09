@@ -134,6 +134,7 @@ class MainActivity : AbsCastActivity() {
         handlePlaybackIntent(intent)
     }
 
+    @Suppress("deprecation")
     private fun handlePlaybackIntent(intent: Intent) {
         lifecycleScope.launch(IO) {
             val uri: Uri? = intent.data
@@ -153,7 +154,7 @@ class MainActivity : AbsCastActivity() {
             if (uri != null && uri.toString().isNotEmpty()) {
                 MusicPlayerRemote.playFromUri(this@MainActivity, uri)
                 handled = true
-            } else if ("vnd.android.cursor.dir/playlist" == mimeType) {
+            } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
                 val id = parseLongFromIntent(intent, "playlistId", "playlist")
                 if (id >= 0L) {
                     val position: Int = intent.getIntExtra("position", 0)
