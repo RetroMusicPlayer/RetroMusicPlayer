@@ -69,8 +69,8 @@
 -keep class * extends androidx.fragment.app.Fragment{}
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
--keep class code.name.monkey.retromusic.network.model.** { *; }
--keep class code.name.monkey.retromusic.model.** { *; }
+#-keep class code.name.monkey.retromusic.network.model.** { *; }
+-keep class code.name.monkey.retromusic.** { *; }
 -keep class com.google.android.material.bottomsheet.** { *; }
 
 # TypeToken https://stackoverflow.com/questions/70969756/caused-by-java-lang-runtimeexception-missing-type-parameter
@@ -78,20 +78,18 @@
 -keep class * extends com.google.gson.reflect.TypeToken
 -keep public class * implements java.lang.reflect.Type
 
-# Keep Song, SongMetadata, Sng, Songmeta and all fields for Gson
--keep class code.name.monkey.retromusic.model.Song { *; }
--keep class code.name.monkey.retromusic.helper.SongTMPContainer { *; }
--keep class code.name.monkey.retromusic.model.SongMetaData { *; }
--keepclassmembers class * {
-    @com.google.gson.annotations.SerializedName <fields>;
-}
--keepclassmembers class * {
-    <init>(...);
-}
--keepattributes Signature
--keepattributes *Annotation*
-
-# Keep all fields for Gson (generic fallback)
--keepclassmembers class * {
-    <fields>;
-}
+## Keep Song, SongMetadata, Sng, Songmeta and all fields for Gson
+#-keep class code.name.monkey.retromusic.helper.FlowType { *; }
+#-keepclassmembers class * {
+#    @com.google.gson.annotations.SerializedName <fields>;
+#}
+#-keepclassmembers class * {
+#    <init>(...);
+#}
+#-keepattributes Signature
+#-keepattributes *Annotation*
+#
+## Keep all fields for Gson (generic fallback)
+#-keepclassmembers class * {
+#    <fields>;
+#}

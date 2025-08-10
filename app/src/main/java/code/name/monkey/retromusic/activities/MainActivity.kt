@@ -40,6 +40,8 @@ import org.koin.android.ext.android.get
 import code.name.monkey.retromusic.helper.SongDataManager
 import code.name.monkey.retromusic.helper.SongStatisticsManager
 import code.name.monkey.retromusic.helper.*
+import code.name.monkey.retromusic.helper.getApiKeys
+import code.name.monkey.retromusic.helper.addApiKey
 
 class MainActivity : AbsCastActivity() {
     companion object {
@@ -55,10 +57,19 @@ class MainActivity : AbsCastActivity() {
         updateTabs()
         AppRater.appLaunched(this)
         SongDataManager.loadDefaultSongsJson(this@MainActivity)
-        // Run initialiseDataProcess in the background
-        lifecycleScope.launch(IO) {
-            SongStatisticsManager.load(this@MainActivity)
-            initialiseMetaDataProcess(this@MainActivity)
+
+        // Ensure API keys exist before starting background work
+        val apiKeys = getApiKeys(this)
+        if (apiKeys.isEmpty()) {
+            // Show dialog on UI thread, then proceed if keys are saved
+            addApiKey(this)
+            // User must restart or re-enter the screen to continue, or you can listen for dialog completion and then launch the background process.
+        } else {
+            // Run initialiseDataProcess in the background
+            lifecycleScope.launch(IO) {
+                SongStatisticsManager.load(this@MainActivity)
+                initialiseMetaDataProcess(this@MainActivity)
+            }
         }
 
         setupNavigationController()

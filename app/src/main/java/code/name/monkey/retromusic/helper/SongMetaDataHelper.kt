@@ -20,19 +20,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import code.name.monkey.retromusic.repository.RealSongRepository
 import code.name.monkey.retromusic.model.SongMetaData
+import code.name.monkey.retromusic.model.SongTMPContainer
 import androidx.security.crypto.MasterKey
 import androidx.security.crypto.EncryptedSharedPreferences
-
-// Dummy classes to replace missing references (You should replace these with actual project classes)
-data class SongTMPContainer(
-    val title: String,
-    val artistName: List<String>?, // fixed: List type assumed
-    val data: String,
-    val year: Int? = null,
-    val liked: Boolean? = false,
-    val favorite: Boolean? = false,
-    val rating: Int? = 0
-)
 
 const val inputPath = "inputile.txt"
 const val outputPath = "outputile.txt"
@@ -341,9 +331,7 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
         val myApiKeys = getApiKeys(context)
         if (myApiKeys.isEmpty()) {
             println("No API keys found. Please store your API keys securely.")
-            if(!addApiKey(context)){
-                return
-            }
+            return
         }
 
         val modelNames = mutableListOf(
@@ -445,27 +433,72 @@ fun readFileOrCreate(context: Context, filename: String, defaultContent: String 
  * Required keys: mood, market, danceability, tempo, energy, valence.
  * This causes those songs to be reprocessed as new by the AI.
  */
+
 fun fixMissingSongMetaFields(context: Context, outputPath: String) {
     val gson = Gson()
     val fileContent = readFileOrCreate(context, outputPath, "[]") ?: "[]"
-    if(fileContent == "[]"){
+    if (fileContent == "[]") {
         return
     }
     val arr = try {
         JsonParser().parse(fileContent).asJsonArray
     } catch (e: Exception) {
         println("Error parsing $outputPath: $e")
+        // Consider writing back an empty array or handling corrupted file
+        writeToInternalStorage(context, outputPath, "[]")
         return
     }
-    val requiredFields = listOf("mood", "market", "danceability", "tempo", "energy", "valence")
-    val filteredArr = arr.filter { el ->
-        val obj = el.asJsonObject
-        requiredFields.all { obj.has(it) }
+
+    val filteredArr = arr.filter { element ->
+        if (!element.isJsonObject) return@filter false // Element must be an object
+        val obj = element.asJsonObject
+
+        // Helper to check if a field is present, a JsonPrimitive, and not JsonNull
+        fun isPresentAndNotNullPrimitive(fieldName: String): Boolean {
+            return obj.has(fieldName) && obj.get(fieldName).isJsonPrimitive && !obj.get(fieldName).isJsonNull
+        }
+
+        // Helper to check if a field is present, a JsonArray, and not JsonNull
+        // For "required for AI" fields that are lists, they must be present and be actual arrays.
+        fun isPresentAndNotNullArray(fieldName: String): Boolean {
+            return obj.has(fieldName) && obj.get(fieldName).isJsonArray // .isJsonArray implies not null and is an array
+        }
+
+        // Helper to check if a field is present, a non-empty string
+        fun isPresentAndNonEmptyString(fieldName: String): Boolean {
+            if (!obj.has(fieldName)) return false
+            val jsonElement = obj.get(fieldName)
+            return jsonElement.isJsonPrimitive && jsonElement.asJsonPrimitive.isString && jsonElement.asString.isNotEmpty()
+        }
+
+        // --- Start validation ---
+
+        // 1. Critical non-nullable fields for type safety and basic data presence
+        if (!isPresentAndNonEmptyString("file")) return@filter false
+        if (!isPresentAndNonEmptyString("title")) return@filter false // title is non-nullable String
+        if (!isPresentAndNotNullArray("artists")) return@filter false // artists is non-nullable List
+        if (!isPresentAndNotNullArray("genre")) return@filter false   // genre is non-nullable List
+
+        // mood is non-nullable List AND an original "required for AI" field
+        if (!isPresentAndNotNullArray("mood")) return@filter false
+
+        // 2. Other original "required for AI" fields
+        // market is List<String>? but if "required for AI", implies non-null and containing data for AI
+        if (!isPresentAndNotNullArray("market")) return@filter false
+
+        if (!isPresentAndNotNullPrimitive("danceability")) return@filter false
+        if (!isPresentAndNotNullPrimitive("tempo")) return@filter false
+        if (!isPresentAndNotNullPrimitive("energy")) return@filter false
+        if (!isPresentAndNotNullPrimitive("valence")) return@filter false
+
+        // If all checks pass, keep the element
+        true
     }
+
     if (filteredArr.size != arr.size()) {
         writeToInternalStorage(context, outputPath, gson.toJson(filteredArr))
-        println("Removed entries with missing fields from outputile.txt.")
+        println("Entries with missing or invalid fields removed/fixed in $outputPath. Original: ${arr.size()}, New: ${filteredArr.size}")
     } else {
-        println("No missing fields found in outputile.txt.")
+        println("No missing or invalid fields found in $outputPath that required fixing.")
     }
 }

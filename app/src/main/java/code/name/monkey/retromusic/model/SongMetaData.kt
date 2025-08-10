@@ -19,3 +19,34 @@ data class SongMetaData(
     val market: List<String>? = null,
     var skips: Int = 0
 )
+
+// Dummy classes to replace missing references (You should replace these with actual project classes)
+data class SongTMPContainer(
+    val title: String,
+    val artistName: List<String>?, // fixed: List type assumed
+    val data: String,
+    val year: Int? = null,
+    val liked: Boolean? = false,
+    val favorite: Boolean? = false,
+    val rating: Int? = 0
+)
+
+data class SongStatistics(
+    val songId: String,
+    var playCount: Int = 0,
+    var skipCount: Int = 0,
+    var rating: Int = 0,
+    var lastPlayed: Long = 0L
+)
+
+data class DataStatistics(
+    val songStats: Map<String, Map<String, Any>>? = null,
+    val sequences: List<Pair<String, Int>>? = null,
+    val genres: List<Pair<String, Int>>? = null,
+    val artists: List<Pair<String, Int>>? = null
+)
+
+/**
+ * Enum representing different music flow types for shuffling.
+ */
+enum class FlowType { RollerCoaster, WindDown, MoodLift, Pulse, Wave }

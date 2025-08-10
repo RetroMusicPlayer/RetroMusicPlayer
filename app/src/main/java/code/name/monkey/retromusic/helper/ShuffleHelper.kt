@@ -20,19 +20,19 @@ import java.io.File
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import android.content.Context
+import code.name.monkey.retromusic.model.FlowType
 
 /**
  * Manages loading and caching of song data.
  */
 object SongDataManager {
-
     var defaultSongsJson = "[]"
 
     /**
      * Loads the default songs JSON from file or uses initial data if file is missing/empty.
      */
     fun loadDefaultSongsJson(context: Context) {
-        val file = File(context.filesDir, outputPath)
+        val file = File(context.filesDir, "outputile.txt")
         defaultSongsJson = if (!file.exists() || file.readText().isBlank()) {
             "[]"
         } else {
@@ -47,11 +47,6 @@ object SongDataManager {
      */
     fun getSongByTitle(title: String): SongMetaData? = songs.find { it.title == title }
 }
-
-/**
- * Enum representing different music flow types for shuffling.
- */
-enum class FlowType { RollerCoaster, WindDown, MoodLift, Pulse, Wave }
 
 /**
  * Helper object for advanced shuffle logic based on song metadata.
@@ -72,8 +67,8 @@ object ShuffleHelper {
         val listType = object : TypeToken<List<SongMetaData>>() {}.type
         val metadataList: List<SongMetaData> = Gson().fromJson(defaultSongsJson, listType)
 
-        // Use lowercase file name without extension as key for comparison
-        val map = metadataList.associateBy { File(it.file).nameWithoutExtension.lowercase() }
+        // ... inside loadMetadataMap
+        val map = metadataList.filter { it.file.isNotBlank() }.associateBy { File(it.file).nameWithoutExtension.lowercase() }
         metadataMap = map
         println("Map==============================================")
         println(map)

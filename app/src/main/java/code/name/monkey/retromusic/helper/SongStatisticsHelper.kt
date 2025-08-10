@@ -4,21 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
-
-data class SongStatistics(
-    val songId: String,
-    var playCount: Int = 0,
-    var skipCount: Int = 0,
-    var rating: Int = 0,
-    var lastPlayed: Long = 0L
-)
-
-data class DataStatistics(
-    val songStats: Map<String, Map<String, Any>>? = null,
-    val sequences: List<Pair<String, Int>>? = null,
-    val genres: List<Pair<String, Int>>? = null,
-    val artists: List<Pair<String, Int>>? = null
-)
+import code.name.monkey.retromusic.model.SongStatistics
+import code.name.monkey.retromusic.model.DataStatistics
 
 object SongStatisticsManager {
 
