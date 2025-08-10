@@ -37,12 +37,16 @@ import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
+import code.name.monkey.retromusic.helper.SongDataManager
+import code.name.monkey.retromusic.helper.SongStatisticsManager
+import code.name.monkey.retromusic.helper.*
 
 class MainActivity : AbsCastActivity() {
     companion object {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
     }
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +54,12 @@ class MainActivity : AbsCastActivity() {
         hideStatusBar()
         updateTabs()
         AppRater.appLaunched(this)
+        SongDataManager.loadDefaultSongsJson(this@MainActivity)
+        // Run initialiseDataProcess in the background
+        lifecycleScope.launch(IO) {
+            SongStatisticsManager.load(this@MainActivity)
+            initialiseMetaDataProcess(this@MainActivity)
+        }
 
         setupNavigationController()
 
@@ -134,7 +144,6 @@ class MainActivity : AbsCastActivity() {
         handlePlaybackIntent(intent)
     }
 
-    @Suppress("deprecation")
     private fun handlePlaybackIntent(intent: Intent) {
         lifecycleScope.launch(IO) {
             val uri: Uri? = intent.data

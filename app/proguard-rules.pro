@@ -77,3 +77,21 @@
 -keep class com.google.gson.reflect.TypeToken
 -keep class * extends com.google.gson.reflect.TypeToken
 -keep public class * implements java.lang.reflect.Type
+
+# Keep Song, SongMetadata, Sng, Songmeta and all fields for Gson
+-keep class code.name.monkey.retromusic.model.Song { *; }
+-keep class code.name.monkey.retromusic.helper.SongTMPContainer { *; }
+-keep class code.name.monkey.retromusic.model.SongMetaData { *; }
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+-keepclassmembers class * {
+    <init>(...);
+}
+-keepattributes Signature
+-keepattributes *Annotation*
+
+# Keep all fields for Gson (generic fallback)
+-keepclassmembers class * {
+    <fields>;
+}

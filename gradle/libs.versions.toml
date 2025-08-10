@@ -2,6 +2,7 @@
 #buildscripts dependencies
 advrecyclerview = "1.0.0"
 jetradarmobile_androidSnowfall_version = "1.2.1"
+securityCrypto = "1.1.0-alpha06"
 tankery_circularSeekBar_version = "1.4.2"
 retrofit_version = "3.0.0"
 afollestad_dialog_version = "3.3.0"
@@ -61,6 +62,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room_version" }
 
 #google_play
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 google-feature-delivery = { module = "com.google.android.play:feature-delivery", version.ref = "google_featureDelivery_version" }
 google-play-services-cast-framework = { module = "com.google.android.gms:play-services-cast-framework", version.ref = "playServicesCastFramework" }
 google-play-review = { module = "com.google.android.play:review", version.ref = "google_play_review_version" }
