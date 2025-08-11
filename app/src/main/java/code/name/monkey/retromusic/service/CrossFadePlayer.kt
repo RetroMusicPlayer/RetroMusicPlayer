@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.service
 
 import android.animation.Animator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
@@ -317,14 +318,36 @@ class CrossFadePlayer(context: Context) : AudioManagerPlayback(context), MediaPl
                 if (nextSong != null && nextSong != Song.emptySong) {
                     nextDataSource = null
                     setDataSourceImpl(player, nextSong.uri.toString()) { success ->
-                        if (success) switchPlayer()
+                        if (success) {
+                            // --- BPM matching logic start ---
+                            val currentSong = MusicPlayerRemote.currentSong
+                            val currentBpm = currentSong?.bpm ?: 0f
+                            val nextBpm = nextSong.bpm ?: 0f
+                            if (currentBpm > 0f && nextBpm > 0f && currentBpm != nextBpm) {
+                                val speed = currentBpm / nextBpm
+                                player.setPlaybackSpeedPitch(speed, playbackPitch)
+                            }
+                            // --- BPM matching logic end ---
+                            switchPlayer()
+                        }
                     }
 
                 }
                 // So we have to use the previously stored nextDataSource value
                 else if (!nextDataSource.isNullOrEmpty()) {
                     setDataSourceImpl(player, nextDataSource!!) { success ->
-                        if (success) switchPlayer()
+                        if (success) {
+                            // --- BPM matching logic start ---
+                            val currentSong = MusicPlayerRemote.currentSong
+                            val nextSong = MusicPlayerRemote.nextSong
+                            val currentBpm = currentSong?.bpm ?: 0f
+                            val nextBpm = nextSong?.bpm ?: 0f
+                            if (currentBpm > 0f && nextBpm > 0f && currentBpm != nextBpm) {
+                                player.setPlaybackSpeedPitch(currentBpm / nextBpm, playbackPitch)
+                            }
+                            // --- BPM matching logic end ---
+                            switchPlayer()
+                        }
                         nextDataSource = null
                     }
                 }
@@ -335,6 +358,24 @@ class CrossFadePlayer(context: Context) : AudioManagerPlayback(context), MediaPl
     private fun switchPlayer() {
         getNextPlayer()?.start()
         crossFade(getNextPlayer()!!, getCurrentPlayer()!!)
+        // --- Gradually restore BPM after crossfade ---
+        val nextSong = MusicPlayerRemote.nextSong
+        val currentSong = MusicPlayerRemote.currentSong
+        val currentBpm = currentSong?.bpm ?: 0f
+        val nextBpm = nextSong?.bpm ?: 0f
+        if (currentBpm > 0f && nextBpm > 0f && currentBpm != nextBpm) {
+            val initialSpeed = currentBpm / nextBpm
+            // Animate speed from initialSpeed to 1.0 over 3 seconds
+            ValueAnimator.ofFloat(initialSpeed, 1.0f).apply {
+                duration = 3000
+                addUpdateListener { anim ->
+                    val speed = anim.animatedValue as Float
+                    getNextPlayer()?.setPlaybackSpeedPitch(speed, playbackPitch)
+                }
+                start()
+            }
+        }
+        // --- End BPM restore ---
         currentPlayer =
             if (currentPlayer == CurrentPlayer.PLAYER_ONE || currentPlayer == CurrentPlayer.NOT_SET) {
                 CurrentPlayer.PLAYER_TWO

@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil.isAudioFocusEnabled
 
-abstract class AudioManagerPlayback(val context: Context) : Playback {
+abstract class AudioManagerPlayback(open val context: Context) : Playback {
 
     private val audioManager: AudioManager? = context.getSystemService()
     private var isPausedByTransientLossOfFocus = false

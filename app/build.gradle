@@ -112,6 +112,7 @@ dependencies {
     implementation libs.androidx.palette.ktx
     implementation libs.androidx.mediarouter
     implementation libs.androidx.security.crypto
+
     //Cast Dependencies
     normalImplementation libs.google.play.services.cast.framework
     //WebServer by NanoHttpd
@@ -133,7 +134,7 @@ dependencies {
 
     normalImplementation libs.google.feature.delivery
     normalImplementation libs.google.play.review
-
+    implementation libs.tarsosdsp
     implementation libs.android.material
 
     implementation libs.retrofit

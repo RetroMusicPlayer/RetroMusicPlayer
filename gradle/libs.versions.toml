@@ -14,6 +14,7 @@ gradle = "8.12.0"
 dhaval2404_imagepicker_version = "2.1"
 chrisbanes_insetter_version = "0.6.1"
 jaudiotagger = "2.3.15"
+tarsosdsp = "2.4"
 yslibrary_keyboardvisibilityevent_version = "3.0.0-RC3"
 koinAndroid = "3.5.6"
 kotlinGradlePlugin = "2.1.21"
@@ -127,6 +128,7 @@ androidx-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", ver
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 androidx-navigation-safeargs-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation_version" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+tarsosdsp = { module = "com.github.JorenSix:TarsosDSP", version.ref = "tarsosdsp" }
 
 [plugins]
 github-ben-manes = { id = "com.github.ben-manes.versions", version.ref = "ben_manes_versoin" }

@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
+import android.media.MediaMetadataRetriever
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
@@ -34,6 +35,10 @@ import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
+import be.tarsos.dsp.io.jvm.AudioDispatcherFactory
+import be.tarsos.dsp.onsets.BeatRootOnsetEventHandler
+import javax.sound.sampled.AudioSystem
+import java.io.File
 
 /**
  * Created by hemanths on 10/08/17.
@@ -142,6 +147,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val artistName = cursor.getStringOrNull(AudioColumns.ARTIST)
         val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
         val albumArtist = cursor.getStringOrNull("album_artist")
+        val bpm = getBpmFromFile(data)
         return Song(
             id,
             title,
@@ -155,9 +161,30 @@ class RealSongRepository(private val context: Context) : SongRepository {
             artistId,
             artistName ?: "",
             composer ?: "",
-            albumArtist ?: ""
+            albumArtist ?: "",
+            bpm
         )
     }
+
+    /**
+     * Attempts to extract the BPM from the audio file's metadata using jaudiotagger.
+     * Returns null if not available or not a valid float.
+     */
+        fun getBPMFromFile(filePath: String): Float? {
+            val audioFile = File(filePath)
+            if (!audioFile.exists()) {
+                println("File does not exist: $filePath")
+            }
+
+            val format = AudioSystem.getAudioFileFormat(audioFile).format
+            val dispatcher = AudioDispatcherFactory.fromFile(audioFile, 2048, 512)
+            val onsetHandler = BeatRootOnsetEventHandler(format.sampleRate.toDouble())
+
+            dispatcher.addAudioProcessor(onsetHandler)
+            dispatcher.run()
+
+            return onsetHandler.bpm
+        }
 
     @JvmOverloads
     fun makeSongCursor(

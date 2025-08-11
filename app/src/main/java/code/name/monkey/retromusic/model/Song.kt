@@ -31,7 +31,8 @@ open class Song(
     open val artistId: Long,
     open val artistName: String,
     open val composer: String?,
-    open val albumArtist: String?
+    open val albumArtist: String?,
+    open val bpm: Float? = null // <-- Added BPM property
 ) : Parcelable {
 
 
@@ -55,6 +56,7 @@ open class Song(
         if (artistName != other.artistName) return false
         if (composer != other.composer) return false
         if (albumArtist != other.albumArtist) return false
+        if (bpm != other.bpm) return false // <-- Compare BPM
 
         return true
     }
@@ -73,6 +75,7 @@ open class Song(
         result = 31 * result + artistName.hashCode()
         result = 31 * result + (composer?.hashCode() ?: 0)
         result = 31 * result + (albumArtist?.hashCode() ?: 0)
+        result = 31 * result + (bpm?.hashCode() ?: 0) // <-- Add BPM to hashCode
         return result
     }
 
@@ -93,7 +96,8 @@ open class Song(
             artistId = -1,
             artistName = "",
             composer = "",
-            albumArtist = ""
+            albumArtist = "",
+            bpm = null // <-- Add BPM to emptySong
         )
     }
 }
