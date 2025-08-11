@@ -449,6 +449,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">Restore</string>
+
     <string name="restore_message">Do you want to restore backup?</string>
     <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
     <string name="restored_previous_purchases">Restored previous purchases.</string>
@@ -573,5 +574,6 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
-
+    <string name="continue_text">Continue</string>
+    <string name="premium">Premium</string>
 </resources>

@@ -25,7 +25,18 @@ class BillingManager(private val context: Context) : PurchasesUpdatedListener {
             .build()
         startConnection()
     }
-
+    fun restorePurchases(onComplete: () -> Unit) {
+        billingClient.queryPurchasesAsync(
+            QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build()
+        ) { billingResult, purchasesList ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                isPro = purchasesList.any { it.products.contains(PRODUCT_ID) }
+            }
+            onComplete()
+        }
+    }
     private fun startConnection() {
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {

@@ -175,5 +175,6 @@ dependencies {
 
     implementation libs.androidx.exoplayer
     implementation(libs.google.play.billing)
+    implementation(libs.purchases)
 
 }
