@@ -133,6 +133,7 @@ dependencies {
 
     normalImplementation libs.google.feature.delivery
     normalImplementation libs.google.play.review
+    normalImplementation libs.google.play.billing
 
     implementation libs.android.material
 
@@ -166,7 +167,6 @@ dependencies {
 
     implementation libs.org.eclipse.egit.github.core
     implementation libs.jaudiotagger
-    normalImplementation libs.android.lab.library
     implementation libs.slidableactivity
     implementation libs.material.intro
     implementation libs.dhaval2404.imagepicker
