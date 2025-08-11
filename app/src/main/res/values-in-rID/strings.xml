@@ -343,7 +343,6 @@
     <string name="pref_summary_bluetooth_playback">Mainkan segera setelah terhubung ke perangkat bluetooth</string>
     <string name="pref_summary_blurred_album_art">Mengaburkan sampul album di layar kunci. Dapat menyebabkan masalah dengan aplikasi dan widget pihak ketiga</string>
     <string name="pref_summary_carousel_effect">Efek korsel untuk sampul album di layar yang sedang diputar. Perhatikan bahwa tema Kartu dan Kartu Blur tidak akan berfungsi</string>
-    <string name="pref_summary_classic_notification">Pakai desain notifikasi klasik</string>
     <string name="pref_summary_colored_app">Warna latar belakang dan tombol kontrol berubah sesuai dengan sampul album dari layar yang sedang diputar</string>
     <string name="pref_summary_colored_app_shortcuts">Warnai pintasan aplikasi dalam warna aksen. Setiap kali Anda mengubah warna, harap aktifkan ini untuk diterapkan</string>
     <string name="pref_summary_colored_notification">"Mewarnai notifikasi di sampul album\u2019 dengan warna cerah"</string>
@@ -384,7 +383,6 @@
     <string name="pref_title_bluetooth_playback">Pemutaran Bluetooth</string>
     <string name="pref_title_blurred_album_art">Buramkan sampul album</string>
     <string name="pref_title_circle_button">Tombol putar melingkar</string>
-    <string name="pref_title_classic_notification">Desain notifikasi klasik</string>
     <string name="pref_title_colored_app">Warna Adaptif</string>
     <string name="pref_title_colored_notification">Notifikasi berwarna</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

@@ -349,7 +349,6 @@
     <string name="pref_summary_bluetooth_playback">Spustit přehrávání ihned po připojení k bluetooth zařízení</string>
     <string name="pref_summary_blurred_album_art">Zostří přebal alba na uzamčení obrazovky. Může způsobit problémy s aplikacemi třetích stran a widgety</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-    <string name="pref_summary_classic_notification">Use the classic notification design</string>
     <string name="pref_summary_colored_app">Pozadí, barva ovládacích tlačítek se mění podle vzhledu alb z obrazovky přehrávače</string>
     <string name="pref_summary_colored_app_shortcuts">Vybarvit zkratky aplikací v barvě odstínu. Pokaždé, když změníte barvu, přepněte toto nastavení, aby se projevil efekt</string>
     <string name="pref_summary_colored_notification">"Vybarv\u00ed ozn\u00e1men\u00ed v \u017eiv\u00e9 barv\u011b krytu alba."</string>
@@ -390,7 +389,6 @@
     <string name="pref_title_bluetooth_playback">Přehrávání Bluetooth</string>
     <string name="pref_title_blurred_album_art">Rozostřit obal alba</string>
     <string name="pref_title_circle_button">Kruhové tlačítko přehrávání</string>
-    <string name="pref_title_classic_notification">Klasický vzhled oznámení</string>
     <string name="pref_title_colored_app">Adaptivní barva</string>
     <string name="pref_title_colored_notification">Barevné notifikace</string>
     <string name="pref_title_cross_fade">Prolínání (Beta)</string>

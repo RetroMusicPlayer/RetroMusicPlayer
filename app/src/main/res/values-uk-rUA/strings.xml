@@ -349,7 +349,6 @@
     <string name="pref_summary_bluetooth_playback">Почати відтворення відразу при під\'єднанні до Bluetooth пристрою</string>
     <string name="pref_summary_blurred_album_art">Розмивати обкладинку альбому на екрані блокування. Можуть виникнути проблеми зі сторонніми застосунками та віджетами</string>
     <string name="pref_summary_carousel_effect">Ефект каруселі для обкладинок альбомів на екрані відтворення. Теми \"Картка\" та \"Розмита картка\" не працюватимуть</string>
-    <string name="pref_summary_classic_notification">Використовувати класичне оформлення сповіщення</string>
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
     <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у акцентний колір. Кожного разу, коли ви змінюєте колір, вмикайте це, щоб зміни набрали чинності</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
@@ -390,7 +389,6 @@
     <string name="pref_title_bluetooth_playback">Відтворення Bluetooth</string>
     <string name="pref_title_blurred_album_art">Розмити обкладинку альбому</string>
     <string name="pref_title_circle_button">Кнопка кругового відтворення</string>
-    <string name="pref_title_classic_notification">Класичне оформлення сповіщень</string>
     <string name="pref_title_colored_app">Адаптивний колір</string>
     <string name="pref_title_colored_notification">Кольорове сповіщення</string>
     <string name="pref_title_cross_fade">Плавний перехід (бета-версія)</string>

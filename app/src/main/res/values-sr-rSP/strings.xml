@@ -347,7 +347,6 @@
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Zamuti omot albuma na zakljucanom ekranu. (moze izazvati probleme sa drugim aplikacijama i vidzetima)</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-    <string name="pref_summary_classic_notification">Koristi klasicni stil obavestenja</string>
     <string name="pref_summary_colored_app">Pozadina i pusti/pauziraj dugme menjaju boju u zavisnosti od boje omota albuma</string>
     <string name="pref_summary_colored_app_shortcuts">Oboj precice aplikacije u akcentovanu boju. Svaki puta kada promenis boju molim te omoguci ovo opet kako bi imalo efekta</string>
     <string name="pref_summary_colored_notification">"Oboj obavestenja u boju omota albuma"</string>
@@ -388,7 +387,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Zamuti omot albuma</string>
     <string name="pref_title_circle_button">Circular play button</string>
-    <string name="pref_title_classic_notification">Klasican stil obavestenja</string>
     <string name="pref_title_colored_app">Prilagodive boje</string>
     <string name="pref_title_colored_notification">Obojena obavestenja</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

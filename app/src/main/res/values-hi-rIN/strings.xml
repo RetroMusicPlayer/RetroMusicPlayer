@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">ब्लूटूथ डिवाइस से कनेक्ट होते ही बाजाना शुरू करें</string>
     <string name="pref_summary_blurred_album_art">लॉकस्क्रीन पर एल्बम कवर को धुंधला करें। तृतीय पक्ष ऐप्स और विजेट्स के साथ समस्याएँ पैदा हो सकती हैं</string>
     <string name="pref_summary_carousel_effect">नाउ प्लेइंग स्क्रीन में एल्बम आर्ट के लिए कैरोसेल प्रभाव। ध्यान दें कि कार्ड और ब्लर कार्ड थीम काम नहीं करेंगी।</string>
-    <string name="pref_summary_classic_notification">क्लासिक अधिसूचना डिज़ाइन का उपयोग करें</string>
     <string name="pref_summary_colored_app">पृष्ठभूमि और नियंत्रण बटन के रंग नाउ प्लेइंग स्क्रीन मे एल्बम आर्ट के अनुसार बदलते हैं।</string>
     <string name="pref_summary_colored_app_shortcuts">ऐप शॉर्टकट को एक्सेंट रंग में रंगें। हर बार जब आप रंग बदलते हैं तो प्रभावी होने के लिए कृपया इसे टॉगल करें</string>
     <string name="pref_summary_colored_notification">"अधिसूचना को एल्बम कवर\u2019 के जीवंत रंग में रंग दे।"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">ब्लूटूथ प्लेबैक</string>
     <string name="pref_title_blurred_album_art">धुंधला एल्बम कवर</string>
     <string name="pref_title_circle_button">गोलाकार प्ले बटन</string>
-    <string name="pref_title_classic_notification">क्लासिक अधिसूचना डिजाइन</string>
     <string name="pref_title_colored_app">अनुकूलित रंग</string>
     <string name="pref_title_colored_notification">रंगीन अधिसूचना</string>
     <string name="pref_title_cross_fade">क्रॉसफ़ेड (बीटा)</string>

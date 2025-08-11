@@ -343,7 +343,6 @@
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">잠금 화면의 앨범 커버에 흐림 효과를 적용합니다. 서드 파티 앱 및 위젯에서 문제가 생길 수 있습니다.</string>
     <string name="pref_summary_carousel_effect">지금 재생 중 화면에서 이전/다음 곡의 앨범 아트를 표시합니다.</string>
-    <string name="pref_summary_classic_notification">클래식 알림 디자인을 사용합니다.</string>
     <string name="pref_summary_colored_app">배경과 조작 버튼의 색상을 재생 화면의 앨범 사진에 따라 바꿉니다.</string>
     <string name="pref_summary_colored_app_shortcuts">강조 색상의 앱 바로 가기 색상을 지정합니다. 색깔을 바꿀 때마다 이 설정을 다시 켜주세요</string>
     <string name="pref_summary_colored_notification">"\uc568\ubc94 \uc544\ud2b8\ub85c\ubd80\ud130 \ucd94\ucd9c\ud55c \uc0c9\uc0c1\uc73c\ub85c \uc54c\ub9bc \uc0c9\uc0c1\uc744 \uc9c0\uc815\ud569\ub2c8\ub2e4."</string>
@@ -384,7 +383,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">앨범 커버 블러</string>
     <string name="pref_title_circle_button">Circular play button</string>
-    <string name="pref_title_classic_notification">클래식 알림 디자인</string>
     <string name="pref_title_colored_app">반응형 색상 지정</string>
     <string name="pref_title_colored_notification">알림 색상 틴트</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

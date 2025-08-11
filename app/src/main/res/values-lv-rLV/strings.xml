@@ -347,7 +347,6 @@
     <string name="pref_summary_bluetooth_playback">Sākt atskaņošanu uzreiz pēc bluetooth ierīces pievienošanas</string>
     <string name="pref_summary_blurred_album_art">Izpludināt albuma attēlu bloķēšanas ekrānā. Var rasties problēmas ar trešo pušu lietotnēm un logrīkiem</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-    <string name="pref_summary_classic_notification">Izmontot standarta paziņojuma dizainu</string>
     <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
     <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
     <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
@@ -388,7 +387,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_circle_button">Circular play button</string>
-    <string name="pref_title_classic_notification">Classic notification design</string>
     <string name="pref_title_colored_app">Adaptive color</string>
     <string name="pref_title_colored_notification">Iekrāsots paziņojums</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

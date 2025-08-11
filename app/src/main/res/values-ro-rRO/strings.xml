@@ -347,7 +347,6 @@
     <string name="pref_summary_bluetooth_playback">Începe redarea imediat ce este conectat un dispozitiv Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Spălăcește coperta de album pe ecranul de blocare. Poate cauza probleme cu alte aplcicatii sau widget-uri.</string>
     <string name="pref_summary_carousel_effect">Efectul carusel pentru coperţile de album în ecranul de redare. Rețineți că tema Card și Blur Card nu va funcționa</string>
-    <string name="pref_summary_classic_notification">Folosește designul classic de notificare.</string>
     <string name="pref_summary_colored_app">Culoarea fundalului și a butonului de control se schimbă în dependență de coperta albumului din ecranul de redare</string>
     <string name="pref_summary_colored_app_shortcuts">Colorează comenzile rapide în culoarea de accent. De fiecare dată cînd schimbați culoarea, comutați această opțiune pentru effect</string>
     <string name="pref_summary_colored_notification">"Coloreaz\u0103 notificarea dup\u0103 culoarea copertei de album."</string>
@@ -388,7 +387,6 @@
     <string name="pref_title_bluetooth_playback">Redare prin Bluetooth</string>
     <string name="pref_title_blurred_album_art">Spălăcește coperta albumului</string>
     <string name="pref_title_circle_button">Butonul de redare circulară</string>
-    <string name="pref_title_classic_notification">Design classic de notificare</string>
     <string name="pref_title_colored_app">Culoare adaptivă</string>
     <string name="pref_title_colored_notification">Notificare colorată</string>
     <string name="pref_title_cross_fade">Suprapunere între piese (Beta)</string>

@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Vervaagt de album cover op het vergrendelscherm. Kan problemen veroorzaken met apps van derde en widgets/</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-    <string name="pref_summary_classic_notification">Gebruik het klassieke notificatie design.</string>
     <string name="pref_summary_colored_app">Achtergrond, de kleur van de besturingstoetsen verandert overeenstemmend met de album opmaak van het afspeelscherm</string>
     <string name="pref_summary_colored_app_shortcuts">Kleurt de app snelkoppelingen naar de accent kleur. Elker keer wanneer je de kleur verandert, toggle dit om de changes te zien</string>
     <string name="pref_summary_colored_notification">"Kleurt de notificatie in de kleur van de album cover"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth afspelen</string>
     <string name="pref_title_blurred_album_art">Vervaag album cover</string>
     <string name="pref_title_circle_button">Ronde afspeelknop</string>
-    <string name="pref_title_classic_notification">Klassiek notificatie design</string>
     <string name="pref_title_colored_app">Aangepaste kleur</string>
     <string name="pref_title_colored_notification">Gekleurde notificatie</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

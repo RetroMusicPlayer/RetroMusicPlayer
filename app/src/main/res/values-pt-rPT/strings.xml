@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Começar a tocar assim que ligado ao dispositivo Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Desfocar a capa do álbum no ecrã de bloqueio. Pode causar problemas com aplicações e widgets</string>
     <string name="pref_summary_carousel_effect">Efeito carrossel no ecrã A reproduzir. Os temas de cartões e cartões desfocados não vão funcionar</string>
-    <string name="pref_summary_classic_notification">Utilizar o design clássico de notificações</string>
     <string name="pref_summary_colored_app">As cores do fundo e dos botões mudam consoante a capa do álbum no ecrã A reproduzir</string>
     <string name="pref_summary_colored_app_shortcuts">Dá cor aos atalhos na cor de destaque. Sempre que alterar a cor, ligue/desligue para fazer efeito</string>
     <string name="pref_summary_colored_notification">"Colorir as notificações na capa do álbum"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Reprodução Bluetooth</string>
     <string name="pref_title_blurred_album_art">Desfocar capa do álbum</string>
     <string name="pref_title_circle_button">Botão circular de reprodução</string>
-    <string name="pref_title_classic_notification">Design de notificações clássico</string>
     <string name="pref_title_colored_app">Cor adaptável</string>
     <string name="pref_title_colored_notification">Notificações coloridas</string>
     <string name="pref_title_cross_fade">Crossfade (beta)</string>

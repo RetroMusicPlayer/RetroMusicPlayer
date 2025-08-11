@@ -349,7 +349,6 @@
     <string name="pref_summary_bluetooth_playback">Rozpocznij odtwarzanie po podłączeniu urządzenia Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Rozmyj okładkę albumu na ekranie blokady. Może powodować problemy z aplikacjami i widżetami innych firm</string>
     <string name="pref_summary_carousel_effect">Efekt karuzeli na okładce obecnie odtwarzanego albumu. Motywy karty i rozmycie nie będą dostępne</string>
-    <string name="pref_summary_classic_notification">Użyj klasycznego wyglądu powiadomień</string>
     <string name="pref_summary_colored_app">Tło oraz kolory przycisków sterujących będą zmieniać się zgodnie z okładką albumu na ekranie odtwarzacza</string>
     <string name="pref_summary_colored_app_shortcuts">Koloruje skróty aplikacji w kolorze wiodącym. Za każdym razem, gdy zmieniasz kolor, włącz tę opcję, aby zmiany odniosły skutek.</string>
     <string name="pref_summary_colored_notification">"Koloruje powiadomienie dominującym kolorem okładki albumu."</string>
@@ -390,7 +389,6 @@
     <string name="pref_title_bluetooth_playback">Odtwarzanie przez Bluetooth</string>
     <string name="pref_title_blurred_album_art">Rozmyj okładkę albumu</string>
     <string name="pref_title_circle_button">Okrągły przycisk Odtwórz</string>
-    <string name="pref_title_classic_notification">Klasyczny wygląd powiadomień</string>
     <string name="pref_title_colored_app">Kolor adaptacyjny</string>
     <string name="pref_title_colored_notification">Kolorowe powiadomienia</string>
     <string name="pref_title_cross_fade">Płynne przejście (Beta)</string>

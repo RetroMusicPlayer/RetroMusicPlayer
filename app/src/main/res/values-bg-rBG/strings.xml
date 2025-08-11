@@ -346,7 +346,6 @@
     <string name="pref_summary_bluetooth_playback">Стартирайте възпроизвеждането веднага след свързване на Bluetooth устройство</string>
     <string name="pref_summary_blurred_album_art">Замъглете обложката на албума на заключения екран. Може да причини проблеми с приложения и уиджети на трети страни</string>
     <string name="pref_summary_carousel_effect">Ефект на завъртане за обложка на албум на екрана за възпроизвеждане. Ефектът не работи за темите \"Карта\" и \"Карта със замъгляване\".\"</string>
-    <string name="pref_summary_classic_notification">Използвайте класически дизайн на известията</string>
     <string name="pref_summary_colored_app">Цветът на фона и бутоните за управление се променя, за да съответства на обложката на албума от екрана за възпроизвеждане</string>
     <string name="pref_summary_colored_app_shortcuts">Преки пътища за приложения за цветове в основен цвят. Всеки път, когато промените цвят, включете го, за да влезе в сила</string>
     <string name="pref_summary_colored_notification">"Оцветява известието в доминиращия цвят на корицата на албума"</string>
@@ -387,7 +386,6 @@
     <string name="pref_title_bluetooth_playback">Възпроизвеждане с Bluetooth връзка</string>
     <string name="pref_title_blurred_album_art">Размазване на обложката на албума</string>
     <string name="pref_title_circle_button">Кръгъл бутон за възпроизвеждане</string>
-    <string name="pref_title_classic_notification">Класически дизайн на известията</string>
     <string name="pref_title_colored_app">Адаптивен цвят</string>
     <string name="pref_title_colored_notification">Цветно известие</string>
     <string name="pref_title_cross_fade">Плавно затихване (бета-версия)</string>

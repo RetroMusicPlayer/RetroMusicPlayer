@@ -270,7 +270,6 @@
     <string name="pref_summary_bluetooth_playback">బ్లూటూత్ పరికరానికి కనెక్ట్ అయిన వెంటనే ప్లే చేయడం ప్రారంభించండి</string>
     <string name="pref_summary_blurred_album_art">లాక్‌స్క్రీన్‌పై ఆల్బమ్ కవర్‌ను అస్పష్టం చేయండి.  మూడవ పార్టీ అనువర్తనాలు మరియు విడ్జెట్‌లతో సమస్యలను కలిగిస్తుంది</string>
     <string name="pref_summary_carousel_effect">ఇప్పుడు ప్లే అవుతున్న స్క్రీన్‌లో ఆల్బమ్ ఆర్ట్ కోసం రంగులరాట్నం ప్రభావం.  కార్డ్ మరియు బ్లర్ కార్డ్ థీమ్‌లు పనిచేయవని గమనించండి</string>
-    <string name="pref_summary_classic_notification">క్లాసిక్ నోటిఫికేషన్ డిజైన్‌ను ఉపయోగించండి</string>
     <string name="pref_summary_colored_app">ఇప్పుడు ప్లే అవుతున్న స్క్రీన్ నుండి ఆల్బమ్ ఆర్ట్ ప్రకారం నేపథ్యం మరియు నియంత్రణ బటన్ రంగులు మారుతాయి</string>
     <string name="pref_summary_colored_app_shortcuts">అనువర్తన సత్వరమార్గాలను యాస రంగులో రంగులు వేస్తుంది.  మీరు రంగును మార్చిన ప్రతిసారీ దయచేసి దీనిని అమలు చేయడానికి టోగుల్ చేయండి</string>
     <string name="pref_summary_colored_notification">"ఆల్బమ్ కవర్ in u2019 యొక్క శక్తివంతమైన రంగులోని నోటిఫికేషన్‌ను రంగులు వేస్తుంది"</string>
@@ -296,7 +295,6 @@
     <string name="pref_title_blacklist">బ్లాక్లిస్ట్</string>
     <string name="pref_title_bluetooth_playback">బ్లూటూత్ ప్లేబ్యాక్</string>
     <string name="pref_title_blurred_album_art">బ్లర్ ఆల్బమ్ కవర్</string>
-    <string name="pref_title_classic_notification">క్లాసిక్ నోటిఫికేషన్ డిజైన్</string>
     <string name="pref_title_colored_app">అనుకూల రంగు</string>
     <string name="pref_title_colored_notification">రంగు నోటిఫికేషన్</string>
     <string name="pref_title_desaturated_color">అసంతృప్త రంగు</string>

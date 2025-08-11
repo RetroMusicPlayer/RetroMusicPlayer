@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Comença a reproduir tan bon punt estigui connectat a un dispositiu bluetooth</string>
     <string name="pref_summary_blurred_album_art">Desenfoca la portada de l\'àlbum a la pantalla de bloqueig. Pot causar problemes amb aplicacions i widgets de tercers</string>
     <string name="pref_summary_carousel_effect">Efecte carrusel per a la portada de l\'àlbum a la pantalla de la reproducció en curs. Tingueu en compte que els temes Targeta i Targeta Difuminada no funcionaran</string>
-    <string name="pref_summary_classic_notification">Utilitzeu el disseny de notificació clàssic</string>
     <string name="pref_summary_colored_app">Els colors de fons i del botó de control canvien d\'acord amb la coberta de l\'àlbum a la pantalla de la reproducció en curs</string>
     <string name="pref_summary_colored_app_shortcuts">Acoloreix les dreceres de l\'aplicació amb el color del tema. Intercanvieu això cada vegada que canvieu el color perquè tingui efecte</string>
     <string name="pref_summary_colored_notification">"Pinta la notificació amb el color viu de l'àlbum"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Reproducció Bluetooth</string>
     <string name="pref_title_blurred_album_art">Difumina la portada de l\'àlbum</string>
     <string name="pref_title_circle_button">Botó de reproducció circular</string>
-    <string name="pref_title_classic_notification">Disseny de notificació clàssic</string>
     <string name="pref_title_colored_app">Color adaptatiu</string>
     <string name="pref_title_colored_notification">Notificació amb color</string>
     <string name="pref_title_cross_fade">Esvaïment creuat (Beta)</string>

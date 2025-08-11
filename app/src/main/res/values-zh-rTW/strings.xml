@@ -343,7 +343,6 @@
     <string name="pref_summary_bluetooth_playback">當連線至藍芽裝置時，自動播放音樂</string>
     <string name="pref_summary_blurred_album_art">在鎖定畫面上模糊化專輯圖片。第三方程式和小工具可能不正常運作</string>
     <string name="pref_summary_carousel_effect">現正播放畫面的專輯封面輪播效果。請注意，卡牌風和模糊卡牌風佈景主題不會有此效果</string>
-    <string name="pref_summary_classic_notification">使用經典通知樣式</string>
     <string name="pref_summary_colored_app">於現正播放畫面中，背景和控制鍵的顏色將依專輯封面色調而變化</string>
     <string name="pref_summary_colored_app_shortcuts">以強調色作為應用程式的捷徑色調。每變更強調顏色後，請重新切換此功能開關以生效</string>
     <string name="pref_summary_colored_notification">"以鮮豔的專輯封面色調作為通知欄顏色"</string>
@@ -384,7 +383,6 @@
     <string name="pref_title_bluetooth_playback">藍牙播放</string>
     <string name="pref_title_blurred_album_art">模糊化專輯圖片</string>
     <string name="pref_title_circle_button">圓形播放鍵</string>
-    <string name="pref_title_classic_notification">經典通知樣式</string>
     <string name="pref_title_colored_app">自動調整顏色</string>
     <string name="pref_title_colored_notification">彩色狀態列</string>
     <string name="pref_title_cross_fade">淡入/淡出 (測試中)</string>

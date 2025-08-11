@@ -268,7 +268,6 @@
     <string name="pref_summary_bluetooth_playback">連接到藍牙裝置後立即開始播放</string>
     <string name="pref_summary_blurred_album_art">在鎖定螢幕將專輯圖片模糊化。會引致第三方程式及工具無法正常運作</string>
     <string name="pref_summary_carousel_effect">於現正播放專輯圖片使用的轉盤效果。請注意卡片模式及模糊卡片模式將無法使用此效果</string>
-    <string name="pref_summary_classic_notification">使用基本的通知欄設計</string>
     <string name="pref_summary_colored_app">背景及控制按鈕色彩根據現在播放中的專輯圖片而轉變</string>
     <string name="pref_summary_colored_app_shortcuts">將重色設為程式捷徑色彩。每次更改色彩後請切換此選項來生效</string>
     <string name="pref_summary_colored_notification">"\u5f9e\u5c08\u8f2f\u5716\u7247\u4e2d\u6700\u9bae\u660e\u7684\u8272\u5f69\u4f86\u6311\u9078\u901a\u77e5\u6b04\u8272\u5f69"</string>
@@ -293,7 +292,6 @@
     <string name="pref_title_blacklist">黑名單</string>
     <string name="pref_title_bluetooth_playback">藍牙播放</string>
     <string name="pref_title_blurred_album_art">模糊化專輯圖片</string>
-    <string name="pref_title_classic_notification">基本通知欄設計</string>
     <string name="pref_title_colored_app">自適應色彩</string>
     <string name="pref_title_colored_notification">彩色通知欄</string>
     <string name="pref_title_desaturated_color">飽和色</string>

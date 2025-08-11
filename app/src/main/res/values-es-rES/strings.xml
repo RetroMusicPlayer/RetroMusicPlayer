@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Comienza a reproducir tan pronto como esté conectado al dispositivo Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Desenfocar la portada el álbum en la pantalla de bloqueo. Puede causar problemas con aplicaciones y widgets de terceros</string>
     <string name="pref_summary_carousel_effect">Efecto carrusel para la portada del álbum en la ventana de reproducción. En los temas \"Tarjeta\" y \"Tarjeta Desenfocada\" no funcionará</string>
-    <string name="pref_summary_classic_notification">Usar el diseño de notificación clásico</string>
     <string name="pref_summary_colored_app">El color del fondo y los botones de control cambian de acuerdo a la portada del álbum para la ventana de reproducción</string>
     <string name="pref_summary_colored_app_shortcuts">Colorea los accesos directos de la aplicación en el color de énfasis. Cada vez que cambie el color, activa esta opción para que surta efecto</string>
     <string name="pref_summary_colored_notification">"Colorea la notificación con el color vibrante de la portada del álbum"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Reproducción por Bluetooth</string>
     <string name="pref_title_blurred_album_art">Desenfocar portada del álbum</string>
     <string name="pref_title_circle_button">Botón de reproducción circular</string>
-    <string name="pref_title_classic_notification">Diseño de notificación clásico</string>
     <string name="pref_title_colored_app">Color adaptable</string>
     <string name="pref_title_colored_notification">Notificación coloreada</string>
     <string name="pref_title_cross_fade">Transición (Beta)</string>

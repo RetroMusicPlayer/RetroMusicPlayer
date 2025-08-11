@@ -9,22 +9,6 @@ import androidx.annotation.ChecksSdkIntAtLeast
 
 object VersionUtils {
     /**
-     * @return true if device is running API >= 23
-     */
-    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.M)
-    fun hasMarshmallow(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-    }
-
-    /**
-     * @return true if device is running API >= 24
-     */
-    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N)
-    fun hasNougat(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-    }
-
-    /**
      * @return true if device is running API >= 25
      */
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N_MR1)

@@ -13,7 +13,7 @@ android {
     namespace = "code.name.monkey.retromusic"
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
         targetSdk = 36
 
         vectorDrawables {

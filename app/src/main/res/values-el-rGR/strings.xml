@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Ξεκινά να παίζει μόλις συνδεθείτε με συσκευή bluetooth</string>
     <string name="pref_summary_blurred_album_art">Θολώνει το εξώφυλλο άλμπουμ στην οθόνη κλειδώματος. Μπορεί να προκαλέσει προβλήματα με εφαρμογές και widgets.</string>
     <string name="pref_summary_carousel_effect">Εφέ καρουζέλ για το εξώφυλλο του άλμπουμ στην οθόνη αναπαραγωγής. Σημειώστε ότι τα θέματα Κάρτα και Θαμπή Κάρτα δε θα λειτουργήσουν</string>
-    <string name="pref_summary_classic_notification">Χρήση του κλασσικού σχεδιασμού ειδοποιήσεων.</string>
     <string name="pref_summary_colored_app">Το φόντο και το κουμπί ελέγχου αλλάζουν σύμφωνα με το εξώφυλλο άλμπουμ</string>
     <string name="pref_summary_colored_app_shortcuts">Χρωματίζει τις συντομεύσεις εφαρμογής με το επιλεγμένο χρώμα τονισμού. Κάθε φορά που αλλάζετε το χρώμα, παρακαλούμε αλλάξτε και αυτό για να ισχύσει</string>
     <string name="pref_summary_colored_notification">"Χρωματίζει την ειδοποίηση με το κυρίαρχο χρώμα του εξωφύλλου του άλμπουμ"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Αναπαραγωγή μέσω bluetooth</string>
     <string name="pref_title_blurred_album_art">Θόλωμα εξωφύλλων άλμπουμ</string>
     <string name="pref_title_circle_button">Κυκλικό κουμπί αναπαραγωγής</string>
-    <string name="pref_title_classic_notification">Κλασσική σχεδίαση ειδοποίησης</string>
     <string name="pref_title_colored_app">Προσαρμοστικό χρώμα</string>
     <string name="pref_title_colored_notification">Χρωματιστή ειδοποίηση</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

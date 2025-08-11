@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Commencez à jouer dès que vous êtes connecté à un appareil Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Flouter la couverture de l\'album sur l\'écran de verrouillage. Cela peut poser des problèmes avec des applications et widgets tiers</string>
     <string name="pref_summary_carousel_effect">Effet carrousel pour les couvertures d\'albums sur l\'écran de lecture en cours. Veuillez noter que les thèmes Carte et Carte floutée ne fonctionneront pas</string>
-    <string name="pref_summary_classic_notification">Utiliser le design classique pour les notifications</string>
     <string name="pref_summary_colored_app">La couleur du fond et les boutons de contrôle changent en fonction de l\'image de l\'album sur l\'écran de lecture en cours</string>
     <string name="pref_summary_colored_app_shortcuts">Raccourcis de l\'application selon la couleur d\'accent. Chaque fois que vous changez de couleur, veuillez activer ceci afin que le changement soit pris en compte</string>
     <string name="pref_summary_colored_notification">"Colorer la notification avec la couleur dominante des pochettes d'albums"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Lecture via Bluetooth</string>
     <string name="pref_title_blurred_album_art">Flouter la couverture d\'album</string>
     <string name="pref_title_circle_button">Bouton de lecture circulaire</string>
-    <string name="pref_title_classic_notification">Design de notification classique</string>
     <string name="pref_title_colored_app">Couleur adaptative</string>
     <string name="pref_title_colored_notification">Notification colorée</string>
     <string name="pref_title_cross_fade">Fondu enchaîné (Beta)</string>

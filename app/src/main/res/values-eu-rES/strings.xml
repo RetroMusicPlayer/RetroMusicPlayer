@@ -275,7 +275,6 @@
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Lausotu albumaren azala blokeo-pantailan. Arazoak sor ditzazke hirugarrenen aplikazio edota widgetekin</string>
     <string name="pref_summary_carousel_effect">Karrusel efektua erreprodukzio pantailako album azalerako. Kontuan izan Txartela eta Txartel lausotua gaiek ez dutela funtzionatuko</string>
-    <string name="pref_summary_classic_notification">Erabili jakinarazpenen diseinu klasikoa</string>
     <string name="pref_summary_colored_app">Orain erreproduzitzen pantailan atzealdeko eta kontrol botoien koloreak album azalaren arabera aldatuko dira</string>
     <string name="pref_summary_colored_app_shortcuts">Aplikazioaren lasterbideak azentu kolorean ezartzen ditu. Kolorea aldatzen duzun bakoitzean hau birraktibatu aldaketak aplikatzeko</string>
     <string name="pref_summary_colored_notification">"Jakinarazpena albumaren azalaren kolore nagusian ezarri"</string>
@@ -301,7 +300,6 @@
     <string name="pref_title_blacklist">Zerrenda beltza</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Lausotu albumaren azala</string>
-    <string name="pref_title_classic_notification">Jakinarazpenen diseinu klasikoa</string>
     <string name="pref_title_colored_app">Kolore moldagarria</string>
     <string name="pref_title_colored_notification">Jakinarazpen koloreztatua</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
