@@ -1,6 +1,7 @@
 [versions]
 #buildscripts dependencies
 advrecyclerview = "1.0.0"
+core = "2.5"
 jetradarmobile_androidSnowfall_version = "1.2.1"
 securityCrypto = "1.1.0-alpha06"
 tankery_circularSeekBar_version = "1.4.2"
@@ -14,7 +15,6 @@ gradle = "8.12.0"
 dhaval2404_imagepicker_version = "2.1"
 chrisbanes_insetter_version = "0.6.1"
 jaudiotagger = "2.3.15"
-tarsosdsp = "2.4"
 yslibrary_keyboardvisibilityevent_version = "3.0.0-RC3"
 koinAndroid = "3.5.6"
 kotlinGradlePlugin = "2.1.21"
@@ -64,6 +64,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 
 #google_play
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
+core = { module = "be.tarsos.dsp:core", version.ref = "core" }
 google-feature-delivery = { module = "com.google.android.play:feature-delivery", version.ref = "google_featureDelivery_version" }
 google-play-services-cast-framework = { module = "com.google.android.gms:play-services-cast-framework", version.ref = "playServicesCastFramework" }
 google-play-review = { module = "com.google.android.play:review", version.ref = "google_play_review_version" }
@@ -75,6 +76,7 @@ glide-okhttp3-integration = { module = "com.github.bumptech.glide:okhttp3-integr
 
 
 #koin
+jvm = { module = "be.tarsos.dsp:jvm", version.ref = "core" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinAndroid" }
 
@@ -128,7 +130,6 @@ androidx-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", ver
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 androidx-navigation-safeargs-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation_version" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
-tarsosdsp = { module = "com.github.JorenSix:TarsosDSP", version.ref = "tarsosdsp" }
 
 [plugins]
 github-ben-manes = { id = "com.github.ben-manes.versions", version.ref = "ben_manes_versoin" }

@@ -1,22 +1,7 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
-import android.media.MediaMetadataRetriever
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
@@ -35,10 +20,7 @@ import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
-import be.tarsos.dsp.io.jvm.AudioDispatcherFactory
-import be.tarsos.dsp.onsets.BeatRootOnsetEventHandler
-import javax.sound.sampled.AudioSystem
-import java.io.File
+import com.google.gson.Gson
 
 /**
  * Created by hemanths on 10/08/17.
@@ -62,6 +44,8 @@ interface SongRepository {
 
 class RealSongRepository(private val context: Context) : SongRepository {
 
+    private val gson = Gson()
+
     override fun songs(): List<Song> {
         return sortedSongs(makeSongCursor(null, null))
     }
@@ -82,22 +66,22 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val songs = songs(cursor)
         return when (PreferenceUtil.songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s1.title, s2.title) }
+                songs.sortedWith { s1, s2 -> collator.compare(s1.title, s2.title) }
             }
             SortOrder.SongSortOrder.SONG_Z_A -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s2.title, s1.title) }
+                songs.sortedWith { s1, s2 -> collator.compare(s2.title, s1.title) }
             }
             SortOrder.SongSortOrder.SONG_ALBUM -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumName, s2.albumName) }
+                songs.sortedWith { s1, s2 -> collator.compare(s1.albumName, s2.albumName) }
             }
             SortOrder.SongSortOrder.SONG_ALBUM_ARTIST -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s1.albumArtist, s2.albumArtist) }
+                songs.sortedWith { s1, s2 -> collator.compare(s1.albumArtist, s2.albumArtist) }
             }
             SortOrder.SongSortOrder.SONG_ARTIST -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s1.artistName, s2.artistName) }
+                songs.sortedWith { s1, s2 -> collator.compare(s1.artistName, s2.artistName) }
             }
             SortOrder.SongSortOrder.COMPOSER -> {
-                songs.sortedWith{ s1, s2 -> collator.compare(s1.composer, s2.composer) }
+                songs.sortedWith { s1, s2 -> collator.compare(s1.composer, s2.composer) }
             }
             else -> songs
         }
@@ -147,7 +131,9 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val artistName = cursor.getStringOrNull(AudioColumns.ARTIST)
         val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
         val albumArtist = cursor.getStringOrNull("album_artist")
-        val bpm = getBpmFromFile(data)
+        
+        val bpm = getBPMFromFile(context,data)
+        
         return Song(
             id,
             title,
@@ -166,25 +152,15 @@ class RealSongRepository(private val context: Context) : SongRepository {
         )
     }
 
-    /**
-     * Attempts to extract the BPM from the audio file's metadata using jaudiotagger.
-     * Returns null if not available or not a valid float.
-     */
-        fun getBPMFromFile(filePath: String): Float? {
-            val audioFile = File(filePath)
-            if (!audioFile.exists()) {
-                println("File does not exist: $filePath")
-            }
+    fun getBPMFromFile(
+        context: Context,
+        filePath: String,
+        bufferSize: Int = 2048,
+        overlap: Int = 1024
+    ): Float? {
+        return null
+    }
 
-            val format = AudioSystem.getAudioFileFormat(audioFile).format
-            val dispatcher = AudioDispatcherFactory.fromFile(audioFile, 2048, 512)
-            val onsetHandler = BeatRootOnsetEventHandler(format.sampleRate.toDouble())
-
-            dispatcher.addAudioProcessor(onsetHandler)
-            dispatcher.run()
-
-            return onsetHandler.bpm
-        }
 
     @JvmOverloads
     fun makeSongCursor(
@@ -202,17 +178,14 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 IS_MUSIC
             }
 
-            // Whitelist
             if (PreferenceUtil.isWhiteList) {
-                selectionFinal =
-                    selectionFinal + " AND " + Constants.DATA + " LIKE ?"
+                selectionFinal = selectionFinal + " AND " + Constants.DATA + " LIKE ?"
                 selectionValuesFinal = addSelectionValues(
                     selectionValuesFinal, arrayListOf(
                         getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
                     )
                 )
             } else {
-                // Blacklist
                 val paths = BlacklistStore.getInstance(context).paths
                 if (paths.isNotEmpty()) {
                     selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
@@ -220,8 +193,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 }
             }
 
-            selectionFinal =
-                selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
+            selectionFinal = selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
         }
         val uri = if (VersionUtils.hasQ()) {
             Media.getContentUri(MediaStore.VOLUME_EXTERNAL)

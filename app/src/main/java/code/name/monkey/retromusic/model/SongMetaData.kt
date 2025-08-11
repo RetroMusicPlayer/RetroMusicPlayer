@@ -17,7 +17,8 @@ data class SongMetaData(
     val energy: Double? = null,       // 0.0 - 1.0 (intensity/loudness)
     val valence: Double? = null,      // 0.0 - 1.0 (musical positivity)
     val market: List<String>? = null,
-    var skips: Int = 0
+    var skips: Int = 0,
+    val bpm: Float? = null
 )
 
 // Dummy classes to replace missing references (You should replace these with actual project classes)

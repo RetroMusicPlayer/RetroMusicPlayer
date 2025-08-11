@@ -11,10 +11,12 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import android.media.MediaScannerConnection
 import okhttp3.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -23,9 +25,18 @@ import code.name.monkey.retromusic.model.SongMetaData
 import code.name.monkey.retromusic.model.SongTMPContainer
 import androidx.security.crypto.MasterKey
 import androidx.security.crypto.EncryptedSharedPreferences
-
+import java.util.regex.Pattern
+import android.content.ContentValues
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
+import okhttp3.OkHttpClient
+import java.io.OutputStream
 const val inputPath = "inputile.txt"
 const val outputPath = "outputile.txt"
+const val APP_LYRICS_SUBFOLDER_NAME = "RetroMusicPlayer" // Or whatever you choose
+const val LYRICS_NOT_FOUND_PLACEHOLDER = "No Lyrics Found"
 
 fun initialiseMetaDataProcess(context: Context) {
     val songRepository = RealSongRepository(context)
@@ -43,6 +54,7 @@ fun initialiseMetaDataProcess(context: Context) {
             rating = 0
         )
     }
+    ensureLyricsFilesForSongs(context, deviceSongs)
     enhanceSongsData(inputPath, outputPath, deviceSongs, context)
 }
 
@@ -70,52 +82,52 @@ fun generateTextWithGemini(
         addProperty("role", "user")
         val partsArray = JsonArray().apply {
             add(JsonObject().apply {
-                addProperty("text", """
-You are an AI Music Tag Enhancer.
+                addProperty("text",
+"""You are an AI Music Tag Enhancer.
 
 You will be provided with a JSON object that contains metadata about a song.
 
 Your tasks are strictly as follows:
-Improve and expand only the mood and genre arrays.
-Add appropriate values that enhance the description of the song.
-You must select values strictly from the provided approved lists below.
-Do not use any mood or genre not present in the approved lists.
-Add a danceability field (if it does not exist) with a numeric value between 0.0 and 1.0.
-0.0 = Not danceable
-1.0 = Very danceable
-Add or enhance the market field.
-This should be an array of region codes based on relevance to the song’s style or audience.
-Valid values include, but are not limited to: "US" (United States), "UK" (United Kingdom), "SA" (South Africa), etc.
-Add a tempo field (in beats per minute).
-This should be a numeric value (Integer or Double).
-Example: 120.0 represents 120 beats per minute.
-Add an energy field with a value between 0.0 and 1.0.
-This represents the intensity and loudness of the track.
-Higher values indicate more energetic or intense songs.
-Add a valence field with a value between 0.0 and 1.0.
-This measures the musical positivity of the song.
-Higher values indicate more positive or cheerful moods.
+    Improve and expand only the mood and genre arrays.
+    Add appropriate values that enhance the description of the song.
+    You must select values strictly from the provided approved lists below.
+    Do not use any mood or genre not present in the approved lists.
+    Add a danceability field (if it does not exist) with a numeric value between 0.0 and 1.0.
+    0.0 = Not danceable
+    1.0 = Very danceable
+    Add or enhance the market field.
+    This should be an array of region codes based on relevance to the song’s style or audience.
+    Valid values include, but are not limited to: "US" (United States), "UK" (United Kingdom), "SA" (South Africa), etc.
+    Add a tempo field (in beats per minute).
+    This should be a numeric value (Integer or Double).
+    Example: 120.0 represents 120 beats per minute.
+    Add an energy field with a value between 0.0 and 1.0.
+    This represents the intensity and loudness of the track.
+    Higher values indicate more energetic or intense songs.
+    Add a valence field with a value between 0.0 and 1.0.
+    This measures the musical positivity of the song.
+    Higher values indicate more positive or cheerful moods.
 
 Important constraints:
-You must not change or remove any existing fields other than mood, genre, and market.
-Do not rename, reorder, or restructure the JSON object.
-Do not rename any keys of the JSON object
-Do not add any new keys unless they are explicitly required (danceability, tempo, energy, valence, market).
-Your output must be a valid JSON object.
-Do not include explanations, comments, or formatting (such as code blocks or markdown).
-Do not wrap the output in quotation marks, backticks, or any additional text.
+    You must not change or remove any existing fields other than mood, genre, and market.
+    Do not rename, reorder, or restructure the JSON object.
+    Do not rename any keys of the JSON object
+    Do not add any new keys unless they are explicitly required (danceability, tempo, energy, valence, market).
+    Your output must be a valid JSON object.
+    Do not include explanations, comments, or formatting (such as code blocks or markdown).
+    Do not wrap the output in quotation marks, backticks, or any additional text.
 
 Approved values:
-You must use the case-sensitive values from the provided mood and genre lists only.
-Any mood or genre not in the approved list is invalid and must not be used.
+    You must use the case-sensitive values from the provided mood and genre lists only.
+    Any mood or genre not in the approved list is invalid and must not be used.
 
 Case-sensitive valid options:
 
 **Mood (select only from this list):**
-['Abstract', 'Adventurous', 'Affectionate', 'Aggressive', 'Amber', 'Ambient', 'Ambitious', 'Analytical', 'Angry', 'Angsty', 'Anguished', 'Anthemic', 'Anxious', 'Apologetic', 'Aspirational', 'Atmospheric', 'Authentic', 'Bass-heavy', 'Bittersweet', 'Boastful', 'Bold', 'Bossy', 'Bouncy', 'Braggy', 'Bright', 'Brooding', 'Calm', 'Calming', 'Carefree', 'Catchy', 'Celebratory', 'Ceremonial', 'Chant', 'Charismatic', 'Cheeky', 'Cheerful', 'Chill', 'Chilled', 'Chilling', 'Cinematic', 'Classic', 'Club', 'Clubby', 'Club‑ready', 'Collaborative', 'Colorful', 'Comforting', 'Competitive', 'Confidence', 'Conflict', 'Conflicted', 'Confrontational', 'Conscious', 'Cool', 'Cozy', 'Cultural', 'Dance', 'Danceable', 'Dancey', 'Dance‑floor', 'Dark', 'Deep', 'Defiant', 'Depressed', 'Detached', 'Determined', 'Devotional', 'Dramatic', 'Dreamy', 'Driven', 'Driving', 'Dynamic', 'Earnest', 'Edgy', 'Elegant', 'Empathetic', 'Empowered', 'Encouraging', 'Energizing', 'Epic', 'Escapist', 'Ethereal', 'Exciting', 'Existential', 'Exotic', 'Experimental', 'Faithful', 'Feel-Good', 'Fierce', 'Fiery', 'Flex', 'Focused', 'Free-Spirited', 'Fresh', 'Friendship', 'Frustrated', 'Fun', 'Funky', 'Funny', 'Futuristic', 'Gentle', 'Grateful', 'Groovy', 'Happy', 'Hard', 'Hard-Hitting', 'Healing', 'Heartbroken', 'Heavy', 'High Energy', 'Hopeful', 'Humorous', 'Hungry', "Hustler's anthem", 'Hyped', 'Innovative', 'Inspirational', 'Inspiring', 'Intense', 'Intimate', 'Isolation', 'Joyful', 'Late night groove', 'Late‑night', 'Legendary', 'Liberated', 'Liberating', 'Lighthearted', 'Live', 'Lively', 'Local Pride', 'Local Vibe', 'Lonely', 'Longing', 'Lounge', 'Love‑Struck', 'Loving', 'Loyalty', 'Lyrical', 'Melancholic', 'Melodic', 'Melodramatic', 'Minimalistic', 'Money-focused', 'Morning vibe', 'Motivated', 'Mysterious', 'Mystical', 'Narrative', 'Night Vibe', 'Nonchalant', 'Nostalgic', 'Party', 'Passionate', 'Patriotic', 'Peaceful', 'Pensive', 'Personal', 'Playful', 'Political', 'Positive', 'Powerful', 'Protective', 'Proud', 'Provocative', 'Pumped-up', 'Quirky', 'Raised', 'Raise‑the‑roof', 'Raw', 'Real', 'Rebellious', 'Refreshing', 'Regretful', 'Relaxed', 'Relaxing', 'Resilient', 'Respectful', 'Retro', 'Reverent', 'Rhythmic', 'Rowdy', 'Sad', 'Sarcastic', 'Sassy', 'Satirical', 'Seductive', 'Serene', 'Serious', 'Sexy', 'Sincere', 'Slow', 'Smooth', 'Soft', 'Somber', 'Sophisticated', 'South African pride', 'Southern vibe', 'Spicy', 'Spiritual', 'Storytelling', 'Strategic', 'Street', 'Street-wise', 'Street‑empower', 'Street‑vibe', 'Strong', 'Stylish', 'Sultry', 'Supportive', 'Swagger', 'Swaggy', 'Sweet', 'Tender', 'Thankful', 'Thoughtful', 'Togetherness', 'Tough', 'Traditional', 'Tragic', 'Tranquil', 'Trendy', 'Tribal', 'Tribute', 'Trippy', 'Triumphant', 'Turn up', 'Turnt', 'Underground', 'Upbeat', 'Up‑tempo', 'Urban', 'Vengeful', 'Vibe', 'Vibey', 'Vibrant', 'Victorious', 'Vulnerable', 'Warm', 'Wavy', 'Whimsical', 'Wild', 'Wistful', 'Witty', 'Worshipful', 'Yearning', 'Young', 'Youthful', 'assertive', 'braggadocious', 'confident', 'contemplative', 'emotional', 'empowering', 'energetic', 'euphoric', 'festive', 'flirty', 'gritty', 'haunting', 'heartbreak', 'heartfelt', 'hype', 'hypnotic', 'independent', 'introspective', 'ironic', 'laid-back', 'lush', 'luxurious', 'melancholy', 'mellow', 'moody', 'motivational', 'optimistic', 'reflective', 'relatable', 'romantic', 'sensual', 'sentimental', 'soothing', 'soulful', 'tense', 'thought-provoking', 'uplifting']
+    ['Abstract', 'Adventurous', 'Affectionate', 'Aggressive', 'Amber', 'Ambient', 'Ambitious', 'Analytical', 'Angry', 'Angsty', 'Anguished', 'Anthemic', 'Anxious', 'Apologetic', 'Aspirational', 'Atmospheric', 'Authentic', 'Bass-heavy', 'Bittersweet', 'Boastful', 'Bold', 'Bossy', 'Bouncy', 'Braggy', 'Bright', 'Brooding', 'Calm', 'Calming', 'Carefree', 'Catchy', 'Celebratory', 'Ceremonial', 'Chant', 'Charismatic', 'Cheeky', 'Cheerful', 'Chill', 'Chilled', 'Chilling', 'Cinematic', 'Classic', 'Club', 'Clubby', 'Club‑ready', 'Collaborative', 'Colorful', 'Comforting', 'Competitive', 'Confidence', 'Conflict', 'Conflicted', 'Confrontational', 'Conscious', 'Cool', 'Cozy', 'Cultural', 'Dance', 'Danceable', 'Dancey', 'Dance‑floor', 'Dark', 'Deep', 'Defiant', 'Depressed', 'Detached', 'Determined', 'Devotional', 'Dramatic', 'Dreamy', 'Driven', 'Driving', 'Dynamic', 'Earnest', 'Edgy', 'Elegant', 'Empathetic', 'Empowered', 'Encouraging', 'Energizing', 'Epic', 'Escapist', 'Ethereal', 'Exciting', 'Existential', 'Exotic', 'Experimental', 'Faithful', 'Feel-Good', 'Fierce', 'Fiery', 'Flex', 'Focused', 'Free-Spirited', 'Fresh', 'Friendship', 'Frustrated', 'Fun', 'Funky', 'Funny', 'Futuristic', 'Gentle', 'Grateful', 'Groovy', 'Happy', 'Hard', 'Hard-Hitting', 'Healing', 'Heartbroken', 'Heavy', 'High Energy', 'Hopeful', 'Humorous', 'Hungry', "Hustler's anthem", 'Hyped', 'Innovative', 'Inspirational', 'Inspiring', 'Intense', 'Intimate', 'Isolation', 'Joyful', 'Late night groove', 'Late‑night', 'Legendary', 'Liberated', 'Liberating', 'Lighthearted', 'Live', 'Lively', 'Local Pride', 'Local Vibe', 'Lonely', 'Longing', 'Lounge', 'Love‑Struck', 'Loving', 'Loyalty', 'Lyrical', 'Melancholic', 'Melodic', 'Melodramatic', 'Minimalistic', 'Money-focused', 'Morning vibe', 'Motivated', 'Mysterious', 'Mystical', 'Narrative', 'Night Vibe', 'Nonchalant', 'Nostalgic', 'Party', 'Passionate', 'Patriotic', 'Peaceful', 'Pensive', 'Personal', 'Playful', 'Political', 'Positive', 'Powerful', 'Protective', 'Proud', 'Provocative', 'Pumped-up', 'Quirky', 'Raised', 'Raise‑the‑roof', 'Raw', 'Real', 'Rebellious', 'Refreshing', 'Regretful', 'Relaxed', 'Relaxing', 'Resilient', 'Respectful', 'Retro', 'Reverent', 'Rhythmic', 'Rowdy', 'Sad', 'Sarcastic', 'Sassy', 'Satirical', 'Seductive', 'Serene', 'Serious', 'Sexy', 'Sincere', 'Slow', 'Smooth', 'Soft', 'Somber', 'Sophisticated', 'South African pride', 'Southern vibe', 'Spicy', 'Spiritual', 'Storytelling', 'Strategic', 'Street', 'Street-wise', 'Street‑empower', 'Street‑vibe', 'Strong', 'Stylish', 'Sultry', 'Supportive', 'Swagger', 'Swaggy', 'Sweet', 'Tender', 'Thankful', 'Thoughtful', 'Togetherness', 'Tough', 'Traditional', 'Tragic', 'Tranquil', 'Trendy', 'Tribal', 'Tribute', 'Trippy', 'Triumphant', 'Turn up', 'Turnt', 'Underground', 'Upbeat', 'Up‑tempo', 'Urban', 'Vengeful', 'Vibe', 'Vibey', 'Vibrant', 'Victorious', 'Vulnerable', 'Warm', 'Wavy', 'Whimsical', 'Wild', 'Wistful', 'Witty', 'Worshipful', 'Yearning', 'Young', 'Youthful', 'assertive', 'braggadocious', 'confident', 'contemplative', 'emotional', 'empowering', 'energetic', 'euphoric', 'festive', 'flirty', 'gritty', 'haunting', 'heartbreak', 'heartfelt', 'hype', 'hypnotic', 'independent', 'introspective', 'ironic', 'laid-back', 'lush', 'luxurious', 'melancholy', 'mellow', 'moody', 'motivational', 'optimistic', 'reflective', 'relatable', 'romantic', 'sensual', 'sentimental', 'soothing', 'soulful', 'tense', 'thought-provoking', 'uplifting']
 
 **Genre (select only from this list):**
-['Acapella', 'Acoustic', 'Adult contemporary', 'African', 'Afro Fusion', 'Afro Hip-Hop', 'Afro Rap', 'Afro Tech', 'Afro pop', 'Afro-House', 'Afro-jazz', 'Afrobeat', 'Afrobeats', 'Alternative', 'Alternative Hip Hop', 'Alternative Pop', 'Alternative R&B', 'Alternative Rap', 'Alternative Rock', 'Ambient', 'Ambient Pop', 'Ambient Rock', 'Anime-inspired', 'Bacardi', 'Bacardi House', 'Ballad', 'Barcadi', 'Baroque Pop', 'Battle Rap', 'Blues', 'Blues Rock', 'Bongo Flava', 'Boom Bap', 'Britpop', 'Broken Beat', 'Chill Rap', 'Chillout', 'Choir', 'Choral', 'Christian', 'Christian Hip‑Hop', 'Christian Pop', 'Christian Rap', 'Christian Worship', 'Christmas', 'Cinematic', 'Classic', 'Classic Rock', 'Classical', 'Cloud Rap', 'Club', 'Coleader', 'Comedy Rap', 'Comedy hip hop', 'Conscious Hip-Hop', 'Conscious Rap', 'Contemporary Christian', 'Contemporary R&B', 'Country', 'Crunk', 'Cypher', 'Dance', 'Dance Rock', 'Dance-Pop', 'Dancehall', 'Deep House', 'Detroit House', 'Disco', 'Disney', 'Diss Track', 'Doowop', 'Downtempo', 'Dream Pop', 'Drum & Bass', 'Drum and Bass', 'Dubstep', 'EDM', 'East Coast Hip‑Hop', 'Electro', 'Electro House', 'Electronic', 'Electronica', 'Electropop', 'Emo', 'Emo Rap', 'Euro Pop', 'Eurodance', 'Experimental', 'Experimental Hip‑Hop', 'Folk', 'Folk House', 'Freestyle', 'French Chanson', 'French Pop', 'Funk', 'Funk Brasileiro', 'Future Bass', 'G-Funk', 'Gangsta Rap', 'Gospel', 'Gospel House', 'Gqom', 'Grime', 'Highlife', 'Indie', 'Indie Dance', 'Indie Folk', 'Indie Pop', 'Indie rock', 'Inspirational', 'Instrumental', 'Intro', 'Jam Band', 'Jazz', 'Jazz Fusion', 'Jazz House', 'Kwaito Fusion', 'Kwaito Rap', 'Kwaito-Influenced', 'Latin', 'Latin House', 'Latin Pop', 'Latin Trap', 'Live', 'Lo-fi Hip Hop', 'Lounge', 'Lo‑fi', 'Lyricism', 'Maskandi', 'Maskandi Fusion', 'Melodic Rap', 'Minimalism', 'Motswako', 'Neo Soul', 'Novelty', 'Nu Disco', 'Nu Jazz', 'Old School Hip Hop', 'Opera', 'Orchestral', 'Orchestral Pop', 'Orchestral Rap', 'Party', 'Party Rap', 'Pop Ballad', 'Pop Rock', 'Pop Soul', 'Pop-Rap', 'Progressive House', 'R&B', 'R&B Fusion', 'Rap', 'Reggae', 'Reggaeton', 'Remix', 'Retro', 'RnB', 'Rock', 'Rock and Roll', 'Romantic', 'SA Hip-Hop', 'Singer‑Songwriter', 'Slow jam', 'Smooth Jazz', 'Soft Rock', 'Sotho Rap', 'Soul', 'Soulful', 'Soulful Amapiano', 'Soulful House', 'Soulful Piano', 'Soundtrack', 'South African', 'South African Dance', 'South African Hip Hop', 'South African Music', 'South African Rap', 'South African Street', 'South African house', 'Spiritual', 'Spiritual House', 'Spoken Word', 'Street Rap', 'Swing', 'Synthpop', 'Tech House', 'Techno', 'Traditional', 'Traditional Crossover', 'Traditional Zulu', 'Trap Metal', 'Trap Soul', 'Trip‑Hop', 'Tsonga Rap', 'UK Hip‑Hop', 'Underground Rap', 'Urban', 'West Coast Hip‑Hop', 'World', 'World Music', 'Worldbeat', 'Worship', 'Zulu Rap', 'Zulu Traditional', 'afrosoul', 'afrotrap', 'amapiano', 'arena rock', 'art rock', 'drill', 'hip hop', 'house', 'kwaito', 'pop', 'post-Britpop', 'private school', 'soul-pop', 'south african pop', 'southern rap', 'trap', 'trap-pop']
+    ['Acapella', 'Acoustic', 'Adult contemporary', 'African', 'Afro Fusion', 'Afro Hip-Hop', 'Afro Rap', 'Afro Tech', 'Afro pop', 'Afro-House', 'Afro-jazz', 'Afrobeat', 'Afrobeats', 'Alternative', 'Alternative Hip Hop', 'Alternative Pop', 'Alternative R&B', 'Alternative Rap', 'Alternative Rock', 'Ambient', 'Ambient Pop', 'Ambient Rock', 'Anime-inspired', 'Bacardi', 'Bacardi House', 'Ballad', 'Barcadi', 'Baroque Pop', 'Battle Rap', 'Blues', 'Blues Rock', 'Bongo Flava', 'Boom Bap', 'Britpop', 'Broken Beat', 'Chill Rap', 'Chillout', 'Choir', 'Choral', 'Christian', 'Christian Hip‑Hop', 'Christian Pop', 'Christian Rap', 'Christian Worship', 'Christmas', 'Cinematic', 'Classic', 'Classic Rock', 'Classical', 'Cloud Rap', 'Club', 'Coleader', 'Comedy Rap', 'Comedy hip hop', 'Conscious Hip-Hop', 'Conscious Rap', 'Contemporary Christian', 'Contemporary R&B', 'Country', 'Crunk', 'Cypher', 'Dance', 'Dance Rock', 'Dance-Pop', 'Dancehall', 'Deep House', 'Detroit House', 'Disco', 'Disney', 'Diss Track', 'Doowop', 'Downtempo', 'Dream Pop', 'Drum & Bass', 'Drum and Bass', 'Dubstep', 'EDM', 'East Coast Hip‑Hop', 'Electro', 'Electro House', 'Electronic', 'Electronica', 'Electropop', 'Emo', 'Emo Rap', 'Euro Pop', 'Eurodance', 'Experimental', 'Experimental Hip‑Hop', 'Folk', 'Folk House', 'Freestyle', 'French Chanson', 'French Pop', 'Funk', 'Funk Brasileiro', 'Future Bass', 'G-Funk', 'Gangsta Rap', 'Gospel', 'Gospel House', 'Gqom', 'Grime', 'Highlife', 'Indie', 'Indie Dance', 'Indie Folk', 'Indie Pop', 'Indie rock', 'Inspirational', 'Instrumental', 'Intro', 'Jam Band', 'Jazz', 'Jazz Fusion', 'Jazz House', 'Kwaito Fusion', 'Kwaito Rap', 'Kwaito-Influenced', 'Latin', 'Latin House', 'Latin Pop', 'Latin Trap', 'Live', 'Lo-fi Hip Hop', 'Lounge', 'Lo‑fi', 'Lyricism', 'Maskandi', 'Maskandi Fusion', 'Melodic Rap', 'Minimalism', 'Motswako', 'Neo Soul', 'Novelty', 'Nu Disco', 'Nu Jazz', 'Old School Hip Hop', 'Opera', 'Orchestral', 'Orchestral Pop', 'Orchestral Rap', 'Party', 'Party Rap', 'Pop Ballad', 'Pop Rock', 'Pop Soul', 'Pop-Rap', 'Progressive House', 'R&B', 'R&B Fusion', 'Rap', 'Reggae', 'Reggaeton', 'Remix', 'Retro', 'RnB', 'Rock', 'Rock and Roll', 'Romantic', 'SA Hip-Hop', 'Singer‑Songwriter', 'Slow jam', 'Smooth Jazz', 'Soft Rock', 'Sotho Rap', 'Soul', 'Soulful', 'Soulful Amapiano', 'Soulful House', 'Soulful Piano', 'Soundtrack', 'South African', 'South African Dance', 'South African Hip Hop', 'South African Music', 'South African Rap', 'South African Street', 'South African house', 'Spiritual', 'Spiritual House', 'Spoken Word', 'Street Rap', 'Swing', 'Synthpop', 'Tech House', 'Techno', 'Traditional', 'Traditional Crossover', 'Traditional Zulu', 'Trap Metal', 'Trap Soul', 'Trip‑Hop', 'Tsonga Rap', 'UK Hip‑Hop', 'Underground Rap', 'Urban', 'West Coast Hip‑Hop', 'World', 'World Music', 'Worldbeat', 'Worship', 'Zulu Rap', 'Zulu Traditional', 'afrosoul', 'afrotrap', 'amapiano', 'arena rock', 'art rock', 'drill', 'hip hop', 'house', 'kwaito', 'pop', 'post-Britpop', 'private school', 'soul-pop', 'south african pop', 'southern rap', 'trap', 'trap-pop']
 
 Now, here is the input JSON:
 
@@ -131,6 +143,7 @@ Now, here is the input JSON:
     val client = OkHttpClient.Builder()
         .callTimeout(120, TimeUnit.SECONDS)
         .build()
+
 
     val apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/$modelName:generateContent?key=$apiKey"
 
@@ -148,7 +161,6 @@ Now, here is the input JSON:
                 return "Error making API request: ${response.code} ${response.message}"
             }
             val responseBodyString = response.body.string()
-            println(responseBodyString)
             val json = JsonParser().parse(responseBodyString).asJsonObject
             val candidates = json.getAsJsonArray("candidates")
             if (candidates != null && candidates.size() > 0) {
@@ -181,7 +193,7 @@ fun songToSongMetaData(song: SongTMPContainer): SongMetaData {
         danceability = null, // corrected spelling
         tempo = null,        // in BPM (e.g., 120.0)
         energy = null,       // 0.0 - 1.0 (intensity/loudness)
-        valence = null, 
+        valence = null,
         market = null,
         skips = 0
     )
@@ -189,7 +201,6 @@ fun songToSongMetaData(song: SongTMPContainer): SongMetaData {
 
 // Merge new device songs into file if not already present
 fun scanAndAddNewDeviceSongs(context: Context, songsDataPath: String, deviceSongs: List<SongTMPContainer>) {
-    println("Scanning device songs")
     val gson = Gson()
     val existingSongs: List<JsonObject> = try {
         val arr = JsonParser().parse(readFileOrCreate(context, songsDataPath, "[]")).asJsonArray
@@ -207,8 +218,8 @@ fun scanAndAddNewDeviceSongs(context: Context, songsDataPath: String, deviceSong
     if (newDeviceSongs.isNotEmpty()) {
         val updatedSongs = existingSongs.toMutableList()
         newDeviceSongs.forEach { updatedSongs.add(gson.toJsonTree(it).asJsonObject) }
-        var updatedSongsTxt = gson.toJson(updatedSongs)
-        
+        val updatedSongsTxt = gson.toJson(updatedSongs)
+
         writeToInternalStorage(context, songsDataPath, updatedSongsTxt)
     }
 }
@@ -271,11 +282,11 @@ fun addApiKey(context: Context): Boolean {
     var result = false
     val editText = EditText(context)
     editText.inputType = InputType.TYPE_CLASS_TEXT
-    editText.hint = "Enter Google API keys, separated by commas"
+    editText.hint = "Enter a Google Gemini API Key"
 
     val dialog = AlertDialog.Builder(context)
-        .setTitle("Enter Google API Keys")
-        .setMessage("Please enter your Google API keys, separated by commas (,):")
+        .setTitle("Enter a Google Gemini API Key")
+        .setMessage("Please enter your Google API key, you can add multiple keys separated by commas (,):")
         .setView(editText)
         .setCancelable(false)
         .setPositiveButton("Save") { _, _ ->
@@ -306,7 +317,6 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
     fixMissingSongMetaFields(context, outputPath)
     // Check for internet connection before proceeding
     if (!hasInternetConnection(context)) {
-        println("No internet connection available. Cannot enhance songs data.")
         return
     }
 
@@ -330,7 +340,6 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
         // Use secure API key retrieval
         val myApiKeys = getApiKeys(context)
         if (myApiKeys.isEmpty()) {
-            println("No API keys found. Please store your API keys securely.")
             return
         }
 
@@ -353,8 +362,6 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
                 while (modelIndex < modelNames.size && !processed) {
                     val modelName = modelNames[modelIndex]
                     val prompt = song.toString()
-                    println("prompt-------------------------------")
-                    println(prompt)
                     val result = generateTextWithGemini(prompt, apiKey, modelName)
                         .replace("```json", "")
                         .replace("```", "")
@@ -364,8 +371,6 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
                         .replace("\"genres\"", "genre")
                         .replace("\"markets\"", "market")
                         .trim()
-                    println("results-------------------------------")
-                    println(result)
                     try {
                         val enhancedSong = JsonParser().parse(result).asJsonObject
                         enhancedSongs.add(enhancedSong)
@@ -391,7 +396,6 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
             }
         }
     }
-    println(gson.toJson(enhancedSongs))
 }
 
 fun writeToInternalStorage(context: Context, filename: String, content: String) {
@@ -400,9 +404,6 @@ fun writeToInternalStorage(context: Context, filename: String, content: String) 
         FileOutputStream(file).use {
             it.write(content.toByteArray())
         }
-        // Or using Kotlin's extension function for convenience:
-        // file.writeText(content)
-        println("Successfully wrote to: ${file.absolutePath}")
     } catch (e: Exception) {
         e.printStackTrace() // Log the full error
     }
@@ -413,10 +414,8 @@ fun readFileOrCreate(context: Context, filename: String, defaultContent: String 
     return try {
         if (file.exists()) {
             // File exists, read its content
-            println("Reading: $filename file read")
             file.readText()
         } else {
-            println("Reading: $filename file created")
             // File does not exist, create it with default content
             file.writeText(defaultContent)
             defaultContent // Return the default content that was just written
@@ -443,7 +442,6 @@ fun fixMissingSongMetaFields(context: Context, outputPath: String) {
     val arr = try {
         JsonParser().parse(fileContent).asJsonArray
     } catch (e: Exception) {
-        println("Error parsing $outputPath: $e")
         // Consider writing back an empty array or handling corrupted file
         writeToInternalStorage(context, outputPath, "[]")
         return
@@ -497,8 +495,297 @@ fun fixMissingSongMetaFields(context: Context, outputPath: String) {
 
     if (filteredArr.size != arr.size()) {
         writeToInternalStorage(context, outputPath, gson.toJson(filteredArr))
-        println("Entries with missing or invalid fields removed/fixed in $outputPath. Original: ${arr.size()}, New: ${filteredArr.size}")
-    } else {
-        println("No missing or invalid fields found in $outputPath that required fixing.")
     }
+}
+
+/**
+ * For every song, check if a .lrc file exists in internal storage.
+ * If not, or if the .lrc file is empty or only whitespace, fetch lyrics from the API and save as .lrc.
+ * If not found, create an empty .lrc file.
+ * Afterward, delete all .lrc files with empty strings and clean HTML tags from lyrics.
+ */
+
+
+// (Keep your getLrcFileName, removeHtmlTags, buildLyricsApiUrl helpers as before)
+// (Keep your APP_LYRICS_SUBFOLDER_NAME, getLrcFileName, removeHtmlTags, buildLyricsApiUrl helpers)
+// ... (imports and helper functions, APP_LYRICS_SUBFOLDER_NAME, LYRICS_NOT_FOUND_PLACEHOLDER) ...
+
+fun isContentConsideredValid(content: String?): Boolean {
+    if (content.isNullOrBlank()) return false // Null, empty, or only whitespace is not valid
+    return content != LYRICS_NOT_FOUND_PLACEHOLDER // Not valid if it's our specific placeholder
+    // Add any other placeholder strings your app might have used in the past
+}
+
+fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContainer>) {
+    // ... (client, dirs, etc. setup as before) ...
+    val client = OkHttpClient.Builder()
+        .callTimeout(30, TimeUnit.SECONDS)
+        .build()
+
+    val publicDownloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+    val appLyricsDirInDownloadsFile = File(publicDownloadsDir, APP_LYRICS_SUBFOLDER_NAME)
+
+    if (!appLyricsDirInDownloadsFile.exists()) {
+        if (!appLyricsDirInDownloadsFile.mkdirs()) {
+            Log.e("Lyrics", "Failed to create app lyrics directory: ${appLyricsDirInDownloadsFile.absolutePath}")
+        }
+    }
+    val mediaStoreRelativePathForQPlus = Environment.DIRECTORY_DOWNLOADS + File.separator + APP_LYRICS_SUBFOLDER_NAME + File.separator
+
+
+    for (song in deviceSongs) {
+        // ... (song file path and parent dir check as before) ...
+        val originalSongFile = File(song.data)
+        val songParentDir = originalSongFile.parentFile
+
+        if (songParentDir == null || songParentDir.absolutePath != appLyricsDirInDownloadsFile.absolutePath) {
+            Log.d("Lyrics", "Skipping song not in designated folder: ${song.title} (Path: ${originalSongFile.path})")
+            continue
+        }
+
+        val lrcFileName = getLrcFileName(song)
+        Log.d("Lyrics_DEBUG", "Processing Song: ${song.title}, Target LRC Filename: $lrcFileName")
+
+        var lyricsContentToWrite: String? = null
+        val resolver = context.contentResolver
+        var needsFetch = true
+        var isUpdateOperation = false
+        var existingFileContent: String? = null // Store existing content to avoid re-reading
+
+        var existingLrcFileForReadPreQ: File? = null
+        var existingLrcUriForQPlus: Uri? = null
+
+        // --- Check for existing LRC file and its content ---
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // ... (Q+ query logic as before to find existingLrcUriForQPlus and lrcFileName)
+            val queryUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
+            val projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.SIZE, MediaStore.MediaColumns.DISPLAY_NAME)
+            val selection = "${MediaStore.MediaColumns.RELATIVE_PATH}=? AND ${MediaStore.MediaColumns.DISPLAY_NAME}=?"
+            val selectionArgs = arrayOf(mediaStoreRelativePathForQPlus, lrcFileName)
+            try {
+                resolver.query(queryUri, projection, selection, selectionArgs, null)?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))
+                        // val size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
+                        val displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME))
+
+                        if (displayName == lrcFileName) { // Exact match
+                            existingLrcUriForQPlus = Uri.withAppendedPath(queryUri, id.toString())
+                            isUpdateOperation = true
+                            try {
+                                resolver.openInputStream(existingLrcUriForQPlus!!)?.bufferedReader()?.use { reader ->
+                                    existingFileContent = reader.readText()
+                                }
+                                if (isContentConsideredValid(existingFileContent)) {
+                                    needsFetch = false
+                                    Log.d("Lyrics", "Found VALID existing LRC (Q+) for ${song.title}. Won't fetch from API.")
+                                } else {
+                                    Log.d("Lyrics_DEBUG", "Existing LRC (Q+) for $lrcFileName is empty or placeholder. Will fetch/overwrite.")
+                                }
+                            } catch (e: Exception) {
+                                Log.w("Lyrics", "Could not read content of existing LRC (Q+) for $lrcFileName.", e)
+                                // needsFetch remains true, proceed to fetch
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) { Log.w("Lyrics", "Error querying MediaStore (Q+) for $lrcFileName: ", e) }
+        } else { // Pre-API 29
+            val lrcFileInAppDir = File(appLyricsDirInDownloadsFile, lrcFileName)
+            if (lrcFileInAppDir.exists()) {
+                isUpdateOperation = true
+                existingLrcFileForReadPreQ = lrcFileInAppDir
+                try {
+                    existingFileContent = lrcFileInAppDir.readText()
+                    if (isContentConsideredValid(existingFileContent)) {
+                        needsFetch = false
+                        Log.d("Lyrics", "Found VALID existing LRC (pre-Q) for ${song.title}. Won't fetch from API.")
+                    } else {
+                        Log.d("Lyrics_DEBUG", "Existing LRC (pre-Q) for $lrcFileName is empty or placeholder. Will fetch/overwrite.")
+                    }
+                } catch (e: Exception) {
+                    Log.w("Lyrics", "Could not read content of existing LRC (pre-Q) for $lrcFileName.", e)
+                    // needsFetch remains true
+                }
+            }
+        }
+
+        // --- Fetch Lyrics ONLY IF NEEDED ---
+        if (needsFetch) {
+            Log.d("Lyrics", "Fetching lyrics from API for ${song.title} ($lrcFileName)")
+            // ... (API call logic as before to get response) ...
+            val artist = song.artistName?.joinToString(" ") ?: ""
+            val title = song.title
+            val request = Request.Builder().url(buildLyricsApiUrl(artist, title)).get().build()
+            var apiFetchedLyrics: String? = null
+            try {
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        val body = response.body?.string() ?: ""
+                        val json = JsonParser().parse(body).asJsonObject
+                        val syncedLyrics = json.get("syncedLyrics")?.asString
+                        val plainLyrics = json.get("plainLyrics")?.asString
+                        val rawApiLyrics = if (!syncedLyrics.isNullOrEmpty()) syncedLyrics else if (!plainLyrics.isNullOrEmpty()) plainLyrics else ""
+                        apiFetchedLyrics = removeHtmlTags(rawApiLyrics) // Cleaned API lyrics
+                    } else if (response.code == 404) {
+                        apiFetchedLyrics = LYRICS_NOT_FOUND_PLACEHOLDER // Use placeholder
+                    } else {
+                        Log.w("Lyrics_API", "API error ${response.code} for $lrcFileName")
+                        apiFetchedLyrics = "" // Empty on other errors
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("Lyrics_API", "API call failed for $lrcFileName", e)
+                apiFetchedLyrics = "" // Empty on exception
+            }
+
+            // Decide whether to use API lyrics or keep existing (if existing was just a placeholder)
+            if (isContentConsideredValid(apiFetchedLyrics)) {
+                // API provided good lyrics, so we'll use them.
+                lyricsContentToWrite = apiFetchedLyrics
+                Log.d("Lyrics", "API provided valid lyrics for $lrcFileName. Will write.")
+            } else if (!isContentConsideredValid(existingFileContent)) {
+                // API didn't provide good lyrics, AND local file was also not good (or missing).
+                // So, write the API's result (which might be "No Lyrics Found" or empty).
+                lyricsContentToWrite = apiFetchedLyrics // This could be LYRICS_NOT_FOUND_PLACEHOLDER or ""
+                Log.d("Lyrics", "API did not provide valid lyrics for $lrcFileName, and local file was also invalid/missing. Writing API result: '$lyricsContentToWrite'")
+            } else {
+                // API didn't provide good lyrics, BUT the existingFileContent was considered valid.
+                // In this scenario, we DO NOTHING to lyricsContentToWrite, preserving the existing valid file.
+                Log.d("Lyrics", "API did not provide valid lyrics for $lrcFileName, but local file is valid. PRESERVING LOCAL FILE.")
+                // lyricsContentToWrite remains null, so no write operation will occur later for this case.
+            }
+        } else if (isUpdateOperation && existingFileContent != null) { // Local file is valid, needsFetch is false. Just clean if necessary.
+            Log.d("Lyrics", "Local lyrics for $lrcFileName are valid. Checking if cleaning is needed.")
+            val cleanedExistingLyrics = removeHtmlTags(existingFileContent)
+            if (existingFileContent != cleanedExistingLyrics) {
+                lyricsContentToWrite = cleanedExistingLyrics
+                Log.d("Lyrics", "Cleaning existing valid lyrics for $lrcFileName.")
+            } else {
+                Log.d("Lyrics", "Existing valid lyrics for $lrcFileName are already clean. No changes.")
+                // lyricsContentToWrite remains null, or you could 'continue' if no other logic depends on it.
+            }
+        }
+
+
+        // --- Write Lyrics (if lyricsContentToWrite is not null) ---
+        if (lyricsContentToWrite != null) {
+            // ... (The entire Q+ and Pre-Q write logic as in the previous good version for overwriting)
+            // This part correctly handles overwriting `existingLrcUriForQPlus` or `targetLrcFile`
+            // if `lyricsContentToWrite` has something to be written.
+            // No change needed here from the version that fixed the "(1).lrc" duplication.
+
+            // Example (Q+ part, Pre-Q part is similar with FileOutputStream):
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                var lrcUriForWrite: Uri? = null
+                var outputStream: OutputStream? = null
+                try {
+                    if (existingLrcUriForQPlus != null) { // Exact match found, UPDATE
+                        lrcUriForWrite = existingLrcUriForQPlus
+                        Log.d("Lyrics_DEBUG", "OVERWRITING existing MediaStore URI (Q+): $lrcUriForWrite with new content for: $lrcFileName")
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            val pendingValues = ContentValues()
+                            pendingValues.put(MediaStore.MediaColumns.IS_PENDING, 1)
+                            resolver.update(lrcUriForWrite, pendingValues, null, null)
+                        }
+                        outputStream = resolver.openOutputStream(lrcUriForWrite, "wt") // "wt" for write/truncate
+                    } else { // No exact match found, INSERT new
+                        Log.d("Lyrics_DEBUG", "INSERTING new MediaStore entry (Q+) for: $lrcFileName")
+                        val contentValues = ContentValues().apply {
+                            put(MediaStore.MediaColumns.DISPLAY_NAME, lrcFileName)
+                            put(MediaStore.MediaColumns.MIME_TYPE, "application/lrc")
+                            put(MediaStore.MediaColumns.RELATIVE_PATH, mediaStoreRelativePathForQPlus)
+                            put(MediaStore.MediaColumns.IS_PENDING, 1)
+                        }
+                        lrcUriForWrite = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+                        if (lrcUriForWrite != null) {
+                            outputStream = resolver.openOutputStream(lrcUriForWrite)
+                        }
+                    }
+
+                    if (outputStream != null) {
+                        outputStream.use { it.write(lyricsContentToWrite!!.toByteArray(Charsets.UTF_8)) }
+                        Log.i("Lyrics", "Successfully wrote/updated LRC (Q+) for $lrcFileName to MediaStore: $lrcUriForWrite")
+                        val finalValues = ContentValues()
+                        finalValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
+                        if (lrcUriForWrite != null) {
+                            resolver.update(lrcUriForWrite, finalValues, null, null)
+                        }
+                    } else { Log.e("Lyrics", "Failed to get OutputStream (Q+) for: $lrcFileName. URI: $lrcUriForWrite") }
+                } catch (e: Exception) { /* ... error handling ... */ Log.e("Lyrics", "MediaStore (Q+) write/update failed for $lrcFileName: ", e) }
+            } else { // Pre-API 29
+                val targetLrcFile = File(appLyricsDirInDownloadsFile, lrcFileName)
+                Log.d("Lyrics_DEBUG", "Writing/Overwriting LRC (pre-Q): Target file: ${targetLrcFile.absolutePath}")
+                try {
+                    FileOutputStream(targetLrcFile).use { // This will create or overwrite
+                        it.write(lyricsContentToWrite!!.toByteArray(Charsets.UTF_8))
+                    }
+                    Log.i("Lyrics", "Successfully wrote/updated LRC (pre-Q) to: ${targetLrcFile.absolutePath}")
+                    MediaScannerConnection.scanFile(context, arrayOf(targetLrcFile.absolutePath), arrayOf("application/lrc")) { path, uri ->
+                        Log.d("Lyrics", "MediaScanner (pre-Q) finished for $path, URI: $uri")
+                    }
+                } catch (e: Exception) { Log.e("Lyrics", "File write/update (pre-Q) failed for $lrcFileName: ", e) }
+            }
+        } else {
+            Log.d("Lyrics_DEBUG", "lyricsContentToWrite is null for ${song.title} ($lrcFileName) after all checks. No write operation performed.")
+        }
+    }
+}
+
+/**
+ * Deletes all .lrc files in internal storage that are empty or contain only whitespace.
+ */
+fun deleteEmptyLrcFiles(context: Context) {
+    // Delete empty .lrc files in the same directory as each song
+    val songRepository = RealSongRepository(context)
+    val deviceSongs = songRepository.songs().map {
+        SongTMPContainer(
+            title = it.title,
+            artistName = it.artistName
+                .split(',', '/')
+                .map { name -> name.trim() }
+                .filter { name -> name.isNotEmpty() },
+            data = it.data,
+            year = it.year,
+            liked = false,
+            favorite = false,
+            rating = 0
+        )
+    }
+    for (song in deviceSongs) {
+        val lrcFileName = getLrcFileName(song)
+        val songFile = File(song.data)
+        val lrcFile = File(songFile.parentFile, lrcFileName)
+        if (lrcFile.exists() && lrcFile.readText().trim().isEmpty()) {
+            lrcFile.delete()
+        }
+    }
+}
+
+/**
+ * Removes HTML tags from a string.
+ */
+fun removeHtmlTags(input: String): String {
+    val pattern = Pattern.compile("<[^>]*>")
+    return pattern.matcher(input).replaceAll("")
+}
+
+/**
+ * Build the .lrc filename for a song.
+ * Uses the song's file name (without extension) + ".lrc".
+ */
+fun getLrcFileName(song: SongTMPContainer): String {
+    val fileName = File(song.data).nameWithoutExtension
+    return "$fileName.lrc"
+}
+
+/**
+ * Build the lyrics API URL for the song.
+ */
+fun buildLyricsApiUrl(artist: String, title: String): String {
+    val baseUrl = "https://lrclib.net/api/get" // Corrected base URL if this was a typo
+    val artistParam = URLEncoder.encode(artist, "UTF-8")
+    val titleParam = URLEncoder.encode(title, "UTF-8")
+    // Add other params like album and duration if your API supports them
+    return "$baseUrl?artist_name=$artistParam&track_name=$titleParam"
 }

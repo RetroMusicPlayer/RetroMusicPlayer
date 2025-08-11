@@ -1,17 +1,3 @@
-/*
- * Copyright (c) 2020 Hemanth Savarla.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- */
 package code.name.monkey.retromusic.helper
 
 import code.name.monkey.retromusic.model.SongMetaData
@@ -60,7 +46,6 @@ object ShuffleHelper {
      * Loads and caches metadata for songs by filename (case-insensitive, no extension).
      */
     private fun loadMetadataMap(): Map<String, SongMetaData> {
-        println("loadingmap-----------------------------")
         if (metadataMap != null) return metadataMap!!
 
         val defaultSongsJson = SongDataManager.defaultSongsJson
@@ -70,8 +55,6 @@ object ShuffleHelper {
         // ... inside loadMetadataMap
         val map = metadataList.filter { it.file.isNotBlank() }.associateBy { File(it.file).nameWithoutExtension.lowercase() }
         metadataMap = map
-        println("Map==============================================")
-        println(map)
         return map
     }
 

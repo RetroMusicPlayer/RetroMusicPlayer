@@ -5,6 +5,10 @@ buildscript {
     repositories {
         mavenCentral()
         google()
+        maven { // TarsosDSP repository
+            name = "TarsosDSP repository"
+            url = "https://mvn.0110.be/releases"
+        }
     }
     dependencies {
         classpath libs.gradle
@@ -19,4 +23,13 @@ plugins {
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
+}
+
+allprojects {
+    repositories {
+//        maven { // TarsosDSP repository
+//            name = "TarsosDSP repository"
+//            url = "https://mvn.0110.be/releases"
+//        }
+    }
 }
