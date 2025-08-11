@@ -566,7 +566,6 @@ fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContain
                 resolver.query(queryUri, projection, selection, selectionArgs, null)?.use { cursor ->
                     if (cursor.moveToFirst()) {
                         val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))
-                        // val size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))
                         val displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME))
 
                         if (displayName == lrcFileName) { // Exact match
@@ -670,11 +669,6 @@ fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContain
 
         // --- Write Lyrics (if lyricsContentToWrite is not null) ---
         if (lyricsContentToWrite != null) {
-            // ... (The entire Q+ and Pre-Q write logic as in the previous good version for overwriting)
-            // This part correctly handles overwriting `existingLrcUriForQPlus` or `targetLrcFile`
-            // if `lyricsContentToWrite` has something to be written.
-            // No change needed here from the version that fixed the "(1).lrc" duplication.
-
             // Example (Q+ part, Pre-Q part is similar with FileOutputStream):
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 var lrcUriForWrite: Uri? = null
@@ -704,7 +698,7 @@ fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContain
                     }
 
                     if (outputStream != null) {
-                        outputStream.use { it.write(lyricsContentToWrite!!.toByteArray(Charsets.UTF_8)) }
+                        outputStream.use { it.write(lyricsContentToWrite.toByteArray(Charsets.UTF_8)) }
                         Log.i("Lyrics", "Successfully wrote/updated LRC (Q+) for $lrcFileName to MediaStore: $lrcUriForWrite")
                         val finalValues = ContentValues()
                         finalValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
@@ -718,7 +712,7 @@ fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContain
                 Log.d("Lyrics_DEBUG", "Writing/Overwriting LRC (pre-Q): Target file: ${targetLrcFile.absolutePath}")
                 try {
                     FileOutputStream(targetLrcFile).use { // This will create or overwrite
-                        it.write(lyricsContentToWrite!!.toByteArray(Charsets.UTF_8))
+                        it.write(lyricsContentToWrite.toByteArray(Charsets.UTF_8))
                     }
                     Log.i("Lyrics", "Successfully wrote/updated LRC (pre-Q) to: ${targetLrcFile.absolutePath}")
                     MediaScannerConnection.scanFile(context, arrayOf(targetLrcFile.absolutePath), arrayOf("application/lrc")) { path, uri ->
@@ -730,6 +724,7 @@ fun ensureLyricsFilesForSongs(context: Context, deviceSongs: List<SongTMPContain
             Log.d("Lyrics_DEBUG", "lyricsContentToWrite is null for ${song.title} ($lrcFileName) after all checks. No write operation performed.")
         }
     }
+    deleteEmptyLrcFiles(context)
 }
 
 /**
