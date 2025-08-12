@@ -56,6 +56,9 @@ class MainActivity : AbsCastActivity() {
                 SongStatisticsManager.load(this@MainActivity)
                 initialiseMetaDataProcess(this@MainActivity)
             }
+            lifecycleScope.launch(IO) {
+                LyricsGetter.downloadLyrics(this@MainActivity)
+            }
         }
 
         setupNavigationController()
@@ -131,7 +134,7 @@ class MainActivity : AbsCastActivity() {
             fromNotification = true
             slidingPanel.bringToFront()
             expandPanel()
-            intent?.removeExtra(EXPAND_PANEL)
+            intent.removeExtra(EXPAND_PANEL)
         }
     }
 
