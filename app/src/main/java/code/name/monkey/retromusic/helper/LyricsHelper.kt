@@ -13,10 +13,9 @@ import okhttp3.OkHttpClient
 import androidx.documentfile.provider.DocumentFile
 import java.io.FileNotFoundException
 import androidx.core.net.toUri
+import code.name.monkey.retromusic.network.InternetConnection
 
 object LyricsGetter {
-    
-    // ------ Recycled functions
 
     fun writeLyricsToFile(
         file: File?,
@@ -119,10 +118,9 @@ object LyricsGetter {
         // Add other params like album and duration if your API supports them
         return "$baseUrl?artist_name=$artistParam&track_name=$titleParam"
     }
-    //----------- new functions
 
     fun downloadLyrics(context: Context) {
-        if(hasInternetConnection(context)) {
+        if(InternetConnection.hasInternetConnection(context)) {
             val songRepository = RealSongRepository(context)
             val deviceSongs = songRepository.songs().map {
                 SongTMPContainer(
@@ -148,8 +146,7 @@ object LyricsGetter {
             }
         }
     }
-}
-
-fun doesFileExist(file: File?): Boolean {
-    return file?.exists() == true && file.isFile == true
+    fun doesFileExist(file: File?): Boolean {
+        return file?.exists() == true && file.isFile == true
+    }
 }

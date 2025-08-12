@@ -1,35 +1,44 @@
 package code.name.monkey.retromusic.helper
 
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.InputType
 import android.widget.EditText
+import androidx.activity.result.launch
+import androidx.core.app.NotificationCompat
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import code.name.monkey.retromusic.R // Assuming you have a general notification icon
+import code.name.monkey.retromusic.model.SongMetaData
+import code.name.monkey.retromusic.model.SongTMPContainer
+import code.name.monkey.retromusic.network.InternetConnection
+import code.name.monkey.retromusic.repository.RealSongRepository
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import android.media.MediaScannerConnection
-import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import code.name.monkey.retromusic.repository.RealSongRepository
-import code.name.monkey.retromusic.model.SongMetaData
-import code.name.monkey.retromusic.model.SongTMPContainer
-import androidx.security.crypto.MasterKey
-import androidx.security.crypto.EncryptedSharedPreferences
-import okhttp3.OkHttpClient
+import kotlinx.coroutines.withContext // Add this import
+import kotlinx.coroutines.CoroutineScope // Will add this
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch // Will add this
+
 
 const val inputPath = "inputile.txt"
 const val outputPath = "outputile.txt"
-const val APP_LYRICS_SUBFOLDER_NAME = "RetroMusicPlayer" // Or whatever you choose
-const val LYRICS_NOT_FOUND_PLACEHOLDER = "No Lyrics Found"
+
+private const val ENHANCEMENT_CHANNEL_ID = "song_enhancement_channel"
+public const val ENHANCEMENT_NOTIFICATION_ID = 1001
 
 fun initialiseMetaDataProcess(context: Context) {
     val songRepository = RealSongRepository(context)
@@ -47,8 +56,9 @@ fun initialiseMetaDataProcess(context: Context) {
             rating = 0
         )
     }
-    LyricsGetter.downloadLyrics(context)
-    enhanceSongsData(inputPath, outputPath, deviceSongs, context)
+    CoroutineScope(Dispatchers.IO).launch {
+        enhanceSongsData(inputPath, outputPath, deviceSongs, context)
+    }
 }
 
 // Helper: build the song key (title + artists)
@@ -212,25 +222,7 @@ fun scanAndAddNewDeviceSongs(context: Context, songsDataPath: String, deviceSong
         val updatedSongs = existingSongs.toMutableList()
         newDeviceSongs.forEach { updatedSongs.add(gson.toJsonTree(it).asJsonObject) }
         val updatedSongsTxt = gson.toJson(updatedSongs)
-
         writeToInternalStorage(context, songsDataPath, updatedSongsTxt)
-    }
-}
-
-// Helper function to check for internet connection
-fun hasInternetConnection(context: Context): Boolean {
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val network = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-                capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-    } else {
-        @Suppress("DEPRECATION")
-        val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-        @Suppress("DEPRECATION")
-        return networkInfo.isConnected
     }
 }
 
@@ -298,23 +290,46 @@ fun addApiKey(context: Context): Boolean {
         .create()
 
     dialog.show()
-    // Note: This function returns before user input is complete due to dialog being asynchronous.
-    // For proper flow, use a callback or suspend function in production code.
     return result
 }
 
+private fun createNotificationChannel(context: Context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val name = "Song Enhancement Progress"
+        val descriptionText = "Shows the progress of song metadata enhancement"
+        val importance = NotificationManager.IMPORTANCE_LOW
+        val channel = NotificationChannel(ENHANCEMENT_CHANNEL_ID, name, importance).apply {
+            description = descriptionText
+        }
+        val notificationManager: NotificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+}
+
 // Main method to enhance songs via Gemini API
-fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<SongTMPContainer>, context: Context) {
+suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<SongTMPContainer>, context: Context) {
     val gson = Gson()
+    createNotificationChannel(context)
+    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val notificationBuilder = NotificationCompat.Builder(context, ENHANCEMENT_CHANNEL_ID)
+        .setSmallIcon(R.drawable.ic_notification) // Replace with your notification icon
+        .setContentTitle("Song Metadata Enhancement")
+        .setContentText("Starting enhancement process...")
+        .setPriority(NotificationCompat.PRIORITY_LOW)
+        .setOngoing(true)
+        .setProgress(0, 0, true) // Indeterminate progress initially
+
+    notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
+
     scanAndAddNewDeviceSongs(context, inputPath, deviceSongs)
     fixMissingSongMetaFields(context, outputPath)
-    // Check for internet connection before proceeding
-    if (!hasInternetConnection(context)) {
-        return
+
+    withContext(Dispatchers.IO) {
+        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager) // Assuming this is your blocking call
     }
 
     val songs = JsonParser().parse(readFileOrCreate(context, inputPath, "[]")).asJsonArray
-
     val enhancedSongs: MutableList<JsonObject> = try {
         val arr = JsonParser().parse(readFileOrCreate(context, outputPath, "[]")).asJsonArray
         arr.map { it.asJsonObject }.toMutableList()
@@ -322,37 +337,39 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
         mutableListOf()
     }
 
-    // Build a set of file paths already processed in the output file
     val processedPaths = enhancedSongs.mapNotNull { it.get("file")?.asString }.toSet()
-
-    // Only process songs whose file path is not present in the output file
     val newEntries = songs.map { it.asJsonObject }
         .filter { it.get("file")?.asString !in processedPaths }
 
     if (newEntries.isNotEmpty()) {
-        // Use secure API key retrieval
         val myApiKeys = getApiKeys(context)
         if (myApiKeys.isEmpty()) {
+            notificationBuilder
+                .setContentText("Enhancement stopped: No API keys found.")
+                .setProgress(0, 0, false)
+                .setOngoing(false)
+            notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
             return
         }
 
         val modelNames = mutableListOf(
-            "gemini-2.0-flash",
-            "gemini-2.0-flash-lite",
-            "gemini-2.5-flash",
-            "gemini-2.5-pro",
-            "gemini-2.5-flash-lite"
+            "gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.5-flash-lite"
         )
-
         var apiKeyIndex = 0
         var modelIndex = 0
+        var songsProcessedCount = 0
+        val totalSongsToProcess = newEntries.size
+
+        notificationBuilder
+            .setContentText("Processing $songsProcessedCount of $totalSongsToProcess songs.")
+            .setProgress(totalSongsToProcess, songsProcessedCount, false)
+        notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
 
         for (song in newEntries) {
-            var processed = false
-
-            while (apiKeyIndex < myApiKeys.size && !processed) {
+            var processedThisSong = false
+            while (apiKeyIndex < myApiKeys.size && !processedThisSong) {
                 val apiKey = myApiKeys[apiKeyIndex]
-                while (modelIndex < modelNames.size && !processed) {
+                while (modelIndex < modelNames.size && !processedThisSong) {
                     val modelName = modelNames[modelIndex]
                     val prompt = song.toString()
                     val result = generateTextWithGemini(prompt, apiKey, modelName)
@@ -368,63 +385,85 @@ fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<So
                         val enhancedSong = JsonParser().parse(result).asJsonObject
                         enhancedSongs.add(enhancedSong)
                         writeToInternalStorage(context, outputPath, gson.toJson(enhancedSongs))
-                        SongDataManager.loadDefaultSongsJson(context)
-                        processed = true
-                        Thread.sleep(3000)
+                        SongDataManager.loadDefaultSongsJson(context) // Assuming this exists and is relevant
+                        processedThisSong = true
+                        songsProcessedCount++
+                        notificationBuilder
+                            .setContentText("Processing $songsProcessedCount of $totalSongsToProcess songs.")
+                            .setProgress(totalSongsToProcess, songsProcessedCount, false)
+                        notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
+                        Thread.sleep(3000) // Consider if this sleep is essential or can be handled differently
                     } catch (e: Exception) {
-                        // If parsing fails, try next model
-                        modelIndex++
+                        if (!InternetConnection.hasInternetConnection(context)){
+                            processedThisSong == true
+                        }else{
+                            modelIndex++
+                        }
                     }
                 }
-                if (!processed) {
-                    // Current API key is exhausted, move to next API key and reset model index
-                    apiKeyIndex++
-                    modelIndex = 0
+                if (!processedThisSong) {
+                    if (!InternetConnection.hasInternetConnection(context)){
+                        processedThisSong == true
+                    }else{
+                        apiKeyIndex++
+                        modelIndex = 0
+                    }
                 }
             }
-
-            if (!processed) {
-                // All API keys and models are exhausted, stop processing further songs
-                break
+            if (!processedThisSong) {
+                if (!InternetConnection.hasInternetConnection(context)) {
+                    withContext(Dispatchers.IO) {
+        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager) // Assuming this is your blocking call
+    }
+                }else{
+                    notificationBuilder
+                        .setContentText("Enhancement partially complete. API/Model issues after $songsProcessedCount songs.")
+                        .setProgress(totalSongsToProcess, songsProcessedCount, false)
+                        .setOngoing(false)
+                    notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
+                    return // Stop processing if a song cannot be processed with any key/model
+                }
             }
         }
+        notificationBuilder
+            .setContentText("Enhancement complete. $songsProcessedCount songs processed.")
+            .setProgress(totalSongsToProcess, songsProcessedCount, false)
+            .setOngoing(false)
+        notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
+    } else {
+        notificationBuilder
+            .setContentText("No new songs to enhance.")
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
     }
 }
 
 fun writeToInternalStorage(context: Context, filename: String, content: String) {
     try {
-        val file = File(context.filesDir, filename) // Get app's internal files directory
+        val file = File(context.filesDir, filename)
         FileOutputStream(file).use {
             it.write(content.toByteArray())
         }
     } catch (e: Exception) {
-        e.printStackTrace() // Log the full error
+        e.printStackTrace()
     }
 }
 
 fun readFileOrCreate(context: Context, filename: String, defaultContent: String = ""): String? {
-    val file = File(context.filesDir, filename) // Creates a File object in the app's internal files directory
+    val file = File(context.filesDir, filename)
     return try {
         if (file.exists()) {
-            // File exists, read its content
             file.readText()
         } else {
-            // File does not exist, create it with default content
             file.writeText(defaultContent)
-            defaultContent // Return the default content that was just written
+            defaultContent
         }
     } catch (e: IOException) {
-        // Handle potential I/O errors (e.g., permission issues though unlikely for internal storage, disk full)
-        e.printStackTrace() // Log the error for debugging
+        e.printStackTrace()
         "[]"
     }
 }
-
-/**
- * Removes entries from outputile.txt that are missing any required keys.
- * Required keys: mood, market, danceability, tempo, energy, valence.
- * This causes those songs to be reprocessed as new by the AI.
- */
 
 fun fixMissingSongMetaFields(context: Context, outputPath: String) {
     val gson = Gson()
@@ -435,54 +474,38 @@ fun fixMissingSongMetaFields(context: Context, outputPath: String) {
     val arr = try {
         JsonParser().parse(fileContent).asJsonArray
     } catch (e: Exception) {
-        // Consider writing back an empty array or handling corrupted file
         writeToInternalStorage(context, outputPath, "[]")
         return
     }
 
     val filteredArr = arr.filter { element ->
-        if (!element.isJsonObject) return@filter false // Element must be an object
+        if (!element.isJsonObject) return@filter false
         val obj = element.asJsonObject
 
-        // Helper to check if a field is present, a JsonPrimitive, and not JsonNull
         fun isPresentAndNotNullPrimitive(fieldName: String): Boolean {
             return obj.has(fieldName) && obj.get(fieldName).isJsonPrimitive && !obj.get(fieldName).isJsonNull
         }
 
-        // Helper to check if a field is present, a JsonArray, and not JsonNull
-        // For "required for AI" fields that are lists, they must be present and be actual arrays.
         fun isPresentAndNotNullArray(fieldName: String): Boolean {
-            return obj.has(fieldName) && obj.get(fieldName).isJsonArray // .isJsonArray implies not null and is an array
+            return obj.has(fieldName) && obj.get(fieldName).isJsonArray
         }
 
-        // Helper to check if a field is present, a non-empty string
         fun isPresentAndNonEmptyString(fieldName: String): Boolean {
             if (!obj.has(fieldName)) return false
             val jsonElement = obj.get(fieldName)
             return jsonElement.isJsonPrimitive && jsonElement.asJsonPrimitive.isString && jsonElement.asString.isNotEmpty()
         }
 
-        // --- Start validation ---
-
-        // 1. Critical non-nullable fields for type safety and basic data presence
         if (!isPresentAndNonEmptyString("file")) return@filter false
-        if (!isPresentAndNonEmptyString("title")) return@filter false // title is non-nullable String
-        if (!isPresentAndNotNullArray("artists")) return@filter false // artists is non-nullable List
-        if (!isPresentAndNotNullArray("genre")) return@filter false   // genre is non-nullable List
-
-        // mood is non-nullable List AND an original "required for AI" field
+        if (!isPresentAndNonEmptyString("title")) return@filter false
+        if (!isPresentAndNotNullArray("artists")) return@filter false
+        if (!isPresentAndNotNullArray("genre")) return@filter false
         if (!isPresentAndNotNullArray("mood")) return@filter false
-
-        // 2. Other original "required for AI" fields
-        // market is List<String>? but if "required for AI", implies non-null and containing data for AI
         if (!isPresentAndNotNullArray("market")) return@filter false
-
         if (!isPresentAndNotNullPrimitive("danceability")) return@filter false
         if (!isPresentAndNotNullPrimitive("tempo")) return@filter false
         if (!isPresentAndNotNullPrimitive("energy")) return@filter false
         if (!isPresentAndNotNullPrimitive("valence")) return@filter false
-
-        // If all checks pass, keep the element
         true
     }
 

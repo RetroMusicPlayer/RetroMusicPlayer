@@ -25,9 +25,10 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import code.name.monkey.retromusic.helper.SongDataManager
 import code.name.monkey.retromusic.helper.SongStatisticsManager
-import code.name.monkey.retromusic.helper.*
+import code.name.monkey.retromusic.helper.LyricsGetter
 import code.name.monkey.retromusic.helper.getApiKeys
 import code.name.monkey.retromusic.helper.addApiKey
+import code.name.monkey.retromusic.helper.initialiseMetaDataProcess
 
 class MainActivity : AbsCastActivity() {
     companion object {
