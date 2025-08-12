@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
 import com.google.gson.Gson
+import java.io.File // Added import
 
 /**
  * Created by hemanths on 10/08/17.
@@ -96,9 +97,75 @@ class RealSongRepository(private val context: Context) : SongRepository {
         cursor?.close()
         return song
     }
-
+    // Extension function to get the corresponding .lrc file for a song data path
+    fun String.toLrcFile(): File? {
+        return if (this.isNotEmpty()) {
+            File(this.substringBeforeLast('.') + ".lrc")
+        } else {
+            null
+        }
+    }
     override fun songs(query: String): List<Song> {
-        return songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
+        val songsFromTitleQuery: List<Song> = songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
+        val songsFromArtistQuery: List<Song> = songs(makeSongCursor(AudioColumns.ARTIST + " LIKE ?", arrayOf("%$query%")))
+
+        var songsFromCombinedTitleArtistQuery: List<Song> = emptyList()
+        val queryWords = query.trim().split(" ").filter { it.isNotEmpty() }
+
+        if (queryWords.isNotEmpty()) {
+            val selectionClauses = mutableListOf<String>()
+            val selectionArgsList = mutableListOf<String>()
+
+            queryWords.forEach { word ->
+                selectionClauses.add("(${AudioColumns.TITLE} LIKE ? OR ${AudioColumns.ARTIST} LIKE ?)")
+                selectionArgsList.add("%$word%")
+                selectionArgsList.add("%$word%")
+            }
+
+            val combinedSelection = selectionClauses.joinToString(separator = " AND ")
+            val combinedSelectionArgs = selectionArgsList.toTypedArray()
+            songsFromCombinedTitleArtistQuery = songs(makeSongCursor(combinedSelection, combinedSelectionArgs))
+        }
+        var songsFromLyricsQuery: List<Song> = emptyList()
+
+//======================================================================================================================//
+//                                                                                                                      //
+//                                                                                                                      //
+//        ======================================================================================================        //
+//        ||                                                                                                  ||        //
+//        ||         Code to search file by lyrics, the code is commented due to too much processing          ||        //
+//        ||                                                                                                  ||        //
+//        ======================================================================================================        //
+//                                                                                                                      //
+//                                                                                                                      //
+//        if (query.length >= 4) {                                                                                      //
+//            val sanitizedQueryForLyrics = query.replace(Regex("[^a-zA-Z0-9\\s]"), "")
+//
+//            if (sanitizedQueryForLyrics.isNotBlank()) {
+//                val allSongsForLyricsCheck: List<Song> = songs(makeSongCursor(null, null))
+//                songsFromLyricsQuery = allSongsForLyricsCheck.filter { song ->
+//                    try {
+//                        val lyricsFile = song.data.toLrcFile()
+//                        if (lyricsFile != null && lyricsFile.exists() && lyricsFile.isFile) {
+//                            try {
+//                                val lyricsText = lyricsFile.readText()
+//                                lyricsText.contains(sanitizedQueryForLyrics, ignoreCase = true)
+//                            } catch (e: Exception) {
+//                                false
+//                            }
+//                        } else {
+//                            false
+//                        }
+//                    } catch (e: Exception) {
+//                        false
+//                    }
+//                }
+//            }
+//        }
+
+        val combinedSongs = songsFromTitleQuery + songsFromArtistQuery + songsFromLyricsQuery + songsFromCombinedTitleArtistQuery
+        val uniqueSongs = combinedSongs.distinctBy { it.id }
+        return uniqueSongs
     }
 
     override fun song(songId: Long): Song {
@@ -178,23 +245,24 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 IS_MUSIC
             }
 
+            // Whitelist/Blacklist logic
             if (PreferenceUtil.isWhiteList) {
-                selectionFinal = selectionFinal + " AND " + Constants.DATA + " LIKE ?"
-                selectionValuesFinal = addSelectionValues(
-                    selectionValuesFinal, arrayListOf(
-                        getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).canonicalPath
-                    )
-                )
+                val musicDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)?.canonicalPath
+                if (musicDir != null) {
+                    selectionFinal = "$selectionFinal AND ${Constants.DATA} LIKE ?"
+                    selectionValuesFinal = addSelectionValues(selectionValuesFinal, arrayListOf("$musicDir%"))
+                }
             } else {
                 val paths = BlacklistStore.getInstance(context).paths
                 if (paths.isNotEmpty()) {
                     selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
-                    selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths)
+                    selectionValuesFinal = addSelectionValues(selectionValuesFinal, paths.map { "$it%" } as ArrayList<String>)
                 }
             }
-
-            selectionFinal = selectionFinal + " AND " + Media.DURATION + ">= " + (PreferenceUtil.filterLength * 1000)
+            // Filter by minimum song length
+            selectionFinal = "$selectionFinal AND ${Media.DURATION} >= ${PreferenceUtil.filterLength * 1000}"
         }
+
         val uri = if (VersionUtils.hasQ()) {
             Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
         } else {
@@ -206,7 +274,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 baseProjection,
                 selectionFinal,
                 selectionValuesFinal,
-                sortOrder
+                sortOrder // Note: for lyrics search, we get all songs, so sortOrder is less critical here
             )
         } catch (ex: SecurityException) {
             return null
@@ -235,11 +303,12 @@ class RealSongRepository(private val context: Context) : SongRepository {
             selectionValuesFinal = emptyArray()
         }
         val newSelectionValues = Array(selectionValuesFinal.size + paths.size) {
-            "n = $it"
+            "n = $it" // Placeholder, will be overwritten
         }
         System.arraycopy(selectionValuesFinal, 0, newSelectionValues, 0, selectionValuesFinal.size)
         for (i in selectionValuesFinal.size until newSelectionValues.size) {
-            newSelectionValues[i] = paths[i - selectionValuesFinal.size] + "%"
+            // Paths for blacklist/whitelist should already include '%' if needed by LIKE
+            newSelectionValues[i] = paths[i - selectionValuesFinal.size]
         }
         return newSelectionValues
     }

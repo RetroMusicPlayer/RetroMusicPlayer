@@ -8,15 +8,8 @@ import com.google.gson.reflect.TypeToken
 import android.content.Context
 import code.name.monkey.retromusic.model.FlowType
 
-/**
- * Manages loading and caching of song data.
- */
 object SongDataManager {
     var defaultSongsJson = "[]"
-
-    /**
-     * Loads the default songs JSON from file or uses initial data if file is missing/empty.
-     */
     fun loadDefaultSongsJson(context: Context) {
         val file = File(context.filesDir, "outputile.txt")
         defaultSongsJson = if (!file.exists() || file.readText().isBlank()) {
@@ -25,26 +18,12 @@ object SongDataManager {
             file.readText()
         }
     }
-
     var songs: MutableList<SongMetaData> = mutableListOf()
-
-    /**
-     * Finds a song by title.
-     */
     fun getSongByTitle(title: String): SongMetaData? = songs.find { it.title == title }
 }
 
-/**
- * Helper object for advanced shuffle logic based on song metadata.
- */
 object ShuffleHelper {
-
-    // Caches metadata for performance.
     private var metadataMap: Map<String, SongMetaData>? = null
-
-    /**
-     * Loads and caches metadata for songs by filename (case-insensitive, no extension).
-     */
     private fun loadMetadataMap(): Map<String, SongMetaData> {
         if (metadataMap != null) return metadataMap!!
 
@@ -52,38 +31,25 @@ object ShuffleHelper {
         val listType = object : TypeToken<List<SongMetaData>>() {}.type
         val metadataList: List<SongMetaData> = Gson().fromJson(defaultSongsJson, listType)
 
-        // ... inside loadMetadataMap
         val map = metadataList.filter { it.file.isNotBlank() }.associateBy { File(it.file).nameWithoutExtension.lowercase() }
         metadataMap = map
         return map
     }
 
-    /**
-     * Reorders the list to prioritize songs similar to the current one,
-     * based on genre, mood, and artist similarity.
-     *
-     * @param listToShuffle The queue of songs to shuffle.
-     * @param current The index of the current song.
-     */
     fun makeShuffleList(listToShuffle: MutableList<Song>, current: Int) {
         if (listToShuffle.isEmpty() || current !in listToShuffle.indices) return
 
         val metadata = loadMetadataMap()
         val currentSong = listToShuffle.removeAt(current)
         val currentMeta = metadata[getSongKey(currentSong)]
-
-        // If no metadata for any song, fallback to normal shuffle
         val hasAnyMetadata = listToShuffle.any { metadata[getSongKey(it)] != null }
         if (currentMeta == null || !hasAnyMetadata) {
             listToShuffle.shuffle()
             listToShuffle.add(0, currentSong)
             return
         }
-
         val scoredSongs = scoreSongs(listToShuffle, metadata, currentMeta)
         val originalScored = scoredSongs.toMutableList()
-
-        // Select a flow based on current song's metadata
         val selectedFlow = selectFlowType(currentMeta)
         val reordered: List<Pair<Song, Int>> = reorderByFlow(selectedFlow, originalScored, metadata)
         val finalOrdered = enforceMaxMovement(reordered, originalScored, maxMovement = 5)
@@ -91,8 +57,6 @@ object ShuffleHelper {
             .groupBy { it.second }
             .toSortedMap(compareByDescending { it })
             .flatMap { (_, group) -> group.shuffled().map { it.first } }
-
-        // Add extra randomness: randomly swap a few pairs in the final list
         val extraRandomized = smartShuffled.toMutableList()
         val swapRange = 4
         val swaps = (extraRandomized.size / 7).coerceAtLeast(1)
@@ -108,16 +72,11 @@ object ShuffleHelper {
                 extraRandomized[j] = tmp
             }
         }
-
-        // Rebuild queue: current song first
         listToShuffle.clear()
         listToShuffle.add(currentSong)
         listToShuffle.addAll(extraRandomized)
     }
 
-    /**
-     * Scores all songs in the list against the current song's metadata.
-     */
     private fun scoreSongs(
         songs: List<Song>,
         metadata: Map<String, SongMetaData>,
@@ -126,7 +85,6 @@ object ShuffleHelper {
         return songs.mapNotNull { song ->
             val meta = metadata[getSongKey(song)]
             if (meta == null || isCorrupted(meta)) {
-                // Log corrupted metadata for debugging
                 null
             } else {
                 val score = calculateSimilarity(currentMeta, meta)
@@ -149,9 +107,6 @@ object ShuffleHelper {
         }
     }
 
-    /**
-     * Reorders the scored list according to the selected flow type.
-     */
     private fun reorderByFlow(
         flow: FlowType,
         scored: List<Pair<Song, Int>>,
@@ -160,35 +115,30 @@ object ShuffleHelper {
         fun Song.getMeta(): SongMetaData? = metadata[getSongKey(this)]
         return when (flow) {
             FlowType.RollerCoaster -> {
-                // Alternate high/low energy, then valence
                 val sorted = scored.sortedByDescending { it.first.getMeta()?.energy ?: 0.0 }
                 val high = sorted.filterIndexed { i, _ -> i % 2 == 0 }
                 val low = sorted.filterIndexed { i, _ -> i % 2 != 0 }.reversed()
                 (high + low).take(scored.size)
             }
             FlowType.WindDown -> {
-                // Descending energy, then valence
                 scored.sortedWith(
                     compareByDescending<Pair<Song, Int>> { it.first.getMeta()?.energy ?: 0.0 }
                         .thenByDescending { it.first.getMeta()?.valence ?: 0.0 }
                 )
             }
             FlowType.MoodLift -> {
-                // Ascending valence, then energy
                 scored.sortedWith(
                     compareBy<Pair<Song, Int>> { it.first.getMeta()?.valence ?: 0.0 }
                         .thenBy { it.first.getMeta()?.energy ?: 0.0 }
                 )
             }
             FlowType.Pulse -> {
-                // Alternate high/low danceability
                 val sorted = scored.sortedByDescending { it.first.getMeta()?.danceability ?: 0.0 }
                 val high = sorted.filterIndexed { i, _ -> i % 2 == 0 }
                 val low = sorted.filterIndexed { i, _ -> i % 2 != 0 }.reversed()
                 (high + low).take(scored.size)
             }
             FlowType.Wave -> {
-                // Up and down: sort by energy, then reverse every 5 songs
                 val sorted = scored.sortedByDescending { it.first.getMeta()?.energy ?: 0.0 }
                 val chunked = sorted.chunked(5).flatMapIndexed { idx, chunk ->
                     if (idx % 2 == 0) chunk else chunk.reversed()
@@ -198,9 +148,6 @@ object ShuffleHelper {
         }
     }
 
-    /**
-     * Enforces a maximum movement constraint for each song to preserve some original order.
-     */
     private fun enforceMaxMovement(
         reordered: List<Pair<Song, Int>>,
         originalScored: List<Pair<Song, Int>>,
@@ -218,18 +165,10 @@ object ShuffleHelper {
         return finalOrdered
     }
 
-    /**
-     * Extracts the lowercase filename (without extension) for metadata matching.
-     */
     private fun getSongKey(song: Song): String {
         return File(song.data).nameWithoutExtension.lowercase()
     }
 
-    /**
-     * Calculates a similarity score between two songs.
-     * Artist match: 10 pts each, Genre match: 9 pts each, Mood match: 8 pts each,
-     * danceability: up to 5 pts (closer = higher), Market: 2 pts each, Year: up to 5 pts, Energy/Valence/Tempo: up to 5 pts each.
-     */
     private fun calculateSimilarity(
         a: SongMetaData,
         b: SongMetaData,
@@ -312,16 +251,12 @@ object ShuffleHelper {
             modernBonus
     }
 
-    /**
-     * Checks if the metadata is corrupted (basic check: file, artists, danceability).
-     */
     private fun isCorrupted(meta: SongMetaData): Boolean {
         return meta.file.isBlank()
             || meta.artists.isEmpty()
             || meta.danceability?.isNaN() == true
     }
 
-    // List of similar artist groups for genre-based similarity scoring.
     private val similarArtistGroups = listOf(
         listOf("Drake", "Lil Wayne", "Future", "Kanye West", "21 Savage", "Travis Scott", "Young Thug", "Gunna", "DaBaby", "Pop Smoke", "ASAP Rocky", "Meek Mill", "Lil Baby", "Lil Durk", "Tyga","2 Chains"),
         listOf("Kendrick Lamar", "J. Cole", "Big Sean", "Joey BadaSS", "Logic", "Mac Miller", "Wale", "Denzel Curry", "NF", "Cordae", "Mick Jenkins", "IDK", "Isaiah Rashad", "Russ", "Bas"),
@@ -349,20 +284,15 @@ object ShuffleHelper {
         listOf("Lucky Dube", "Johnny Clegg", "Miriam Makeba", "Yvonne Chaka Chaka", "Brenda Fassie", "Busi Mhlongo", "Soweto Gospel Choir", "Thandiswa Mazwai", "Simphiwe Dana", "Oliver Mtukudzi", "Ringo Madlingozi", "Caiphus Semenya", "Letta Mbulu", "Judith Sephuma", "Sipho Hotstix Mabuse")
     )
 
-    /**
-     * Returns a similarity score if both songs share artists from the same group.
-     */
     private fun getGenreBasedArtistSimilarity(a: SongMetaData, b: SongMetaData): Int {
         for (group in similarArtistGroups) {
             val groupSet = group.toSet()
             val aMatch = a.artists.any { it in groupSet }
             val bMatch = b.artists.any { it in groupSet }
             if (aMatch && bMatch) {
-                return 20 // Adjust this score based on importance
+                return 20
             }
         }
         return 0
     }
-
-    // TODO: Profile performance, add unit/integration tests, modularize further as needed.
 }

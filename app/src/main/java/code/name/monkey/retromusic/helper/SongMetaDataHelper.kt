@@ -7,7 +7,6 @@ import android.content.Context
 import android.os.Build
 import android.text.InputType
 import android.widget.EditText
-import androidx.activity.result.launch
 import androidx.core.app.NotificationCompat
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -258,11 +257,6 @@ fun getApiKeys(context: Context): List<String> {
     return keys.split(",").map { it.trim() }.filter { it.isNotEmpty() }
 }
 
-/**
- * Prompts the user for Google API keys (comma-separated), saves them securely,
- * verifies if at least one key is stored, and returns true if successful.
- * This function must be called from the UI thread.
- */
 fun addApiKey(context: Context): Boolean {
     var result = false
     val editText = EditText(context)
@@ -307,18 +301,17 @@ private fun createNotificationChannel(context: Context) {
     }
 }
 
-// Main method to enhance songs via Gemini API
 suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs: List<SongTMPContainer>, context: Context) {
     val gson = Gson()
     createNotificationChannel(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val notificationBuilder = NotificationCompat.Builder(context, ENHANCEMENT_CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_notification) // Replace with your notification icon
+        .setSmallIcon(R.drawable.ic_notification)
         .setContentTitle("Song Metadata Enhancement")
         .setContentText("Starting enhancement process...")
         .setPriority(NotificationCompat.PRIORITY_LOW)
         .setOngoing(true)
-        .setProgress(0, 0, true) // Indeterminate progress initially
+        .setProgress(0, 0, true)
 
     notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
 
@@ -326,7 +319,7 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
     fixMissingSongMetaFields(context, outputPath)
 
     withContext(Dispatchers.IO) {
-        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager) // Assuming this is your blocking call
+        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager)
     }
 
     val songs = JsonParser().parse(readFileOrCreate(context, inputPath, "[]")).asJsonArray
@@ -385,14 +378,14 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
                         val enhancedSong = JsonParser().parse(result).asJsonObject
                         enhancedSongs.add(enhancedSong)
                         writeToInternalStorage(context, outputPath, gson.toJson(enhancedSongs))
-                        SongDataManager.loadDefaultSongsJson(context) // Assuming this exists and is relevant
+                        SongDataManager.loadDefaultSongsJson(context)
                         processedThisSong = true
                         songsProcessedCount++
                         notificationBuilder
                             .setContentText("Processing $songsProcessedCount of $totalSongsToProcess songs.")
                             .setProgress(totalSongsToProcess, songsProcessedCount, false)
                         notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
-                        Thread.sleep(3000) // Consider if this sleep is essential or can be handled differently
+                        Thread.sleep(3000)
                     } catch (e: Exception) {
                         if (!InternetConnection.hasInternetConnection(context)){
                             processedThisSong == true
@@ -413,7 +406,7 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
             if (!processedThisSong) {
                 if (!InternetConnection.hasInternetConnection(context)) {
                     withContext(Dispatchers.IO) {
-        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager) // Assuming this is your blocking call
+        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager)
     }
                 }else{
                     notificationBuilder
@@ -421,7 +414,7 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
                         .setProgress(totalSongsToProcess, songsProcessedCount, false)
                         .setOngoing(false)
                     notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
-                    return // Stop processing if a song cannot be processed with any key/model
+                    return
                 }
             }
         }

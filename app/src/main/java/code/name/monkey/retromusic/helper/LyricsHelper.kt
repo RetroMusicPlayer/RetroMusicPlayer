@@ -1,7 +1,11 @@
 package code.name.monkey.retromusic.helper
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.core.app.NotificationCompat
+import code.name.monkey.retromusic.R // Assuming you have a R.drawable.ic_notification or similar
 import com.google.gson.JsonParser
 import okhttp3.*
 import java.io.File
@@ -16,6 +20,23 @@ import androidx.core.net.toUri
 import code.name.monkey.retromusic.network.InternetConnection
 
 object LyricsGetter {
+
+    private const val LYRICS_CHANNEL_ID = "lyrics_channel"
+    private const val LYRICS_NOTIFICATION_ID = 2 // Different from metadata helper
+
+    private fun createLyricsNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Lyrics Downloader"
+            val descriptionText = "Notifications for lyrics download status"
+            val importance = NotificationManager.IMPORTANCE_LOW
+            val channel = NotificationChannel(LYRICS_CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
 
     fun writeLyricsToFile(
         file: File?,
@@ -64,7 +85,7 @@ object LyricsGetter {
                 outputStream?.close()
             }
         } else {
-            println("Unable to handle FileNotFoundException")
+            println("Unable to handle FileNotFoundException for: ${file?.absolutePath}")
         }
     }
 
@@ -79,9 +100,9 @@ object LyricsGetter {
     fun fetchLyricsForSong(song: SongTMPContainer): String? {
         val client = OkHttpClient.Builder()
             .callTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS) // Also good to set read timeout
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
-        var lyricsContentToWrite = "" // Default to null (meaning no content or error)
+        var lyricsContentToWrite = ""
         val artist = song.artistName?.joinToString(" ") ?: ""
         val title = song.title
         val request = Request.Builder().url(buildLyricsApiUrl(artist, title)).get().build()
@@ -89,20 +110,24 @@ object LyricsGetter {
             client.newCall(request).execute().use { response ->
                 if (response.isSuccessful) {
                     val body = response.body.string()
-                    val json = JsonParser().parse(body).asJsonObject // Use try-catch for parsing
+                    if (body.isNullOrBlank()) return ""
+                    val json = JsonParser().parse(body).asJsonObject
                     val syncedLyrics = if (json.has("syncedLyrics") && !json.get("syncedLyrics").isJsonNull) json.get("syncedLyrics").asString else null
                     val plainLyrics = if (json.has("plainLyrics") && !json.get("plainLyrics").isJsonNull) json.get("plainLyrics").asString else null
                     val rawApiLyrics = syncedLyrics ?: plainLyrics ?: ""
                     lyricsContentToWrite = removeHtmlTags(rawApiLyrics)
-                    if (lyricsContentToWrite.isBlank() && (syncedLyrics != null || plainLyrics != null)) {
-                        return "" // Or specific placeholder
+                    if (lyricsContentToWrite.isBlank() && (!syncedLyrics.isNullOrBlank() || !plainLyrics.isNullOrBlank())) {
+                        return ""
                     }
                 } else if (response.code == 404) {
-                    return "No Lyrics Found" // Or LYRICS_NOT_FOUND_PLACEHOLDER if you want to distinguish
+                    return "No Lyrics Found"
+                } else {
+                    return ""
                 }
             }
         } catch (e: Exception) {
-            return "" // Write empty on exception
+            println("Error fetching lyrics for ${song.title}: ${e.message}")
+            return ""
         }
         return lyricsContentToWrite
     }
@@ -112,41 +137,130 @@ object LyricsGetter {
     }
 
     fun buildLyricsApiUrl(artist: String, title: String): String {
-        val baseUrl = "https://lrclib.net/api/get" // Corrected base URL if this was a typo
+        val baseUrl = "https://lrclib.net/api/get"
         val artistParam = URLEncoder.encode(artist, "UTF-8")
         val titleParam = URLEncoder.encode(title, "UTF-8")
-        // Add other params like album and duration if your API supports them
         return "$baseUrl?artist_name=$artistParam&track_name=$titleParam"
     }
 
     fun downloadLyrics(context: Context) {
-        if(InternetConnection.hasInternetConnection(context)) {
-            val songRepository = RealSongRepository(context)
-            val deviceSongs = songRepository.songs().map {
-                SongTMPContainer(
-                    title = it.title,
-                    artistName = it.artistName
-                        .split(',', '/')
-                        .map { name -> name.trim() }
-                        .filter { name -> name.isNotEmpty() },
-                    data = it.data,
-                    year = it.year,
-                    liked = false,
-                    favorite = false,
-                    rating = 0
-                )
+        createLyricsNotificationChannel(context)
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationBuilder = NotificationCompat.Builder(context, LYRICS_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle("Lyrics Download")
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setOngoing(true)
+
+        notificationBuilder.setContentText("Preparing to download lyrics...")
+            .setProgress(0, 0, true)
+        notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+
+        var totalWaitTimeMillis = 0L
+        val initialSleepTimeMillis = 2 * 60 * 1000L // 2 minutes
+        val thirtyMinThresholdSleepTimeMillis = 11000L * 60L * 15L // 165 minutes
+        val oneHourThresholdSleepTimeMillis = 20 * 60 * 1000L     // 20 minutes
+        val thirtyMinutesMillis = 30 * 60 * 1000L
+        val oneHourMillis = 60 * 60 * 1000L
+        var sleepDurationForThisIterationMillis: Long
+
+        while (!InternetConnection.hasInternetConnection(context)) {
+            if (totalWaitTimeMillis >= oneHourMillis) {
+                sleepDurationForThisIterationMillis = oneHourThresholdSleepTimeMillis
+            } else if (totalWaitTimeMillis >= thirtyMinutesMillis) {
+                sleepDurationForThisIterationMillis = thirtyMinThresholdSleepTimeMillis
+            } else {
+                sleepDurationForThisIterationMillis = initialSleepTimeMillis
             }
-            for (song in deviceSongs){
-                val file = song.data.toLrcFile()
-                if (doesFileExist(file)){
-                    continue
-                }
-                val lyrics = fetchLyricsForSong(song) ?: ""
-                writeLyricsToFile(file, lyrics, context, song, null)
+
+            val nextCheckInMinutes = sleepDurationForThisIterationMillis / (60 * 1000)
+            val totalWaitTimeSoFarMinutes = totalWaitTimeMillis / (60 * 1000)
+            val waitMsg = if (totalWaitTimeMillis == 0L) {
+                "Waiting for internet. Retrying in $nextCheckInMinutes min."
+            } else {
+                "Still no internet. Retrying in $nextCheckInMinutes min. Total wait: $totalWaitTimeSoFarMinutes min."
             }
+            notificationBuilder
+                .setContentText(waitMsg)
+                .setProgress(0, 0, true)
+            notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+
+            try {
+                Thread.sleep(sleepDurationForThisIterationMillis)
+            } catch (e: InterruptedException) {
+                Thread.currentThread().interrupt()
+                notificationBuilder
+                    .setContentText("Lyrics download interrupted while waiting for internet.")
+                    .setProgress(0, 0, false)
+                    .setOngoing(false)
+                notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+                return
+            }
+            totalWaitTimeMillis += sleepDurationForThisIterationMillis
         }
+
+        notificationBuilder.setContentText("Starting lyrics download...")
+            .setProgress(0,0,true) // Reset to indeterminate before song processing
+        notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+
+        val songRepository = RealSongRepository(context)
+        val deviceSongs = songRepository.songs().map {
+            SongTMPContainer(
+                title = it.title,
+                artistName = it.artistName
+                    .split(',', '/')
+                    .map { name -> name.trim() }
+                    .filter { name -> name.isNotEmpty() },
+                data = it.data,
+                year = it.year,
+                liked = false,
+                favorite = false,
+                rating = 0
+            )
+        }
+
+        if (deviceSongs.isEmpty()) {
+            notificationBuilder
+                .setContentText("No songs found on device to download lyrics for.")
+                .setProgress(0, 0, false)
+                .setOngoing(false)
+            notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+            return
+        }
+
+        var songsProcessedCount = 0
+        val totalSongsToProcess = deviceSongs.size
+
+        notificationBuilder.setProgress(totalSongsToProcess, songsProcessedCount, false)
+
+        for (song in deviceSongs) {
+            songsProcessedCount++
+            notificationBuilder
+                .setContentText("Processing ${song.title} ($songsProcessedCount/$totalSongsToProcess)")
+                .setProgress(totalSongsToProcess, songsProcessedCount, false)
+            notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+
+            val file = song.data.toLrcFile()
+            if (doesFileExist(file)) {
+                continue
+            }
+            val lyrics = fetchLyricsForSong(song)
+            if (lyrics != null && lyrics != "No Lyrics Found" && lyrics.isNotBlank()) {
+                 writeLyricsToFile(file, lyrics, context, song, null)
+            } else if (lyrics == "No Lyrics Found") {
+                continue
+            }
+            Thread.sleep(500)
+        }
+
+        notificationBuilder
+            .setContentText("Lyrics download complete. Processed $songsProcessedCount songs.")
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
     }
+
     fun doesFileExist(file: File?): Boolean {
-        return file?.exists() == true && file.isFile == true
+        return file?.exists() == true && file.isFile
     }
 }
