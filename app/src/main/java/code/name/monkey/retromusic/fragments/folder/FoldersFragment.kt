@@ -17,10 +17,8 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.*
 import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
@@ -29,7 +27,6 @@ import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -46,21 +43,18 @@ import code.name.monkey.retromusic.adapter.StorageAdapter
 import code.name.monkey.retromusic.adapter.StorageClickListener
 import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.dip
-
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueueKeepShuffleMode
 import code.name.monkey.retromusic.helper.ScanMusicBottomSheet
-
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.ICallbacks
 import code.name.monkey.retromusic.interfaces.IMainActivityFragmentCallbacks
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.misc.FolderMediaScannerCompletionListener
-
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -82,8 +76,6 @@ import java.io.FileFilter
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
-import kotlin.getValue
-import kotlin.text.get
 
 class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
     IMainActivityFragmentCallbacks, SelectionCallback, ICallbacks,
@@ -448,6 +440,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
         if (toBeScanned.isEmpty()) {
 
+            scanViewModel.notifyScanFinishedSuccessfully(
+                getString(
+                    R.string.scan_complete,
+                    0
+                )
+            )
             return
         }
 
