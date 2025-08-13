@@ -239,7 +239,13 @@ object LyricsGetter {
                 .setContentText("Processing ${song.title} ($songsProcessedCount/$totalSongsToProcess)")
                 .setProgress(totalSongsToProcess, songsProcessedCount, false)
             notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
-
+            if(songsProcessedCount == totalSongsToProcess){
+                notificationBuilder
+                    .setContentText("Lyrics download complete. Processed $songsProcessedCount songs.")
+                    .setProgress(0, 0, false)
+                    .setOngoing(false)
+                notificationManager.notify(LYRICS_NOTIFICATION_ID, notificationBuilder.build())
+            }
             val file = song.data.toLrcFile()
             if (doesFileExist(file)) {
                 continue

@@ -77,8 +77,8 @@ fun songKeyFromSong(song: SongTMPContainer): Pair<String, List<String>> {
 // Generate AI-enhanced data using Gemini API
 fun generateTextWithGemini(
     prompt: String,
-    apiKey: String = "",
-    modelName: String = "gemini-2.0-flash"
+    apiKey: String,
+    modelName: String
 ): String {
     val message = JsonObject().apply {
         addProperty("role", "user")
@@ -354,8 +354,8 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
         val totalSongsToProcess = newEntries.size
 
         notificationBuilder
-            .setContentText("Processing $songsProcessedCount of $totalSongsToProcess songs.")
-            .setProgress(totalSongsToProcess, songsProcessedCount, false)
+            .setContentText("Processing 0 of $totalSongsToProcess songs.")
+            .setProgress(totalSongsToProcess, 0, false)
         notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
 
         for (song in newEntries) {
@@ -406,8 +406,8 @@ suspend fun enhanceSongsData(inputPath: String, outputPath: String, deviceSongs:
             if (!processedThisSong) {
                 if (!InternetConnection.hasInternetConnection(context)) {
                     withContext(Dispatchers.IO) {
-        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager)
-    }
+                        InternetConnection.waitForConnection(context, notificationBuilder, notificationManager)
+                    }
                 }else{
                     notificationBuilder
                         .setContentText("Enhancement partially complete. API/Model issues after $songsProcessedCount songs.")
@@ -461,48 +461,47 @@ fun readFileOrCreate(context: Context, filename: String, defaultContent: String 
 fun fixMissingSongMetaFields(context: Context, outputPath: String) {
     val gson = Gson()
     val fileContent = readFileOrCreate(context, outputPath, "[]") ?: "[]"
-    if (fileContent == "[]") {
-        return
-    }
-    val arr = try {
-        JsonParser().parse(fileContent).asJsonArray
+    if (fileContent !== "[]") {
+    try {
+        val arr = JsonParser().parse(fileContent).asJsonArray
+        val filteredArr = arr.filter { element ->
+            if (!element.isJsonObject) return@filter false
+            val obj = element.asJsonObject
+
+            fun isPresentAndNotNullPrimitive(fieldName: String): Boolean {
+                return obj.has(fieldName) && obj.get(fieldName).isJsonPrimitive && !obj.get(
+                    fieldName
+                ).isJsonNull
+            }
+
+            fun isPresentAndNotNullArray(fieldName: String): Boolean {
+                return obj.has(fieldName) && obj.get(fieldName).isJsonArray
+            }
+
+            fun isPresentAndNonEmptyString(fieldName: String): Boolean {
+                if (!obj.has(fieldName)) return false
+                val jsonElement = obj.get(fieldName)
+                return jsonElement.isJsonPrimitive && jsonElement.asJsonPrimitive.isString && jsonElement.asString.isNotEmpty()
+            }
+
+            if (!isPresentAndNonEmptyString("file")) return@filter false
+            if (!isPresentAndNonEmptyString("title")) return@filter false
+            if (!isPresentAndNotNullArray("artists")) return@filter false
+            if (!isPresentAndNotNullArray("genre")) return@filter false
+            if (!isPresentAndNotNullArray("mood")) return@filter false
+            if (!isPresentAndNotNullArray("market")) return@filter false
+            if (!isPresentAndNotNullPrimitive("danceability")) return@filter false
+            if (!isPresentAndNotNullPrimitive("tempo")) return@filter false
+            if (!isPresentAndNotNullPrimitive("energy")) return@filter false
+            if (!isPresentAndNotNullPrimitive("valence")) return@filter false
+            true
+        }
+
+        if (filteredArr.size != arr.size()) {
+            writeToInternalStorage(context, outputPath, gson.toJson(filteredArr))
+        }
     } catch (e: Exception) {
         writeToInternalStorage(context, outputPath, "[]")
-        return
     }
-
-    val filteredArr = arr.filter { element ->
-        if (!element.isJsonObject) return@filter false
-        val obj = element.asJsonObject
-
-        fun isPresentAndNotNullPrimitive(fieldName: String): Boolean {
-            return obj.has(fieldName) && obj.get(fieldName).isJsonPrimitive && !obj.get(fieldName).isJsonNull
-        }
-
-        fun isPresentAndNotNullArray(fieldName: String): Boolean {
-            return obj.has(fieldName) && obj.get(fieldName).isJsonArray
-        }
-
-        fun isPresentAndNonEmptyString(fieldName: String): Boolean {
-            if (!obj.has(fieldName)) return false
-            val jsonElement = obj.get(fieldName)
-            return jsonElement.isJsonPrimitive && jsonElement.asJsonPrimitive.isString && jsonElement.asString.isNotEmpty()
-        }
-
-        if (!isPresentAndNonEmptyString("file")) return@filter false
-        if (!isPresentAndNonEmptyString("title")) return@filter false
-        if (!isPresentAndNotNullArray("artists")) return@filter false
-        if (!isPresentAndNotNullArray("genre")) return@filter false
-        if (!isPresentAndNotNullArray("mood")) return@filter false
-        if (!isPresentAndNotNullArray("market")) return@filter false
-        if (!isPresentAndNotNullPrimitive("danceability")) return@filter false
-        if (!isPresentAndNotNullPrimitive("tempo")) return@filter false
-        if (!isPresentAndNotNullPrimitive("energy")) return@filter false
-        if (!isPresentAndNotNullPrimitive("valence")) return@filter false
-        true
-    }
-
-    if (filteredArr.size != arr.size()) {
-        writeToInternalStorage(context, outputPath, gson.toJson(filteredArr))
     }
 }

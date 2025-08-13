@@ -26,7 +26,7 @@ object InternetConnection {
     }
 
     fun waitForConnection(context: Context, notificationBuilder: NotificationCompat.Builder, notificationManager: android.app.NotificationManager){
-        if (!InternetConnection.hasInternetConnection(context)) {
+        if (!hasInternetConnection(context)) {
             var totalWaitTimeMillis = 0L
             val initialSleepTimeMillis = 2 * 60 * 1000L
             val thirtyMinThresholdSleepTimeMillis = 11000L * 60L * 15L // 9,900,000 ms = 165 minutes
@@ -36,7 +36,7 @@ object InternetConnection {
 
             var sleepDurationForThisIterationMillis: Long // Declare type
 
-            while (!InternetConnection.hasInternetConnection(context)) {
+            while (!hasInternetConnection(context)) {
                 // Determine sleep duration for this iteration based on total time waited so far
                 if (totalWaitTimeMillis >= oneHourMillis) {
                     sleepDurationForThisIterationMillis = oneHourThresholdSleepTimeMillis
@@ -69,15 +69,15 @@ object InternetConnection {
                         .setProgress(0, 0, false)
                         .setOngoing(false)
                     notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
-                    return // Exit the function if interrupted
+                    return
                 }
                 totalWaitTimeMillis += sleepDurationForThisIterationMillis // Accumulate wait time
             }
-            notificationBuilder
-                .setContentText("Continuing Enhancement: Internet connection restored.")
-                .setProgress(0, 0, false)
-                .setOngoing(false)
-            notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
+                notificationBuilder
+                    .setContentText("Continuing Enhancement: Internet connection restored.")
+                    .setProgress(0, 0, false)
+                    .setOngoing(false)
+                notificationManager.notify(ENHANCEMENT_NOTIFICATION_ID, notificationBuilder.build())
         }
     }
 }
