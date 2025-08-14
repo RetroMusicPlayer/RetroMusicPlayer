@@ -456,6 +456,12 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
         if (toBeScanned.isEmpty()) {
 
+            scanViewModel.notifyScanFinishedSuccessfully(
+                getString(
+                    R.string.scan_complete,
+                    0
+                )
+            )
             return
         }
 
