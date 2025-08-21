@@ -454,6 +454,7 @@
     <string name="restored_previous_purchase_please_restart">Předchozí nákup byl obnoven. Restartujte aplikaci pro využití všech funkcí.</string>
     <string name="restored_previous_purchases">Předchozí nákupy byly obnoveny.</string>
     <string name="restoring_purchase">Obnovuji nákup…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Přehrávač</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Aplikace potřebuje přístup k nastavení zařízení pro nastavení hudby jako vyzvánění</string>
@@ -570,4 +571,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
     <string name="could_not_write_tags_to_file">Nelze uložit tagy do hudebního souboru!</string>
     <string name="sleep_timer_no_permission">Žádné oprávnění k naplánování budíků, povolte prosím oprávnění Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
