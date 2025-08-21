@@ -454,6 +454,7 @@
     <string name="restored_previous_purchase_please_restart">Przywrócono poprzedni zakup. Zrestartuj aplikacje aby korzystać z wszystkich funkcji.</string>
     <string name="restored_previous_purchases">Przywrócono poprzednie zakupy.</string>
     <string name="restoring_purchase">Przywracanie zakupu...</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Odtwarzacz Retro Music</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Potrzebujemy uprawnień do ustawień Twojego urządzenia, aby ustawić utwór jako dzwonek</string>
@@ -510,7 +511,7 @@
     <string name="sort_order_num_songs">Liczba utworów</string>
     <string name="sort_order_num_songs_desc">Liczba utworów malejąco</string>
     <string name="sort_order_year">Rok</string>
-    <string name="sort_order_year_asc">Year ascending</string>
+    <string name="sort_order_year_asc"></string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Malejąco</string>
     <string name="speech_not_supported">Twoje urządzenie nie obsługuje wprowadzania głosowego</string>
@@ -570,4 +571,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
     <string name="could_not_write_tags_to_file">Nie udało się przypisać tagów do pliku!</string>
     <string name="sleep_timer_no_permission">Brak uprawnień do ustawiania alarmów, proszę zezwolić na to Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
