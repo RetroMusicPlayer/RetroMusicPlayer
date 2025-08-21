@@ -452,6 +452,7 @@ têne guhertin</string>
     <string name="restored_previous_purchase_please_restart">Kirîna berê hate vegerandin. Ji kerema xwe sepanê ji nû ve bide destpêkirin da ku hemû taybetmendiyan bi kar bînî.</string>
     <string name="restored_previous_purchases">Kirînên berê hatin vegerandin.</string>
     <string name="restoring_purchase">Kirîn tê vegerandin…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Lêdera muzîkê ya Retro</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ji bo ku muzîkê wekî dengê zengilê saz bikî pêdivî bi mafdayînê heye ku bigihîje sazkariyên amûra te</string>
@@ -568,4 +569,8 @@ têne guhertin</string>
     <string name="your_account_data_is_only_used_for_authentication">Daneyên ajimêra te tenê ji bo pejirandinê têne bikaranîn.</string>
     <string name="could_not_write_tags_to_file">Nikare etîketan li pelê muzîkê binivîsîne!</string>
     <string name="sleep_timer_no_permission">Izin ji xiştekirina \'elarman re tune, bi kerema xwe izin bidin Retro Music\'ê.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
