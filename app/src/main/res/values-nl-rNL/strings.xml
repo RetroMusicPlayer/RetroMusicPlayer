@@ -450,6 +450,7 @@
     <string name="restored_previous_purchase_please_restart">Vorige aankoop hersteld. Gelieve de app te herstarten om alle functies te benutten.</string>
     <string name="restored_previous_purchases">Teruggezette aankopen</string>
     <string name="restoring_purchase">Aankoop herstellen…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
@@ -566,4 +567,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
