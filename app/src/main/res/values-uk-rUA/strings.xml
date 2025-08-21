@@ -3,7 +3,7 @@
     <string name="about_album_label">Про альбом %s</string>
     <string name="about_settings_summary">Команда, посилання на соц. мережі</string>
     <string name="accent_color">Акцентний колір</string>
-    <string name="accent_color_desc">Акцентний колір, за замовчуванням фіолетовий</string>
+    <string name="accent_color_desc">Акцентний колір, типово — фіолетовий</string>
     <string name="action_about">Про застосунок</string>
     <string name="action_add_to_blacklist">Додати до чорного списку</string>
     <string name="action_add_to_favorites">Додати в обране</string>
@@ -111,7 +111,7 @@
     <string name="bug_report_no_title">Введіть заголовок проблеми</string>
     <string name="bug_report_no_username">Введіть своє дійсне ім’я користувача GitHub</string>
     <string name="bug_report_success">Звіт про помилку надіслано</string>
-    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте \"Очистити дані застосунку\" або надішліть лист на ел. пошту </string>
+    <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте «Очистити дані застосунку» або надішліть лист на пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
     <string name="buy_now">Придбайте вже</string>
     <string name="cancel_current_timer">Відмінити</string>
@@ -351,12 +351,12 @@
     <string name="pref_summary_carousel_effect">Ефект каруселі для обкладинок альбомів на екрані відтворення. Теми \"Картка\" та \"Розмита картка\" не працюватимуть</string>
     <string name="pref_summary_classic_notification">Використовувати класичне оформлення сповіщення</string>
     <string name="pref_summary_colored_app">Тло і кольори кнопок керування міняються в залежності від обкладинки екрана відтворення</string>
-    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у колір акценту. Кожного разу, коли ви змінюєте колір, будь ласка, перемкніть його, щоб зміни набрали чинності</string>
+    <string name="pref_summary_colored_app_shortcuts">Фарбує ярлики застосунків у акцентний колір. Кожного разу, коли ви змінюєте колір, вмикайте це, щоб зміни набрали чинності</string>
     <string name="pref_summary_colored_notification">"Фарбує повідомлення в обкладинці альбому яскравим кольором"</string>
     <string name="pref_summary_cross_fade">Тривалість переходу між піснями</string>
     <string name="pref_summary_desaturated_color">Для Material Design лінії в темному режимі мають бути ненасичені</string>
     <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
-    <string name="pref_summary_extra_controls">Додати додаткові елементи керування до міні-програвача</string>
+    <string name="pref_summary_extra_controls">Додати додаткові елементи керування до мініпрогравача</string>
     <string name="pref_summary_extra_song_info">Показати додаткову інформацію про пісню, таку як формат файлів, бітрейт та частоту</string>
     <string name="pref_summary_home_banner">Сховати головний банер</string>
     <string name="pref_summary_ignore_media_store_artwork">Може збільшити якість обкладинки альбому, але збільшує час завантаження зображення. Використовуйте тільки якщо у вас проблеми з обкладинками низької роздільної здатності</string>
@@ -454,6 +454,7 @@
     <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть застосунок, щоб скористатися всіма функціями.</string>
     <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
     <string name="restoring_purchase">Відновлення покупки…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music плеєр</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Застосунку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рингтон</string>
@@ -506,7 +507,7 @@
     <string name="sort_order_composer">Композитор</string>
     <string name="sort_order_date">Дата додавання</string>
     <string name="sort_order_date_modified">Дата змінення</string>
-    <string name="sort_order_default">За замовчуванням</string>
+    <string name="sort_order_default">Типово</string>
     <string name="sort_order_num_songs">Кількість пісень</string>
     <string name="sort_order_num_songs_desc">Опис кількості пісень</string>
     <string name="sort_order_year">Рік</string>
@@ -550,13 +551,13 @@
     <string name="user_images_description">Зображення користувача</string>
     <string name="user_name">Ім\'я користувача</string>
     <string name="username">Ім\'я користувача</string>
-    <string name="version">Версія додатку</string>
+    <string name="version">Версія застосунку</string>
     <string name="vertical_flip">Вертикальне сальто</string>
     <string name="view_on_telegram">Переглянути в Telegram</string>
     <string name="volume">Гучність</string>
     <string name="web_search">Пошук в інтернеті</string>
     <string name="website">Сайт</string>
-    <string name="website_summary">Відвідайте наш веб-сайт</string>
+    <string name="website_summary">Відвідайте наш вебсайт</string>
     <string name="welcome">Вітаємо вас,</string>
     <string name="what_do_you_want_to_share">Чим ви хочете поділитися?</string>
     <string name="whats_new">Що нового</string>
@@ -570,4 +571,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Дані вашого облікового запису використовуються лише для автентифікації.</string>
     <string name="could_not_write_tags_to_file">Не вдалося записати теги у файл!</string>
     <string name="sleep_timer_no_permission">Немає дозволу на планування будильників, надайте дозвіл Retro Music.</string>
+    <string name="scanning_folders_files">Сканування тек і файлів…</string>
+    <string name="scan_complete">Сканування завершено: знайдено %1$d медіа елементів.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
