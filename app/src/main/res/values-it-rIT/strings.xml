@@ -451,6 +451,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="restored_previous_purchase_please_restart">Acquisto precedente ripristinato. Riavvia l\'app per utilizzare tutte le funzionalità.</string>
     <string name="restored_previous_purchases">Acquisti precedenti ripristinati.</string>
     <string name="restoring_purchase">Ripristino acquisto...</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'app necessita dell\'autorizzazione ad accedere alle impostazioni del dispositivo per impostare musica come suoneria</string>
