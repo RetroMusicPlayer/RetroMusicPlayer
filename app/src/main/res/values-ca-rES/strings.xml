@@ -5,10 +5,10 @@
     <string name="accent_color">Color d\'èmfasi</string>
     <string name="accent_color_desc">El color d\'accent del tema, per defecte és porpra</string>
     <string name="action_about">Quant a</string>
-    <string name="action_add_to_blacklist">Afegir a llista negra</string>
+    <string name="action_add_to_blacklist">Afegeix a llista negra</string>
     <string name="action_add_to_favorites">Afegeix als preferits</string>
     <string name="action_add_to_playing_queue">Afegeix a la cua de reproducció</string>
-    <string name="action_add_to_playlist">Afageix a la llista de reproducció</string>
+    <string name="action_add_to_playlist">Afegeix a la llista de reproducció</string>
     <string name="action_cancel">Cancel·la</string>
     <string name="action_cast">Emet</string>
     <string name="action_clear_playing_queue">Esborra la cua de reproducció</string>
@@ -29,16 +29,16 @@
     <string name="action_next">Següent</string>
     <string name="action_play">Reprodueix</string>
     <string name="action_play_all">Reprodueix-ho tot</string>
-    <string name="action_play_next">Reproduir la propera</string>
+    <string name="action_play_next">Reprodueix la següent</string>
     <string name="action_play_pause">Reprodueix/Pausa</string>
     <string name="action_previous">Anterior</string>
     <string name="action_remove_from_favorites">Suprimeix dels preferits</string>
     <string name="action_remove_from_playing_queue">Esborra de la cua de reproducció</string>
     <string name="action_remove_from_playlist">Elimina de la llista de reproducció</string>
-    <string name="action_rename">Reanomenar</string>
+    <string name="action_rename">Canvia\'n el nom</string>
     <string name="action_save_playing_queue">Desa la cua de reproducció</string>
-    <string name="action_scan">Escanejar</string>
-    <string name="action_search">Cercar</string>
+    <string name="action_scan">Escaneja</string>
+    <string name="action_search">Cerca</string>
     <string name="action_set">Inicia</string>
     <string name="action_set_as_ringtone">Estableix com a to de trucada</string>
     <string name="action_set_as_start_directory">Estableix com a directori d\'inici</string>
@@ -53,7 +53,7 @@
     <string name="action_toggle_shuffle">Commuta el mode de barreja</string>
     <string name="adaptive">Adaptatiu</string>
     <string name="add_action">Afegeix</string>
-    <string name="add_playlist_title">"Afageix a la llista de reproducció"</string>
+    <string name="add_playlist_title">"Afegeix a la llista de reproducció"</string>
     <string name="add_time_framed_lryics">Afegeix lletres amb marques de temps</string>
     <string name="added_song_count_to_playlist">S\'han afegit %1$d cançon(s) a %2$s</string>
     <string name="added_title_to_playing_queue">"S'ha afegit 1 títol a la cua de reproducció."</string>
@@ -272,7 +272,7 @@
     <string name="no_purchase_found">No s\'ha trobat cap compra.</string>
     <string name="no_results">Sense resultats</string>
     <string name="no_songs">No tens cançons</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">No s\'han trobat resultats</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Lletres normals</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> no figura al magatzem multimèdia.]]></string>
@@ -333,8 +333,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pausa a zero</string>
     <string name="pref_keep_screen_on_summary">Tingues en compte que activar aquesta funció pot afectar la durada de la bateria</string>
     <string name="pref_keep_screen_on_title">Mantenir la pantalla encesa</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Cal reiniciar l\'aplicació perquè s\'apliqui. El reproductor ha de ser en primer pla abans de tancar la pantalla perquè la funció vagi bé</string>
+    <string name="pref_show_when_locked_title">Mostra la interfície del reproductor a la pantalla de bloqueig</string>
     <string name="pref_language_name">Tria l\'idioma</string>
     <string name="pref_snow_fall_title">Efecte de caiguda de neu</string>
     <string name="pref_summary_album_art_on_lockscreen">Utilitzeu la portada de l\'àlbum de la cançó que s\'està reproduint com a fons de pantalla de bloqueig</string>
@@ -348,7 +348,7 @@
     <string name="pref_summary_classic_notification">Utilitzeu el disseny de notificació clàssic</string>
     <string name="pref_summary_colored_app">Els colors de fons i del botó de control canvien d\'acord amb la coberta de l\'àlbum a la pantalla de la reproducció en curs</string>
     <string name="pref_summary_colored_app_shortcuts">Acoloreix les dreceres de l\'aplicació amb el color del tema. Intercanvieu això cada vegada que canvieu el color perquè tingui efecte</string>
-    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
+    <string name="pref_summary_colored_notification">"Pinta la notificació amb el color viu de l'àlbum"</string>
     <string name="pref_summary_cross_fade">Durada de l\'esvaïment entre cançons</string>
     <string name="pref_summary_desaturated_color">Segons les directrius del Material Design, els colors s\'han de dessaturar en el mode fosc</string>
     <string name="pref_summary_expand_now_playing_panel">Si feu clic a la notificació, es mostrarà la pantalla de la reproducció en curs en lloc de la pantalla d\'inici</string>
@@ -362,7 +362,7 @@
     <string name="pref_summary_open_source_licences">Detalls de la llicència del programari lliure</string>
     <string name="pref_summary_pause_history">Quan està activat, les cançons recentment reproduïdes no es mostraran a l\'historial</string>
     <string name="pref_summary_remember_tab">Navega a l\'última pestanya utilitzada quan s\'obre l\'aplicació</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Mostra una barra de cerca a la llista</string>
     <string name="pref_summary_show_lyrics">Mostra les lletres sincronitzades a la portada de l\'àlbum</string>
     <string name="pref_summary_suggestions">Mostra un Mix de Música recentment afegit a la pantalla d\'inici</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permet canviar la cançó fent lliscar el dit a qualsevol lloc de la pantalla de la reproducció en curs</string>
@@ -409,7 +409,7 @@
     <string name="pref_title_open_source_licences">Llicències de codi obert</string>
     <string name="pref_title_pause_history">Fes una pausa a l\'historial</string>
     <string name="pref_title_remember_tab">Recorda la darrera pestanya</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Activa la cerca a la llista</string>
     <string name="pref_title_show_lyrics">Mostra la lletra</string>
     <string name="pref_title_suggestions">Mostra els suggeriments</string>
     <string name="pref_title_swipe_anywhere_now_playing">Llisqueu a qualsevol lloc per canviar la cançó</string>
@@ -450,12 +450,13 @@
     <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Reinicia l\'aplicació per fer ús de totes les funcions.</string>
     <string name="restored_previous_purchases">Compres anteriors restaurades.</string>
     <string name="restoring_purchase">S\'està restaurant la compra…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'aplicació necessita permís per accedir a la configuració del dispositiu per configurar la música com a to de trucada</string>
     <string name="ringtone_title">To de trucada (Opcional)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">Cal permís per posar alarmes exactes per configurar temporitzadors d\'aturada</string>
+    <string name="permission_alarm_title">Alarma (Opcional)</string>
     <string name="saf_delete_failed">L\'eliminació del fitxer ha fallat: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">No es pot obtenir URI SAF</string>
@@ -506,8 +507,8 @@
     <string name="sort_order_num_songs">Nombre de cançons</string>
     <string name="sort_order_num_songs_desc">Nombre de cançons (descendent)</string>
     <string name="sort_order_year">Any</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">Any ascendent</string>
+    <string name="sort_order_year_desc">Any descendent</string>
     <string name="sort_order_z_a">Descendent</string>
     <string name="speech_not_supported">El vostre dispositiu no permet l’entrada de veu</string>
     <string name="speech_prompt">Cerca a la biblioteca</string>
@@ -565,5 +566,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Se us enviarà al lloc web de seguiment de problemes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Les dades del vostre compte només s\'utilitzen per a l\'autenticació.</string>
     <string name="could_not_write_tags_to_file">No s\'han pogut modificar les etiquetes al fitxer de música!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">No hi ha permís per posar alarmes, si us plau, permeteu-ho a Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
