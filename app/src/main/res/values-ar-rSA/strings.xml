@@ -283,7 +283,7 @@
     <string name="no_purchase_found">لم يتم العثور على عملية شراء.</string>
     <string name="no_results">لا يوجد نتائج</string>
     <string name="no_songs">لا يوجد أغاني</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">لم يتم العثور على نتائج للبحث</string>
     <string name="normal">الافتراضي</string>
     <string name="normal_lyrics">كلمات عادية</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> غير مدرج في مخزن الوسائط]]></string>
@@ -345,7 +345,7 @@
     <string name="pref_keep_screen_on_summary">ضع في اعتبارك أن تمكين هذه الميزة قد يؤثر على عمر البطارية</string>
     <string name="pref_keep_screen_on_title">ابقاء الشاشة تعمل</string>
     <string name="pref_show_when_locked_summary">يتطلب إعادة تشغيل التطبيق ليعمل. يجب أن يكون المشغل في المقدمة قبل القفل لتعمل هذه الميزة</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_title">إظهار واجهة المشغل عند القفل</string>
     <string name="pref_language_name">حدد اللغة</string>
     <string name="pref_snow_fall_title">تأثير سقوط الثلوج</string>
     <string name="pref_summary_album_art_on_lockscreen">استخدم غلاف ألبوم الأغنية قيد التشغيل حاليًا كخلفية لشاشة القفل</string>
@@ -373,7 +373,7 @@
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
     <string name="pref_summary_pause_history">عند التمكين، لن تظهر الأغاني المشغلة حديثا في المحفوظات</string>
     <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">إظهار حقل البحث في قائمة التشغيل</string>
     <string name="pref_summary_show_lyrics">عرض كلمات الأغاني المتزامنة على غلاف الألبوم</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تمكين تغيير الأغنية بالسحب في أي مكان على الشاشة المشغلة الآن</string>
@@ -461,6 +461,7 @@
     <string name="restored_previous_purchase_please_restart">تم استرداد عملية الشراء السابقة. الرجاء اعادة تشغيل التطبيق الاستمتاع بكافة المميزات.</string>
     <string name="restored_previous_purchases">تم </string>
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
     <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
     <string name="ringtone_summary">يحتاج التطبيق إلى إذن للوصول إلى إعدادات جهازك من أجل تعيين الموسيقى كنغمة رنين</string>
@@ -576,6 +577,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
     <string name="your_account_data_is_only_used_for_authentication">بيانات حسابك تستخدم لتوثيق فقط.</string>
     <string name="could_not_write_tags_to_file">تعذر كتابة العلامات إلى ملف الموسيقى!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
-    <string name="scan_complete">اكتمل الفحص: تم العثور على %1$d من العناصر.</string>
+    <string name="sleep_timer_no_permission">لا يوجد إذن لجدولة التنبيهات، يرجى السماح لـ Retro Music.</string>
+    <string name="scanning_folders_files">جارٍ فحص المجلدات والملفات…</string>
+    <string name="scan_complete">اكتمل المسح: %1$d تم العثور على وسائط صوتية.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
