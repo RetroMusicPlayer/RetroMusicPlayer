@@ -451,6 +451,7 @@
     <string name="restored_previous_purchase_please_restart">Предишната покупка е възстановена. Рестартирайте приложението, за да се възползвате от всички функции.</string>
     <string name="restored_previous_purchases">Възстановени са предишните покупки.</string>
     <string name="restoring_purchase">Възстановяване на покупката…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Ретро Плеър на Музика</string>
     <string name="retro_music_pro">Ретро Плеър на Музика Про</string>
     <string name="ringtone_summary">Приложението се нуждае от разрешение за достъп до настройките на вашето устройство, за да зададе музика като ваш тон на звънене</string>
@@ -567,4 +568,8 @@
     <string name="your_account_data_is_only_used_for_authentication">Информацията за вашия акаунт се използва само за удостоверяване.</string>
     <string name="could_not_write_tags_to_file">Неуспешно записване на етикети към музикален файл!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
