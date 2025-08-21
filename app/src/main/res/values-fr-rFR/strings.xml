@@ -450,6 +450,7 @@
     <string name="restored_previous_purchase_please_restart">Achat restauré. Veuillez redémarrer l\'application pour utiliser toutes les fonctionnalités.</string>
     <string name="restored_previous_purchases">Achats précédents restaurés.</string>
     <string name="restoring_purchase">Restauration de l\'achat…</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'application a besoin d\'accéder au stockage de votre appareil pour configurer un morceau comme sonnerie</string>
