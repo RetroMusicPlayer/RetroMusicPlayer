@@ -448,6 +448,7 @@
     <string name="restored_previous_purchase_please_restart">ယခင်ဝယ်ယူမှုကို ပြန်လည်ရယူပြီးပါပြီ။ Feature အားလုံးအလုပ်လုပ်ရန် app မှထွက်ပြီးပြန်ဝင်ပါ။</string>
     <string name="restored_previous_purchases">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူပြီးပါပြီ</string>
     <string name="restoring_purchase">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူနေသည်...</string>
+    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">သီချင်းများကို Ringtone ထားရန် app အား System Settings များကိုပြင်ဆင်ခွင့်ပေးရန်လိုသည်။</string>
@@ -564,4 +565,8 @@
     <string name="your_account_data_is_only_used_for_authentication">သင့်အကောင့်အချက်အလက်ကို အတည်ပြုရန်အတွက်သာအသုံးပြုပါသည်။</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
     <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
+    <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
