@@ -120,6 +120,7 @@ dependencies {
     implementation libs.androidx.navigation.runtime.ktx
     implementation libs.androidx.navigation.fragment.ktx
     implementation libs.androidx.navigation.ui.ktx
+    implementation libs.androidx.activity.ktx
 
     implementation libs.androidx.room.runtime
     implementation libs.androidx.room.ktx
@@ -170,6 +171,7 @@ dependencies {
     implementation libs.slidableactivity
     implementation libs.material.intro
     implementation libs.dhaval2404.imagepicker
+    implementation libs.yalantis.ucrop
     implementation libs.fastscroll.library
     implementation libs.customactivityoncrash
     implementation libs.tankery.circularSeekBar

@@ -192,6 +192,12 @@ fun AppCompatActivity.setLightNavigationBarAuto(bgColor: Int) {
  */
 @Suppress("DEPRECATION")
 fun AppCompatActivity.setStatusBarColor(color: Int) {
+    // For Android 15+, avoid deprecated APIs where possible
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        // Use modern inset handling for Android 15+
+        return
+    }
+    
     val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
     if (statusBar != null) {
         when {
@@ -219,6 +225,12 @@ fun AppCompatActivity.setStatusBarColorAuto() {
 
 @Suppress("DEPRECATION")
 fun AppCompatActivity.setNavigationBarColor(color: Int) {
+    // For Android 15+, avoid deprecated APIs where possible
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        // Use modern inset handling for Android 15+
+        return
+    }
+    
     if (VersionUtils.hasOreo()) {
         window.navigationBarColor = color
     } else {

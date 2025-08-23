@@ -36,6 +36,8 @@ appcompat_version = "1.7.1"
 google_play_review_version = "2.0.2"
 room_version = "2.7.1"
 core_version = "1.16.0"
+activity_version = "1.9.3"
+ucrop_version = "2.2.8"
 
 #plugins
 devTools_ksp_version = "2.1.21-2.0.1"
@@ -49,6 +51,9 @@ slidableactivity = "2.1.0"
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation_version" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation_version" }
 androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigation_version" }
+
+#activity
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity_version" }
 
 #lifecycle
 androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle_version" }
@@ -102,6 +107,7 @@ jaudiotagger = { module = "com.github.Adonai:jaudiotagger", version.ref = "jaudi
 slidableactivity = { module = "com.r0adkll:slidableactivity", version.ref = "slidableactivity" }
 material-intro = { module = "com.heinrichreimersoftware:material-intro", version.ref = "materialIntro" }
 dhaval2404-imagepicker = { module = "com.github.dhaval2404:imagepicker", version.ref = "dhaval2404_imagepicker_version" }
+yalantis-ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop_version" }
 fastscroll-library = { module = "me.zhanghai.android.fastscroll:library", version.ref = "fast_scroll_libraryVersion" }
 customactivityoncrash = { module = "cat.ereza:customactivityoncrash", version.ref = "customactivityoncrash" }
 tankery-circularSeekBar = { module = "me.tankery.lib:circularSeekBar", version.ref = "tankery_circularSeekBar_version" }
