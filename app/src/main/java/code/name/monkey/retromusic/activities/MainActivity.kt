@@ -18,6 +18,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.contains
 import androidx.navigation.ui.setupWithNavController
@@ -45,6 +46,7 @@ class MainActivity : AbsCastActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setTaskDescriptionColorAuto()
         hideStatusBar()
@@ -117,14 +119,14 @@ class MainActivity : AbsCastActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        val expand = intent?.extra<Boolean>(EXPAND_PANEL)?.value ?: false
+        val expand = intent.extra<Boolean>(EXPAND_PANEL)?.value ?: false
         if (expand && PreferenceUtil.isExpandPanel) {
             fromNotification = true
             slidingPanel.bringToFront()
             expandPanel()
-            intent?.removeExtra(EXPAND_PANEL)
+            intent.removeExtra(EXPAND_PANEL)
         }
     }
 

@@ -141,7 +141,7 @@
     <string name="create_new_backup">ایجاد کردن</string>
     <string name="created_playlist_x">پلی لیست %1$s ساخته شد.</string>
     <string name="credit_title">اعضا و دست اندرکاران </string>
-    <string name="currently_listening_to_x_by_x">در حال حاضر شما به s$1% از s$2% گوش می‌دهید.</string>
+    <string name="currently_listening_to_x_by_x">در حال حاضر شما به %1$s از %2$s گوش می‌دهید.</string>
     <string name="custom_artist_images">تصاویر هنرمند سفارشی</string>
     <string name="customactivityoncrash_error_activity_error_details_share">به اشتراک گذاری گزارش خرابی</string>
     <string name="dark_theme_name">تقریبا مشکی</string>
