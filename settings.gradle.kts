@@ -1,5 +1,13 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
-    id "com.gradle.develocity" version "3.19.2"
+    id("com.gradle.develocity") version "3.19.2"
 }
 
 develocity {
@@ -10,13 +18,18 @@ develocity {
     }
 }
 
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
-include ':app', ':appthemehelper'
+
+
+
+include(":app", ":appthemehelper")
