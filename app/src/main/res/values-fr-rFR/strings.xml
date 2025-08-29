@@ -119,7 +119,7 @@
     <string name="cascading">En cascade</string>
     <string name="changelog">Liste des changements</string>
     <string name="changelog_summary">Découvrez les nouveautés</string>
-    <string name="choose_image">Choisissez l\'image</string>
+    <string name="choose_image">Choisir une image</string>
     <string name="choose_restore_title">Choisir les éléments à restaurer</string>
     <string name="circle">Cercle</string>
     <string name="circular">Circulaire</string>
@@ -143,7 +143,7 @@
     <string name="credit_title">Membres et contributeurs </string>
     <string name="currently_listening_to_x_by_x">Vous écoutez actuellement %1$s par %2$s.</string>
     <string name="custom_artist_images">Images personnalisées pour l\'artiste</string>
-    <string name="customactivityoncrash_error_activity_error_details_share">Envoyer les rapports de plantage</string>
+    <string name="customactivityoncrash_error_activity_error_details_share">Partager le rapport de crash</string>
     <string name="dark_theme_name">Plutôt Sombre</string>
     <string name="delete_playlist_title">Supprimer la liste de lecture</string>
     <string name="delete_playlist_x"><![CDATA[Supprimer la liste <b>%1$s</b> ?]]></string>
@@ -336,7 +336,7 @@
     <string name="pref_show_when_locked_summary">Nécessite un redémarrage de l\'application pour prendre effet. Le lecteur doit être au premier plan avant le verrouillage pour que cette fonctionnalité fonctionne</string>
     <string name="pref_show_when_locked_title">Afficher l\'interface du lecteur lorsque verrouillé</string>
     <string name="pref_language_name">Choisir la langue</string>
-    <string name="pref_snow_fall_title">Effet neige qui tombe</string>
+    <string name="pref_snow_fall_title">Effet de chute de neige</string>
     <string name="pref_summary_album_art_on_lockscreen">Utiliser la couverture d\'album du morceau en cours de lecture comme fond sur l\'écran de verrouillage</string>
     <string name="pref_summary_album_artists_only">Afficher les artistes de l\'album dans la catégorie Artiste</string>
     <string name="pref_summary_audio_ducking">Baisser le volume quand un son système ou une notification est reçue</string>
@@ -347,7 +347,7 @@
     <string name="pref_summary_carousel_effect">Effet carrousel pour les couvertures d\'albums sur l\'écran de lecture en cours. Veuillez noter que les thèmes Carte et Carte floutée ne fonctionneront pas</string>
     <string name="pref_summary_classic_notification">Utiliser le design classique pour les notifications</string>
     <string name="pref_summary_colored_app">La couleur du fond et les boutons de contrôle changent en fonction de l\'image de l\'album sur l\'écran de lecture en cours</string>
-    <string name="pref_summary_colored_app_shortcuts">Raccourcis de l\'application selon la couleur d\'accent. Chaque fois que vous changez de couleur, veuillez activer ceci afin que le changement soit pris en compte</string>
+    <string name="pref_summary_colored_app_shortcuts">Colorie les raccourcis d\'application avec la couleur d\'accentuation. Chaque fois que vous modifiez la couleur, activez cette option pour qu\'elle soit prise en compte.</string>
     <string name="pref_summary_colored_notification">"Colorer la notification avec la couleur dominante des pochettes d'albums"</string>
     <string name="pref_summary_cross_fade">Durée du fondu enchaîné entre les morceaux</string>
     <string name="pref_summary_desaturated_color">Selon les lignes directrices du Material Design, les couleurs devraient être désaturées en mode sombre</string>
@@ -450,7 +450,7 @@
     <string name="restored_previous_purchase_please_restart">Achat restauré. Veuillez redémarrer l\'application pour utiliser toutes les fonctionnalités.</string>
     <string name="restored_previous_purchases">Achats précédents restaurés.</string>
     <string name="restoring_purchase">Restauration de l\'achat…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Une erreur s\'est produite lors de la communication avec Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'application a besoin d\'accéder au stockage de votre appareil pour configurer un morceau comme sonnerie</string>
