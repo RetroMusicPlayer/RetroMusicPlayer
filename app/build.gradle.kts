@@ -1,11 +1,11 @@
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.navigation.safeargs)
     id("org.jetbrains.kotlin.plugin.parcelize")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
 
         vectorDrawables {
             useSupportLibrary = true
@@ -133,8 +133,10 @@ dependencies {
 
     "normalImplementation"(libs.google.feature.delivery)
     "normalImplementation"(libs.google.play.review)
+    "normalImplementation"(libs.google.play.billing)
 
-    implementation(libs.android.material)
+
+            implementation(libs.android.material)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
@@ -166,7 +168,6 @@ dependencies {
 
     implementation(libs.org.eclipse.egit.github.core)
     implementation(libs.jaudiotagger)
-    "normalImplementation"(libs.android.lab.library)
     implementation(libs.slidableactivity)
     implementation(libs.material.intro)
     implementation(libs.dhaval2404.imagepicker)

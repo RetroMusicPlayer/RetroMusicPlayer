@@ -66,6 +66,7 @@ google-play-services-cast-framework = { module = "com.google.android.gms:play-se
 google-play-review = { module = "com.google.android.play:review", version.ref = "google_play_review_version" }
 google-play-billing = { module = "com.android.billingclient:billing", version.ref = "google_play_billing_version" }
 
+
 #glide
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide_version" }
 glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide_version" }
