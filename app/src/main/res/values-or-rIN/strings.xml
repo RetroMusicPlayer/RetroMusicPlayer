@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_album_label">%s ଵିଷୟରେ</string>
-    <string name="about_settings_summary">Team, social links</string>
-    <string name="accent_color">Accent color</string>
-    <string name="accent_color_desc">The theme accent color, defaults to purple</string>
-    <string name="action_about">ଵିଷୟରେ</string>
-    <string name="action_add_to_blacklist">Add to Blacklist</string>
+    <string name="about_album_label">%s ବିଷୟରେ</string>
+    <string name="about_settings_summary">ଟିମ୍, ସାମାଜିକ ଲିଙ୍କ୍‌ଗୁଡିକ</string>
+    <string name="accent_color">ଆକ୍ସେଣ୍ଟ ରଙ୍ଗ</string>
+    <string name="accent_color_desc">ଥିମ୍ ଆକ୍ସେଣ୍ଟ ରଙ୍ଗ, ଡିଫଲ୍ଟ ଭାବରେ ବାଇଗଣି</string>
+    <string name="action_about">ବିଷୟରେ</string>
+    <string name="action_add_to_blacklist">ବ୍ଲାକଲିଷ୍ଟରେ ଯୋଡନ୍ତୁ</string>
     <string name="action_add_to_favorites">ପସନ୍ଦିଆରେ ଯୋଡ଼ନ୍ତୁ</string>
-    <string name="action_add_to_playing_queue">Add to playing queue</string>
+    <string name="action_add_to_playing_queue">ପ୍ଲେ ହେଉଥିବା କ୍ୟୁରେ ଯୋଡନ୍ତୁ</string>
     <string name="action_add_to_playlist">ଚାଳନାତାଲିକାରେ ଯୋଡ଼ନ୍ତୁ</string>
-    <string name="action_cancel">Cancel</string>
+    <string name="action_cancel">ବାତିଲ</string>
     <string name="action_cast">ପାତ୍ର</string>
-    <string name="action_clear_playing_queue">Clear playing queue</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_clear_playing_queue">ପ୍ଲେ ହେଉଥିବା କ୍ୟୁ ସଫା କରନ୍ତୁ</string>
+    <string name="action_cycle_repeat">ସାଇକିଲ୍ ପୁନରାବୃତ୍ତି ମୋଡ୍</string>
     <string name="action_delete">ବିଲୋପ କରନ୍ତୁ</string>
-    <string name="action_delete_from_device">Delete from device</string>
+    <string name="action_delete_from_device">ଡିଭାଇସ୍ ରୁ ବିଲୋପ କରନ୍ତୁ</string>
     <string name="action_details">ଵିଵରଣୀ</string>
     <string name="action_edit">ସମ୍ପାଦନା</string>
     <string name="action_go_to_album">Go to album</string>
@@ -56,8 +56,8 @@
     <string name="add_playlist_title">"ଚାଳନାତାଲିକାରେ ଯୋଡ଼ନ୍ତୁ"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
     <string name="added_song_count_to_playlist">%2$sରେ %1$dଟି ଗୀତ ଯୋଡ଼ାଗଲା</string>
-    <string name="added_title_to_playing_queue">"ଚାଲୁଥିବା ଧାଡ଼ିରେ ୧ ଆଖ୍ୟା ଯୋଡ଼ାଗଲା।"</string>
-    <string name="added_x_titles_to_playing_queue">ଚାଲୁଥିବା ଧାଡ଼ିରେ %1$dଟି ଆଖ୍ୟା ଯୋଡ଼ାଗଲା।</string>
+    <string name="added_title_to_playing_queue">"ଚାଲୁଥିବା ଧାଡ଼ିରେ 1 ଆଖ୍ୟା ଯୋଡ଼ାଗଲା."</string>
+    <string name="added_x_titles_to_playing_queue">ଚାଲୁଥିବା ଧାଡ଼ିରେ %1$dଟି ଆଖ୍ୟା ଯୋଡ଼ାଗଲା.</string>
     <string name="album">Album</string>
     <plurals name="albumSongs">
         <item quantity="one">ଗୀତ</item>
@@ -132,9 +132,9 @@
     <string name="colors">Colors</string>
     <string name="compact">Compact</string>
     <string name="composer">Composer</string>
-    <string name="copied_device_info_to_clipboard">ଡିଵାଇସ୍ ସୂଚନା କ୍ଲିପବୋର୍ଡରେ କପି କରାଗଲା।</string>
-    <string name="could_not_create_playlist">ଚାଳନାତାଲିକା ସୃଷ୍ଟି କରିହେଲାନି।</string>
-    <string name="could_not_download_album_cover">"ଗୋଟାଏ ମେଳ ଖାଉଥିବା ଆଲବମ୍ କଵର୍ ଡାଉନଲୋଡ୍ କରିହେଲାନି।"</string>
+    <string name="copied_device_info_to_clipboard">ଡିଵାଇସ୍ ସୂଚନା କ୍ଲିପବୋର୍ଡରେ କପି କରାଗଲା.</string>
+    <string name="could_not_create_playlist">ଚାଳନାତାଲିକା ସୃଷ୍ଟି କରିହେଲାନାହିଁ.</string>
+    <string name="could_not_download_album_cover">"ଗୋଟାଏ ମେଳ ଖାଉଥିବା ଆଲବମ୍ କଭର ଡାଉନଲୋଡ୍ କରିହେଲାନାହିଁ."</string>
     <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
     <string name="create_action">Create</string>
@@ -156,8 +156,8 @@
     <string name="deleted_x_songs">Deleted %1$d songs.</string>
     <string name="deleting_songs">Deleting Songs</string>
     <string name="depth">Depth</string>
-    <string name="description">ଵର୍ଣ୍ଣନା</string>
-    <string name="device_info">ଡିଵାଇସ୍ ସୂଚନା</string>
+    <string name="description">ବର୍ଣ୍ଣନା</string>
+    <string name="device_info">ଡିଭାଇସ୍ ସୂଚନା</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
     <string name="disc_hint">Disc Number</string>
@@ -180,7 +180,7 @@
     <string name="error_share_file">Couldn\'t share file</string>
     <string name="expanded">Expanded</string>
     <string name="faq">FAQ</string>
-    <string name="favorites">ପସନ୍ଦିଆ</string>
+    <string name="favorites">ପସନ୍ଦ ଗୁଡ଼ିକ</string>
     <string name="file_already_exists">ଫାଇଲ୍ ଆଗରୁ ବିଦ୍ୟମାନ ଅଛି</string>
     <string name="finish_last_song">Finish last song</string>
     <string name="fit">Fit</string>
@@ -194,7 +194,7 @@
     <string name="general_settings_summary">Change the theme and colors of the app</string>
     <string name="general_settings_title">Look and feel</string>
     <string name="genre">ଧରଣ</string>
-    <string name="genres">ଧରଣ</string>
+    <string name="genres">ଧରଣ ଗୁଡ଼ିକ</string>
     <string name="git_hub_summary">Fork the project on GitHub</string>
     <string name="gradient">Gradient</string>
     <string name="grant_access">Grant access</string>
