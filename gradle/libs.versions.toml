@@ -66,6 +66,7 @@ google-play-services-cast-framework = { module = "com.google.android.gms:play-se
 google-play-review = { module = "com.google.android.play:review", version.ref = "google_play_review_version" }
 google-play-billing = { module = "com.android.billingclient:billing", version.ref = "google_play_billing_version" }
 
+
 #glide
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide_version" }
 glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide_version" }
@@ -121,11 +122,11 @@ androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", versi
 androidx-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version = "1.6.1" }
 
 
-#buildscripts dependencies
-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
-androidx-navigation-safeargs-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation_version" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "gradle" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinGradlePlugin" }
+androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation_version" }
 github-ben-manes = { id = "com.github.ben-manes.versions", version.ref = "ben_manes_versoin" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devTools_ksp_version" }
