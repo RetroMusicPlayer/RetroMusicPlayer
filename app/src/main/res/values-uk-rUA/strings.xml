@@ -454,7 +454,7 @@
     <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть застосунок, щоб скористатися всіма функціями.</string>
     <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
     <string name="restoring_purchase">Відновлення покупки…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Сталася помилка під час зв\'язку із системою оплати Google Play</string>
     <string name="retro_music_player">Retro Music плеєр</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Застосунку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рингтон</string>
@@ -573,6 +573,6 @@
     <string name="sleep_timer_no_permission">Немає дозволу на планування будильників, надайте дозвіл Retro Music.</string>
     <string name="scanning_folders_files">Сканування тек і файлів…</string>
     <string name="scan_complete">Сканування завершено: знайдено %1$d медіа елементів.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_summary">При переході до перегляду тек відновлювати останній використаний каталог</string>
+    <string name="pref_save_last_directory_title">Зберегти останній каталог</string>
 </resources>
