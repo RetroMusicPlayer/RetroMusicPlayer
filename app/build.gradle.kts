@@ -170,7 +170,6 @@ dependencies {
     implementation(libs.jaudiotagger)
     implementation(libs.slidableactivity)
     implementation(libs.material.intro)
-    implementation(libs.dhaval2404.imagepicker)
     implementation(libs.fastscroll.library)
     implementation(libs.customactivityoncrash)
     implementation(libs.tankery.circularSeekBar)
