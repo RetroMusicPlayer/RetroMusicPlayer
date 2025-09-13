@@ -449,7 +449,7 @@
     <string name="restored_previous_purchase_please_restart">恢复以前的购买。请重新启动应用以使用所有功能。</string>
     <string name="restored_previous_purchases">恢复之前的购买。</string>
     <string name="restoring_purchase">正在恢复购买…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">与 Google Play 结算服务通信时出错</string>
     <string name="retro_music_player">Retro Music 播放器</string>
     <string name="retro_music_pro">Retro Music 高级版</string>
     <string name="ringtone_summary">应用需要系统设置访问权限，才能将音乐设置为为铃声</string>
@@ -566,8 +566,8 @@
     <string name="your_account_data_is_only_used_for_authentication">您的账户数据仅用于验证。</string>
     <string name="could_not_write_tags_to_file">无法将标签写入音乐文件！</string>
     <string name="sleep_timer_no_permission">无权限设定闹钟，请允许 Retro Music 执行</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
-    <string name="scan_complete">Scan complete: %1$d media items found.</string>
+    <string name="scanning_folders_files">正在扫描文件夹和文件…</string>
+    <string name="scan_complete">扫描完成：找到 %1$d 个媒体项目。</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
 </resources>
