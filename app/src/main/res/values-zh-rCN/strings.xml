@@ -568,6 +568,6 @@
     <string name="sleep_timer_no_permission">无权限设定闹钟，请允许 Retro Music 执行</string>
     <string name="scanning_folders_files">正在扫描文件夹和文件…</string>
     <string name="scan_complete">扫描完成：找到 %1$d 个媒体项目。</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_summary">切换到文件夹视图时恢复上次使用的目录</string>
+    <string name="pref_save_last_directory_title">保存上次目录</string>
 </resources>
