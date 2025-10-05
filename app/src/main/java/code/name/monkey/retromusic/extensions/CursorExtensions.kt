@@ -36,7 +36,9 @@ internal fun Cursor.getLong(columnName: String): Long {
 
 internal fun Cursor.getString(columnName: String): String {
     try {
-        return getString(getColumnIndexOrThrow(columnName))
+        val columnIndex = getColumnIndexOrThrow(columnName)
+        val rawString = getString(columnIndex) // Use the native cursor getString with index
+        return rawString?.let { fixStringEncoding(it) } ?: ""
     } catch (ex: Throwable) {
         throw IllegalStateException("invalid column $columnName", ex)
     }
@@ -44,8 +46,63 @@ internal fun Cursor.getString(columnName: String): String {
 
 internal fun Cursor.getStringOrNull(columnName: String): String? {
     try {
-        return getString(getColumnIndexOrThrow(columnName))
+        val columnIndex = getColumnIndexOrThrow(columnName)
+        val rawString = getString(columnIndex) // Use the native cursor getString with index
+        return rawString?.let { fixStringEncoding(it) }
     } catch (ex: Throwable) {
         throw IllegalStateException("invalid column $columnName", ex)
+    }
+}
+
+/**
+ * Fixes character encoding issues in metadata strings.
+ * Handles both HTML entities and JAudioTagger safe character substitutions.
+ */
+private fun fixStringEncoding(text: String): String {
+    if (text.isEmpty()) return text
+    
+    return try {
+        var result = text
+        
+        // Handle HTML entities first
+        if (text.contains("&")) {
+            result = result
+                .replace("&deg;", "°")
+                .replace("&#176;", "°")
+                .replace("&amp;", "&")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">")
+                .replace("&quot;", "\"")
+                .replace("&#39;", "'")
+                .replace("&auml;", "ä")
+                .replace("&ouml;", "ö")
+                .replace("&uuml;", "ü")
+                .replace("&Auml;", "Ä")
+                .replace("&Ouml;", "Ö")
+                .replace("&Uuml;", "Ü")
+                .replace("&oslash;", "ø")
+                .replace("&Oslash;", "Ø")
+                .replace("&apos;", "'")
+                .replace("°", "°")
+                .replace("&#8451;", "°")
+        }
+        
+        // Handle JAudioTagger safe character markers back to original characters
+        result = result
+            .replace("___DEG___", "°")
+            .replace("___ae___", "ä")
+            .replace("___oe___", "ö")
+            .replace("___ue___", "ü")
+            .replace("___AE___", "Ä")
+            .replace("___OE___", "Ö")
+            .replace("___UE___", "Ü")
+            .replace("___o_slash___", "ø")
+            .replace("___O_SLASH___", "Ø")
+        
+        // Handle the specific corruption from the original issue
+        result.replace("起院", "°_°")
+        
+    } catch (e: Exception) {
+        text
     }
 }

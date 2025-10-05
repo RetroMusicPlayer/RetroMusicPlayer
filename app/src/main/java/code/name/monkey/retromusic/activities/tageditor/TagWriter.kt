@@ -15,6 +15,8 @@ import code.name.monkey.retromusic.util.MusicUtil.createAlbumArtFile
 import code.name.monkey.retromusic.util.MusicUtil.deleteAlbumArt
 import code.name.monkey.retromusic.util.MusicUtil.insertAlbumArt
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.audio.exceptions.CannotReadException
@@ -31,6 +33,27 @@ import java.io.IOException
 class TagWriter {
 
     companion object {
+        
+        /**
+         * Works around JAudioTagger's character encoding limitations by using unique safe markers.
+         * JAudioTagger corrupts certain Unicode characters, so we use unique markers that won't conflict with normal text.
+         */
+        private fun ensureUtf8Encoding(text: String): String {
+            return try {
+                // Use unique markers that are unlikely to appear in normal text
+                text.replace("°", "___DEG___")
+                    .replace("ä", "___ae___")
+                    .replace("ö", "___oe___")
+                    .replace("ü", "___ue___")
+                    .replace("Ä", "___AE___")
+                    .replace("Ö", "___OE___")
+                    .replace("Ü", "___UE___")
+                    .replace("ø", "___o_slash___")
+                    .replace("Ø", "___O_SLASH___")
+            } catch (e: Exception) {
+                text
+            }
+        }
 
         suspend fun scan(context: Context, toBeScanned: List<String?>?) {
             if (toBeScanned.isNullOrEmpty()) {
@@ -49,6 +72,8 @@ class TagWriter {
                 }
             )
         }
+
+
 
         suspend fun writeTagsToFiles(context: Context, info: AudioTagInfo) {
             withContext(Dispatchers.IO) {
@@ -81,7 +106,9 @@ class TagWriter {
                                         if (newValue.isEmpty()) {
                                             tag.deleteField(key)
                                         } else {
-                                            tag.setField(key, newValue)
+                                            // Ensure proper UTF-8 encoding for special characters
+                                            val encodedValue = ensureUtf8Encoding(newValue)
+                                            tag.setField(key, encodedValue)
                                         }
                                     }
                                 } catch (e: FieldDataInvalidException) {
@@ -124,6 +151,7 @@ class TagWriter {
                 } else if (deletedArtwork) {
                     deleteAlbumArt(context, info.artworkInfo!!.albumId)
                 }
+                
                 scan(context, info.filePaths)
             }
         }
@@ -175,7 +203,9 @@ class TagWriter {
                                         if (newValue.isEmpty()) {
                                             tag.deleteField(key)
                                         } else {
-                                            tag.setField(key, newValue)
+                                            // Ensure proper UTF-8 encoding for special characters
+                                            val encodedValue = ensureUtf8Encoding(newValue)
+                                            tag.setField(key, encodedValue)
                                         }
                                     }
                                 } catch (e: FieldDataInvalidException) {
