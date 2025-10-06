@@ -60,6 +60,11 @@ class PlayingNotificationClassic(
     val context: Context,
 ) : PlayingNotification(context) {
     private var primaryColor: Int = 0
+    
+    init {
+        // Set small icon immediately in constructor to ensure it's always present
+        setSmallIcon(R.drawable.ic_notification)
+    }
 
     private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
         val remoteViews = RemoteViews(
@@ -96,15 +101,30 @@ class PlayingNotificationClassic(
             )
         val deleteIntent = buildPendingIntent(context, ACTION_QUIT, null)
 
-        setSmallIcon(R.drawable.ic_notification)
+        // Ensure small icon is set first and properly with fallback
+        try {
+            setSmallIcon(R.drawable.ic_notification)
+        } catch (e: Exception) {
+            // Fallback to a system icon if custom icon fails
+            setSmallIcon(android.R.drawable.ic_media_play)
+        }
+        
+        // Set basic notification properties
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setCategory(NotificationCompat.CATEGORY_SERVICE)
         priority = NotificationCompat.PRIORITY_MAX
         setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        setOngoing(true)
+        
+        // Set channel ID explicitly for Android O+
+        if (VersionUtils.hasOreo()) {
+            setChannelId(NOTIFICATION_CHANNEL_ID)
+        }
+        
+        // Set custom views after basic notification properties
         setCustomContentView(notificationLayout)
         setCustomBigContentView(notificationLayoutBig)
-        setOngoing(true)
         val bigNotificationImageSize = context.resources
             .getDimensionPixelSize(R.dimen.notification_big_image_size)
         Glide.with(context)
