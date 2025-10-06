@@ -20,6 +20,7 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
     private var job: Job? = null
     private var counter = 0
     private var wasSeeking = false
+    private var initialPosition = 0
 
     private var startX = 0f
     private var startY = 0f
@@ -32,17 +33,20 @@ class MusicSeekSkipTouchListener(val activity: FragmentActivity, val next: Boole
             MotionEvent.ACTION_DOWN -> {
                 startX = event.x
                 startY = event.y
+                initialPosition = MusicPlayerRemote.songProgressMillis
                 job = activity.lifecycleScope.launch(Dispatchers.Default) {
                     counter = 0
                     while (isActive) {
                         delay(500)
                         wasSeeking = true
-                        var seekingDuration = MusicPlayerRemote.songProgressMillis
+                        var seekingDuration = initialPosition
                         if (next) {
                             seekingDuration += 5000 * (counter.floorDiv(2) + 1)
                         } else {
                             seekingDuration -= 5000 * (counter.floorDiv(2) + 1)
                         }
+                        // Ensure we don't seek to negative positions
+                        seekingDuration = seekingDuration.coerceAtLeast(0)
                         withContext(Dispatchers.Main) {
                             MusicPlayerRemote.seekTo(seekingDuration)
                         }
