@@ -277,8 +277,6 @@
     <string name="not_recently_played">Tidak baru-baru ini dimainkan</string>
     <string name="nothing_to_scan">Tidak ada yang dipindai.</string>
     <string name="nothing_to_see">Tidak ada yang bisa dilihat</string>
-    <string name="notification">Notifikasi</string>
-    <string name="notification_settings_summary">Sesuaikan gaya notifikasi</string>
     <string name="now_playing">Sedang diputar</string>
     <string name="now_playing_queue">Sekarang memutar antrean</string>
     <string name="now_playing_summary">Sesuaikan tampilan layar yang sedang diputar</string>

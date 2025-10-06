@@ -279,8 +279,6 @@
     <string name="not_recently_played">No reproduït recentment</string>
     <string name="nothing_to_scan">Res per escanejar.</string>
     <string name="nothing_to_see">No hi ha res a veure</string>
-    <string name="notification">Notificació</string>
-    <string name="notification_settings_summary">Personalitzar l\'estil de les notificacions</string>
     <string name="now_playing">Reproducció en curs</string>
     <string name="now_playing_queue">Cua de la reproducció en curs</string>
     <string name="now_playing_summary">Personalitza la pantalla de reproducció en curs</string>

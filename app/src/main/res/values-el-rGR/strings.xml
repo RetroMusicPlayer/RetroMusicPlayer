@@ -279,8 +279,6 @@
     <string name="not_recently_played">Καμία πρόσφατη αναπαραγωγή</string>
     <string name="nothing_to_scan">Δεν υπάρχει στοιχείο προς σάρωση.</string>
     <string name="nothing_to_see">Τίποτα για να δείτε</string>
-    <string name="notification">Ειδοποίηση</string>
-    <string name="notification_settings_summary">Προσαρμόστε το στυλ ειδοποίησης</string>
     <string name="now_playing">Παίζει τώρα</string>
     <string name="now_playing_queue">Τρέχουσα ουρά αναπαραγωγής</string>
     <string name="now_playing_summary">Προσαρμόστε την οθόνη αναπαραγωγής</string>

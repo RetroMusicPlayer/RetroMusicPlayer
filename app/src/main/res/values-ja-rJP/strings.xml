@@ -278,8 +278,6 @@
     <string name="not_recently_played">最近再生されていない曲</string>
     <string name="nothing_to_scan">スキャン対象がありません</string>
     <string name="nothing_to_see">表示するものがありません</string>
-    <string name="notification">通知</string>
-    <string name="notification_settings_summary">通知スタイルを変更</string>
     <string name="now_playing">再生画面</string>
     <string name="now_playing_queue">再生中のキュー</string>
     <string name="now_playing_summary">再生中の画面をカスタマイズ</string>

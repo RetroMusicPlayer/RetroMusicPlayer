@@ -277,8 +277,6 @@
     <string name="not_recently_played">မကြာသေးခင်က play မထားပါ</string>
     <string name="nothing_to_scan">စကန်ဖတ်စရာမရှိပါ</string>
     <string name="nothing_to_see">ကြည့်စရာတစ်ခုမှမရှိပါ</string>
-    <string name="notification">Notification</string>
-    <string name="notification_settings_summary">Notification ပုံစံကို စိတ်ကြိုက်ပြင်ဆင်မည်</string>
     <string name="now_playing">Now playing</string>
     <string name="now_playing_queue">Now playing queue</string>
     <string name="now_playing_summary">Now playing screen ကိုစိတ်ကြိုက်ပြင်ခြင်း</string>

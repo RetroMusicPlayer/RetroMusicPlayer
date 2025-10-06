@@ -217,8 +217,6 @@
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b>不在媒體庫。]]></string>
     <string name="nothing_to_scan">沒有項目可以掃描。</string>
     <string name="nothing_to_see">沒有什麼可以看的</string>
-    <string name="notification">通知欄</string>
-    <string name="notification_settings_summary">個人化通知欄樣式</string>
     <string name="now_playing">現在播放</string>
     <string name="now_playing_queue">現在播放清單</string>
     <string name="now_playing_summary">個人化現在播放界面</string>

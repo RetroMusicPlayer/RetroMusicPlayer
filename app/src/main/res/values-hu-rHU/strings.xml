@@ -279,8 +279,6 @@
     <string name="not_recently_played">Nem mostanában játszott</string>
     <string name="nothing_to_scan">Nincs mit beolvasni.</string>
     <string name="nothing_to_see">Nincs mit látni</string>
-    <string name="notification">Értesítés</string>
-    <string name="notification_settings_summary">Értesítési stílus testreszabása</string>
     <string name="now_playing">Most játszott</string>
     <string name="now_playing_queue">Sorban áll</string>
     <string name="now_playing_summary">Most játszott képernyő személyre szabása</string>

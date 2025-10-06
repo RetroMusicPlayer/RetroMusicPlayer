@@ -279,8 +279,6 @@
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Inget att skanna.</string>
     <string name="nothing_to_see">Ingenting att se</string>
-    <string name="notification">Notis</string>
-    <string name="notification_settings_summary">Anpassa utseendet på notisen</string>
     <string name="now_playing">Spelare</string>
     <string name="now_playing_queue">Spelkö</string>
     <string name="now_playing_summary">Anpassa spelarskärmen</string>

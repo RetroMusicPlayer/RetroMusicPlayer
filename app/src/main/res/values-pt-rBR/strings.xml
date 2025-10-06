@@ -279,8 +279,6 @@
     <string name="not_recently_played">Não reproduzido recentemente</string>
     <string name="nothing_to_scan">Nada para escanear.</string>
     <string name="nothing_to_see">Nada para ver</string>
-    <string name="notification">Notificação</string>
-    <string name="notification_settings_summary">Personalizar o estilo de notificação</string>
     <string name="now_playing">Tela de Reprodução</string>
     <string name="now_playing_queue">Fila de reprodução atual</string>
     <string name="now_playing_summary">Personalizar a tela de reprodução</string>

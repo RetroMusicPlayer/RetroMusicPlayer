@@ -279,8 +279,6 @@
     <string name="not_recently_played">Hindi kamakailan naipa-tugtog</string>
     <string name="nothing_to_scan">Walang ma-scan.</string>
     <string name="nothing_to_see">Walang makita</string>
-    <string name="notification">Abiso</string>
-    <string name="notification_settings_summary">I-customize ang istilo ng abiso</string>
     <string name="now_playing">Now playing</string>
     <string name="now_playing_queue">Now playing queue</string>
     <string name="now_playing_summary">I-customize ang screen sa now playing</string>

@@ -283,8 +283,6 @@
     <string name="not_recently_played">Нет недавно воспроизведённых треков</string>
     <string name="nothing_to_scan">Нет файлов для сканирования.</string>
     <string name="nothing_to_see">Нет файлов для сканирования</string>
-    <string name="notification">Уведомление</string>
-    <string name="notification_settings_summary">Настроить стиль уведомления</string>
     <string name="now_playing">Экран воспроизведения</string>
     <string name="now_playing_queue">Очередь треков</string>
     <string name="now_playing_summary">Настройка экрана воспроизведения</string>

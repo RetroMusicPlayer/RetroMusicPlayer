@@ -280,8 +280,6 @@
     <string name="not_recently_played">ಇತ್ತೀಚೆಗೆ ಪ್ಲೇ ಮಾಡಲಾಗಿಲ್ಲ</string>
     <string name="nothing_to_scan">ಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಏನೂ ಇಲ್ಲ.</string>
     <string name="nothing_to_see">ನೋಡಲು ಏನೂ ಇಲ್ಲ</string>
-    <string name="notification">ಅಧಿಸೂಚನೆ</string>
-    <string name="notification_settings_summary">ಅಧಿಸೂಚನೆ ಶೈಲಿಯನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ</string>
     <string name="now_playing">ಇವಾಗ ಪ್ಲೇ ಮಾಡಲಾಗುತ್ತಿರುವುದು</string>
     <string name="now_playing_queue">ಈಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಪಟ್ಟಿ</string>
     <string name="now_playing_summary">ಈಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಪರದೆಯನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ</string>

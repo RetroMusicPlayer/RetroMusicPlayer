@@ -283,8 +283,6 @@
     <string name="not_recently_played">Nepřehrané nedávno</string>
     <string name="nothing_to_scan">Nic pro skenování.</string>
     <string name="nothing_to_see">Není tu nic k vidění</string>
-    <string name="notification">Oznámení</string>
-    <string name="notification_settings_summary">Upravte si styl oznámení</string>
     <string name="now_playing">Nyní hraje</string>
     <string name="now_playing_queue">Fronta přehrávání</string>
     <string name="now_playing_summary">Přizpůsobte si obrazovku přehrávání</string>

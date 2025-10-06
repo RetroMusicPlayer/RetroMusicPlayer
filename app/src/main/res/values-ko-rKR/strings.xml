@@ -277,8 +277,6 @@
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">스캔할 것이 없습니다.</string>
     <string name="nothing_to_see">Nothing to see</string>
-    <string name="notification">알림</string>
-    <string name="notification_settings_summary">알림 스타일 변경</string>
     <string name="now_playing">지금 재생 중</string>
     <string name="now_playing_queue">현재 재생 대기열</string>
     <string name="now_playing_summary">Customize the now playing screen</string>

@@ -279,8 +279,6 @@
     <string name="not_recently_played">Al een tijdje niet beluisterd</string>
     <string name="nothing_to_scan">Niets om te scannen</string>
     <string name="nothing_to_see">Niks te zien hier, enkel leegte</string>
-    <string name="notification">Notificatie</string>
-    <string name="notification_settings_summary">Pas de notificatiestijl aan</string>
     <string name="now_playing">Speelt nu</string>
     <string name="now_playing_queue">Nu afspeel wachtrij</string>
     <string name="now_playing_summary">Pas het \"speelt nu\"-scherm aan</string>

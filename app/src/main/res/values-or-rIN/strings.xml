@@ -279,8 +279,6 @@
     <string name="not_recently_played">ନିକଟରେ ବଜାଯାଇନାହିଁ</string>
     <string name="nothing_to_scan">ସ୍କାନ୍ କରିବାକୁ କିଛି ନାହିଁ।</string>
     <string name="nothing_to_see">ଦେଖିବାକୁ କିଛି ନାହିଁ</string>
-    <string name="notification">ବିଜ୍ଞପ୍ତି</string>
-    <string name="notification_settings_summary">ବିଜ୍ଞପ୍ତି ଶୈଳୀ କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ</string>
     <string name="now_playing">ବର୍ତ୍ତମାନ ଚାଲୁଛି</string>
     <string name="now_playing_queue">ବର୍ତ୍ତମାନ ଚାଲୁଥିବା କ୍ୟୁ</string>
     <string name="now_playing_summary">ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍ କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ</string>
@@ -345,7 +343,6 @@
     <string name="pref_summary_bluetooth_playback">ବ୍ଲୁଟୁଥ୍ ଡିଭାଇସ୍ ସହ ସଂଯୋଗ ହେବା ମାତ୍ରେ ପ୍ଲେ କରିବା ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="pref_summary_blurred_album_art">ଲକ୍‌ସ୍କ୍ରିନ୍‌ରେ ଆଲବମ୍ କଭରକୁ ବ୍ଲର୍ କରନ୍ତୁ। ତୃତୀୟ ପକ୍ଷ ଆପ୍ ଏବଂ ୱିଜେଟ୍ ସହ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ</string>
     <string name="pref_summary_carousel_effect">ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍‌ରେ ଆଲବମ୍ ଆର୍ଟ ପାଇଁ କାରୋସେଲ ଇଫେକ୍ଟ। ଧ୍ୟାନ ଦିଅନ୍ତୁ ଯେ କାର୍ଡ ଏବଂ ବ୍ଲର୍ କାର୍ଡ ଥିମ୍ କାମ କରିବ ନାହିଁ</string>
-    <string name="pref_summary_classic_notification">କ୍ଲାସିକ୍ ବିଜ୍ଞପ୍ତି ଡିଜାଇନ୍ ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="pref_summary_colored_app">ବ୍ୟାକଗ୍ରାଉଣ୍ଡ ଏବଂ କଣ୍ଟ୍ରୋଲ୍ ବଟନ୍ ରଙ୍ଗ ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍‌ର ଆଲବମ୍ ଆର୍ଟ ଅନୁଯାୟୀ ପରିବର୍ତ୍ତନ ହୁଏ</string>
     <string name="pref_summary_colored_app_shortcuts">ଆପ୍ ସର୍ଟକଟ୍‌ଗୁଡ଼ିକୁ ଆକ୍ସେଣ୍ଟ ରଙ୍ଗରେ ରଙ୍ଗ କରେ। ପ୍ରତିଥର ଆପଣ ରଙ୍ଗ ବଦଳାଇଲେ ଏହାକୁ ପ୍ରଭାବୀ କରିବା ପାଇଁ ଟଗଲ୍ କରନ୍ତୁ</string>
     <string name="pref_summary_colored_notification">"ଆଲବମ୍ କଭରର ଉଜ୍ଜ୍ୱଳ ରଙ୍ଗରେ ବିଜ୍ଞପ୍ତିକୁ ରଙ୍ଗ କରେ"</string>
@@ -386,7 +383,6 @@
     <string name="pref_title_bluetooth_playback">ବ୍ଲୁଟୁଥ୍ ପ୍ଲେବ୍ୟାକ୍</string>
     <string name="pref_title_blurred_album_art">ଆଲବମ୍ କଭର ବ୍ଲର୍ କରନ୍ତୁ</string>
     <string name="pref_title_circle_button">ବୃତ୍ତାକାର ପ୍ଲେ ବଟନ୍</string>
-    <string name="pref_title_classic_notification">କ୍ଲାସିକ୍ ବିଜ୍ଞପ୍ତି ଡିଜାଇନ୍</string>
     <string name="pref_title_colored_app">ଆଡାପ୍ଟିଭ୍ ରଙ୍ଗ</string>
     <string name="pref_title_colored_notification">ରଙ୍ଗୀନ ବିଜ୍ଞପ୍ତି</string>
     <string name="pref_title_cross_fade">କ୍ରସ୍‌ଫେଡ୍ (ବିଟା)</string>

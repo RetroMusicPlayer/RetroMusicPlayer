@@ -281,8 +281,6 @@
     <string name="not_recently_played">Nu s-a redat recent</string>
     <string name="nothing_to_scan">Nimic de scanat.</string>
     <string name="nothing_to_see">Nimic de văzut</string>
-    <string name="notification">Notificare</string>
-    <string name="notification_settings_summary">Personalizează stil de notificare</string>
     <string name="now_playing">Se redă</string>
     <string name="now_playing_queue">Coada de redare</string>
     <string name="now_playing_summary">Personalizează ecranul de redare acum</string>

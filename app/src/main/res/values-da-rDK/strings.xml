@@ -279,8 +279,6 @@
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nothing to scan.</string>
     <string name="nothing_to_see">Nothing to see</string>
-    <string name="notification">Notification</string>
-    <string name="notification_settings_summary">Customize the notification style</string>
     <string name="now_playing">Now playing</string>
     <string name="now_playing_queue">Now playing queue</string>
     <string name="now_playing_summary">Customize the now playing screen</string>

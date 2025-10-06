@@ -68,7 +68,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         binding.nowPlayingSettings.setOnClickListener(this)
         binding.personalizeSettings.setOnClickListener(this)
         binding.imageSettings.setOnClickListener(this)
-        binding.notificationSettings.setOnClickListener(this)
         binding.otherSettings.setOnClickListener(this)
         binding.aboutSettings.setOnClickListener(this)
         binding.backupRestoreSettings.setOnClickListener(this)

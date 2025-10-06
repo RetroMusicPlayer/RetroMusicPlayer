@@ -277,8 +277,6 @@
     <string name="not_recently_played">ไม่มีการเล่นล่าสุด</string>
     <string name="nothing_to_scan">ไม่มีอะไรให้สแกน</string>
     <string name="nothing_to_see">ไม่มีอะไรให้ดู</string>
-    <string name="notification">การแสดงเตือน</string>
-    <string name="notification_settings_summary">ตั้งค่าการแจ้งเตือน</string>
     <string name="now_playing">Now Playing</string>
     <string name="now_playing_queue">คิวที่กำลังเล่นอยู่</string>
     <string name="now_playing_summary">ตั้งค่าหน้าจอ Now playing</string>

@@ -219,8 +219,6 @@
     <string name="not_listed_in_media_store"><![CDATA[<b>%s </b> మీడియా స్టోర్‌లో జాబితా చేయబడలేదు.]]></string>
     <string name="nothing_to_scan">స్కాన్ చేయడానికి ఏమీ లేదు.</string>
     <string name="nothing_to_see">చూడటానికి ఏమీ లేదు</string>
-    <string name="notification">నోటిఫికేషన్</string>
-    <string name="notification_settings_summary">నోటిఫికేషన్ శైలిని అనుకూలీకరించండి</string>
     <string name="now_playing">ఇప్పుడు ఆడుతున్నారు</string>
     <string name="now_playing_queue">ఇప్పుడు క్యూ ఆడుతున్నారు</string>
     <string name="now_playing_summary">ఇప్పుడు ప్లే అవుతున్న స్క్రీన్‌ను అనుకూలీకరించండి</string>

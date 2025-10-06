@@ -283,8 +283,6 @@
     <string name="not_recently_played">Нещодавно відтворені</string>
     <string name="nothing_to_scan">Нічого сканувати.</string>
     <string name="nothing_to_see">Порожньо</string>
-    <string name="notification">Сповіщення</string>
-    <string name="notification_settings_summary">Налаштувати стиль сповіщення</string>
     <string name="now_playing">Відтворюється зараз</string>
     <string name="now_playing_queue">Зараз в черзі відтворення</string>
     <string name="now_playing_summary">Налаштування екрану відтворення</string>

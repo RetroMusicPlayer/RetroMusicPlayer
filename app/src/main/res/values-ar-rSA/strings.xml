@@ -290,8 +290,6 @@
     <string name="not_recently_played">لم تشغّل مؤخراً</string>
     <string name="nothing_to_scan">لاشيء لفحصه.</string>
     <string name="nothing_to_see">لاشيء لفحصه</string>
-    <string name="notification">إشعارات</string>
-    <string name="notification_settings_summary">تخصيص نمط الإشعارات</string>
     <string name="now_playing">تشغيل الان</string>
     <string name="now_playing_queue">تسلسل التشغيل الان</string>
     <string name="now_playing_summary">تخصيص شاشة التشغيل الآن</string>

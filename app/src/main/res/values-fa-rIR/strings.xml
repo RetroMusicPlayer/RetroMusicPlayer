@@ -279,8 +279,6 @@
     <string name="not_recently_played">اخیراً پخش نشده</string>
     <string name="nothing_to_scan">هیچ چیزی برای اسکن نیست.</string>
     <string name="nothing_to_see">اینچا چیزی برای دیدن نیست</string>
-    <string name="notification">اعلان</string>
-    <string name="notification_settings_summary">اعلان‌ها را شخصی‌سازی کنید</string>
     <string name="now_playing">صفحه در حال پخش</string>
     <string name="now_playing_queue">لیست درحال پخش</string>
     <string name="now_playing_summary">صفحه پخش اهنگ را شخصی سازی کنید</string>

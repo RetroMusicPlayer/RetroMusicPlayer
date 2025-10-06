@@ -278,8 +278,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="not_recently_played">Không phát gần đây</string>
     <string name="nothing_to_scan">Không có gì để quét.</string>
     <string name="nothing_to_see">Không có gì để hiển thị</string>
-    <string name="notification">Thông báo</string>
-    <string name="notification_settings_summary">Tùy chỉnh kiểu thông báo</string>
     <string name="now_playing">Màn hình phát</string>
     <string name="now_playing_queue">Đang phát danh sách chờ</string>
     <string name="now_playing_summary">Tùy chỉnh màn hình phát</string>

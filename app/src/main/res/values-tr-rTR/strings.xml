@@ -279,8 +279,6 @@
     <string name="not_recently_played">Yakın zamanda oynatılmadı</string>
     <string name="nothing_to_scan">Aranacak herhangi bir şey yok.</string>
     <string name="nothing_to_see">Hiçbir şey yok</string>
-    <string name="notification">Bildirim</string>
-    <string name="notification_settings_summary">Bildirim stilini özelleştirin</string>
     <string name="now_playing">Şimdi oynatılıyor</string>
     <string name="now_playing_queue">Şimdi çalınıyor kuyruğu</string>
     <string name="now_playing_summary">Şimdi oynatılıyor ekranını özelleştirin</string>

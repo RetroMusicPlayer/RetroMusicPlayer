@@ -279,8 +279,6 @@
     <string name="not_recently_played">हाल ही में नहीं बजाया</string>
     <string name="nothing_to_scan">स्कैन करने के लिए कुछ भी नहीं</string>
     <string name="nothing_to_see">कुछ भी नहीं देखने के लिए</string>
-    <string name="notification">अधिसूचना</string>
-    <string name="notification_settings_summary">अधिसूचना शैली को अनुकूलित करें</string>
     <string name="now_playing">अभी चल रहा है</string>
     <string name="now_playing_queue">नाउ प्लेइंग कतार</string>
     <string name="now_playing_summary">नाउ प्लेइंग स्क्रीन को अनुकूलित करें</string>

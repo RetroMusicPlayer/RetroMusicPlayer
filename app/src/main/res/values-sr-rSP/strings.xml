@@ -281,8 +281,6 @@
     <string name="not_recently_played">Not recently played</string>
     <string name="nothing_to_scan">Nema se sta skenirati</string>
     <string name="nothing_to_see">Nothing to see</string>
-    <string name="notification">Obavestenja</string>
-    <string name="notification_settings_summary">Customize the notification style</string>
     <string name="now_playing">Репродукује се</string>
     <string name="now_playing_queue">Lista za trenutno pustanje</string>
     <string name="now_playing_summary">Customize the now playing screen</string>

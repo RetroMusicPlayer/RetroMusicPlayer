@@ -277,8 +277,6 @@
     <string name="not_recently_played">鮮少播放</string>
     <string name="nothing_to_scan">沒有可掃描的內容。</string>
     <string name="nothing_to_see">沒有內容</string>
-    <string name="notification">通知</string>
-    <string name="notification_settings_summary">自訂通知樣式</string>
     <string name="now_playing">現正播放</string>
     <string name="now_playing_queue">播放佇列</string>
     <string name="now_playing_summary">自訂現正播放畫面</string>

@@ -224,8 +224,6 @@
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> ez dator dendan zerrendatua]]></string>
     <string name="nothing_to_scan">Eskaneatzekorik ez</string>
     <string name="nothing_to_see">Nothing to see</string>
-    <string name="notification">Jakinarazpena</string>
-    <string name="notification_settings_summary">Jakinarazpen estiloa pertsonalizatu</string>
     <string name="now_playing">Orain erreproduzitzen</string>
     <string name="now_playing_queue">Erreprodukzio ilara</string>
     <string name="now_playing_summary">Pertsonalizatu orain erreproduzitzen pantaila</string>

@@ -283,8 +283,6 @@
     <string name="not_recently_played">Ostatnio nieodtwarzane</string>
     <string name="nothing_to_scan">Brak elementów do przeskanowania.</string>
     <string name="nothing_to_see">Pusto</string>
-    <string name="notification">Powiadomienie</string>
-    <string name="notification_settings_summary">Dostosuj wygląd powiadomień</string>
     <string name="now_playing">Teraz odtwarzane</string>
     <string name="now_playing_queue">Teraz odtwarzane</string>
     <string name="now_playing_summary">Dostosuj odtwarzacz</string>

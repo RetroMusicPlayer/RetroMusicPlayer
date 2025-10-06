@@ -280,8 +280,6 @@
     <string name="not_recently_played">Няма наскоро пуснати песни</string>
     <string name="nothing_to_scan">Няма файлове за сканиране.</string>
     <string name="nothing_to_see">Няма файлове за сканиране</string>
-    <string name="notification">Известия</string>
-    <string name="notification_settings_summary">Настройте стила на известията</string>
     <string name="now_playing">Възпроизвеждане</string>
     <string name="now_playing_queue">Опашка в екрана за възпроизвеждане</string>
     <string name="now_playing_summary">Настройка на екрана за възпроизвеждане</string>

@@ -279,8 +279,6 @@
     <string name="not_recently_played">Nicht kürzlich abgespielt</string>
     <string name="nothing_to_scan">Nichts zu scannen.</string>
     <string name="nothing_to_see">Nichts zu sehen</string>
-    <string name="notification">Benachrichtigung</string>
-    <string name="notification_settings_summary">Den Benachrichtigungsstil anpassen</string>
     <string name="now_playing">Aktuelle Wiedergabe</string>
     <string name="now_playing_queue">Wiedergabe-Warteschlange</string>
     <string name="now_playing_summary">Passe den Wiedergabe-Bildschirm an</string>

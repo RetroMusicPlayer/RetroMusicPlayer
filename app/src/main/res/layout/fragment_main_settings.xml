@@ -144,15 +144,6 @@
             app:settingListItemTitle="@string/pref_header_images" />
 
         <code.name.monkey.retromusic.views.SettingListItemView
-            android:id="@+id/notificationSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:settingListItemIcon="@drawable/ic_notifications_active"
-            app:settingListItemIconColor="@color/md_yellow_A400"
-            app:settingListItemText="@string/notification_settings_summary"
-            app:settingListItemTitle="@string/notification" />
-
-        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/otherSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
