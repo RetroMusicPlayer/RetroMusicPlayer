@@ -15,15 +15,20 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.contains
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import code.name.monkey.retromusic.HORIZONTAL_SWIPE_NAVIGATION
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsCastActivity
 import code.name.monkey.retromusic.extensions.*
+import code.name.monkey.retromusic.helper.HorizontalSwipeHelper
+import code.name.monkey.retromusic.helper.NavigationSwipeManager
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper.getSongs
 import code.name.monkey.retromusic.interfaces.IScrollHelper
@@ -34,6 +39,8 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logE
+import android.view.MotionEvent
+import android.view.View
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
@@ -43,6 +50,9 @@ class MainActivity : AbsCastActivity() {
         const val TAG = "MainActivity"
         const val EXPAND_PANEL = "expand_panel"
     }
+
+    private var swipeHelper: HorizontalSwipeHelper? = null
+    private val navigationSwipeManager = NavigationSwipeManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +66,17 @@ class MainActivity : AbsCastActivity() {
         WhatsNewFragment.showChangeLog(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Set up swipe navigation after everything is initialized
+        setupHorizontalSwipeNavigation()
+    }
+
     private fun setupNavigationController() {
-        val navController = findNavController(R.id.fragment_container)
-        val navInflater = navController.navInflater
-        val navGraph = navInflater.inflate(R.navigation.main_graph)
+        try {
+            val navController = findNavController(R.id.fragment_container)
+            val navInflater = navController.navInflater
+            val navGraph = navInflater.inflate(R.navigation.main_graph)
 
         val categoryInfo: CategoryInfo = PreferenceUtil.libraryCategory.first { it.visible }
         if (categoryInfo.visible) {
@@ -79,6 +96,17 @@ class MainActivity : AbsCastActivity() {
         }
         navController.graph = navGraph
         navigationView.setupWithNavController(navController)
+        
+        // Initialize swipe navigation manager
+        navigationSwipeManager.initialize(
+            navController = navController,
+            navigationView = navigationView,
+            isNavigationEnabled = { 
+                isBottomNavVisible && 
+                getBottomSheetBehavior().state == com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED 
+            }
+        )
+        
         // Scroll Fragment to top
         navigationView.setOnItemReselectedListener {
             currentFragment(R.id.fragment_container).apply {
@@ -109,11 +137,45 @@ class MainActivity : AbsCastActivity() {
                 ) // Hide Bottom Navigation Bar
             }
         }
+        } catch (e: Exception) {
+            // NavController not ready yet, defer setup
+            findViewById<View>(android.R.id.content).post {
+                setupNavigationController()
+            }
+        }
     }
 
     private fun saveTab(id: Int) {
         if (PreferenceUtil.libraryCategory.firstOrNull { it.category.id == id }?.visible == true) {
             PreferenceUtil.lastTab = id
+        }
+    }
+
+    private fun setupHorizontalSwipeNavigation() {
+        try {
+            if (!PreferenceUtil.horizontalSwipeNavigation) {
+                swipeHelper = null
+                return
+            }
+            
+            swipeHelper = HorizontalSwipeHelper(
+                context = this,
+                onSwipeDetected = { direction ->
+                    navigationSwipeManager.handleSwipe(direction)
+                }
+            )
+            
+        } catch (e: Exception) {
+            // Silently handle errors
+        }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
+        super.onSharedPreferenceChanged(sharedPreferences, key)
+        when (key) {
+            HORIZONTAL_SWIPE_NAVIGATION -> {
+                setupHorizontalSwipeNavigation()
+            }
         }
     }
 
@@ -210,5 +272,19 @@ class MainActivity : AbsCastActivity() {
             }
         }
         return id
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        // Let our swipe helper process the event first
+        swipeHelper?.onTouch(null, ev)
+        // Always let the normal touch handling continue
+        return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationSwipeManager.cleanup()
+        findViewById<View>(R.id.fragment_container)?.setOnTouchListener(null)
+        swipeHelper = null
     }
 }

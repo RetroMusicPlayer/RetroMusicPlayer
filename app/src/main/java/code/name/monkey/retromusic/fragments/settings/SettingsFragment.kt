@@ -24,13 +24,21 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.databinding.FragmentSettingsBinding
-import code.name.monkey.retromusic.extensions.findNavController
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorCallback
 
 class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private var navController: NavController? = null
+    private val destinationChangedListener = NavController.OnDestinationChangedListener { _, _, _ ->
+        _binding?.let { binding ->
+            navController?.currentDestination?.let { destination ->
+                binding.appBarLayout.title = getStringFromDestination(destination)
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentSettingsBinding.bind(view)
@@ -38,7 +46,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
     }
 
     private fun setupToolbar() {
-        val navController: NavController = findNavController(R.id.contentFrame)
+        navController = findNavController()
         with (binding.appBarLayout.toolbar) {
             setNavigationIcon(R.drawable.ic_arrow_back)
             isTitleCentered = false
@@ -47,10 +55,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
             }
         }
 
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            binding.appBarLayout.title =
-                navController.currentDestination?.let { getStringFromDestination(it) }.toString()
-        }
+        navController?.addOnDestinationChangedListener(destinationChangedListener)
     }
 
     private fun getStringFromDestination(currentDestination: NavDestination): String {
@@ -79,6 +84,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings), ColorCallback {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Remove the listener to prevent memory leaks and crashes
+        navController?.removeOnDestinationChangedListener(destinationChangedListener)
+        navController = null
         _binding = null
     }
 

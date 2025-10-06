@@ -74,6 +74,13 @@
             android:summary="@string/pref_summary_enable_search_playlist"
             android:title="@string/pref_title_enable_search_playlist" />
 
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="horizontal_swipe_navigation"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_horizontal_swipe_navigation"
+            android:title="@string/pref_title_horizontal_swipe_navigation" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
             android:entries="@array/pref_tab_text_mode_titles"

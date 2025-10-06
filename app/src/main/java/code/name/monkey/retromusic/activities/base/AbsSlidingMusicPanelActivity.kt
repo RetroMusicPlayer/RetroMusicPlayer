@@ -40,6 +40,7 @@ import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
 import code.name.monkey.retromusic.CAROUSEL_EFFECT
 import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
 import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.HORIZONTAL_SWIPE_NAVIGATION
 import code.name.monkey.retromusic.KEEP_SCREEN_ON
 import code.name.monkey.retromusic.LIBRARY_CATEGORIES
 import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
@@ -318,6 +319,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
             KEEP_SCREEN_ON -> {
                 maybeSetScreenOn()
+            }
+
+            HORIZONTAL_SWIPE_NAVIGATION -> {
+                // This will be handled in MainActivity
             }
         }
     }

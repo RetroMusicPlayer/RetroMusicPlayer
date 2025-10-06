@@ -14,37 +14,80 @@
  */
 package code.name.monkey.retromusic.extensions
 
-import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
+import androidx.navigation.NavOptions
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.google.android.material.navigation.NavigationBarView
 
-fun Fragment.navigate(@IdRes id: Int) = findNavController().navigate(id)
+/**
+ * Extension functions for navigation-related operations
+ */
 
-fun Fragment.findNavController(@IdRes id: Int): NavController {
-    val fragment = childFragmentManager.findFragmentById(id) as NavHostFragment
-    return fragment.navController
+/**
+ * Get the next visible tab in the navigation
+ */
+fun NavigationBarView.getNextTab(): Int? {
+    val currentItemId = selectedItemId
+    val visibleTabs = PreferenceUtil.libraryCategory.filter { it.visible }.map { it.category.id }
+    val currentIndex = visibleTabs.indexOf(currentItemId)
+    
+    return if (currentIndex != -1 && currentIndex < visibleTabs.size - 1) {
+        visibleTabs[currentIndex + 1]
+    } else null
 }
 
-fun Fragment.findActivityNavController(@IdRes id: Int): NavController {
-    return requireActivity().findNavController(id)
+/**
+ * Get the previous visible tab in the navigation
+ */
+fun NavigationBarView.getPreviousTab(): Int? {
+    val currentItemId = selectedItemId
+    val visibleTabs = PreferenceUtil.libraryCategory.filter { it.visible }.map { it.category.id }
+    val currentIndex = visibleTabs.indexOf(currentItemId)
+    
+    return if (currentIndex > 0) {
+        visibleTabs[currentIndex - 1]
+    } else null
 }
 
-fun AppCompatActivity.findNavController(@IdRes id: Int): NavController {
-    val fragment = supportFragmentManager.findFragmentById(id) as NavHostFragment
-    return fragment.navController
-}
-
-val fadeNavOptions
-    get() = navOptions {
-        anim {
-            enter = android.R.anim.fade_in
-            exit = android.R.anim.fade_out
-            popEnter = android.R.anim.fade_in
-            popExit = android.R.anim.fade_out
-        }
+/**
+ * Navigate to the next tab if available
+ */
+fun NavController.navigateToNextTab(navigationView: NavigationBarView): Boolean {
+    return try {
+        val nextTabId = navigationView.getNextTab()
+        if (nextTabId != null && currentDestination?.id != nextTabId) {
+            val navOptions = NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_right)
+                .setExitAnim(R.anim.slide_out_left)
+                .setPopEnterAnim(R.anim.slide_in_left)
+                .setPopExitAnim(R.anim.slide_out_right)
+                .build()
+            navigate(nextTabId, null, navOptions)
+            true
+        } else false
+    } catch (e: Exception) {
+        false
     }
+}
+
+/**
+ * Navigate to the previous tab if available
+ */
+fun NavController.navigateToPreviousTab(navigationView: NavigationBarView): Boolean {
+    return try {
+        val previousTabId = navigationView.getPreviousTab()
+        if (previousTabId != null && currentDestination?.id != previousTabId) {
+            val navOptions = NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_left)
+                .setExitAnim(R.anim.slide_out_right)
+                .setPopEnterAnim(R.anim.slide_in_right)
+                .setPopExitAnim(R.anim.slide_out_left)
+                .build()
+            navigate(previousTabId, null, navOptions)
+            true
+        } else false
+    } catch (e: Exception) {
+        false
+    }
+}

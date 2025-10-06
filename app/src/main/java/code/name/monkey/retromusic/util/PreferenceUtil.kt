@@ -764,6 +764,9 @@ object PreferenceUtil {
 
     val swipeDownToDismiss
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
+
+    val horizontalSwipeNavigation
+        get() = sharedPreferences.getBoolean(HORIZONTAL_SWIPE_NAVIGATION, true)
 }
 
 enum class CoverLyricsType {

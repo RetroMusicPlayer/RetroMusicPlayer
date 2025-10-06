@@ -366,6 +366,7 @@
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
     <string name="pref_summary_remember_tab">Navigate to the last used tab on start</string>
     <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_horizontal_swipe_navigation">Swipe left or right anywhere on screen to switch between library tabs (experimental)</string>
     <string name="pref_summary_show_lyrics">Display synced lyrics over album cover</string>
     <string name="pref_summary_suggestions">Show New Music Mix on homescreen</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Enables changing song by swiping anywhere on the now playing screen</string>
@@ -413,6 +414,7 @@
     <string name="pref_title_pause_history">Pause history</string>
     <string name="pref_title_remember_tab">Remember last tab</string>
     <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_horizontal_swipe_navigation">Horizontal swipe navigation</string>
     <string name="pref_title_show_lyrics">Show lyrics</string>
     <string name="pref_title_suggestions">Show suggestions</string>
     <string name="pref_title_swipe_anywhere_now_playing">Swipe anywhere to change song</string>
