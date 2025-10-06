@@ -97,7 +97,6 @@ class RealPlaylistRepository(
             } while (cursor.moveToNext())
         }
         cursor?.close()
-        // Sort using Collator for consistent behavior with other sections
         val collator = java.text.Collator.getInstance()
         return playlists.sortedWith { p1, p2 -> collator.compare(p1.name, p2.name) }
     }
