@@ -11,16 +11,120 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
+import code.name.monkey.retromusic.ALBUM_ARTISTS_ONLY
+import code.name.monkey.retromusic.ALBUM_ART_ON_LOCK_SCREEN
+import code.name.monkey.retromusic.ALBUM_COVER_STYLE
+import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
+import code.name.monkey.retromusic.ALBUM_DETAIL_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ALBUM_GRID_SIZE
+import code.name.monkey.retromusic.ALBUM_GRID_SIZE_LAND
+import code.name.monkey.retromusic.ALBUM_GRID_STYLE
+import code.name.monkey.retromusic.ALBUM_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ALBUM_SORT_ORDER
+import code.name.monkey.retromusic.APPBAR_MODE
+import code.name.monkey.retromusic.ARTIST_ALBUM_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_DETAIL_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_GRID_SIZE
+import code.name.monkey.retromusic.ARTIST_GRID_SIZE_LAND
+import code.name.monkey.retromusic.ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.ARTIST_SONG_SORT_ORDER
+import code.name.monkey.retromusic.ARTIST_SORT_ORDER
+import code.name.monkey.retromusic.AUDIO_FADE_DURATION
+import code.name.monkey.retromusic.AUTO_DOWNLOAD_IMAGES_POLICY
+import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.BLACK_THEME
+import code.name.monkey.retromusic.BLUETOOTH_PLAYBACK
+import code.name.monkey.retromusic.BLURRED_ALBUM_ART
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
+import code.name.monkey.retromusic.COLORED_APP_SHORTCUTS
+import code.name.monkey.retromusic.CROSS_FADE_DURATION
+import code.name.monkey.retromusic.CUSTOM_FONT
+import code.name.monkey.retromusic.DESATURATED_COLOR
+import code.name.monkey.retromusic.ENABLE_SEARCH_PLAYLIST
+import code.name.monkey.retromusic.EXPAND_NOW_PLAYING_PANEL
+import code.name.monkey.retromusic.EXTRA_SONG_INFO
+import code.name.monkey.retromusic.FILTER_SONG
+import code.name.monkey.retromusic.GENERAL_THEME
+import code.name.monkey.retromusic.GENRE_SORT_ORDER
+import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
+import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
+import code.name.monkey.retromusic.IGNORE_MEDIA_STORE_ARTWORK
+import code.name.monkey.retromusic.INITIALIZED_BLACKLIST
+import code.name.monkey.retromusic.KEEP_SCREEN_ON
+import code.name.monkey.retromusic.LANGUAGE_NAME
+import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
+import code.name.monkey.retromusic.LAST_CHANGELOG_VERSION
+import code.name.monkey.retromusic.LAST_DIRECTORY
+import code.name.monkey.retromusic.LAST_SLEEP_TIMER_VALUE
+import code.name.monkey.retromusic.LAST_USED_TAB
+import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.LOCALE_AUTO_STORE_ENABLED
+import code.name.monkey.retromusic.LOCK_SCREEN
+import code.name.monkey.retromusic.LYRICS_OPTIONS
+import code.name.monkey.retromusic.LYRICS_TYPE
+import code.name.monkey.retromusic.MANAGE_AUDIO_FOCUS
+import code.name.monkey.retromusic.MATERIAL_YOU
+import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
+import code.name.monkey.retromusic.NEXT_SLEEP_TIMER_ELAPSED_REALTIME
+import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
+import code.name.monkey.retromusic.PAUSE_HISTORY
+import code.name.monkey.retromusic.PAUSE_ON_ZERO_VOLUME
+import code.name.monkey.retromusic.PLAYBACK_PITCH
+import code.name.monkey.retromusic.PLAYBACK_SPEED
+import code.name.monkey.retromusic.PLAYLIST_GRID_SIZE
+import code.name.monkey.retromusic.PLAYLIST_GRID_SIZE_LAND
+import code.name.monkey.retromusic.PLAYLIST_SORT_ORDER
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.RECENTLY_PLAYED_CUTOFF
+import code.name.monkey.retromusic.REMEMBER_LAST_TAB
+import code.name.monkey.retromusic.SAF_SDCARD_URI
+import code.name.monkey.retromusic.SAVE_LAST_DIRECTORY
+import code.name.monkey.retromusic.SCREEN_ON_LYRICS
+import code.name.monkey.retromusic.SHOW_LYRICS
+import code.name.monkey.retromusic.SHOW_WHEN_LOCKED
+import code.name.monkey.retromusic.SLEEP_TIMER_FINISH_SONG
+import code.name.monkey.retromusic.SNOWFALL
+import code.name.monkey.retromusic.SONG_GRID_SIZE
+import code.name.monkey.retromusic.SONG_GRID_SIZE_LAND
+import code.name.monkey.retromusic.SONG_GRID_STYLE
+import code.name.monkey.retromusic.SONG_SORT_ORDER
+import code.name.monkey.retromusic.START_DIRECTORY
+import code.name.monkey.retromusic.SWIPE_ANYWHERE_NOW_PLAYING
+import code.name.monkey.retromusic.SWIPE_DOWN_DISMISS
+import code.name.monkey.retromusic.TAB_TEXT_MODE
+import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
+import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
+import code.name.monkey.retromusic.TOGGLE_HEADSET
+import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
+import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
+import code.name.monkey.retromusic.TOGGLE_VOLUME
+import code.name.monkey.retromusic.USER_NAME
+import code.name.monkey.retromusic.WALLPAPER_ACCENT
+import code.name.monkey.retromusic.WHITELIST_MUSIC
 import code.name.monkey.retromusic.extensions.getIntRes
 import code.name.monkey.retromusic.extensions.getStringOrDefault
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.folder.FoldersFragment
-import code.name.monkey.retromusic.helper.SortOrder.*
+import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.ArtistAlbumSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.ArtistSongSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.ArtistSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.GenreSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.PlaylistSortOrder
+import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.transform.*
+import code.name.monkey.retromusic.transform.CascadingPageTransformer
+import code.name.monkey.retromusic.transform.DepthTransformation
+import code.name.monkey.retromusic.transform.HingeTransformation
+import code.name.monkey.retromusic.transform.HorizontalFlipTransformation
+import code.name.monkey.retromusic.transform.NormalPageTransformer
+import code.name.monkey.retromusic.transform.VerticalFlipTransformation
+import code.name.monkey.retromusic.transform.VerticalStackTransformer
 import code.name.monkey.retromusic.util.theme.ThemeMode
 import code.name.monkey.retromusic.views.TopAppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -252,9 +356,6 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(
             TOGGLE_HOME_BANNER, false
         )
-    var isClassicNotification
-        get() = sharedPreferences.getBoolean(CLASSIC_NOTIFICATION, false)
-        set(value) = sharedPreferences.edit { putBoolean(CLASSIC_NOTIFICATION, value) }
 
     val isScreenOnEnabled get() = sharedPreferences.getBoolean(KEEP_SCREEN_ON, false)
 
@@ -309,14 +410,6 @@ object PreferenceUtil {
             putBoolean(COLORED_APP_SHORTCUTS, value)
         }
 
-    var isColoredNotification
-        get() = sharedPreferences.getBoolean(
-            COLORED_NOTIFICATION, true
-        )
-        set(value) = sharedPreferences.edit {
-            putBoolean(COLORED_NOTIFICATION, value)
-        }
-
     var isDesaturatedColor
         get() = sharedPreferences.getBoolean(
             DESATURATED_COLOR, false
@@ -348,15 +441,11 @@ object PreferenceUtil {
             "always" -> true
             "only_wifi" -> {
                 val connectivityManager = context.getSystemService<ConnectivityManager>()
-                if (VersionUtils.hasMarshmallow()) {
-                    val network = connectivityManager?.activeNetwork
-                    val capabilities = connectivityManager?.getNetworkCapabilities(network)
-                    capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                } else {
-                    val netInfo = connectivityManager?.activeNetworkInfo
-                    netInfo != null && netInfo.type == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting
-                }
+                val network = connectivityManager?.activeNetwork
+                val capabilities = connectivityManager?.getNetworkCapabilities(network)
+                capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
             }
+
             "never" -> false
             else -> false
         }

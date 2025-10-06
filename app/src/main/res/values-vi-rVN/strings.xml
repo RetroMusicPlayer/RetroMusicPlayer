@@ -344,7 +344,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_bluetooth_playback">Tự động phát nhạc sau khi kết nối với thiết bị Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Làm mờ ảnh bìa album trên màn hình khóa. Có thể gây ra sự cố với các ứng dụng và tiện ích của bên thứ ba</string>
     <string name="pref_summary_carousel_effect">Hiệu ứng băng chuyền cho ảnh bìa album trong màn hình phát. Lưu ý rằng nó không hoạt động với chủ đề Thẻ và Thẻ mờ</string>
-    <string name="pref_summary_classic_notification">Dùng thiết kế thông báo kiểu cổ điển</string>
     <string name="pref_summary_colored_app">Màu nền và các nút điều khiển sẽ thay đổi theo màu sắc ảnh bìa album từ màn hình phát</string>
     <string name="pref_summary_colored_app_shortcuts">Màu sắc trong lối tắt ứng dụng dùng màu sắc chủ đạo. Mỗi khi bạn thay đổi màu chủ đạo, hãy bật/tắt lại công tắc này để thay đổi có hiệu lực</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
@@ -385,7 +384,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_bluetooth_playback">Tự động phát Bluetooth</string>
     <string name="pref_title_blurred_album_art">Làm mờ bìa album</string>
     <string name="pref_title_circle_button">Nút chơi nhạc tròn</string>
-    <string name="pref_title_classic_notification">Thiết kế thông báo cổ điển</string>
     <string name="pref_title_colored_app">Màu sắc thích nghi</string>
     <string name="pref_title_colored_notification">Đổi màu thông báo</string>
     <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>

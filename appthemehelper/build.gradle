@@ -5,7 +5,7 @@ android {
     namespace "code.name.monkey.appthemehelper"
 
     defaultConfig {
-        minSdk 21
+        minSdk 24
         targetSdk 36
     }
     buildTypes {

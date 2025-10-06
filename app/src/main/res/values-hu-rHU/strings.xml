@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Amint csatlakoztatta a bluetooth készüléket, kezdje el a lejátszást</string>
     <string name="pref_summary_blurred_album_art">Elhomályosítja az album borítóját a zárolás képernyőjén. Problémákat okozhat harmadik féltől származó alkalmazásokkal és widgetekkel.</string>
     <string name="pref_summary_carousel_effect">Körhinta effektus a most játszott képernyőn lévő albumborítón. Ne feledje, hogy a Kártya és a Homályosított Kártya téma nem fog működni</string>
-    <string name="pref_summary_classic_notification">Használja a klasszikus értesítési kinézetet.</string>
     <string name="pref_summary_colored_app">A háttér és a vezérlőgombok színe a most játszott képernyőn megjelenő albumborító szerint változik</string>
     <string name="pref_summary_colored_app_shortcuts">Beszínezi az alkalmazás parancsikonjait a kijelölő színére. Minden alkalommal, amikor megváltoztattad a kijelölő színt, kérjük, kapcsold be ezt az opciót, hogy érvényesüljön.</string>
     <string name="pref_summary_colored_notification">"Értesítések színezése az albumborító domináns színei alapján."</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth lejátszás</string>
     <string name="pref_title_blurred_album_art">Elhomályosított albumborító</string>
     <string name="pref_title_circle_button">Kerek lejátszási gomb</string>
-    <string name="pref_title_classic_notification">Klasszikus értesítés design</string>
     <string name="pref_title_colored_app">Adaptív szín</string>
     <string name="pref_title_colored_notification">Színes értesítés</string>
     <string name="pref_title_cross_fade">Átfedés (Béta)</string>

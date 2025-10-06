@@ -166,9 +166,7 @@ class SleepTimerDialog : DialogFragment() {
 
     private fun makeTimerPendingIntent(flag: Int): PendingIntent {
         return PendingIntent.getService(
-            requireActivity(), 0, makeTimerIntent(), flag or if (VersionUtils.hasMarshmallow())
-                PendingIntent.FLAG_IMMUTABLE
-            else 0
+            requireActivity(), 0, makeTimerIntent(), flag or PendingIntent.FLAG_IMMUTABLE
         )
     }
 

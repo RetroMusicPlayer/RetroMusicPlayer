@@ -349,7 +349,6 @@
     <string name="pref_summary_bluetooth_playback">Начать воспроизведение сразу же после подключения устройства Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Размыть обложку альбома на экране блокировки. Может вызвать проблемы со сторонними приложениями и виджетами</string>
     <string name="pref_summary_carousel_effect">Эффект карусели для обложек альбома на экране воспроизведения. Эффект не работает для тем \"Карточка\" и \"Карточка с размытием\"</string>
-    <string name="pref_summary_classic_notification">Использовать классический дизайн уведомления</string>
     <string name="pref_summary_colored_app">Цвет фона и кнопок управления изменяется в соответствии с обложкой альбома с экрана воспроизведения</string>
     <string name="pref_summary_colored_app_shortcuts">Окрашивает ярлыки приложения в акцентный цвет. При каждой смене цвета включайте эту опцию вновь</string>
     <string name="pref_summary_colored_notification">"Окрашивает уведомление в доминирующий цвет обложки альбома"</string>
@@ -390,7 +389,6 @@
     <string name="pref_title_bluetooth_playback">Воспроизведение при подключении Bluetooth</string>
     <string name="pref_title_blurred_album_art">Размывать обложку альбома</string>
     <string name="pref_title_circle_button">Круглая кнопка воспроизведения</string>
-    <string name="pref_title_classic_notification">Классический дизайн уведомления</string>
     <string name="pref_title_colored_app">Адаптивный цвет</string>
     <string name="pref_title_colored_notification">Окрашенное уведомление</string>
     <string name="pref_title_cross_fade">Плавное затухание (бета-версия)</string>

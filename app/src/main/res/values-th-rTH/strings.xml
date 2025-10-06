@@ -343,7 +343,6 @@
     <string name="pref_summary_bluetooth_playback">เริ่มเล่นเพลงหลังจากเชื่อมต่อกับอุปกรณ์ Bluetooth</string>
     <string name="pref_summary_blurred_album_art">เบลอรูปปกอัลบัมบนล็อคสกรีน (อาจจะเกิดปัญหากับแอปอื่นๆได้)</string>
     <string name="pref_summary_carousel_effect">เปิดการใช้งาน Carousel สำหรับอัลบัมอาร์ตบนหน้าจอ Now playing (ไม่สามารถใช้งานได้กับธีม Card และ Blur Card)</string>
-    <string name="pref_summary_classic_notification">ใช้การแจ้งเตือนปกติ</string>
     <string name="pref_summary_colored_app">สีพื้นหลังและปุ่มการควบคุมจะขึ้นอยู่กับอัลบัมอาร์ตจากหน้าจอ Now playing</string>
     <string name="pref_summary_colored_app_shortcuts">การเน้นสีของทางลัดเข้าแอป (หากมีการเปลี่ยนแปลงค่าให้เลือกตรงนี้เพื่อเปิดใช้งาน)</string>
     <string name="pref_summary_colored_notification">"ใช้สีสดในของการแจ้งเตือน"</string>
@@ -384,7 +383,6 @@
     <string name="pref_title_bluetooth_playback">การเล่นด้วยอุปกรณ์ Bluetooth</string>
     <string name="pref_title_blurred_album_art">เบลอรูปปกอัลบัม</string>
     <string name="pref_title_circle_button">Circular play button</string>
-    <string name="pref_title_classic_notification">การแสดงเตือนคลาสสิก</string>
     <string name="pref_title_colored_app">Adaptive color</string>
     <string name="pref_title_colored_notification">สีการแจ้งเตือน</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

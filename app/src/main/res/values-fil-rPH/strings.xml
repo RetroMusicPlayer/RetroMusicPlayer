@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Magpe-play agad kapag nakakonekta sa bluetooth device</string>
     <string name="pref_summary_blurred_album_art">I-blur ang album cover sa lockscreen. Maaaring magdulot ng mga problema sa mga third party na app at widget</string>
     <string name="pref_summary_carousel_effect">Carousel effect para sa album art sa screen na nagpe-play ngayon. Tandaan na ang mga tema ng Card at Blur Card ay hindi gagana</string>
-    <string name="pref_summary_classic_notification">Gamitin ang klasikong disenyo ng notification</string>
     <string name="pref_summary_colored_app">Ang mga kulay ng background at control button ay nagbabago ayon sa album art mula sa screen ng nagpe-play ngayon</string>
     <string name="pref_summary_colored_app_shortcuts">Kinukulayan ang mga shortcut ng app sa kulay ng accent. Sa tuwing babaguhin mo ang kulay mangyaring i-toggle ito para magkabisa</string>
     <string name="pref_summary_colored_notification">"Kinukulayan ang notification sa makulay na kulay ng album cover"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_circle_button">Circular play button</string>
-    <string name="pref_title_classic_notification">Klasikong disenyo ng notification</string>
     <string name="pref_title_colored_app">Adaptive na kulay</string>
     <string name="pref_title_colored_notification">May kulay na notification</string>
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>

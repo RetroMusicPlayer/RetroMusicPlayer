@@ -356,7 +356,6 @@
     <string name="pref_summary_bluetooth_playback">بدء التشغيل بمجرد توصيل جهاز بلوتوث</string>
     <string name="pref_summary_blurred_album_art">ظبابية غطاء الألبوم على شاشة القفل . يمكن أن يسبب مشاكل في تطبيقات وويدجت الطرف الثالث</string>
     <string name="pref_summary_carousel_effect">التأثير الدائري لصورة الألبوم في شاشة التشغيل الآن. لاحظ أن مواضيع البطاقة و البطاقة الضبابية لن تعمل</string>
-    <string name="pref_summary_classic_notification">أستخدم تصميم الإشعارات التقليدي</string>
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
@@ -397,7 +396,6 @@
     <string name="pref_title_bluetooth_playback">تشغيل البلوتوث</string>
     <string name="pref_title_blurred_album_art">تضبيب صورة الالبوم</string>
     <string name="pref_title_circle_button">زر التشغيل الدائري</string>
-    <string name="pref_title_classic_notification">تصميم التنبيهات الكلاسيكي</string>
     <string name="pref_title_colored_app">اللون المتكيف</string>
     <string name="pref_title_colored_notification">التنبيهات الملونة</string>
     <string name="pref_title_cross_fade">التلاشي (تجريبي)</string>

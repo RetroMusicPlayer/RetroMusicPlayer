@@ -42,7 +42,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
                 R.id.audioSettings -> R.id.action_mainSettingsFragment_to_audioSettings
                 R.id.personalizeSettings -> R.id.action_mainSettingsFragment_to_personalizeSettingsFragment
                 R.id.imageSettings -> R.id.action_mainSettingsFragment_to_imageSettingFragment
-                R.id.notificationSettings -> R.id.action_mainSettingsFragment_to_notificationSettingsFragment
                 R.id.otherSettings -> R.id.action_mainSettingsFragment_to_otherSettingsFragment
                 R.id.aboutSettings -> R.id.action_mainSettingsFragment_to_aboutActivity
                 R.id.nowPlayingSettings -> R.id.action_mainSettingsFragment_to_nowPlayingSettingsFragment

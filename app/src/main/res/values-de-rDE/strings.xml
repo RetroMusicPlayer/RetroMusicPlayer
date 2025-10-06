@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">Wiedergabe starten, sobald das Bluetooth-Gerät verbunden ist</string>
     <string name="pref_summary_blurred_album_art">Weichzeichnen der Album-Cover auf dem Sperrbildschirm. Kann Probleme mit anderen Apps und Widgets verursachen</string>
     <string name="pref_summary_carousel_effect">Karussell-Effekt für Album-Cover auf dem Wiedergabe-Bildschirm. Die Designs Karte und Weichgezeichnete Karte funktionieren nicht</string>
-    <string name="pref_summary_classic_notification">Nutze das klassische Benachrichtigungs-Design</string>
     <string name="pref_summary_colored_app">Farbänderung von Hintergrund und Steuerelementen basierend auf dem Album-Cover vom Wiedergabe-Bildschirm</string>
     <string name="pref_summary_colored_app_shortcuts">Färbt die App-Verknüpfungen in der Akzentfarbe. Bitte nach jeder Änderung der Akzentfarbe erneut anwenden</string>
     <string name="pref_summary_colored_notification">"Färbt die Benachrichtigung in der lebendigen Farbe des Album-Covers"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">Bluetooth-Wiedergabe</string>
     <string name="pref_title_blurred_album_art">Album-Cover weichzeichnen</string>
     <string name="pref_title_circle_button">Runder Wiedergabeknopf</string>
-    <string name="pref_title_classic_notification">Klassischer Benachrichtigungsstil</string>
     <string name="pref_title_colored_app">Farbanpassung</string>
     <string name="pref_title_colored_notification">Farbige Benachrichtigungen</string>
     <string name="pref_title_cross_fade">Überblenden (experimentell)</string>

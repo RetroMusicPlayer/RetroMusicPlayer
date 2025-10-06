@@ -227,7 +227,7 @@ class FullPlaybackControlsFragment :
             val isFavorite: Boolean =
                 libraryViewModel.isSongFavorite(MusicPlayerRemote.currentSong.id)
             withContext(Dispatchers.Main) {
-                val icon = if (animate && VersionUtils.hasMarshmallow()) {
+                val icon = if (animate) {
                     if (isFavorite) R.drawable.avd_favorite else R.drawable.avd_unfavorite
                 } else {
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border

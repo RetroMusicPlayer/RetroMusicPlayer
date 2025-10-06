@@ -345,7 +345,6 @@
     <string name="pref_summary_bluetooth_playback">به محض اتصال به دستگاه بلوتوث شروع به پخش کنید</string>
     <string name="pref_summary_blurred_album_art">جلد آلبوم را روی صفحه قفل تار کنید. می تواند با برنامه ها و ویجت های شخص ثالث مشکل ایجاد کند</string>
     <string name="pref_summary_carousel_effect">جلوه چرخ فلک برای آلبوم هنرمند در صفحه در حال پخش. توجه داشته باشید که تم‌های کارت و کارت تاری کار نمی‌کنند</string>
-    <string name="pref_summary_classic_notification">از طراحی اعلان کلاسیک استفاده کنید</string>
     <string name="pref_summary_colored_app">رنگ‌های پس‌زمینه و دکمه کنترل با توجه به هنر آلبوم از صفحه در حال پخش تغییر می‌کنند</string>
     <string name="pref_summary_colored_app_shortcuts">میانبرهای برنامه را با رنگ تاکیدی رنگ می کند. هر بار که رنگ را تغییر می‌دهید، لطفاً آن را تغییر دهید تا تأثیر بگذارد</string>
     <string name="pref_summary_colored_notification">"به اعلان های جلد آلبوم\u2019 رنگ های متنوع بدهید"</string>
@@ -386,7 +385,6 @@
     <string name="pref_title_bluetooth_playback">پخش بلوتوث</string>
     <string name="pref_title_blurred_album_art">تار کردن جلد البوم</string>
     <string name="pref_title_circle_button">دکمه پخش دایره ای</string>
-    <string name="pref_title_classic_notification">از نمایش اعلان های موزیک به صورت کلاسیک استفاده کنید</string>
     <string name="pref_title_colored_app">رنگ تطبیقی</string>
     <string name="pref_title_colored_notification">اعلان رنگی</string>
     <string name="pref_title_cross_fade">پخش بعدی قبل از اتمام فعلی (میلی ثانیه)</string>
