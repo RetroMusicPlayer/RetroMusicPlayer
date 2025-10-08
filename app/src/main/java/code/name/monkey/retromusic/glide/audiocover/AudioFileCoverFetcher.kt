@@ -22,23 +22,108 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
 
+/**
+ * Fetcher for loading individual song cover art from audio files.
+ * 
+ * This fetcher implements a robust fallback strategy:
+ * 1. Primary: Extract embedded artwork from the audio file using MediaMetadataRetriever
+ * 2. Secondary: Use JAudioTagger for additional metadata format support
+ * 3. Tertiary: Look for external cover art files in the same directory
+ * 
+ * All operations are performed with comprehensive error handling to ensure
+ * the cover art system remains stable even with corrupted or inaccessible files.
+ */
 class AudioFileCoverFetcher(private val model: AudioFileCover) : DataFetcher<InputStream> {
+    
     private var stream: InputStream? = null
+    
+    companion object {
+        private const val TAG = "AudioFileCoverFetcher"
+    }
+    
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
-        val retriever = MediaMetadataRetriever()
+        var retriever: MediaMetadataRetriever? = null
+        
         try {
+            // Primary method: Use MediaMetadataRetriever for embedded artwork
+            retriever = MediaMetadataRetriever()
             retriever.setDataSource(model.filePath)
-            val picture = retriever.embeddedPicture
-            stream = if (picture != null) {
-                ByteArrayInputStream(picture)
-            } else {
-                AudioFileCoverUtils.fallback(model.filePath)
+            
+            val embeddedPicture = retriever.embeddedPicture
+            if (embeddedPicture != null && embeddedPicture.isNotEmpty()) {
+                stream = ByteArrayInputStream(embeddedPicture)
+                callback.onDataReady(stream!!)
+                return
             }
-            callback.onDataReady(stream)
-        } catch (e: FileNotFoundException) {
-            callback.onLoadFailed(e)
+            
+            // Secondary method: Try fallback methods (JAudioTagger + external files)
+            stream = AudioFileCoverUtils.fallback(model.filePath)
+            if (stream != null) {
+                callback.onDataReady(stream!!)
+                return
+            }
+            
+            // No artwork found - let Glide handle placeholder/error drawable
+            callback.onLoadFailed(
+                NoSuchElementException("No cover art found for file: ${model.filePath}")
+            )
+            
+        } catch (e: SecurityException) {
+            // Handle permission-related issues
+            handleFallbackOrFail(callback, e, "Permission denied accessing file")
+        } catch (e: IllegalArgumentException) {
+            // Handle invalid file path or format issues
+            handleFallbackOrFail(callback, e, "Invalid file path or format")
+        } catch (e: RuntimeException) {
+            // Handle MediaMetadataRetriever runtime exceptions
+            handleFallbackOrFail(callback, e, "MediaMetadataRetriever error")
+        } catch (e: Exception) {
+            // Handle any other unexpected exceptions
+            handleFallbackOrFail(callback, e, "Unexpected error during artwork extraction")
         } finally {
+            // Ensure MediaMetadataRetriever is always released
+            retriever?.let { safeReleaseRetriever(it) }
+        }
+    }
+    
+    /**
+     * Attempts fallback artwork loading when primary method fails.
+     * If fallback also fails, reports the original exception to Glide.
+     */
+    private fun handleFallbackOrFail(
+        callback: DataFetcher.DataCallback<in InputStream>,
+        originalException: Exception,
+        context: String
+    ) {
+        try {
+            stream = AudioFileCoverUtils.fallback(model.filePath)
+            if (stream != null) {
+                callback.onDataReady(stream!!)
+            } else {
+                callback.onLoadFailed(
+                    RuntimeException("$context: ${originalException.message}", originalException)
+                )
+            }
+        } catch (fallbackException: Exception) {
+            // If fallback also fails, report the original exception with context
+            callback.onLoadFailed(
+                RuntimeException(
+                    "$context. Fallback also failed: ${fallbackException.message}",
+                    originalException
+                )
+            )
+        }
+    }
+    
+    /**
+     * Safely releases MediaMetadataRetriever, ignoring any exceptions.
+     */
+    private fun safeReleaseRetriever(retriever: MediaMetadataRetriever) {
+        try {
             retriever.release()
+        } catch (e: Exception) {
+            // Ignore release exceptions - nothing we can do about them
+            // and they shouldn't affect the overall operation
         }
     }
 

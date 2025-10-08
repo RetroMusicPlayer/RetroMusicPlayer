@@ -21,25 +21,56 @@ import com.bumptech.glide.load.model.MultiModelLoaderFactory
 import com.bumptech.glide.signature.ObjectKey
 import java.io.InputStream
 
+/**
+ * Glide ModelLoader for loading cover art from individual audio files.
+ * 
+ * This loader integrates with Glide's loading pipeline to provide seamless
+ * individual song artwork loading with proper caching and error handling.
+ * It creates the appropriate fetcher and cache key for each audio file.
+ */
 class AudioFileCoverLoader : ModelLoader<AudioFileCover, InputStream> {
+    
+    /**
+     * Builds load data for the given audio file cover model.
+     * 
+     * @param audioFileCover The model containing the audio file path
+     * @param width Requested width (unused for audio covers)
+     * @param height Requested height (unused for audio covers)  
+     * @param options Additional loading options
+     * @return LoadData containing the cache key and fetcher
+     */
     override fun buildLoadData(
         audioFileCover: AudioFileCover,
         width: Int,
         height: Int,
         options: Options
     ): LoadData<InputStream> {
-        return LoadData(ObjectKey(audioFileCover.filePath), AudioFileCoverFetcher(audioFileCover))
+        return LoadData(
+            ObjectKey(audioFileCover.filePath), 
+            AudioFileCoverFetcher(audioFileCover)
+        )
     }
 
-    override fun handles(audioFileCover: AudioFileCover): Boolean {
-        return true
-    }
+    /**
+     * Determines if this loader can handle the given model.
+     * 
+     * @param audioFileCover The model to check
+     * @return Always true as this loader handles all AudioFileCover instances
+     */
+    override fun handles(audioFileCover: AudioFileCover): Boolean = true
 
+    /**
+     * Factory for creating AudioFileCoverLoader instances.
+     * Required by Glide's ModelLoader registration system.
+     */
     class Factory : ModelLoaderFactory<AudioFileCover, InputStream> {
+        
         override fun build(multiFactory: MultiModelLoaderFactory): ModelLoader<AudioFileCover, InputStream> {
             return AudioFileCoverLoader()
         }
 
-        override fun teardown() {}
+        override fun teardown() {
+            // No resources to clean up
+        }
     }
 }
