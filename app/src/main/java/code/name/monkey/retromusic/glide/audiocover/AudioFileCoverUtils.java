@@ -66,12 +66,9 @@ public class AudioFileCoverUtils {
       }
       
       if (mp3File.hasID3v1Tag()) {
-        try {
-          Artwork artwork = mp3File.getID3v1Tag().getFirstArtwork();
-          if (isValidArtwork(artwork)) {
-            return new ByteArrayInputStream(artwork.getBinaryData());
-          }
-        } catch (Exception e) {
+        Artwork artwork = mp3File.getID3v1Tag().getFirstArtwork();
+        if (isValidArtwork(artwork)) {
+          return new ByteArrayInputStream(artwork.getBinaryData());
         }
       }
       
