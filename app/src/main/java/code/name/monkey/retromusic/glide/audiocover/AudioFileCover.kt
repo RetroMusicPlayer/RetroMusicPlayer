@@ -15,21 +15,10 @@ package code.name.monkey.retromusic.glide.audiocover
 
 /** @author Karim Abou Zeid (kabouzeid)
  */
-/**
- * Model class representing an audio file for cover art extraction.
- * 
- * This class serves as a Glide model for loading individual song artwork
- * from audio files. It implements proper equality and hashing for efficient
- * caching and comparison operations.
- * 
- * @param filePath Absolute path to the audio file
- * 
- * @author Karim Abou Zeid (kabouzeid)
- */
 class AudioFileCover(val filePath: String) {
     
     init {
-        require(filePath.isNotBlank()) { "File path cannot be blank" }
+        require(filePath.isNotBlank()) { "File path cannot be blank. Received: '$filePath'" }
     }
     
     override fun hashCode(): Int {

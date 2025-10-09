@@ -65,29 +65,14 @@ object RetroGlideExtension {
         }
     }
 
-    /**
-     * Gets the appropriate model for loading song artwork.
-     * 
-     * This method prioritizes individual song embedded artwork over album-based covers
-     * to support per-track cover art display. The AudioFileCover loader will handle
-     * fallback to album art and external cover files if individual artwork is not available.
-     * 
-     * @param song The song to get artwork model for
-     * @return AudioFileCover model that will attempt individual song artwork first
-     */
     fun getSongModel(song: Song): Any {
-        return AudioFileCover(song.data)
+        return if (song.data.isNotBlank()) {
+            AudioFileCover(song.data)
+        } else {
+            getMediaStoreAlbumCoverUri(song.albumId)
+        }
     }
 
-    /**
-     * Gets album-based artwork model as a direct fallback option.
-     * 
-     * This method provides access to MediaStore album covers for cases where
-     * individual song artwork loading has failed and a direct album fallback is needed.
-     * 
-     * @param song The song to get album artwork model for
-     * @return MediaStore album cover URI
-     */
     fun getAlbumModel(song: Song): Any {
         return getMediaStoreAlbumCoverUri(song.albumId)
     }

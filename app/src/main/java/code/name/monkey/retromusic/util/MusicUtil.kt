@@ -142,41 +142,13 @@ object MusicUtil : KoinComponent {
         return trackNumberToFix % 1000
     }
 
-    /**
-     * Generates a display-friendly track number for UI presentation.
-     * 
-     * This method implements intelligent track numbering with multiple fallback strategies:
-     * 1. Uses embedded track metadata when available and valid
-     * 2. For single-song contexts, always displays "1" 
-     * 3. For multi-song contexts without metadata, uses position-based numbering
-     * 
-     * The method handles iTunes-style track numbering (e.g., 1002 for track 2 of CD 1)
-     * by extracting the actual track number using modulo arithmetic.
-     * 
-     * @param song The song to generate track number for
-     * @param position Zero-based position in the current list/album
-     * @param totalSongs Total number of songs in the current context
-     * @return User-friendly track number string (never null or empty)
-     * 
-     * @throws IllegalArgumentException if position is negative or >= totalSongs
-     */
     @JvmStatic
-    fun getDisplayTrackNumber(song: Song, position: Int, totalSongs: Int): String {
-        require(position >= 0) { "Position must be non-negative, got: $position" }
-        require(position < totalSongs) { "Position ($position) must be less than total songs ($totalSongs)" }
-        require(totalSongs > 0) { "Total songs must be positive, got: $totalSongs" }
-        
+    fun getDisplayTrackNumber(song: Song, position: Int): String {
         val fixedTrackNumber = getFixedTrackNumber(song.trackNumber)
-        
-        return when {
-            // Use metadata track number if available and valid
-            fixedTrackNumber > 0 -> fixedTrackNumber.toString()
-            
-            // Single song context - always show "1"
-            totalSongs == 1 -> "1"
-            
-            // Multi-song context without valid metadata - use 1-based position
-            else -> (position + 1).toString()
+        return if (fixedTrackNumber > 0) {
+            fixedTrackNumber.toString()
+        } else {
+            (position + 1).toString()
         }
     }
 
