@@ -677,8 +677,13 @@ class MusicService : MediaBrowserServiceCompat(),
                 quit()
             }
         } else {
-            queue.position = getNextPosition(false)
-            prepareNextImpl()
+            if (queue.isLastTrack) {
+                queue.position = getNextPosition(false)
+                prepareNextImpl()
+            } else {
+                // ExoPlayer started playing next song
+                queue.position = queue.position + 1
+            }
             notifyChange(META_CHANGED)
         }
     }
