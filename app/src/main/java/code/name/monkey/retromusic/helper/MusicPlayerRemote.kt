@@ -67,18 +67,18 @@ object MusicPlayerRemote : KoinComponent {
 
     var position: Int
         get() = if (musicService != null) {
-            musicService!!.position
+            musicService!!.queue.position
         } else -1
         set(position) {
             if (musicService != null) {
-                musicService!!.position = position
+                musicService!!.queue.position = position
             }
         }
 
     @JvmStatic
     val playingQueue: List<Song>
         get() = if (musicService != null) {
-            musicService?.playingQueue as List<Song>
+            musicService?.queue?.playingQueue as List<Song>
         } else listOf()
 
     val songProgressMillis: Int
@@ -169,10 +169,6 @@ object MusicPlayerRemote : KoinComponent {
         return null
     }
 
-    fun getQueueDurationSongs(): Int {
-        return musicService?.playingQueue?.size ?: -1
-    }
-
     fun playSongAt(position: Int) {
         musicService?.playSongAt(position)
     }
@@ -259,7 +255,7 @@ object MusicPlayerRemote : KoinComponent {
 
     fun getQueueDurationMillis(position: Int): Long {
         return if (musicService != null) {
-            musicService!!.getQueueDurationMillis(position)
+            musicService!!.queue.duration(position)
         } else -1
     }
 

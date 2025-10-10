@@ -119,7 +119,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent.get
-import java.util.Objects
 import java.util.Random
 
 
@@ -127,11 +126,9 @@ import java.util.Random
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal. Modified by Prathamesh More
  */
 class MusicService : MediaBrowserServiceCompat(),
-    OnSharedPreferenceChangeListener, PlaybackCallbacks, OnAudioVolumeChangedListener {
+    OnSharedPreferenceChangeListener, PlaybackCallbacks, OnAudioVolumeChangedListener,
+    PlayingQueue.QueueChangedCallback {
     private val musicBind: IBinder = MusicBinder()
-
-    @JvmField
-    var nextPosition = -1
 
     @JvmField
     var pendingQuit = false
@@ -146,8 +143,6 @@ class MusicService : MediaBrowserServiceCompat(),
     private var trackEndedByCrossfade = false
     private val serviceScope = CoroutineScope(Job() + Main)
 
-    @JvmField
-    var position = -1
     private val appWidgetBig = AppWidgetBig.instance
     private val appWidgetCard = AppWidgetCard.instance
     private val appWidgetClassic = AppWidgetClassic.instance
@@ -201,10 +196,8 @@ class MusicService : MediaBrowserServiceCompat(),
     private lateinit var mediaStoreObserver: ContentObserver
     private var musicPlayerHandlerThread: HandlerThread? = null
     private var notHandledMetaChangedForCurrentTrack = false
-    private var originalPlayingQueue = ArrayList<Song>()
 
-    @JvmField
-    var playingQueue = ArrayList<Song>()
+    var queue = PlayingQueue(this)
 
     private var playerHandler: Handler? = null
 
@@ -387,27 +380,19 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun addSong(position: Int, song: Song) {
-        playingQueue.add(position, song)
-        originalPlayingQueue.add(position, song)
-        notifyChange(QUEUE_CHANGED)
+        queue.addSong(position, song)
     }
 
     fun addSong(song: Song) {
-        playingQueue.add(song)
-        originalPlayingQueue.add(song)
-        notifyChange(QUEUE_CHANGED)
+        queue.addSong(song)
     }
 
     fun addSongs(position: Int, songs: List<Song>?) {
-        playingQueue.addAll(position, songs!!)
-        originalPlayingQueue.addAll(position, songs)
-        notifyChange(QUEUE_CHANGED)
+        queue.addSongs(position, songs)
     }
 
     fun addSongs(songs: List<Song>?) {
-        playingQueue.addAll(songs!!)
-        originalPlayingQueue.addAll(songs)
-        notifyChange(QUEUE_CHANGED)
+        queue.addSongs(songs)
     }
 
     fun back(force: Boolean) {
@@ -419,10 +404,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun clearQueue() {
-        playingQueue.clear()
-        originalPlayingQueue.clear()
-        setPosition(-1)
-        notifyChange(QUEUE_CHANGED)
+        queue.clear()
     }
 
     fun cycleRepeatMode() {
@@ -437,35 +419,35 @@ class MusicService : MediaBrowserServiceCompat(),
         get() = playbackManager.audioSessionId
 
     val currentSong: Song
-        get() = getSongAt(getPosition())
+        get() = queue.getSongAt(getPosition())
 
     val nextSong: Song?
-        get() = if (isLastTrack && repeatMode == REPEAT_MODE_NONE) {
+        get() = if (queue.isLastTrack && repeatMode == REPEAT_MODE_NONE) {
             null
         } else {
-            getSongAt(getNextPosition(false))
+            queue.getSongAt(getNextPosition(false))
         }
 
     private fun getNextPosition(force: Boolean): Int {
         var position = getPosition() + 1
         when (repeatMode) {
-            REPEAT_MODE_ALL -> if (isLastTrack) {
+            REPEAT_MODE_ALL -> if (queue.isLastTrack) {
                 position = 0
             }
 
             REPEAT_MODE_THIS -> if (force) {
-                if (isLastTrack) {
+                if (queue.isLastTrack) {
                     position = 0
                 }
             } else {
                 position -= 1
             }
 
-            REPEAT_MODE_NONE -> if (isLastTrack) {
+            REPEAT_MODE_NONE -> if (queue.isLastTrack) {
                 position -= 1
             }
 
-            else -> if (isLastTrack) {
+            else -> if (queue.isLastTrack) {
                 position -= 1
             }
         }
@@ -473,7 +455,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun getPosition(): Int {
-        return position
+        return queue.position
     }
 
     private fun setPosition(position: Int) {
@@ -488,12 +470,12 @@ class MusicService : MediaBrowserServiceCompat(),
         var newPosition = getPosition() - 1
         when (repeatMode) {
             REPEAT_MODE_ALL -> if (newPosition < 0) {
-                newPosition = playingQueue.size - 1
+                newPosition = queue.size() - 1
             }
 
             REPEAT_MODE_THIS -> if (force) {
                 if (newPosition < 0) {
-                    newPosition = playingQueue.size - 1
+                    newPosition = queue.size() - 1
                 }
             } else {
                 newPosition = getPosition()
@@ -510,14 +492,6 @@ class MusicService : MediaBrowserServiceCompat(),
         return newPosition
     }
 
-    fun getQueueDurationMillis(position: Int): Long {
-        var duration: Long = 0
-        for (i in position + 1 until playingQueue.size) {
-            duration += playingQueue[i].duration
-        }
-        return duration
-    }
-
     private fun getShuffleMode(): Int {
         return shuffleMode
     }
@@ -529,33 +503,16 @@ class MusicService : MediaBrowserServiceCompat(),
         when (shuffleMode) {
             SHUFFLE_MODE_SHUFFLE -> {
                 this.shuffleMode = shuffleMode
-                makeShuffleList(playingQueue, getPosition())
-                position = 0
+                queue.shuffle()
             }
 
             SHUFFLE_MODE_NONE -> {
                 this.shuffleMode = shuffleMode
-                val currentSongId = Objects.requireNonNull(currentSong).id
-                playingQueue = ArrayList(originalPlayingQueue)
-                var newPosition = 0
-                for (song in playingQueue) {
-                    if (song.id == currentSongId) {
-                        newPosition = playingQueue.indexOf(song)
-                    }
-                }
-                position = newPosition
+                queue.unshuffle(currentSong)
             }
         }
         handleAndSendChangeInternal(SHUFFLE_MODE_CHANGED)
         notifyChange(QUEUE_CHANGED)
-    }
-
-    private fun getSongAt(position: Int): Song {
-        return if ((position >= 0) && (position < playingQueue.size)) {
-            playingQueue[position]
-        } else {
-            emptySong
-        }
     }
 
     val songDurationMillis: Int
@@ -573,36 +530,14 @@ class MusicService : MediaBrowserServiceCompat(),
         playingNotification = PlayingNotification.from(this, notificationManager!!, mediaSession!!)
     }
 
-    private val isLastTrack: Boolean
-        get() = getPosition() == playingQueue.size - 1
-
     val isPlaying: Boolean
         get() = playbackManager.isPlaying
 
     fun moveSong(from: Int, to: Int) {
-        if (from == to) {
-            return
-        }
-        val currentPosition = getPosition()
-        val songToMove = playingQueue.removeAt(from)
-        playingQueue.add(to, songToMove)
-        if (getShuffleMode() == SHUFFLE_MODE_NONE) {
-            val tmpSong = originalPlayingQueue.removeAt(from)
-            originalPlayingQueue.add(to, tmpSong)
-        }
-        when {
-            currentPosition in to until from -> {
-                position = currentPosition + 1
-            }
+        queue.moveSong(from, to)
+    }
 
-            currentPosition in (from + 1)..to -> {
-                position = currentPosition - 1
-            }
-
-            from == currentPosition -> {
-                position = to
-            }
-        }
+    override fun notifyQueueChanged() {
         notifyChange(QUEUE_CHANGED)
     }
 
@@ -711,14 +646,14 @@ class MusicService : MediaBrowserServiceCompat(),
         acquireWakeLock()
         // if there is a timer finished, don't continue
         if (pendingQuit
-            || (repeatMode == REPEAT_MODE_NONE && isLastTrack)
+            || (repeatMode == REPEAT_MODE_NONE && queue.isLastTrack)
         ) {
             quit()
             seek(0, false)
             if (pendingQuit) {
                 pendingQuit = false
-            } else if (repeatMode == REPEAT_MODE_NONE && isLastTrack) {
-                position = 0
+            } else if (repeatMode == REPEAT_MODE_NONE && queue.isLastTrack) {
+                queue.position = 0
                 notifyChange(QUEUE_CHANGED)
             }
         } else {
@@ -733,7 +668,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     override fun onTrackWentToNext() {
-        if (pendingQuit || repeatMode == REPEAT_MODE_NONE && isLastTrack) {
+        if (pendingQuit || repeatMode == REPEAT_MODE_NONE && queue.isLastTrack) {
             playbackManager.setNextDataSource(null)
             pause(false)
             seek(0, false)
@@ -742,7 +677,7 @@ class MusicService : MediaBrowserServiceCompat(),
                 quit()
             }
         } else {
-            position = nextPosition
+            queue.position = getNextPosition(false)
             prepareNextImpl()
             notifyChange(META_CHANGED)
         }
@@ -767,26 +702,21 @@ class MusicService : MediaBrowserServiceCompat(),
         if (!playingQueue.isNullOrEmpty()
             && startPosition >= 0 && startPosition < playingQueue.size
         ) {
-            // it is important to copy the playing queue here first as we might add/remove songs later
-            originalPlayingQueue = ArrayList(playingQueue)
-            this.playingQueue = ArrayList(originalPlayingQueue)
-            var position = startPosition
+            queue.setQueue(playingQueue, startPosition)
             if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
-                makeShuffleList(this.playingQueue, startPosition)
-                position = 0
+                queue.shuffle()
             }
             if (startPlaying) {
-                playSongAt(position)
+                playSongAt(queue.position)
             } else {
-                setPosition(position)
+                setPosition(queue.position)
             }
-            notifyChange(QUEUE_CHANGED)
         }
     }
 
     @Synchronized
     fun openTrackAndPrepareNextAt(position: Int, completion: (success: Boolean) -> Unit) {
-        this.position = position
+        queue.position = position
         openCurrent { success ->
             completion(success)
             if (success) {
@@ -842,8 +772,7 @@ class MusicService : MediaBrowserServiceCompat(),
     fun prepareNextImpl() {
         try {
             val nextPosition = getNextPosition(false)
-            playbackManager.setNextDataSource(getSongAt(nextPosition).uri)
-            this.nextPosition = nextPosition
+            playbackManager.setNextDataSource(queue.getSongAt(nextPosition).uri)
         } catch (ignored: Exception) {
         }
     }
@@ -883,28 +812,11 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun removeSong(position: Int) {
-        if (getShuffleMode() == SHUFFLE_MODE_NONE) {
-            playingQueue.removeAt(position)
-            originalPlayingQueue.removeAt(position)
-        } else {
-            originalPlayingQueue.remove(playingQueue.removeAt(position))
-        }
-        rePosition(position)
-        notifyChange(QUEUE_CHANGED)
+        queue.removeSong(position)
     }
 
     private fun removeSongImpl(song: Song) {
-        val deletePosition = playingQueue.indexOf(song)
-        if (deletePosition != -1) {
-            playingQueue.removeAt(deletePosition)
-            rePosition(deletePosition)
-        }
-
-        val originalDeletePosition = originalPlayingQueue.indexOf(song)
-        if (originalDeletePosition != -1) {
-            originalPlayingQueue.removeAt(originalDeletePosition)
-            rePosition(originalDeletePosition)
-        }
+        queue.removeSongImpl(song)
     }
 
     fun removeSong(song: Song) {
@@ -919,21 +831,8 @@ class MusicService : MediaBrowserServiceCompat(),
         notifyChange(QUEUE_CHANGED)
     }
 
-    private fun rePosition(deletedPosition: Int) {
-        val currentPosition = getPosition()
-        if (deletedPosition < currentPosition) {
-            position = currentPosition - 1
-        } else if (deletedPosition == currentPosition) {
-            if (playingQueue.size > deletedPosition) {
-                setPosition(position)
-            } else {
-                setPosition(position - 1)
-            }
-        }
-    }
-
     private suspend fun restoreQueuesAndPositionIfNecessary() {
-        if (!queuesRestored && playingQueue.isEmpty()) {
+        if (!queuesRestored && queue.isEmpty()) {
             withContext(IO) {
                 val restoredQueue =
                     MusicPlaybackQueueStore.getInstance(this@MusicService).savedPlayingQueue
@@ -948,9 +847,7 @@ class MusicService : MediaBrowserServiceCompat(),
                         SAVED_POSITION_IN_TRACK, -1
                     )
                 if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
-                    originalPlayingQueue = ArrayList(restoredOriginalQueue)
-                    playingQueue = ArrayList(restoredQueue)
-                    position = restoredPosition
+                    queue.restore(restoredOriginalQueue, restoredQueue, restoredPosition)
                     withContext(Main) {
                         openCurrent {
                             prepareNext()
@@ -968,7 +865,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
                     sendChangeInternal(QUEUE_CHANGED)
                     mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
-                    mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
+                    mediaSession?.setQueue(queue.playingQueue.toMediaSessionQueue())
                 }
             }
             queuesRestored = true
@@ -1059,7 +956,7 @@ class MusicService : MediaBrowserServiceCompat(),
             )
             .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.year.toLong())
             .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
-            .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, playingQueue.size.toLong())
+            .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, queue.size().toLong())
 
         // We must send the album art in METADATA_KEY_ALBUM_ART key on A13+ or
         // else album art is blurry in notification
@@ -1155,10 +1052,10 @@ class MusicService : MediaBrowserServiceCompat(),
 
             QUEUE_CHANGED -> {
                 mediaSession?.setQueueTitle(getString(R.string.now_playing_queue))
-                mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
+                mediaSession?.setQueue(queue.playingQueue.toMediaSessionQueue())
                 updateMediaSessionMetaData(::updateMediaSessionPlaybackState) // because playing queue size might have changed
                 saveQueues()
-                if (playingQueue.size > 0) {
+                if (queue.size() > 0) {
                     prepareNext()
                 } else {
                     stopForegroundAndNotification()
@@ -1230,7 +1127,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun restorePlaybackState(wasPlaying: Boolean, progress: Int) {
         playbackManager.setCallbacks(this)
-        openTrackAndPrepareNextAt(position) { success ->
+        openTrackAndPrepareNextAt(queue.position) { success ->
             if (success) {
                 seek(progress)
                 if (wasPlaying) {
@@ -1329,7 +1226,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private fun saveQueues() {
         serviceScope.launch(IO) {
             MusicPlaybackQueueStore.getInstance(this@MusicService)
-                .saveQueues(playingQueue, originalPlayingQueue)
+                .saveQueues(queue.playingQueue, queue.originalPlayingQueue)
         }
     }
 

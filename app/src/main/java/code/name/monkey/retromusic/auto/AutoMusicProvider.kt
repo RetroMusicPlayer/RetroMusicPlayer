@@ -102,7 +102,7 @@ class AutoMusicProvider(
                 )
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE ->
-                mMusicService?.get()?.playingQueue
+                mMusicService?.get()?.queue?.playingQueue
                     ?.let {
                         for (song in it) {
                             mediaItems.add(

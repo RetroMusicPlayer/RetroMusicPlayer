@@ -96,7 +96,7 @@ class MediaSessionCallback(
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> topPlayedRepository.recentlyPlayedTracks()
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SUGGESTIONS -> topPlayedRepository.recentlyPlayedTracks()
                     AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> topPlayedRepository.recentlyPlayedTracks()
-                    else -> musicService.playingQueue
+                    else -> musicService.queue.playingQueue
                 }
                 songs.addAll(tracks)
                 var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
