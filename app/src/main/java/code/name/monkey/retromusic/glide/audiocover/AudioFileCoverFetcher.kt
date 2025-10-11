@@ -18,18 +18,12 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.data.DataFetcher
 import java.io.ByteArrayInputStream
-import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
-
 
 class AudioFileCoverFetcher(private val model: AudioFileCover) : DataFetcher<InputStream> {
     
     private var stream: InputStream? = null
-    
-    companion object {
-        private const val TAG = "AudioFileCoverFetcher"
-    }
     
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
         var retriever: MediaMetadataRetriever? = null

@@ -58,7 +58,7 @@ object RetroGlideExtension {
     }
 
     private fun getSongModel(song: Song, ignoreMediaStore: Boolean): Any {
-        return if (ignoreMediaStore) {
+        return if (ignoreMediaStore && song.data.isNotBlank()) {
             AudioFileCover(song.data)
         } else {
             getMediaStoreAlbumCoverUri(song.albumId)
@@ -66,16 +66,10 @@ object RetroGlideExtension {
     }
 
     fun getSongModel(song: Song): Any {
-        return if (song.data.isNotBlank()) {
-            AudioFileCover(song.data)
-        } else {
-            getMediaStoreAlbumCoverUri(song.albumId)
-        }
+        return getSongModel(song, PreferenceUtil.isIgnoreMediaStoreArtwork)
     }
 
-    fun getAlbumModel(song: Song): Any {
-        return getMediaStoreAlbumCoverUri(song.albumId)
-    }
+
 
     fun getArtistModel(artist: Artist): Any {
         return getArtistModel(
