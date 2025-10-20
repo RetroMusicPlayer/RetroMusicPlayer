@@ -1,21 +1,8 @@
-/*
- * Copyright (c) 2020 Hemanth Savarla.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- */
 package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.text.Spanned
 import android.util.Log
@@ -70,27 +57,62 @@ class SongDetailDialog : DialogFragment() {
                         getFileSizeString(songFile.length())
                     )
                 try {
-                    val audioFile = AudioFileIO.read(songFile)
-                    val audioHeader = audioFile.audioHeader
 
-                    binding.fileFormat.text =
-                        makeTextWithTitle(context, R.string.label_file_format, audioHeader.format)
-                    binding.trackLength.text = makeTextWithTitle(
-                        context,
-                        R.string.label_track_length,
-                        MusicUtil.getReadableDurationString((audioHeader.trackLength * 1000).toLong())
-                    )
-                    binding.bitrate.text = makeTextWithTitle(
-                        context,
-                        R.string.label_bit_rate,
-                        audioHeader.bitRate + " kb/s"
-                    )
-                    binding.samplingRate.text =
-                        makeTextWithTitle(
+                    if (songFile.extension.equals("opus", ignoreCase = true)) {
+
+                        val retriever = MediaMetadataRetriever()
+                        try {
+                            retriever.setDataSource(songFile.absolutePath)
+
+                            val bitrate = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)?.toIntOrNull() ?: 0
+                            val sampleRate = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_SAMPLERATE)?.toIntOrNull() ?: 0
+                            val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull() ?: 0L
+
+                            binding.fileFormat.text =
+                                makeTextWithTitle(context, R.string.label_file_format, "Opus")
+                            binding.trackLength.text = makeTextWithTitle(
+                                context,
+                                R.string.label_track_length,
+                                MusicUtil.getReadableDurationString(duration)
+                            )
+                            binding.bitrate.text = makeTextWithTitle(
+                                context,
+                                R.string.label_bit_rate,
+                                "${bitrate / 1000} kb/s"
+                            )
+                            binding.samplingRate.text =
+                                makeTextWithTitle(
+                                    context,
+                                    R.string.label_sampling_rate,
+                                    "$sampleRate Hz"
+                                )
+                        } finally {
+                            retriever.release()
+                        }
+                    } else {
+                        // Use JAudioTagger for other formats
+                        val audioFile = AudioFileIO.read(songFile)
+                        val audioHeader = audioFile.audioHeader
+
+                        binding.fileFormat.text =
+                            makeTextWithTitle(context, R.string.label_file_format, audioHeader.format)
+                        binding.trackLength.text = makeTextWithTitle(
                             context,
-                            R.string.label_sampling_rate,
-                            audioHeader.sampleRate + " Hz"
+                            R.string.label_track_length,
+                            MusicUtil.getReadableDurationString((audioHeader.trackLength * 1000).toLong())
                         )
+                        binding.bitrate.text = makeTextWithTitle(
+                            context,
+                            R.string.label_bit_rate,
+                            audioHeader.bitRate + " kb/s"
+                        )
+                        binding.samplingRate.text =
+                            makeTextWithTitle(
+                                context,
+                                R.string.label_sampling_rate,
+                                audioHeader.sampleRate + " Hz"
+                            )
+                    }
                 } catch (e: Exception) {
                     Log.e(TAG, "error while reading the song file", e)
                     // fallback
