@@ -94,6 +94,7 @@ class PlayingNotification(
         setContentIntent(clickIntent)
         setDeleteIntent(deleteIntent)
         setShowWhen(false)
+        setOngoing(false) // Allow notification to be dismissed when paused
         addAction(toggleFavorite)
         addAction(previousAction)
         addAction(playPauseAction)
@@ -189,6 +190,8 @@ class PlayingNotification(
     @SuppressLint("RestrictedApi")
     fun setPlaying(isPlaying: Boolean) {
         mActions[2] = buildPlayAction(isPlaying)
+        // Update notification to be ongoing when playing, dismissible when paused
+        setOngoing(isPlaying)
     }
 
     @SuppressLint("RestrictedApi")
@@ -197,7 +200,10 @@ class PlayingNotification(
     }
 
     fun clear(context: Context) {
-        Glide.with(context).clear(currentTarget)
+        currentTarget?.let {
+            Glide.with(context).clear(it)
+            currentTarget = null
+        }
     }
 
     private fun retrievePlaybackAction(action: String): PendingIntent {
