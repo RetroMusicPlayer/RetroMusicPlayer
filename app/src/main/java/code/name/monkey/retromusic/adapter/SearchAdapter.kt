@@ -39,7 +39,7 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.ArtistSeparator 
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.Glide
 import java.util.*
@@ -89,10 +89,12 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = dataSet[position]
         when (getItemViewType(position)) {
             ALBUM -> {
+                val album = item as Album
+                holder.setImageTransitionName(album.id.toString())
                 holder.imageTextContainer?.isVisible = true
-                val album = dataSet[position] as Album
                 holder.title?.text = album.title
                 
                 val formattedArtistName = ArtistSeparator.split(album.artistName).joinToString(", ")
@@ -103,9 +105,10 @@ class SearchAdapter(
                     .into(holder.image!!)
             }
 
-            ARTIST -> {
+            ARTIST, ALBUM_ARTIST -> { 
+                val artist = item as Artist
+                holder.setImageTransitionName(artist.name) 
                 holder.imageTextContainer?.isVisible = true
-                val artist = dataSet[position] as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
                 Glide.with(activity).asDrawable().artistImageOptions(artist).load(
@@ -114,8 +117,8 @@ class SearchAdapter(
             }
 
             SONG -> {
+                val song = item as Song
                 holder.imageTextContainer?.isVisible = true
-                val song = dataSet[position] as Song
                 holder.title?.text = song.title
 
                 val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
@@ -126,7 +129,7 @@ class SearchAdapter(
             }
 
             GENRE -> {
-                val genre = dataSet[position] as Genre
+                val genre = item as Genre
                 holder.title?.text = genre.name
                 holder.text?.text = String.format(
                     Locale.getDefault(),
@@ -139,22 +142,12 @@ class SearchAdapter(
             }
 
             PLAYLIST -> {
-                val playlist = dataSet[position] as PlaylistWithSongs
+                val playlist = item as PlaylistWithSongs
                 holder.title?.text = playlist.playlistEntity.playlistName
             }
 
-            ALBUM_ARTIST -> {
-                holder.imageTextContainer?.isVisible = true
-                val artist = dataSet[position] as Artist
-                holder.title?.text = artist.name
-                holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
-                Glide.with(activity).asDrawable().artistImageOptions(artist).load(
-                    RetroGlideExtension.getArtistModel(artist)
-                ).into(holder.image!!)
-            }
-
-            else -> {
-                holder.title?.text = dataSet[position].toString()
+            else -> { 
+                holder.title?.text = item.toString()
                 holder.title?.setTextColor(ThemeStore.accentColor(activity))
             }
         }
@@ -164,7 +157,7 @@ class SearchAdapter(
         return dataSet.size
     }
 
-    inner class ViewHolder(itemView: View, itemViewType: Int) : MediaEntryViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, private val itemViewType: Int) : MediaEntryViewHolder(itemView) {
         init {
             itemView.setOnLongClickListener(null)
             imageTextContainer?.isInvisible = true
@@ -179,13 +172,9 @@ class SearchAdapter(
                 menu?.isVisible = false
             }
 
-            when (itemViewType) {
-                ALBUM -> setImageTransitionName(activity.getString(R.string.transition_album_art))
-                ARTIST -> setImageTransitionName((dataSet[layoutPosition] as Artist).name)
-                else -> {
-                    val container = itemView.findViewById<View>(R.id.imageContainer)
-                    container?.isVisible = false
-                }
+            if (itemViewType != ALBUM && itemViewType != ARTIST && itemViewType != ALBUM_ARTIST && itemViewType != SONG) {
+                 val container = itemView.findViewById<View>(R.id.imageContainer)
+                 container?.isVisible = false
             }
         }
 
