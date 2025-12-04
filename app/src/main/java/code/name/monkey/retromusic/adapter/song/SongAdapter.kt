@@ -104,10 +104,8 @@ open class SongAdapter(
         holder.text2?.text = getSongText(song)
 
         if (MusicPlayerRemote.currentSong.id == song.id) {
-            val typedValue = TypedValue()
             val context = holder.title?.context
             val textcolor = context?.accentColor()
-
             textcolor?.toInt()?.toInt()?.let { holder.title?.setTextColor(it) }
             textcolor?.let { holder.text?.setTextColor(it) }
             holder.title?.setTypeface(null, Typeface.BOLD)
@@ -125,9 +123,7 @@ open class SongAdapter(
             holder.text?.setTextColor(normalColor)
             holder.title?.setTypeface(null, Typeface.NORMAL)
             holder.text?.setTypeface(null, Typeface.NORMAL)
-
         }
-
         loadAlbumCover(song, holder)
         val landscape = RetroUtil.isLandscape
         if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
