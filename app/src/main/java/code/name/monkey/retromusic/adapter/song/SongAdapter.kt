@@ -16,10 +16,13 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Typeface
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -29,6 +32,7 @@ import code.name.monkey.retromusic.EXTRA_ALBUM_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
@@ -97,6 +101,28 @@ open class SongAdapter(
         holder.title?.text = getSongTitle(song)
         holder.text?.text = getSongText(song)
         holder.text2?.text = getSongText(song)
+
+        if (MusicPlayerRemote.currentSong.id == song.id) {
+            val context = holder.title?.context
+            val textcolor = context?.accentColor()
+            textcolor?.toInt()?.toInt()?.let { holder.title?.setTextColor(it) }
+            textcolor?.let { holder.text?.setTextColor(it) }
+            holder.title?.setTypeface(null, Typeface.BOLD)
+            holder.text?.setTypeface(null, Typeface.BOLD)
+
+        } else {
+            val outValue = TypedValue()
+            activity.theme.resolveAttribute(android.R.attr.textColorPrimary, outValue, true)
+            val normalColor = if (outValue.resourceId != 0) {
+                ContextCompat.getColor(activity, outValue.resourceId)
+            } else {
+                outValue.data
+            }
+            holder.title?.setTextColor(normalColor)
+            holder.text?.setTextColor(normalColor)
+            holder.title?.setTypeface(null, Typeface.NORMAL)
+            holder.text?.setTypeface(null, Typeface.NORMAL)
+        }
         loadAlbumCover(song, holder)
         val landscape = RetroUtil.isLandscape
         if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {
@@ -217,6 +243,7 @@ open class SongAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 MusicPlayerRemote.openQueueKeepShuffleMode(dataSet, layoutPosition, true)
+                notifyDataSetChanged()
             }
         }
 
