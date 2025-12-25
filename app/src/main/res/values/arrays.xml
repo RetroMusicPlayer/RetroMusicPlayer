@@ -125,7 +125,9 @@
         <item>System default</item>
         <item>Arabic</item>
         <item>Basque</item>
+        <item>Bulgarian</item>
         <item>Burmese</item>
+        <item>Catalan</item>
         <item>Simplified Chinese</item>
         <item>Traditional Chinese(Hong Kong)</item>
         <item>Traditional Chinese(Taiwan)</item>
@@ -148,6 +150,7 @@
         <item>Kurmanji Kurdish</item>
         <item>Latvian</item>
         <item>Malayalam</item>
+        <item>Odia</item>
         <item>Persian</item>
         <item>Polish</item>
         <item>Portuguese(Brazil)</item>
@@ -155,6 +158,7 @@
         <item>Romanian</item>
         <item>Russian</item>
         <item>Serbian</item>
+        <item>Sorani Kurdish</item>
         <item>Spanish</item>
         <item>Spanish(Latin America)</item>
         <item>Swedish</item>
@@ -169,7 +173,9 @@
         <item>auto</item>
         <item>ar-SA</item>
         <item>eu-ES</item>
+        <item>bg-BG</item>
         <item>my-MM</item>
+        <item>ca-ES</item>
         <item>zh-CN</item>
         <item>zh-HK</item>
         <item>zh-TW</item>
@@ -192,6 +198,7 @@
         <item>kmr-TR</item>
         <item>lv-LV</item>
         <item>ml</item>
+        <item>or-IN</item>
         <item>fa</item>
         <item>pl</item>
         <item>pt-BR</item>
@@ -199,6 +206,7 @@
         <item>ro</item>
         <item>ru</item>
         <item>sr</item>
+        <item>ckb-IR</item>
         <item>es</item>
         <item>es-419</item>
         <item>sv</item>
