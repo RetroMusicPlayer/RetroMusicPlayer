@@ -105,8 +105,10 @@ open class SongAdapter(
         if (MusicPlayerRemote.currentSong.id == song.id) {
             val context = holder.title?.context
             val textcolor = context?.accentColor()
-            textcolor?.toInt()?.toInt()?.let { holder.title?.setTextColor(it) }
-            textcolor?.let { holder.text?.setTextColor(it) }
+            textcolor?.let { color ->
+                holder.title?.setTextColor(color)
+                holder.text?.setTextColor(color)
+            }
             holder.title?.setTypeface(null, Typeface.BOLD)
             holder.text?.setTypeface(null, Typeface.BOLD)
 
