@@ -44,6 +44,13 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"
+        android:key="audio_visualizer_enabled"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_audio_visualizer"
+        android:title="@string/pref_title_audio_visualizer" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="true"
         android:key="swipe_anywhere_now_playing"
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_swipe_anywhere_now_playing"

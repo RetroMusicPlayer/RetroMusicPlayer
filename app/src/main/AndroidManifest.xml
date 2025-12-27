@@ -32,6 +32,7 @@
         android:name="android.permission.BLUETOOTH_CONNECT"
         android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".App"

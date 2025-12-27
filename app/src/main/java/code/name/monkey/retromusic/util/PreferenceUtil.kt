@@ -98,6 +98,7 @@ import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
 import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
 import code.name.monkey.retromusic.TOGGLE_HEADSET
 import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
+import code.name.monkey.retromusic.AUDIO_VISUALIZER_ENABLED
 import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
 import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.USER_NAME
@@ -853,6 +854,10 @@ object PreferenceUtil {
 
     val swipeDownToDismiss
         get() = sharedPreferences.getBoolean(SWIPE_DOWN_DISMISS, true)
+
+    var isVisualizerEnabled: Boolean
+        get() = sharedPreferences.getBoolean(AUDIO_VISUALIZER_ENABLED, true)
+        set(value) = sharedPreferences.edit { putBoolean(AUDIO_VISUALIZER_ENABLED, value) }
 }
 
 enum class CoverLyricsType {
