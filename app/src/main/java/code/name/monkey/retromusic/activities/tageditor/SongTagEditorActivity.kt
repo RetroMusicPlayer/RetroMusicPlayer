@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.ArtworkInfo
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
@@ -73,8 +74,14 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
         binding.songTextContainer.setTint(false)
         binding.composerContainer.setTint(false)
         binding.albumTextContainer.setTint(false)
+        
         binding.artistContainer.setTint(false)
+        val separators = ArtistSeparator.SEPARATORS.joinToString(" ")
+        binding.artistContainer.helperText = getString(R.string.artist_separator_helper_text, separators)
+
         binding.albumArtistContainer.setTint(false)
+        binding.albumArtistContainer.helperText = getString(R.string.artist_separator_helper_text, separators)
+
         binding.yearContainer.setTint(false)
         binding.genreContainer.setTint(false)
         binding.trackNumberContainer.setTint(false)
@@ -171,37 +178,39 @@ class SongTagEditorActivity : AbsTagEditorActivity<ActivitySongTagEditorBinding>
     override fun getSongUris(): List<Uri> = listOf(MusicUtil.getSongFileUri(id))
 
     override fun loadImageFromFile(selectedFile: Uri?) {
-        Glide.with(this@SongTagEditorActivity)
-            .asBitmapPalette()
-            .load(selectedFile)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true)
-            .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper,
-                    transition: Transition<in BitmapPaletteWrapper>?
-                ) {
-                    RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
-                    albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-                    setImageBitmap(
-                        albumArtBitmap,
-                        RetroColorUtil.getColor(
-                            resource.palette,
-                            defaultFooterColor()
+        if (!isDestroyed) {
+            Glide.with(this)
+                .asBitmapPalette()
+                .load(selectedFile)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(object : ImageViewTarget<BitmapPaletteWrapper>(binding.editorImage) {
+                    override fun onResourceReady(
+                        resource: BitmapPaletteWrapper,
+                        transition: Transition<in BitmapPaletteWrapper>?
+                    ) {
+                        RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
+                        albumArtBitmap = resource.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                        setImageBitmap(
+                            albumArtBitmap,
+                            RetroColorUtil.getColor(
+                                resource.palette,
+                                defaultFooterColor()
+                            )
                         )
-                    )
-                    deleteAlbumArt = false
-                    dataChanged()
-                    setResult(Activity.RESULT_OK)
-                }
+                        deleteAlbumArt = false
+                        dataChanged()
+                        setResult(Activity.RESULT_OK)
+                    }
 
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    super.onLoadFailed(errorDrawable)
-                    showToast(R.string.error_load_failed, Toast.LENGTH_LONG)
-                }
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        showToast(R.string.error_load_failed, Toast.LENGTH_LONG)
+                    }
 
-                override fun setResource(resource: BitmapPaletteWrapper?) {}
-            })
+                    override fun setResource(resource: BitmapPaletteWrapper?) {}
+                })
+        }
     }
 
     companion object {
