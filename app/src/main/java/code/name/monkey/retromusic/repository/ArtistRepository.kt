@@ -19,6 +19,8 @@ import code.name.monkey.retromusic.ALBUM_ARTIST
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.text.Collator
 
@@ -34,11 +36,13 @@ interface ArtistRepository {
     fun artist(artistId: Long): Artist
 
     fun albumArtist(artistName: String): Artist
+    
+    fun artistByName(name: String): Artist
 }
 
 class RealArtistRepository(
-    private val songRepository: RealSongRepository,
-    private val albumRepository: RealAlbumRepository
+    private val songRepository: SongRepository, 
+    private val albumRepository: AlbumRepository
 ) : ArtistRepository {
 
     private fun getSongLoaderSortOrder(): String {
@@ -49,14 +53,7 @@ class RealArtistRepository(
 
     override fun artist(artistId: Long): Artist {
         if (artistId == Artist.VARIOUS_ARTISTS_ID) {
-            // Get Various Artists
-            val songs = songRepository.songs(
-                songRepository.makeSongCursor(
-                    null,
-                    null,
-                    getSongLoaderSortOrder()
-                )
-            )
+            val songs = songRepository.songs()
             val albums = albumRepository.splitIntoAlbums(songs)
                 .filter { it.albumArtist == Artist.VARIOUS_ARTISTS_DISPLAY_NAME }
             return Artist(Artist.VARIOUS_ARTISTS_ID, albums)
@@ -71,17 +68,22 @@ class RealArtistRepository(
         )
         return Artist(artistId, albumRepository.splitIntoAlbums(songs))
     }
+    
+    override fun artistByName(name: String): Artist {
+        val allSongs = songRepository.songs()
+
+        val songsForArtist = allSongs.filter { song ->
+            val sourceName = if (PreferenceUtil.albumArtistsOnly) song.albumArtist else song.artistName
+            ArtistSeparator.split(sourceName).any { it.equals(name, ignoreCase = true) }
+        }
+
+        val albums = albumRepository.splitIntoAlbums(songsForArtist)
+        return Artist(name.hashCode().toLong(), albums, name = name)
+    }
 
     override fun albumArtist(artistName: String): Artist {
         if (artistName == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {
-            // Get Various Artists
-            val songs = songRepository.songs(
-                songRepository.makeSongCursor(
-                    null,
-                    null,
-                    getSongLoaderSortOrder()
-                )
-            )
+            val songs = songRepository.songs()
             val albums = albumRepository.splitIntoAlbums(songs)
                 .filter { it.albumArtist == Artist.VARIOUS_ARTISTS_DISPLAY_NAME }
             return Artist(Artist.VARIOUS_ARTISTS_ID, albums, true)
@@ -94,81 +96,57 @@ class RealArtistRepository(
                 getSongLoaderSortOrder()
             )
         )
-        return Artist(artistName, albumRepository.splitIntoAlbums(songs), true)
+        return Artist(artistName.hashCode().toLong(), albumRepository.splitIntoAlbums(songs), true, name = artistName)
     }
 
     override fun artists(): List<Artist> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                null, null,
-                getSongLoaderSortOrder()
-            )
-        )
-        val artists = splitIntoArtists(albumRepository.splitIntoAlbums(songs))
-        return sortArtists(artists)
+        val songs = songRepository.songs()
+        val artistToSongsMap = mutableMapOf<String, MutableList<Song>>()
+
+        songs.forEach { song ->
+            ArtistSeparator.split(song.artistName).forEach { name ->
+                val trimmedName = name.trim()
+                if (trimmedName.isNotEmpty()) {
+                    artistToSongsMap.getOrPut(trimmedName) { mutableListOf() }.add(song)
+                }
+            }
+        }
+
+        val processedArtists = artistToSongsMap.map { (artistName, songsForArtist) ->
+            val albums = albumRepository.splitIntoAlbums(songsForArtist)
+            Artist(artistName.hashCode().toLong(), albums, name = artistName)
+        }
+
+        return sortArtists(processedArtists)
     }
 
     override fun albumArtists(): List<Artist> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                null,
-                null,
-                "lower($ALBUM_ARTIST)" +
-                        if (PreferenceUtil.artistSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z) "" else " DESC"
-            )
-        )
-        val artists = splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
-        return sortArtists(artists)
+        val songs = songRepository.songs()
+        val artistToSongsMap = mutableMapOf<String, MutableList<Song>>()
+
+        songs.forEach { song ->
+            ArtistSeparator.split(song.albumArtist).forEach { name ->
+                val trimmedName = name.trim()
+                if (trimmedName.isNotEmpty()) {
+                    artistToSongsMap.getOrPut(trimmedName) { mutableListOf() }.add(song)
+                }
+            }
+        }
+
+        val processedArtists = artistToSongsMap.map { (artistName, songsForArtist) ->
+            val albums = albumRepository.splitIntoAlbums(songsForArtist)
+            Artist(artistName.hashCode().toLong(), albums, isAlbumArtist = true, name = artistName)
+        }
+        
+        return sortArtists(processedArtists)
     }
 
     override fun albumArtists(query: String): List<Artist> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                "album_artist" + " LIKE ?",
-                arrayOf("%$query%"),
-                getSongLoaderSortOrder()
-            )
-        )
-        val artists = splitIntoAlbumArtists(albumRepository.splitIntoAlbums(songs))
-        return sortArtists(artists)
+        return albumArtists().filter { it.name.contains(query, ignoreCase = true) }
     }
 
     override fun artists(query: String): List<Artist> {
-        val songs = songRepository.songs(
-            songRepository.makeSongCursor(
-                AudioColumns.ARTIST + " LIKE ?",
-                arrayOf("%$query%"),
-                getSongLoaderSortOrder()
-            )
-        )
-        val artists = splitIntoArtists(albumRepository.splitIntoAlbums(songs))
-        return sortArtists(artists)
-    }
-
-
-    private fun splitIntoAlbumArtists(albums: List<Album>): List<Artist> {
-        return albums.groupBy { it.albumArtist }
-            .filter {
-                !it.key.isNullOrEmpty()
-            }
-            .map {
-                val currentAlbums = it.value
-                if (currentAlbums.isNotEmpty()) {
-                    if (currentAlbums[0].albumArtist == Artist.VARIOUS_ARTISTS_DISPLAY_NAME) {
-                        Artist(Artist.VARIOUS_ARTISTS_ID, currentAlbums, true)
-                    } else {
-                        Artist(currentAlbums[0].artistId, currentAlbums, true)
-                    }
-                } else {
-                    Artist.empty
-                }
-            }
-    }
-
-
-    fun splitIntoArtists(albums: List<Album>): List<Artist> {
-        return albums.groupBy { it.artistId }
-            .map { Artist(it.key, it.value) }
+        return artists().filter { it.name.contains(query, ignoreCase = true) }
     }
 
     private fun sortArtists(artists: List<Artist>): List<Artist> {

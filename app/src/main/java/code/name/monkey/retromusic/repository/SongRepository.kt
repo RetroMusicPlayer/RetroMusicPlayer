@@ -53,6 +53,12 @@ interface SongRepository {
     fun song(cursor: Cursor?): Song
 
     fun song(songId: Long): Song
+    fun makeSongCursor(
+        selection: String?,
+        selectionValues: Array<String>?,
+        sortOrder: String = PreferenceUtil.songSortOrder,
+        ignoreBlacklist: Boolean = false
+    ): Cursor?
 }
 
 class RealSongRepository(private val context: Context) : SongRepository {
@@ -160,11 +166,11 @@ class RealSongRepository(private val context: Context) : SongRepository {
     }
 
     @JvmOverloads
-    fun makeSongCursor(
+    override fun makeSongCursor(
         selection: String?,
         selectionValues: Array<String>?,
-        sortOrder: String = PreferenceUtil.songSortOrder,
-        ignoreBlacklist: Boolean = false
+        sortOrder: String,
+        ignoreBlacklist: Boolean
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues

@@ -97,6 +97,8 @@ interface Repository {
     fun getSongByGenre(genreId: Long): Song
     fun checkPlaylistExists(playListId: Long): LiveData<Boolean>
     fun getPlaylist(playlistId: Long): LiveData<PlaylistWithSongs>
+
+    suspend fun artistByName(name: String): Artist
 }
 
 class RealRepository(
@@ -113,6 +115,8 @@ class RealRepository(
     private val roomRepository: RoomRepository,
     private val localDataRepository: LocalDataRepository,
 ) : Repository {
+
+    override suspend fun artistByName(name: String): Artist = artistRepository.artistByName(name)
 
     override suspend fun deleteSongs(songs: List<Song>) = roomRepository.deleteSongs(songs)
 

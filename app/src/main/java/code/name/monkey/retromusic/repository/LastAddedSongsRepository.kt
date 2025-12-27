@@ -19,6 +19,7 @@ import android.provider.MediaStore
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 /**
@@ -33,20 +34,34 @@ interface LastAddedRepository {
 }
 
 class RealLastAddedRepository(
-    private val songRepository: RealSongRepository,
-    private val albumRepository: RealAlbumRepository,
-    private val artistRepository: RealArtistRepository
+    private val songRepository: SongRepository,
+    private val albumRepository: AlbumRepository,
+    private val artistRepository: ArtistRepository
 ) : LastAddedRepository {
     override fun recentSongs(): List<Song> {
         return songRepository.songs(makeLastAddedCursor())
     }
 
     override fun recentAlbums(): List<Album> {
-        return albumRepository.splitIntoAlbums(recentSongs(), sorted = false)
+        return albumRepository.splitIntoAlbums(recentSongs())
     }
 
     override fun recentArtists(): List<Artist> {
-        return artistRepository.splitIntoArtists(recentAlbums())
+        val recentSongs = recentSongs()
+        val artistNames = mutableSetOf<String>()
+
+        recentSongs.forEach { song ->
+            val sourceName = if (PreferenceUtil.albumArtistsOnly) song.albumArtist else song.artistName
+            ArtistSeparator.split(sourceName).forEach { name ->
+                val trimmedName = name.trim()
+                if (trimmedName.isNotEmpty()) {
+                    artistNames.add(trimmedName)
+                }
+            }
+        }
+        
+        val allArtists = if (PreferenceUtil.albumArtistsOnly) artistRepository.albumArtists() else artistRepository.artists()
+        return allArtists.filter { artist -> artistNames.contains(artist.name) }
     }
 
     private fun makeLastAddedCursor(): Cursor? {

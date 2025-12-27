@@ -24,7 +24,9 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.HistoryStore
 import code.name.monkey.retromusic.providers.SongPlayCountStore
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
+import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -33,21 +35,17 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 interface TopPlayedRepository {
     fun recentlyPlayedTracks(): List<Song>
-
     fun topTracks(): List<Song>
-
     fun notRecentlyPlayedTracks(): List<Song>
-
     fun topAlbums(): List<Album>
-
     fun topArtists(): List<Artist>
 }
 
 class RealTopPlayedRepository(
     private val context: Context,
-    private val songRepository: RealSongRepository,
-    private val albumRepository: RealAlbumRepository,
-    private val artistRepository: RealArtistRepository
+    private val songRepository: SongRepository,
+    private val albumRepository: AlbumRepository,
+    private val artistRepository: ArtistRepository
 ) : TopPlayedRepository {
 
     override fun recentlyPlayedTracks(): List<Song> {
@@ -59,16 +57,12 @@ class RealTopPlayedRepository(
     }
 
     override fun notRecentlyPlayedTracks(): List<Song> {
-        val allSongs = mutableListOf<Song>().apply {
-            addAll(
-                songRepository.songs(
-                    songRepository.makeSongCursor(
-                        null, null,
-                        MediaStore.Audio.Media.DATE_ADDED + " ASC"
-                    )
-                )
+        val allSongs = songRepository.songs(
+            songRepository.makeSongCursor(
+                null, null,
+                MediaStore.Audio.Media.DATE_ADDED + " ASC"
             )
-        }
+        ).toMutableList()
         val playedSongs = songRepository.songs(
             makePlayedTracksCursorAndClearUpDatabase()
         )
@@ -81,11 +75,25 @@ class RealTopPlayedRepository(
     }
 
     override fun topAlbums(): List<Album> {
-        return albumRepository.splitIntoAlbums(topTracks(), sorted = false)
+        return albumRepository.splitIntoAlbums(runBlocking { topTracks() })
     }
 
     override fun topArtists(): List<Artist> {
-        return artistRepository.splitIntoArtists(topAlbums())
+        val topSongs = topTracks()
+        val artistNames = mutableSetOf<String>()
+
+        topSongs.forEach { song ->
+            val sourceName = if (PreferenceUtil.albumArtistsOnly) song.albumArtist else song.artistName
+            ArtistSeparator.split(sourceName).forEach { name ->
+                val trimmedName = name.trim()
+                if (trimmedName.isNotEmpty()) {
+                    artistNames.add(trimmedName)
+                }
+            }
+        }
+
+        val allArtists = if (PreferenceUtil.albumArtistsOnly) artistRepository.albumArtists() else artistRepository.artists()
+        return allArtists.filter { artist -> artistNames.contains(artist.name) }
     }
 
 
@@ -94,7 +102,7 @@ class RealTopPlayedRepository(
         // clean up the databases with any ids not found
         if (retCursor != null) {
             val missingIds = retCursor.missingIds
-            if (missingIds != null && missingIds.size > 0) {
+            if (missingIds != null && missingIds.isNotEmpty()) {
                 for (id in missingIds) {
                     SongPlayCountStore.getInstance(context).removeItem(id)
                 }
@@ -196,10 +204,9 @@ class RealTopPlayedRepository(
     ): SortedLongCursor? {
         val retCursor = makeRecentTracksCursorImpl(ignoreCutoffTime, reverseOrder)
         // clean up the databases with any ids not found
-        // clean up the databases with any ids not found
         if (retCursor != null) {
             val missingIds = retCursor.missingIds
-            if (missingIds != null && missingIds.size > 0) {
+            if (missingIds != null && missingIds.isNotEmpty()) {
                 for (id in missingIds) {
                     HistoryStore.getInstance(context).removeSongId(id)
                 }

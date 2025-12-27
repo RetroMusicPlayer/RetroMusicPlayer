@@ -31,9 +31,11 @@ interface AlbumRepository {
     fun albums(query: String): List<Album>
 
     fun album(albumId: Long): Album
+    
+    fun splitIntoAlbums(songs: List<Song>): List<Album>
 }
 
-class RealAlbumRepository(private val songRepository: RealSongRepository) :
+class RealAlbumRepository(private val songRepository: SongRepository) :
     AlbumRepository {
 
     override fun albums(): List<Album> {
@@ -69,14 +71,8 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
         return sortAlbumSongs(album)
     }
 
-    // We don't need sorted list of songs (with sortAlbumSongs())
-    // cuz we are just displaying Albums(Cover Arts) anyway and not songs
-    fun splitIntoAlbums(
-        songs: List<Song>,
-        sorted: Boolean = true
-    ): List<Album> {
+    override fun splitIntoAlbums(songs: List<Song>): List<Album> {
         val grouped = songs.groupBy { it.albumId }.map { Album(it.key, it.value) }
-        if (!sorted) return grouped
         val collator = Collator.getInstance()
         return when (PreferenceUtil.albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z -> {
@@ -98,19 +94,11 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
     private fun sortAlbumSongs(album: Album): Album {
         val collator = Collator.getInstance()
         val songs = when (PreferenceUtil.albumDetailSongSortOrder) {
-            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
-                o1.trackNumber.compareTo(o2.trackNumber)
-            }
-            SortOrder.AlbumSongSortOrder.SONG_A_Z -> {
-                album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
-            }
-            SortOrder.AlbumSongSortOrder.SONG_Z_A -> {
-                album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
-            }
-            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
-                o1.duration.compareTo(o2.duration)
-            }
-            else -> throw IllegalArgumentException("invalid ${PreferenceUtil.albumDetailSongSortOrder}")
+            SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs.sortedBy { it.trackNumber }
+            SortOrder.AlbumSongSortOrder.SONG_A_Z -> album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
+            SortOrder.AlbumSongSortOrder.SONG_Z_A -> album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
+            SortOrder.AlbumSongSortOrder.SONG_DURATION -> album.songs.sortedBy { it.duration }
+            else -> album.songs.sortedBy { it.title } 
         }
         return album.copy(songs = songs)
     }
