@@ -40,6 +40,7 @@ import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_REWIND
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_SKIP
 import code.name.monkey.retromusic.service.MusicService.Companion.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.service.MusicService.Companion.TOGGLE_FAVORITE
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -112,13 +113,14 @@ class PlayingNotification(
 
     fun updateMetadata(song: Song, onUpdate: () -> Unit) {
         if (song == Song.emptySong) return
+        
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        
         setContentTitle(song.title)
-        setContentText(song.artistName)
+        setContentText(formattedArtistName)
         setSubText(song.albumName)
 
         // Displays a temporary image while Glide loads the actual album image.
-        // This allows us to update the notification immediately
-        // without waiting for Glide.
         setAlbumArtImage(null)
         onUpdate()
 
@@ -129,7 +131,6 @@ class PlayingNotification(
             .asBitmap()
             .songCoverOptions(song)
             .load(RetroGlideExtension.getSongModel(song))
-            //.checkIgnoreMediaStore()
             .centerCrop()
             .into(object : CustomTarget<Bitmap>(
                 bigNotificationImageSize,

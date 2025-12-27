@@ -29,14 +29,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentClassicPlayerBinding
 import code.name.monkey.retromusic.extensions.*
@@ -44,7 +47,6 @@ import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -103,6 +105,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
+            onBackPressedCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {
@@ -117,6 +120,17 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
                 else -> {
                     mainActivity.getBottomSheetBehavior().isDraggable = true
                 }
+            }
+        }
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            if (_binding != null && getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
+                getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
+            } else {
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             }
         }
     }
@@ -136,7 +150,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         hideVolumeIfAvailable()
         setupRecyclerView()
 
-        // Check if the device is in landscape mode
         if (isLandscapeMode()) {
             resizePlayingQueue()
         }
@@ -171,19 +184,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
         }
-        binding.text.setOnClickListener {
-            goToArtist(requireActivity())
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
-                    getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-                else{
-                    mainActivity.getBottomSheetBehavior().state=BottomSheetBehavior.STATE_COLLAPSED
-                }
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
     }
 
 
@@ -226,7 +227,19 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+        
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            val activity = requireActivity() as? MainActivity ?: return@setArtistLinks
+            activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+            activity.setBottomNavVisibility(false)
+            if (activity.getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+                activity.collapsePanel()
+            }
+            activity.findNavController(R.id.fragment_container).navigate(
+                R.id.artistDetailsFragment,
+                bundleOf(EXTRA_ARTIST_NAME to artistName)
+            )
+        }
 
         if (PreferenceUtil.isSongInfo) {
             binding.playerControlsContainer.songInfo.text = getSongInfo(song)
@@ -353,6 +366,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (_binding == null) return
         binding.playerControlsContainer.progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(
@@ -395,23 +409,17 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
             return
         }
 
-        // Check if the device is in landscape mode
         if (isLandscapeMode()) {
             calculateLandScapePeekHeight()
         } else {
             val height = binding.playerContainer.height
             val width = binding.playerContainer.width
-            val finalHeight = height - width
+            val finalHeight = height - (binding.playerControlsContainer.root.height + width)
             val panel = getQueuePanel()
             panel.peekHeight = finalHeight
         }
     }
 
-
-    /**
-     * What am doing here is getting the controls  height, and adding the toolbar and statusbar height to itm
-     * then i subtract it from the screen height to get a peek height
-     */
     private fun calculateLandScapePeekHeight() {
         val height = binding.playerControlsContainer.root.height
         val appbarHeight = binding.playerToolbar.height
@@ -594,14 +602,11 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
         oldBottom: Int
     ) {
 
-        // Check if the device is in landscape mode
         if (isLandscapeMode()) {
             calculateLandScapePeekHeight()
 
-            //get background color from viewModel
             val backgroundColor = libraryViewModel.paletteColor.value
 
-            //check if color is already applied, if not applied then update navigationBarColor
             backgroundColor?.let { color ->
                 if (isLandscapeMode()) {
                     val window = requireActivity().window
@@ -624,8 +629,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(R.layout.fragment_classic_player
 
     private fun isLandscapeMode(): Boolean {
         val config = resources.configuration;
-
-        // Check if the device is in landscape mode
         return config.orientation == Configuration.ORIENTATION_LANDSCAPE
     }
 }

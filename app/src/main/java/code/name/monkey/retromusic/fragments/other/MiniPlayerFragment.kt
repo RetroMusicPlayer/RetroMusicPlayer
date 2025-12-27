@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -98,21 +99,18 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         val title = song.title.toSpannable()
         title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
 
-        val text = song.artistName.toSpannable()
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        val text = formattedArtistName.toSpannable()
         text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)
 
         binding.miniPlayerTitle.isSelected = true
         binding.miniPlayerTitle.text = builder
-
-//        binding.title.isSelected = true
-//        binding.title.text = song.title
-//        binding.text.isSelected = true
-//        binding.text.text = song.artistName
     }
 
     private fun updateSongCover() {
+        if (!isAdded) return
         val song = MusicPlayerRemote.currentSong
         Glide.with(requireContext())
             .load(RetroGlideExtension.getSongModel(song))
@@ -137,6 +135,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (_binding == null) return
         binding.progressBar.max = total
         binding.progressBar.progress = progress
     }
@@ -152,6 +151,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     protected fun updatePlayPauseDrawableState() {
+        if (_binding == null) return
         if (MusicPlayerRemote.isPlaying) {
             binding.miniPlayerPlayPauseButton.setImageResource(R.drawable.ic_pause)
         } else {

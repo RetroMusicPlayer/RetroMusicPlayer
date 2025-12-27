@@ -31,6 +31,7 @@ import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
@@ -75,7 +76,9 @@ class LockScreenControlsFragment :
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = String.format("%s - %s", song.artistName, song.albumName)
+
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        binding.text.text = String.format("%s - %s", formattedArtistName, song.albumName)
     }
 
     override fun onServiceConnected() {

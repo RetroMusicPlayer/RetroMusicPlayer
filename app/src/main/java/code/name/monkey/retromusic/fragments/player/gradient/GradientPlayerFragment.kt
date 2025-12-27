@@ -26,29 +26,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.databinding.FragmentGradientPlayerBinding
-import code.name.monkey.retromusic.extensions.applyColor
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.getBottomInsets
-import code.name.monkey.retromusic.extensions.getSongInfo
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
 import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -178,9 +174,7 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
         binding.playbackControlsFragment.title.setOnClickListener {
             goToAlbum(requireActivity())
         }
-        binding.playbackControlsFragment.text.setOnClickListener {
-            goToArtist(requireActivity())
-        }
+        
         ViewCompat.setOnApplyWindowInsetsListener(
             (binding.container)
         ) { v: View, insets: WindowInsetsCompat ->
@@ -360,13 +354,30 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     override fun onQueueChanged() {
         super.onQueueChanged()
         updateLabel()
-        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue)
+        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, -1) // Position is not needed here
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.playbackControlsFragment.title.text = song.title
-        binding.playbackControlsFragment.text.text = song.artistName
+        
+        binding.playbackControlsFragment.text.setArtistLinks(song.artistName) { artistName ->
+            
+      val activity = requireActivity()
+      if (activity is MainActivity) {
+          activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+          activity.setBottomNavVisibility(false)
+          if (activity.bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+              activity.collapsePanel()
+          }
+          activity.findNavController(R.id.fragment_container).navigate(
+              R.id.artistDetailsFragment,
+              bundleOf(EXTRA_ARTIST_NAME to artistName)
+          )
+      }
+    
+        }
+
         updateLabel()
         if (PreferenceUtil.isSongInfo) {
             binding.playbackControlsFragment.songInfo.text = getSongInfo(song)

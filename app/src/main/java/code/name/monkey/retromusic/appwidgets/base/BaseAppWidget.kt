@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.service.MusicService.Companion.EXTRA_APP_WIDG
 import code.name.monkey.retromusic.service.MusicService.Companion.FAVORITE_STATE_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.META_CHANGED
 import code.name.monkey.retromusic.service.MusicService.Companion.PLAY_STATE_CHANGED
+import code.name.monkey.retromusic.util.ArtistSeparator 
 
 abstract class BaseAppWidget : AppWidgetProvider() {
 
@@ -121,8 +122,11 @@ abstract class BaseAppWidget : AppWidgetProvider() {
 
     protected fun getSongArtistAndAlbum(song: Song): String {
         val builder = StringBuilder()
-        builder.append(song.artistName)
-        if (song.artistName.isNotEmpty() && song.albumName.isNotEmpty()) {
+        
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        builder.append(formattedArtistName)
+        
+        if (formattedArtistName.isNotEmpty() && song.albumName.isNotEmpty()) {
             builder.append(" • ")
         }
         builder.append(song.albumName)

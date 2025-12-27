@@ -19,23 +19,26 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentFullBinding
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.CoverLyricsFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     private var _binding: FragmentFullBinding? = null
@@ -62,15 +65,41 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
 
         setUpSubFragments()
         setUpPlayerToolbar()
-        setupArtist()
+        setupArtistClick()
         binding.nextSong.isSelected = true
         binding.playbackControlsFragment.drawAboveSystemBars()
     }
 
-    private fun setupArtist() {
+    private fun setupArtistClick() {
         binding.artistImage.setOnClickListener {
-            goToArtist(mainActivity)
+            val activity = requireActivity() as? MainActivity ?: return@setOnClickListener
+            val song = MusicPlayerRemote.currentSong
+            val artistNames = ArtistSeparator.split(song.artistName)
+
+            if (artistNames.size > 1) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.go_to_artist))
+                    .setItems(artistNames.toTypedArray()) { dialog, which ->
+                        navigateToArtist(activity, artistNames[which])
+                        dialog.dismiss()
+                    }
+                    .show()
+            } else if (artistNames.isNotEmpty()) {
+                navigateToArtist(activity, artistNames[0])
+            }
         }
+    }
+
+    private fun navigateToArtist(activity: MainActivity, artistName: String) {
+        activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+        activity.setBottomNavVisibility(false)
+        if (activity.getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+            activity.collapsePanel()
+        }
+        activity.findNavController(R.id.fragment_container).navigate(
+            R.id.artistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_NAME to artistName)
+        )
     }
 
     private fun setUpSubFragments() {
@@ -80,11 +109,9 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
         coverFragment.removeSlideEffect()
     }
 
-    override fun onShow() {
-    }
+    override fun onShow() {}
 
-    override fun onHide() {
-    }
+    override fun onHide() {}
 
     override fun toolbarIconColor(): Int {
         return Color.WHITE
@@ -129,16 +156,20 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     }
 
     private fun updateArtistImage() {
-        libraryViewModel.artist(MusicPlayerRemote.currentSong.artistId)
-            .observe(viewLifecycleOwner) { artist ->
-                if (artist.id != -1L) {
-                    Glide.with(requireActivity())
+        if (!isAdded) return
+        val song = MusicPlayerRemote.currentSong
+        val mainArtistName = ArtistSeparator.split(song.artistName).firstOrNull()
+        if (mainArtistName != null) {
+            libraryViewModel.artistByName(mainArtistName).observe(viewLifecycleOwner) { artist ->
+                if (artist != null && artist.id != -1L) {
+                    if (!isAdded) return@observe
+                    Glide.with(this)
                         .load(RetroGlideExtension.getArtistModel(artist))
                         .artistImageOptions(artist)
                         .into(binding.artistImage)
                 }
-
             }
+        }
     }
 
     override fun onQueueChanged() {
@@ -147,6 +178,7 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     }
 
     private fun updateLabel() {
+        if (!isAdded) return
         if ((MusicPlayerRemote.playingQueue.size - 1) == (MusicPlayerRemote.position)) {
             binding.nextSongLabel.setText(R.string.last_song)
             binding.nextSong.hide()

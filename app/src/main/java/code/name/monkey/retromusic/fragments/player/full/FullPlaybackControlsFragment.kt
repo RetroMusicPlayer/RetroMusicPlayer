@@ -25,11 +25,14 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentFullPlayerControlsBinding
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
@@ -38,13 +41,13 @@ import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -94,9 +97,6 @@ class FullPlaybackControlsFragment :
         binding.title.isSelected = true
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
-        }
-        binding.text.setOnClickListener {
-            goToArtist(requireActivity())
         }
     }
 
@@ -149,7 +149,22 @@ class FullPlaybackControlsFragment :
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            val activity = requireActivity()
+            if (activity is MainActivity) {
+                activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+                activity.setBottomNavVisibility(false)
+                if (activity.getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+                    activity.collapsePanel()
+                }
+                activity.findNavController(R.id.fragment_container).navigate(
+                    R.id.artistDetailsFragment,
+                    bundleOf(EXTRA_ARTIST_NAME to artistName)
+                )
+            }
+        }
+
         updateIsFavorite()
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(song)

@@ -25,23 +25,29 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentTinyPlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.abs
 
 class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
@@ -116,7 +122,9 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
+        
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        binding.text.text = String.format("%s \nby - %s", song.albumName, formattedArtistName)
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(song)
@@ -136,13 +144,44 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
 
         setUpPlayerToolbar()
         setUpSubFragments()
+        
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
         }
         binding.text.setOnClickListener {
-            goToArtist(requireActivity())
+            handleArtistClick()
         }
+        
         playerToolbar().drawAboveSystemBars()
+    }
+
+    private fun handleArtistClick() {
+        val activity = requireActivity() as? MainActivity ?: return
+        val song = MusicPlayerRemote.currentSong
+        val artistNames = ArtistSeparator.split(song.artistName)
+
+        if (artistNames.size > 1) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.go_to_artist))
+                .setItems(artistNames.toTypedArray()) { _, which ->
+                    navigateToArtist(activity, artistNames[which])
+                }
+                .show()
+        } else if (artistNames.isNotEmpty()) {
+            navigateToArtist(activity, artistNames[0])
+        }
+    }
+    
+    private fun navigateToArtist(activity: MainActivity, artistName: String) {
+        activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+        activity.setBottomNavVisibility(false)
+        if (activity.getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
+            activity.collapsePanel()
+        }
+        activity.findNavController(R.id.fragment_container).navigate(
+            R.id.artistDetailsFragment,
+            bundleOf(EXTRA_ARTIST_NAME to artistName)
+        )
     }
 
     private fun setUpSubFragments() {
@@ -178,6 +217,7 @@ class TinyPlayerFragment : AbsPlayerFragment(R.layout.fragment_tiny_player),
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (_binding == null) return
         binding.progressBar.max = total
 
         if (isDragEnabled) {

@@ -34,44 +34,10 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
-import code.name.monkey.retromusic.ALBUM_COVER_STYLE
-import code.name.monkey.retromusic.ALBUM_COVER_TRANSFORM
-import code.name.monkey.retromusic.CAROUSEL_EFFECT
-import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
-import code.name.monkey.retromusic.EXTRA_SONG_INFO
-import code.name.monkey.retromusic.KEEP_SCREEN_ON
-import code.name.monkey.retromusic.LIBRARY_CATEGORIES
-import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.SCREEN_ON_LYRICS
-import code.name.monkey.retromusic.SWIPE_ANYWHERE_NOW_PLAYING
-import code.name.monkey.retromusic.SWIPE_DOWN_DISMISS
-import code.name.monkey.retromusic.TAB_TEXT_MODE
-import code.name.monkey.retromusic.TOGGLE_ADD_CONTROLS
-import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
-import code.name.monkey.retromusic.TOGGLE_VOLUME
+import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.PermissionActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
-import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.darkAccentColor
-import code.name.monkey.retromusic.extensions.dip
-import code.name.monkey.retromusic.extensions.getBottomInsets
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.isColorLight
-import code.name.monkey.retromusic.extensions.isLandscape
-import code.name.monkey.retromusic.extensions.keepScreenOn
-import code.name.monkey.retromusic.extensions.maybeSetScreenOn
-import code.name.monkey.retromusic.extensions.peekHeightAnimate
-import code.name.monkey.retromusic.extensions.setLightNavigationBar
-import code.name.monkey.retromusic.extensions.setLightNavigationBarAuto
-import code.name.monkey.retromusic.extensions.setLightStatusBar
-import code.name.monkey.retromusic.extensions.setLightStatusBarAuto
-import code.name.monkey.retromusic.extensions.setNavigationBarColorPreOreo
-import code.name.monkey.retromusic.extensions.setTaskDescriptionColor
-import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.extensions.surfaceColor
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -122,13 +88,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     var fromNotification = false
     private var windowInsets: WindowInsetsCompat? = null
     protected val libraryViewModel by viewModel<LibraryViewModel>()
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    
+    internal lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    
     private lateinit var playerFragment: AbsPlayerFragment
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var nowPlayingScreen: NowPlayingScreen? = null
     private var taskColor: Int = 0
     private var paletteColor: Int = android.graphics.Color.WHITE
-    private var navigationBarColor = 0
+    
+    protected var navigationBarColor = 0
 
     private val panelState: Int
         get() = bottomSheetBehavior.state

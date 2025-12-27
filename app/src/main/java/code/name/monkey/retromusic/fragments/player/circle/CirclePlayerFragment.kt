@@ -27,17 +27,20 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.getSystemService
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentCirclePlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.simpleSongCoverOptions
 import code.name.monkey.retromusic.glide.crossfadeListener
@@ -52,6 +55,7 @@ import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.slider.Slider
 import me.tankery.lib.circularseekbar.CircularSeekBar
 
@@ -90,9 +94,6 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         binding.title.isSelected = true
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
-        }
-        binding.text.setOnClickListener {
-            goToArtist(requireActivity())
         }
         binding.songInfo.drawAboveSystemBars()
     }
@@ -231,7 +232,23 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+        
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            
+      val activity = requireActivity()
+      if (activity is MainActivity) {
+          activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+          activity.setBottomNavVisibility(false)
+          if (activity.bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+              activity.collapsePanel()
+          }
+          activity.findNavController(R.id.fragment_container).navigate(
+              R.id.artistDetailsFragment,
+              bundleOf(EXTRA_ARTIST_NAME to artistName)
+          )
+      }
+    
+        }
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(song)
@@ -239,6 +256,7 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
         } else {
             binding.songInfo.hide()
         }
+        if (!isAdded) return
         Glide.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
             .simpleSongCoverOptions(MusicPlayerRemote.currentSong)
@@ -259,8 +277,9 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
-        _binding?.volumeSeekBar?.max = maxVolume.toFloat()
-        _binding?.volumeSeekBar?.progress = currentVolume.toFloat()
+        if (_binding == null) return
+        binding.volumeSeekBar.max = maxVolume.toFloat()
+        binding.volumeSeekBar.progress = currentVolume.toFloat()
     }
 
     override fun onDestroyView() {
@@ -315,11 +334,10 @@ class CirclePlayerFragment : AbsPlayerFragment(R.layout.fragment_circle_player),
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         val progressSlider = binding.progressSlider
         progressSlider.valueTo = total.toFloat()
-
-        progressSlider.valueTo = total.toFloat()
-
-        progressSlider.value =
-            progress.toFloat().coerceIn(progressSlider.valueFrom, progressSlider.valueTo)
+        
+        if (!isSeeking) {
+            progressSlider.value = progress.toFloat().coerceIn(progressSlider.valueFrom, progressSlider.valueTo)
+        }
 
         binding.songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         binding.songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())

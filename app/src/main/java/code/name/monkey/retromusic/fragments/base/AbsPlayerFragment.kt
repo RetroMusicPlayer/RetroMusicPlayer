@@ -37,28 +37,15 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager.widget.ViewPager
-import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_ALBUM_ID
-import code.name.monkey.retromusic.EXTRA_ARTIST_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.toSongEntity
-import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
-import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
-import code.name.monkey.retromusic.dialogs.PlaybackSpeedDialog
-import code.name.monkey.retromusic.dialogs.SleepTimerDialog
-import code.name.monkey.retromusic.dialogs.SongDetailDialog
-import code.name.monkey.retromusic.dialogs.SongShareDialog
-import code.name.monkey.retromusic.extensions.currentFragment
-import code.name.monkey.retromusic.extensions.getTintedDrawable
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.keepScreenOn
-import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -171,18 +158,7 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             }
 
             R.id.action_go_to_album -> {
-                //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-                mainActivity.setBottomNavVisibility(false)
-                mainActivity.collapsePanel()
-                requireActivity().findNavController(R.id.fragment_container).navigate(
-                    R.id.albumDetailsFragment,
-                    bundleOf(EXTRA_ALBUM_ID to song.albumId)
-                )
-                return true
-            }
-
-            R.id.action_go_to_artist -> {
-                goToArtist(requireActivity())
+                goToAlbum(requireActivity())
                 return true
             }
 
@@ -410,28 +386,6 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
     companion object {
         val TAG: String = AbsPlayerFragment::class.java.simpleName
         const val VISIBILITY_ANIM_DURATION: Long = 300
-    }
-}
-
-fun goToArtist(activity: Activity) {
-    if (activity !is MainActivity) return
-    val song = MusicPlayerRemote.currentSong
-    activity.apply {
-
-        // Remove exit transition of current fragment so
-        // it doesn't exit with a weird transition
-        currentFragment(R.id.fragment_container)?.exitTransition = null
-
-        //Hide Bottom Bar First, else Bottom Sheet doesn't collapse fully
-        setBottomNavVisibility(false)
-        if (getBottomSheetBehavior().state == BottomSheetBehavior.STATE_EXPANDED) {
-            collapsePanel()
-        }
-
-        findNavController(R.id.fragment_container).navigate(
-            R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to song.artistId)
-        )
     }
 }
 

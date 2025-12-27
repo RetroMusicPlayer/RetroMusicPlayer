@@ -20,14 +20,18 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentCardBlurPlayerBinding
-import code.name.monkey.retromusic.extensions.drawAboveSystemBars
-import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.base.goToAlbum
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.glide.BlurTransformation
@@ -40,6 +44,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil.blurAmount
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -95,6 +100,12 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
         setUpSubFragments()
         setUpPlayerToolbar()
         binding.playerToolbar.drawAboveSystemBars()
+
+        binding.title.isSelected = true
+        binding.title.setOnClickListener {
+            goToAlbum(requireActivity())
+        }
+        binding.text.isSelected = true
     }
 
     private fun setUpSubFragments() {
@@ -130,14 +141,29 @@ class CardBlurFragment : AbsPlayerFragment(R.layout.fragment_card_blur_player),
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        binding.run {
-            title.text = song.title
-            text.text = song.artistName
+        binding.title.text = song.title
+        
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            
+      val activity = requireActivity()
+      if (activity is MainActivity) {
+          activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+          activity.setBottomNavVisibility(false)
+          if (activity.bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+              activity.collapsePanel()
+          }
+          activity.findNavController(R.id.fragment_container).navigate(
+              R.id.artistDetailsFragment,
+              bundleOf(EXTRA_ARTIST_NAME to artistName)
+          )
+      }
+    
         }
     }
 
     private fun updateBlur() {
         // https://github.com/bumptech/glide/issues/527#issuecomment-148840717
+        if (!isAdded) return
         Glide.with(this)
             .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
             .simpleSongCoverOptions(MusicPlayerRemote.currentSong)

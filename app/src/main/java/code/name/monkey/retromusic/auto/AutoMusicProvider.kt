@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.*
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.util.ArtistSeparator 
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.lang.ref.WeakReference
@@ -63,11 +64,12 @@ class AutoMusicProvider(
                 )
             }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> for (album in albumsRepository.albums()) {
+                val formattedArtistName = ArtistSeparator.split(album.albumArtist ?: album.artistName).joinToString(", ")
                 mediaItems.add(
                     AutoMediaItem.with(mContext)
                         .path(mediaId, album.id)
                         .title(album.title)
-                        .subTitle(album.albumArtist ?: album.artistName)
+                        .subTitle(formattedArtistName)
                         .icon(MusicUtil.getMediaStoreAlbumCoverUri(album.id))
                         .asPlayable()
                         .build()
@@ -105,15 +107,7 @@ class AutoMusicProvider(
                 mMusicService?.get()?.playingQueue
                     ?.let {
                         for (song in it) {
-                            mediaItems.add(
-                                AutoMediaItem.with(mContext)
-                                    .asPlayable()
-                                    .path(mediaId, song.id)
-                                    .title(song.title)
-                                    .subTitle(song.artistName)
-                                    .icon(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId))
-                                    .build()
-                            )
+                            mediaItems.add(getPlayableSong(mediaId, song))
                         }
                     }
             else -> {
@@ -272,11 +266,12 @@ class AutoMusicProvider(
     }
 
     private fun getPlayableSong(mediaId: String?, song: Song): MediaBrowserCompat.MediaItem {
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
         return AutoMediaItem.with(mContext)
             .asPlayable()
             .path(mediaId, song.id)
             .title(song.title)
-            .subTitle(song.artistName)
+            .subTitle(formattedArtistName)
             .icon(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId))
             .build()
     }

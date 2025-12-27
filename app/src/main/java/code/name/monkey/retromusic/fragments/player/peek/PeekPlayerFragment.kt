@@ -17,17 +17,21 @@ package code.name.monkey.retromusic.fragments.player.peek
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.EXTRA_ARTIST_NAME
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.databinding.FragmentPeekPlayerBinding
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 /**
  * Created by hemanths on 2019-10-03.
@@ -49,9 +53,6 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
         binding.title.isSelected = true
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
-        }
-        binding.text.setOnClickListener {
-            goToArtist(requireActivity())
         }
         binding.root.drawAboveSystemBarsWithPadding()
     }
@@ -105,7 +106,23 @@ class PeekPlayerFragment : AbsPlayerFragment(R.layout.fragment_peek_player) {
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+        
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            
+      val activity = requireActivity()
+      if (activity is MainActivity) {
+          activity.currentFragment(R.id.fragment_container)?.exitTransition = null
+          activity.setBottomNavVisibility(false)
+          if (activity.bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+              activity.collapsePanel()
+          }
+          activity.findNavController(R.id.fragment_container).navigate(
+              R.id.artistDetailsFragment,
+              bundleOf(EXTRA_ARTIST_NAME to artistName)
+          )
+      }
+    
+        }
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(song)

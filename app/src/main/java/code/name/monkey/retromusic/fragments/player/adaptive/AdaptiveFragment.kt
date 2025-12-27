@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
@@ -81,10 +82,8 @@ class AdaptiveFragment : AbsPlayerFragment(R.layout.fragment_adaptive_player) {
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        binding.playerToolbar.apply {
-            title = song.title
-            subtitle = song.artistName
-        }
+        binding.playerToolbar.title = song.title
+        binding.playerToolbar.subtitle = ArtistSeparator.split(song.artistName).joinToString(", ")
     }
 
     override fun toggleFavorite(song: Song) {
