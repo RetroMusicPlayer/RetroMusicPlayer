@@ -36,9 +36,11 @@ class ArtistDetailsViewModel(
 
     private fun fetchArtist() {
         viewModelScope.launch(IO) {
-            artistId?.let { artistDetails.postValue(realRepository.artistById(it)) }
-
-            artistName?.let { artistDetails.postValue(realRepository.albumArtistByName(it)) }
+            if (artistName != null) {
+                artistDetails.postValue(realRepository.artistByName(artistName))
+            } else if (artistId != null && artistId != -1L) {
+                artistDetails.postValue(realRepository.artistById(artistId))
+            }
         }
     }
 

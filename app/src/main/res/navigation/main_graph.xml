@@ -41,7 +41,13 @@
         tools:layout="@layout/fragment_artist_details">
         <argument
             android:name="extra_artist_id"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="extra_artist_name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment

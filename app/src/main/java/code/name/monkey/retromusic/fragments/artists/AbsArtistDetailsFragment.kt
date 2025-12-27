@@ -57,7 +57,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     abstract val detailsViewModel: ArtistDetailsViewModel
     abstract val artistId: Long?
     abstract val artistName: String?
-    private lateinit var artist: Artist
+    
+    private var artist: Artist? = null
+    
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
@@ -84,7 +86,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         mainActivity.addMusicServiceEventListener(detailsViewModel)
         mainActivity.setSupportActionBar(binding.toolbar)
         binding.toolbar.title = null
-        binding.artistCoverContainer.transitionName = (artistId ?: artistName).toString()
+        
+        binding.artistCoverContainer.transitionName = artistName ?: artistId?.toString()
+        
         postponeEnterTransition()
         detailsViewModel.getArtist().observe(viewLifecycleOwner) {
             view.doOnPreDraw {
@@ -95,10 +99,10 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         setupRecyclerView()
 
         binding.fragmentArtistContent.playAction.apply {
-            setOnClickListener { MusicPlayerRemote.openQueue(artist.sortedSongs, 0, true) }
+            setOnClickListener { artist?.let { MusicPlayerRemote.openQueue(it.sortedSongs, 0, true) } }
         }
         binding.fragmentArtistContent.shuffleAction.apply {
-            setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
+            setOnClickListener { artist?.let { MusicPlayerRemote.openAndShuffleQueue(it.songs, true) } }
         }
 
         binding.fragmentArtistContent.biographyText.setOnClickListener {
@@ -149,7 +153,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             R.plurals.albumSongs, artist.songCount, artist.songCount
         )
         val albumText = resources.getQuantityString(
-            R.plurals.albums, artist.songCount, artist.songCount
+            R.plurals.albums, artist.albumCount, artist.albumCount
         )
         binding.fragmentArtistContent.songTitle.text = songText
         binding.fragmentArtistContent.albumTitle.text = albumText
@@ -195,9 +199,8 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             }
         }
 
-        // If the "lang" parameter is set and no biography is given, retry with default language
         if (biography == null && lang != null) {
-            loadBiography(artist.name, null)
+            artist?.let { loadBiography(it.name, null) }
         }
     }
 
@@ -230,11 +233,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     }
 
     override fun onMenuItemSelected(item: MenuItem): Boolean {
-        return handleSortOrderMenuItem(item)
-    }
-
-    private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
-        val songs = artist.songs
+        val currentArtist = artist ?: return false
+        val songs = currentArtist.songs
+        
         when (item.itemId) {
             android.R.id.home -> findNavController().navigateUp()
             R.id.action_play_next -> {
@@ -269,7 +270,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 showToast(resources.getString(R.string.updating))
                 lifecycleScope.launch {
                     CustomArtistImageUtil.getInstance(requireContext())
-                        .resetCustomArtistImage(artist)
+                        .resetCustomArtistImage(currentArtist)
                 }
                 forceDownload = true
                 return true
@@ -290,9 +291,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                         R.id.action_sort_order_album -> SortOrder.ArtistSongSortOrder.SONG_ALBUM
                         R.id.action_sort_order_year -> SortOrder.ArtistSongSortOrder.SONG_YEAR
                         R.id.action_sort_order_song_duration -> SortOrder.ArtistSongSortOrder.SONG_DURATION
-                        else -> {
-                            throw IllegalArgumentException("invalid ${item.title}")
-                        }
+                        else -> return@setOnMenuItemClickListener false
                     }
                     item.isChecked = true
                     setSaveSortOrder(sortOrder)
@@ -305,7 +304,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.artistDetailSongSortOrder = sortOrder
-        songAdapter.swapDataSet(artist.sortedSongs)
+        artist?.let { songAdapter.swapDataSet(it.sortedSongs) }
     }
 
     private fun setupAlbumSortButton() {
@@ -319,9 +318,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                         R.id.action_sort_order_title_desc -> SortOrder.ArtistAlbumSortOrder.ALBUM_Z_A
                         R.id.action_sort_order_year -> SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR_ASC
                         R.id.action_sort_order_year_desc -> SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR
-                        else -> {
-                            throw IllegalArgumentException("invalid ${item.title}")
-                        }
+                        else -> return@setOnMenuItemClickListener false
                     }
                     item.isChecked = true
                     setSaveAlbumSortOrder(sortOrder)
@@ -334,7 +331,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun setSaveAlbumSortOrder(sortOrder: String) {
         PreferenceUtil.artistAlbumSortOrder = sortOrder
-        albumAdapter.swapDataSet(artist.sortedAlbums)
+        artist?.let { albumAdapter.swapDataSet(it.sortedAlbums) }
     }
 
     private fun setUpAlbumSortOrderMenu(sortOrder: Menu) {
@@ -350,10 +347,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
             SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR -> sortOrder.findItem(R.id.action_sort_order_year_desc).isChecked =
                 true
-
-            else -> {
-                throw IllegalArgumentException("invalid $savedAlbumSortOrder")
-            }
         }
     }
 
@@ -373,10 +366,6 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
             SortOrder.ArtistSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked =
                 true
-
-            else -> {
-                throw IllegalArgumentException("invalid $savedSongSortOrder")
-            }
         }
     }
 
@@ -384,8 +373,10 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             lifecycleScope.launch {
                 if (uri != null) {
-                    CustomArtistImageUtil.getInstance(requireContext())
-                        .setCustomArtistImage(artist, uri)
+                    artist?.let {
+                        CustomArtistImageUtil.getInstance(requireContext())
+                            .setCustomArtistImage(it, uri)
+                    }
                 }
             }
         }

@@ -20,12 +20,14 @@ import org.koin.core.parameter.parametersOf
 
 class ArtistDetailsFragment : AbsArtistDetailsFragment() {
     private val arguments by navArgs<ArtistDetailsFragmentArgs>()
+    
     override val detailsViewModel: ArtistDetailsViewModel by viewModel {
-        parametersOf(arguments.extraArtistId, null)
+        parametersOf(arguments.extraArtistId, arguments.extraArtistName)
     }
-    override val artistId: Long
-        get() = arguments.extraArtistId
-    override val artistName: String?
-        get() = null
 
+    override val artistId: Long?
+        get() = if (arguments.extraArtistId != -1L) arguments.extraArtistId else null
+
+    override val artistName: String?
+        get() = arguments.extraArtistName
 }

@@ -283,6 +283,10 @@ class LibraryViewModel(
         emit(repository.artistById(artistId))
     }
 
+    fun artistByName(name: String): LiveData<Artist> = liveData(IO) {
+        emit(repository.artistByName(name))
+    }
+
     fun fetchContributors(): LiveData<List<Contributor>> = liveData(IO) {
         emit(repository.contributor())
     }
