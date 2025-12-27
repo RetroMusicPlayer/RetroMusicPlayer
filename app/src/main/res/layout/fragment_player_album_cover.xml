@@ -13,6 +13,17 @@
 
     </androidx.viewpager.widget.ViewPager>
 
+    <!-- Audio Visualizer Overlay -->
+    <code.name.monkey.retromusic.views.AudioVisualizerView
+        android:id="@+id/audioVisualizer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:alpha="0.8"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/cover_lyrics"
         android:name="code.name.monkey.retromusic.fragments.player.CoverLyricsFragment"

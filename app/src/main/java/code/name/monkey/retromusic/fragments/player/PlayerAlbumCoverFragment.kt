@@ -14,11 +14,16 @@
  */
 package code.name.monkey.retromusic.fragments.player
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorInt
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
@@ -30,6 +35,7 @@ import androidx.viewpager.widget.ViewPager
 import kotlinx.coroutines.launch
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.AUDIO_VISUALIZER_ENABLED
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
@@ -51,6 +57,8 @@ import code.name.monkey.retromusic.util.CoverLyricsType
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.views.AudioVisualizerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -75,8 +83,20 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
 
     private val lrcView: CoverLrcView get() = binding.lyricsView
+    private val audioVisualizer: AudioVisualizerView? get() = _binding?.audioVisualizer
 
     var lyrics: Lyrics? = null
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            initializeVisualizer()
+        } else {
+            PreferenceUtil.isVisualizerEnabled = false
+            showPermissionDeniedDialog()
+        }
+    }
 
     fun removeSlideEffect() {
         val transformer = ParallaxPagerTransformer(R.id.player_image)
@@ -119,6 +139,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
         setupViewPager()
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
+        setupVisualizer()
         maybeInitLyrics()
         lrcView.apply {
             setDraggable(true) { time ->
@@ -163,8 +184,16 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
     override fun onResume() {
         super.onResume()
         maybeInitLyrics()
+        if (PreferenceUtil.isVisualizerEnabled && MusicPlayerRemote.isPlaying) {
+            audioVisualizer?.resume()
+        }
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        audioVisualizer?.pause()
     }
 
     override fun onDestroyView() {
@@ -173,12 +202,14 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             .unregisterOnSharedPreferenceChangeListener(this)
         binding.viewPager.removeOnPageChangeListener(this)
         progressViewUpdateHelper?.stop()
+        audioVisualizer?.release()
         _binding = null
     }
 
     override fun onServiceConnected() {
         updatePlayingQueue()
         updateLyrics()
+        initializeVisualizer()
     }
 
     override fun onPlayingMetaChanged() {
@@ -204,6 +235,14 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             }
             LYRICS_TYPE -> {
                 maybeInitLyrics()
+            }
+            AUDIO_VISUALIZER_ENABLED -> {
+                setupVisualizer()
+                if (PreferenceUtil.isVisualizerEnabled) {
+                    initializeVisualizer()
+                } else {
+                    audioVisualizer?.release()
+                }
             }
         }
     }
@@ -299,12 +338,23 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         when (PreferenceUtil.nowPlayingScreen) {
             Flat, Normal, Material -> if (PreferenceUtil.isAdaptiveColor) {
                 setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+                audioVisualizer?.setColors(color.primaryTextColor, color.secondaryTextColor)
             } else {
                 setLRCViewColors(primaryColor, secondaryColor)
+                audioVisualizer?.setColors(primaryColor, secondaryColor)
             }
-            Color, Classic -> setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
-            Blur -> setLRCViewColors(android.graphics.Color.WHITE, ColorUtil.withAlpha(android.graphics.Color.WHITE, 0.5f))
-            else -> setLRCViewColors(primaryColor, secondaryColor)
+            Color, Classic -> {
+                setLRCViewColors(color.primaryTextColor, color.secondaryTextColor)
+                audioVisualizer?.setColors(color.primaryTextColor, color.secondaryTextColor)
+            }
+            Blur -> {
+                setLRCViewColors(android.graphics.Color.WHITE, ColorUtil.withAlpha(android.graphics.Color.WHITE, 0.5f))
+                audioVisualizer?.setColors(android.graphics.Color.WHITE, ColorUtil.withAlpha(android.graphics.Color.WHITE, 0.5f))
+            }
+            else -> {
+                setLRCViewColors(primaryColor, secondaryColor)
+                audioVisualizer?.setColors(primaryColor, secondaryColor)
+            }
         }
     }
 
@@ -317,6 +367,76 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         fun onColorChanged(color: MediaNotificationProcessor)
 
         fun onFavoriteToggled()
+    }
+
+    // ========== Audio Visualizer Methods ==========
+
+    private fun setupVisualizer() {
+        val enabled = PreferenceUtil.isVisualizerEnabled
+        Log.d(TAG, "setupVisualizer called: enabled=$enabled, audioVisualizer=$audioVisualizer")
+        audioVisualizer?.visibility = if (enabled) {
+            Log.d(TAG, "Setting visualizer visibility to VISIBLE")
+            View.VISIBLE
+        } else {
+            Log.d(TAG, "Setting visualizer visibility to GONE")
+            View.GONE
+        }
+        Log.d(TAG, "Visualizer visibility after setup: ${audioVisualizer?.visibility}")
+    }
+
+    private fun initializeVisualizer() {
+        Log.d(TAG, "initializeVisualizer called")
+        if (!PreferenceUtil.isVisualizerEnabled) {
+            Log.d(TAG, "Visualizer disabled in preferences")
+            return
+        }
+
+        // Check if visualizer is supported
+        if (!AudioVisualizerView.isSupported()) {
+            Log.w(TAG, "Audio visualizer not supported on this device")
+            audioVisualizer?.visibility = View.GONE
+            return
+        }
+
+        // Check permission
+        if (!checkPermission()) {
+            Log.w(TAG, "Permission check failed")
+            return
+        }
+
+        try {
+            val sessionId = MusicPlayerRemote.audioSessionId
+            Log.d(TAG, "Got audio session ID: $sessionId")
+            if (sessionId != 0) {
+                audioVisualizer?.initialize(sessionId)
+                Log.d(TAG, "Audio visualizer initialized with session ID: $sessionId")
+            } else {
+                Log.w(TAG, "Invalid audio session ID: $sessionId")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to initialize audio visualizer", e)
+            audioVisualizer?.visibility = View.GONE
+        }
+    }
+
+    private fun checkPermission(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (requireContext().checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun showPermissionDeniedDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.pref_title_audio_visualizer)
+            .setMessage(R.string.visualizer_permission_required)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     companion object {
