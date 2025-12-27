@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator 
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.Glide
 import java.util.*
@@ -93,7 +94,10 @@ class SearchAdapter(
                 holder.imageTextContainer?.isVisible = true
                 val album = dataSet[position] as Album
                 holder.title?.text = album.title
-                holder.text?.text = album.artistName
+                
+                val formattedArtistName = ArtistSeparator.split(album.artistName).joinToString(", ")
+                holder.text?.text = formattedArtistName
+                
                 Glide.with(activity).asDrawable().albumCoverOptions(album.safeGetFirstSong())
                     .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
                     .into(holder.image!!)
@@ -113,7 +117,10 @@ class SearchAdapter(
                 holder.imageTextContainer?.isVisible = true
                 val song = dataSet[position] as Song
                 holder.title?.text = song.title
-                holder.text?.text = song.albumName
+
+                val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+                holder.text?.text = formattedArtistName
+
                 Glide.with(activity).asDrawable().songCoverOptions(song)
                     .load(RetroGlideExtension.getSongModel(song)).into(holder.image!!)
             }
@@ -134,7 +141,6 @@ class SearchAdapter(
             PLAYLIST -> {
                 val playlist = dataSet[position] as PlaylistWithSongs
                 holder.title?.text = playlist.playlistEntity.playlistName
-                //holder.text?.text = MusicUtil.playlistInfoString(activity, playlist.songs)
             }
 
             ALBUM_ARTIST -> {
@@ -175,7 +181,7 @@ class SearchAdapter(
 
             when (itemViewType) {
                 ALBUM -> setImageTransitionName(activity.getString(R.string.transition_album_art))
-                ARTIST -> setImageTransitionName(activity.getString(R.string.transition_artist_image))
+                ARTIST -> setImageTransitionName((dataSet[layoutPosition] as Artist).name)
                 else -> {
                     val container = itemView.findViewById<View>(R.id.imageContainer)
                     container?.isVisible = false
@@ -196,7 +202,7 @@ class SearchAdapter(
                 ARTIST -> {
                     activity.findNavController(R.id.fragment_container).navigate(
                         R.id.artistDetailsFragment,
-                        bundleOf(EXTRA_ARTIST_ID to (item as Artist).id)
+                        bundleOf(EXTRA_ARTIST_NAME to (item as Artist).name)
                     )
                 }
 

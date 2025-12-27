@@ -219,13 +219,12 @@ class DetailListFragment : AbsMainActivityFragment(R.layout.fragment_playlist_de
         return if (RetroUtil.isLandscape) 4 else 2
     }
 
-
-    override fun onArtist(artistId: Long, view: View) {
+    override fun onArtist(artistName: String, view: View) {
         findNavController().navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to artistId),
+            bundleOf(EXTRA_ARTIST_NAME to artistName),
             null,
-            FragmentNavigatorExtras(view to artistId.toString())
+            FragmentNavigatorExtras(view to artistName)
         )
     }
 

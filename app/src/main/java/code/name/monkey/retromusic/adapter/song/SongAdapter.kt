@@ -38,9 +38,7 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.* 
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
@@ -95,8 +93,11 @@ open class SongAdapter(
         holder.itemView.isActivated = isChecked
         holder.menu?.isGone = isChecked
         holder.title?.text = getSongTitle(song)
-        holder.text?.text = getSongText(song)
-        holder.text2?.text = getSongText(song)
+
+        val formattedArtistName = ArtistSeparator.split(getSongText(song)).joinToString(", ")
+        holder.text?.text = formattedArtistName
+        holder.text2?.text = getSongText2(song) 
+
         loadAlbumCover(song, holder)
         val landscape = RetroUtil.isLandscape
         if ((PreferenceUtil.songGridSize > 2 && !landscape) || (PreferenceUtil.songGridSizeLand > 5 && landscape)) {

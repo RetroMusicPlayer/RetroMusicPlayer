@@ -189,13 +189,13 @@ class HomeAdapter(private val activity: AppCompatActivity) :
     private fun linearLayoutManager() =
         LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-    override fun onArtist(artistId: Long, view: View) {
+    override fun onArtist(artistName: String, view: View) {
         activity.findNavController(R.id.fragment_container).navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to artistId),
+            bundleOf(EXTRA_ARTIST_NAME to artistName),
             null,
             FragmentNavigatorExtras(
-                view to artistId.toString()
+                view to artistName
             )
         )
     }

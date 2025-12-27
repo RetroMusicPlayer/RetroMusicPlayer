@@ -48,7 +48,7 @@ import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroGlideExtension.albumCoverOptions
 import code.name.monkey.retromusic.glide.RetroGlideExtension.artistImageOptions
-import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
+import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette 
 import code.name.monkey.retromusic.glide.SingleColorTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder.Companion.SONG_A_Z
@@ -117,33 +117,34 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             }
             albumArtistExists = !album.albumArtist.isNullOrEmpty()
             showAlbum(album)
-            binding.artistImage.transitionName = if (albumArtistExists) {
-                album.albumArtist
-            } else {
-                album.artistId.toString()
-            }
+            
+            val artistNameToUse = if (albumArtistExists) album.albumArtist else album.artistName
+            binding.artistImage.transitionName = artistNameToUse
         }
 
         setupRecyclerView()
         binding.artistImage.setOnClickListener { artistView ->
+            val artistNameToNavigate = ArtistSeparator.split(
+                if (albumArtistExists) album.albumArtist else album.artistName
+            ).firstOrNull() ?: return@setOnClickListener
+
             if (albumArtistExists) {
                 findActivityNavController(R.id.fragment_container)
                     .navigate(
                         R.id.albumArtistDetailsFragment,
-                        bundleOf(EXTRA_ARTIST_NAME to album.albumArtist),
+                        bundleOf(EXTRA_ARTIST_NAME to artistNameToNavigate),
                         null,
-                        FragmentNavigatorExtras(artistView to album.albumArtist.toString())
+                        FragmentNavigatorExtras(artistView to artistNameToNavigate)
                     )
             } else {
                 findActivityNavController(R.id.fragment_container)
                     .navigate(
                         R.id.artistDetailsFragment,
-                        bundleOf(EXTRA_ARTIST_ID to album.artistId),
+                        bundleOf(EXTRA_ARTIST_NAME to artistNameToNavigate),
                         null,
-                        FragmentNavigatorExtras(artistView to album.artistId.toString())
+                        FragmentNavigatorExtras(artistView to artistNameToNavigate)
                     )
             }
-
         }
         binding.fragmentAlbumContent.playAction.setOnClickListener {
             MusicPlayerRemote.openQueue(album.songs, 0, true)
@@ -200,18 +201,24 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             album.songCount
         )
         binding.fragmentAlbumContent.songTitle.text = songText
-        if (MusicUtil.getYearString(album.year) == "-") {
+
+        val rawArtistName = if (albumArtistExists) album.albumArtist else album.artistName
+        val formattedArtistName = ArtistSeparator.split(rawArtistName).joinToString(", ")
+        val yearString = MusicUtil.getYearString(album.year)
+        val durationString = MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
+
+        if (yearString == "-") {
             binding.albumText.text = String.format(
                 "%s • %s",
-                if (albumArtistExists) album.albumArtist else album.artistName,
-                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
+                formattedArtistName,
+                durationString
             )
         } else {
             binding.albumText.text = String.format(
                 "%s • %s • %s",
-                album.artistName,
-                MusicUtil.getYearString(album.year),
-                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
+                formattedArtistName,
+                yearString,
+                durationString
             )
         }
         loadAlbumCover(album)
@@ -248,8 +255,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     private fun moreAlbums(albums: List<Album>) {
         binding.fragmentAlbumContent.moreTitle.show()
         binding.fragmentAlbumContent.moreRecyclerView.show()
+        val formattedArtistName = ArtistSeparator.split(album.artistName).joinToString(", ")
         binding.fragmentAlbumContent.moreTitle.text =
-            String.format(getString(R.string.label_more_from), album.artistName)
+            String.format(getString(R.string.label_more_from), formattedArtistName)
 
         val albumAdapter =
             HorizontalAlbumAdapter(requireActivity() as AppCompatActivity, albums, this)
@@ -291,7 +299,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
             moreAlbums(it)
         }
         Glide.with(requireContext())
-            //.forceDownload(PreferenceUtil.isAllowedToDownloadMetadata())
             .load(
                 RetroGlideExtension.getArtistModel(
                     artist,
@@ -308,7 +315,6 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
         Glide.with(requireContext())
             .asBitmapPalette()
             .albumCoverOptions(album.safeGetFirstSong())
-            //.checkIgnoreMediaStore()
             .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
             .into(object : SingleColorTarget(binding.image) {
                 override fun onColorReady(color: Int) {
@@ -423,12 +429,7 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.albumDetailSongSortOrder = sortOrder
         val songs = when (sortOrder) {
-            SONG_TRACK_LIST -> album.songs.sortedWith { o1, o2 ->
-                o1.trackNumber.compareTo(
-                    o2.trackNumber
-                )
-            }
-
+            SONG_TRACK_LIST -> album.songs.sortedBy { it.trackNumber }
             SONG_A_Z -> {
                 val collator = Collator.getInstance()
                 album.songs.sortedWith { o1, o2 -> collator.compare(o1.title, o2.title) }
@@ -439,13 +440,9 @@ class AlbumDetailsFragment : AbsMainActivityFragment(R.layout.fragment_album_det
                 album.songs.sortedWith { o1, o2 -> collator.compare(o2.title, o1.title) }
             }
 
-            SONG_DURATION -> album.songs.sortedWith { o1, o2 ->
-                o1.duration.compareTo(
-                    o2.duration
-                )
-            }
+            SONG_DURATION -> album.songs.sortedBy { it.duration }
 
-            else -> throw IllegalArgumentException("invalid $sortOrder")
+            else -> album.songs
         }
         album = album.copy(songs = songs)
         simpleSongAdapter.swapDataSet(album.songs)

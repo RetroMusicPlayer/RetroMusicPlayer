@@ -40,11 +40,8 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
     IArtistClickListener, IAlbumArtistClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryViewModel.getArtists().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty())
-                adapter?.swapDataSet(it)
-            else
-                adapter?.swapDataSet(listOf())
+        libraryViewModel.getArtists().observe(viewLifecycleOwner) { artists ->
+            adapter?.swapDataSet(artists ?: emptyList())
         }
     }
 
@@ -58,10 +55,10 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         get() = true
 
     override fun onShuffleClicked() {
-        libraryViewModel.getArtists().value?.let {
+        adapter?.dataSet?.let { artists ->
             MusicPlayerRemote.setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
             MusicPlayerRemote.openQueue(
-                queue = it.shuffled().flatMap { artist -> artist.songs },
+                queue = artists.shuffled().flatMap { artist -> artist.songs },
                 startPosition = 0,
                 startPlaying = true
             )
@@ -133,12 +130,12 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         }
     }
 
-    override fun onArtist(artistId: Long, view: View) {
+    override fun onArtist(artistName: String, view: View) {
         findNavController().navigate(
             R.id.artistDetailsFragment,
-            bundleOf(EXTRA_ARTIST_ID to artistId),
+            bundleOf(EXTRA_ARTIST_NAME to artistName),
             null,
-            FragmentNavigatorExtras(view to artistId.toString())
+            FragmentNavigatorExtras(view to artistName)
         )
         reenterTransition = null
     }
@@ -164,7 +161,6 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         setupLayoutMenu(layoutItem.subMenu!!)
         setUpSortOrderMenu(menu.findItem(R.id.action_sort_order).subMenu!!)
         setupAlbumArtistMenu(menu)
-        //Setting up cast button
         requireContext().setUpMediaRouteButton(menu)
     }
 
@@ -293,12 +289,12 @@ class ArtistsFragment : AbsRecyclerViewCustomGridSizeFragment<ArtistAdapter, Gri
         item: MenuItem
     ): Boolean {
         val layoutRes = when (item.itemId) {
-            R.id.action_layout_normal -> R.layout.item_grid
-            R.id.action_layout_card -> R.layout.item_card
-            R.id.action_layout_colored_card -> R.layout.item_card_color
-            R.id.action_layout_circular -> R.layout.item_grid_circle
-            R.id.action_layout_image -> R.layout.image
-            R.id.action_layout_gradient_image -> R.layout.item_image_gradient
+            R.layout.item_grid -> R.layout.item_grid
+            R.layout.item_card -> R.layout.item_card
+            R.layout.item_card_color -> R.layout.item_card_color
+            R.layout.item_grid_circle -> R.layout.item_grid_circle
+            R.layout.image -> R.layout.image
+            R.layout.item_image_gradient -> R.layout.item_image_gradient
             else -> PreferenceUtil.artistGridStyle.layoutResId
         }
         if (layoutRes != PreferenceUtil.artistGridStyle.layoutResId) {

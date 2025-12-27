@@ -88,8 +88,8 @@ class ArtistAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = artist.name
         holder.text?.hide()
-        val transitionName =
-            if (albumArtistsOnly) artist.name else artist.id.toString()
+        
+        val transitionName = artist.name
         if (holder.imageContainer != null) {
             holder.imageContainer?.transitionName = transitionName
         } else {
@@ -174,7 +174,7 @@ class ArtistAdapter(
                     if (albumArtistsOnly && IAlbumArtistClickListener != null) {
                         IAlbumArtistClickListener.onAlbumArtist(artist.name, imageContainer ?: it)
                     } else {
-                        IArtistClickListener.onArtist(artist.id, imageContainer ?: it)
+                        IArtistClickListener.onArtist(artist.name, imageContainer ?: it)
                     }
                 }
             }
