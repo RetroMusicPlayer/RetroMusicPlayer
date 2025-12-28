@@ -366,6 +366,9 @@ class AudioVisualizerView @JvmOverloads constructor(
         val spacing = barWidth * 0.2f   // 20% spacing between bars
         val actualBarWidth = barWidth - spacing
 
+        // Draw baseline first (so bars render on top)
+        drawBaseline()
+
         for (i in 0 until NUM_BARS) {
             val height = smoothedBarData[i] * 1.8f // Scale to screen height
             val x = -1.0f + i * barWidth
@@ -373,6 +376,14 @@ class AudioVisualizerView @JvmOverloads constructor(
             // Draw from bottom of screen (-1.0) upward
             drawBar(x, -1.0f, actualBarWidth, height)
         }
+    }
+
+    /**
+     * Draw baseline bar at the bottom (always visible)
+     */
+    private fun drawBaseline() {
+        val baselineHeight = 0.015f // Thin horizontal line
+        drawBar(-1.0f, -1.0f, 2.0f, baselineHeight)
     }
 
     /**
