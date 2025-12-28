@@ -86,26 +86,16 @@ class AudioVisualizerView @JvmOverloads constructor(
     }
 
     init {
-        Log.d(TAG, "AudioVisualizerView init block called")
         try {
             setEGLContextClientVersion(2)
-            Log.d(TAG, "EGL context version set to 2")
             setRenderer(this)
-            Log.d(TAG, "Renderer set")
             renderMode = RENDERMODE_CONTINUOUSLY
-            Log.d(TAG, "Render mode set to CONTINUOUSLY")
         } catch (e: Exception) {
             Log.e(TAG, "Error in init block", e)
         }
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        Log.d(TAG, "onAttachedToWindow called, visibility=$visibility, width=$width, height=$height")
-    }
-
     override fun onDetachedFromWindow() {
-        Log.d(TAG, "onDetachedFromWindow called")
         super.onDetachedFromWindow()
         release()
 
@@ -116,20 +106,13 @@ class AudioVisualizerView @JvmOverloads constructor(
         }
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
-        Log.d(TAG, "onLayout called: changed=$changed, size=${right-left}x${bottom-top}, visibility=$visibility")
-    }
-
     // ========== Public API ==========
 
     /**
      * Initialize visualizer with audio session ID
      */
     fun initialize(audioSessionId: Int) {
-        Log.d(TAG, "initialize called with audioSessionId=$audioSessionId")
         if (isInitialized) {
-            Log.d(TAG, "Already initialized, releasing first")
             release()
         }
 
@@ -147,12 +130,10 @@ class AudioVisualizerView @JvmOverloads constructor(
                 // Set capture size to maximum available
                 val captureSizeRange = Visualizer.getCaptureSizeRange()
                 captureSize = min(captureSizeRange[1], 1024)
-                Log.d(TAG, "Visualizer captureSize set to: $captureSize")
 
                 // Set data capture listener for FFT data
                 val maxRate = Visualizer.getMaxCaptureRate()
                 val captureRate = max(MIN_CAPTURE_RATE, maxRate / 2)
-                Log.d(TAG, "Visualizer captureRate set to: $captureRate (max=$maxRate)")
 
                 setDataCaptureListener(
                     captureListener,
@@ -162,12 +143,10 @@ class AudioVisualizerView @JvmOverloads constructor(
                 )
 
                 enabled = true
-                Log.d(TAG, "Visualizer enabled=${this.enabled}")
             }
 
             isInitialized = true
             isPaused = false
-            Log.d(TAG, "Visualizer initialized successfully with session ID: $audioSessionId")
 
         } catch (e: IllegalStateException) {
             Log.e(TAG, "Failed to initialize visualizer: already in use", e)
@@ -189,7 +168,6 @@ class AudioVisualizerView @JvmOverloads constructor(
             }
             visualizer = null
             isInitialized = false
-            Log.d(TAG, "Visualizer released")
         } catch (e: Exception) {
             Log.e(TAG, "Error releasing visualizer", e)
         }
@@ -227,8 +205,6 @@ class AudioVisualizerView @JvmOverloads constructor(
     // ========== Visualizer Data Capture ==========
 
     private val captureListener = object : Visualizer.OnDataCaptureListener {
-        private var captureCount = 0
-
         override fun onWaveFormDataCapture(
             visualizer: Visualizer,
             waveform: ByteArray,
@@ -242,10 +218,6 @@ class AudioVisualizerView @JvmOverloads constructor(
             fft: ByteArray,
             samplingRate: Int
         ) {
-            captureCount++
-            if (captureCount % 30 == 0) { // Log every 30 captures (~every 0.5 seconds)
-                Log.d(TAG, "onFftDataCapture called (count=$captureCount), fft.size=${fft.size}, isPaused=$isPaused")
-            }
             if (!isPaused) {
                 updateBarData(fft)
             }
@@ -312,23 +284,17 @@ class AudioVisualizerView @JvmOverloads constructor(
 
             totalMagnitude += smoothedBarData[i]
         }
-
-        if (totalMagnitude > 0.1f && System.currentTimeMillis() % 1000 < 50) {
-            Log.d(TAG, "updateBarData: totalMagnitude=$totalMagnitude, bar[0]=${smoothedBarData[0]}, bar[15]=${smoothedBarData[15]}, bar[31]=${smoothedBarData[31]}")
-        }
     }
 
     // ========== OpenGL ES Rendering ==========
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        Log.d(TAG, "onSurfaceCreated called")
-        // Set background to white for testing
-        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f)
+        // Set background to transparent
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f)
 
         // Load and compile shaders
         val vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, R.raw.visualizer_vertex)
         val fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, R.raw.visualizer_fragment)
-        Log.d(TAG, "Shaders loaded: vertex=$vertexShader, fragment=$fragmentShader")
 
         // Create shader program
         shaderProgram = GLES20.glCreateProgram().also {
@@ -343,8 +309,6 @@ class AudioVisualizerView @JvmOverloads constructor(
                 val error = GLES20.glGetProgramInfoLog(it)
                 Log.e(TAG, "Error linking shader program: $error")
                 GLES20.glDeleteProgram(it)
-            } else {
-                Log.d(TAG, "Shader program linked successfully: $it")
             }
         }
 
@@ -354,23 +318,13 @@ class AudioVisualizerView @JvmOverloads constructor(
 
         // Initialize buffers
         updateColorBuffer()
-        Log.d(TAG, "onSurfaceCreated complete, shaderProgram=$shaderProgram")
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         GLES20.glViewport(0, 0, width, height)
     }
 
-    private var frameCount = 0
-
     override fun onDrawFrame(gl: GL10?) {
-        frameCount++
-
-        // Log every 60 frames (~1 second)
-        if (frameCount % 60 == 0) {
-            Log.e(TAG, "========== onDrawFrame called (frame=$frameCount) ==========")
-        }
-
         // Frame rate limiting
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastFrameTime < FRAME_INTERVAL_MS) {
@@ -378,15 +332,10 @@ class AudioVisualizerView @JvmOverloads constructor(
         }
         lastFrameTime = currentTime
 
-        if (frameCount % 60 == 0) {
-            Log.d(TAG, "onDrawFrame: drawing frame, shaderProgram=$shaderProgram")
-        }
-
         // Clear screen
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
         if (shaderProgram == 0) {
-            Log.e(TAG, "onDrawFrame: shaderProgram is 0, skipping")
             return
         }
 
@@ -400,10 +349,6 @@ class AudioVisualizerView @JvmOverloads constructor(
         // Draw each frequency bar
         drawBars()
 
-        if (frameCount % 60 == 0) {
-            Log.d(TAG, "onDrawFrame: bars drawn")
-        }
-
         GLES20.glDisable(GLES20.GL_BLEND)
     }
 
@@ -415,19 +360,12 @@ class AudioVisualizerView @JvmOverloads constructor(
         val spacing = barWidth * 0.2f   // 20% spacing between bars
         val actualBarWidth = barWidth - spacing
 
-        var totalHeight = 0f
         for (i in 0 until NUM_BARS) {
-            // TEST: Make bars much taller and add minimum height
-            val height = max(0.3f, smoothedBarData[i] * 2.0f) // At least 0.3 height, scaled to 2.0x
+            val height = smoothedBarData[i] * 1.8f // Scale to screen height
             val x = -1.0f + i * barWidth
-            totalHeight += height
 
             // Draw from bottom of screen (-1.0) upward
             drawBar(x, -1.0f, actualBarWidth, height)
-        }
-
-        if (frameCount % 60 == 0) {
-            Log.d(TAG, "drawBars: totalHeight=$totalHeight, bar[0] height=${smoothedBarData[0] * 2.0f}, min bars with 0.3 height")
         }
     }
 
@@ -491,8 +429,6 @@ class AudioVisualizerView @JvmOverloads constructor(
         val shaderCode = context.resources.openRawResource(resourceId)
             .bufferedReader().use { it.readText() }
 
-        Log.d(TAG, "loadShader type=$type, resourceId=$resourceId, code length=${shaderCode.length}")
-
         return GLES20.glCreateShader(type).also { shader ->
             GLES20.glShaderSource(shader, shaderCode)
             GLES20.glCompileShader(shader)
@@ -504,8 +440,6 @@ class AudioVisualizerView @JvmOverloads constructor(
                 val error = GLES20.glGetShaderInfoLog(shader)
                 Log.e(TAG, "Error compiling shader type=$type: $error")
                 GLES20.glDeleteShader(shader)
-            } else {
-                Log.d(TAG, "Shader type=$type compiled successfully: $shader")
             }
         }
     }
@@ -514,13 +448,11 @@ class AudioVisualizerView @JvmOverloads constructor(
      * Update color buffer based on current colors
      */
     private fun updateColorBuffer() {
-        // TEST: Use bright red color for debugging
+        // Use white color for visualizer bars
         val r = 1.0f  // Red
-        val g = 0.0f  // Green
-        val b = 0.0f  // Blue
-        val a = 1.0f  // Alpha (fully opaque)
-
-        Log.d(TAG, "updateColorBuffer: color=($r, $g, $b, $a)")
+        val g = 1.0f  // Green
+        val b = 1.0f  // Blue
+        val a = 0.9f  // Alpha (slightly transparent)
 
         // Create color array (same color for all vertices)
         val colors = floatArrayOf(
