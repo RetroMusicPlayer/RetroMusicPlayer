@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PixelFormat
 import android.media.audiofx.Visualizer
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
@@ -87,6 +88,11 @@ class AudioVisualizerView @JvmOverloads constructor(
 
     init {
         try {
+            // Enable transparency for GLSurfaceView
+            setEGLConfigChooser(8, 8, 8, 8, 16, 0)
+            holder.setFormat(PixelFormat.TRANSLUCENT)
+            setZOrderOnTop(true)
+
             setEGLContextClientVersion(2)
             setRenderer(this)
             renderMode = RENDERMODE_CONTINUOUSLY
