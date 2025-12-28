@@ -84,6 +84,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private val lrcView: CoverLrcView get() = binding.lyricsView
     private val audioVisualizer: AudioVisualizerView? get() = _binding?.audioVisualizer
+    private val visualizerGradientOverlay: View? get() = _binding?.visualizerGradientOverlay
 
     var lyrics: Lyrics? = null
 
@@ -373,15 +374,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
 
     private fun setupVisualizer() {
         val enabled = PreferenceUtil.isVisualizerEnabled
-        Log.d(TAG, "setupVisualizer called: enabled=$enabled, audioVisualizer=$audioVisualizer")
-        audioVisualizer?.visibility = if (enabled) {
-            Log.d(TAG, "Setting visualizer visibility to VISIBLE")
-            View.VISIBLE
-        } else {
-            Log.d(TAG, "Setting visualizer visibility to GONE")
-            View.GONE
-        }
-        Log.d(TAG, "Visualizer visibility after setup: ${audioVisualizer?.visibility}")
+        val visibility = if (enabled) View.VISIBLE else View.GONE
+
+        audioVisualizer?.visibility = visibility
+        visualizerGradientOverlay?.visibility = visibility
     }
 
     private fun initializeVisualizer() {

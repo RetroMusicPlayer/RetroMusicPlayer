@@ -13,6 +13,15 @@
 
     </androidx.viewpager.widget.ViewPager>
 
+    <!-- Gradient overlay for visualizer (top: transparent, bottom: semi-transparent black) -->
+    <View
+        android:id="@+id/visualizerGradientOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_visualizer_overlay"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
     <!-- Audio Visualizer Overlay -->
     <code.name.monkey.retromusic.views.AudioVisualizerView
         android:id="@+id/audioVisualizer"
