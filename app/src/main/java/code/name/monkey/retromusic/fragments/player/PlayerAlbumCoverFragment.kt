@@ -152,6 +152,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
                 goToLyrics(requireActivity())
             }
         }
+        setupVisualizerToggle()
     }
 
     private fun setupViewPager() {
@@ -433,6 +434,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             .setMessage(R.string.visualizer_permission_required)
             .setPositiveButton(android.R.string.ok, null)
             .show()
+    }
+
+    private fun setupVisualizerToggle() {
+        binding.visualizerToggle.setOnClickListener {
+            PreferenceUtil.isVisualizerEnabled = !PreferenceUtil.isVisualizerEnabled
+            setupVisualizer()
+            if (PreferenceUtil.isVisualizerEnabled) {
+                initializeVisualizer()
+            } else {
+                audioVisualizer?.release()
+            }
+        }
     }
 
     companion object {

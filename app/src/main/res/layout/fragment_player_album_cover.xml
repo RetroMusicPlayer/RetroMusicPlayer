@@ -63,4 +63,15 @@
             app:lrcTimelineColor="@color/transparent"
             tools:visibility="visible" />
     </com.bosphere.fadingedgelayout.FadingEdgeLayout>
+
+    <!-- Visualizer toggle button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/visualizerToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/toggle_visualizer"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_equalizer" />
 </FrameLayout>

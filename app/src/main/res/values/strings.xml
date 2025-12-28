@@ -573,5 +573,6 @@
     <string name="pref_title_audio_visualizer">Audio Visualizer</string>
     <string name="pref_summary_audio_visualizer">Show frequency bars on album cover</string>
     <string name="visualizer_permission_required">Microphone permission required for visualizer</string>
+    <string name="toggle_visualizer">Toggle visualizer</string>
 
 </resources>
