@@ -53,6 +53,7 @@ class LibraryViewModel(
     private val searchResults = MutableLiveData<List<Any>>()
     private val fabMargin = MutableLiveData(0)
     private val songHistory = MutableLiveData<List<Song>>()
+    private val playCountSongsData = MutableLiveData<List<Song>>()
     private var previousSongHistory = ArrayList<HistoryEntity>()
     val paletteColor: LiveData<Int> = _paletteColor
 
@@ -139,6 +140,7 @@ class LibraryViewModel(
             Playlists -> fetchPlaylists()
             Genres -> fetchGenres()
             Suggestions -> fetchSuggestions()
+            PlayCount -> fetchPlayCountSongs()
         }
     }
 
@@ -250,13 +252,22 @@ class LibraryViewModel(
         emit(repository.recentSongs())
     }
 
-    fun playCountSongs(): LiveData<List<Song>> = liveData(IO) {
+    fun playCountSongs(): LiveData<List<Song>> {
+        if (playCountSongsData.value == null) {
+            viewModelScope.launch(IO) {
+                fetchPlayCountSongs()
+            }
+        }
+        return playCountSongsData
+    }
+
+    private suspend fun fetchPlayCountSongs() {
         repository.playCountSongs().forEach { song ->
             if (!File(song.data).exists() || song.id == -1L) {
                 repository.deleteSongInPlayCount(song)
             }
         }
-        emit(repository.playCountSongs().map {
+        playCountSongsData.postValue(repository.playCountSongs().map {
             it.toSong()
         })
     }
@@ -391,5 +402,6 @@ enum class ReloadType {
     HomeSections,
     Playlists,
     Genres,
-    Suggestions
+    Suggestions,
+    PlayCount
 }
