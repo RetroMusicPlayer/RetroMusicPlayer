@@ -166,5 +166,6 @@ class DeleteSongsDialog : DialogFragment() {
         libraryViewModel.forceReload(ReloadType.HomeSections)
         libraryViewModel.forceReload(ReloadType.Artists)
         libraryViewModel.forceReload(ReloadType.Albums)
+        libraryViewModel.forceReload(ReloadType.PlayCount)
     }
 }
