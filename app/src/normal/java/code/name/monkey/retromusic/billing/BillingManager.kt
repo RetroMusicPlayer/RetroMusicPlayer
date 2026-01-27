@@ -159,7 +159,7 @@ class BillingManager(private val context: Context) : PurchasesUpdatedListener {
             }
 
             // Update Pro version status if this is the Pro version purchase
-            if (purchase.products.contains(Constants.PRO_VERSION_PRODUCT_ID)) {
+        if (purchase.products.contains(Constants.PRO_VERSION_PRODUCT_ID) && !isProVersion) {
                 _isProVersion.value = true
                 context.showToast(R.string.thank_you)
                 Log.d(TAG, "Pro version activated successfully")
