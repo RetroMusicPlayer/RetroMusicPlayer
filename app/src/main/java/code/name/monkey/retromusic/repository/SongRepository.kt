@@ -109,7 +109,12 @@ class RealSongRepository(private val context: Context) : SongRepository {
     }
 
     override fun songs(query: String): List<Song> {
-        return songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
+        val unaccentedQuery = query.convertUnaccentText()
+        return songs().filter {
+            it.title.convertUnaccentText().contains(unaccentedQuery, ignoreCase = true) ||
+                    it.artistName.convertUnaccentText().contains(unaccentedQuery, ignoreCase = true) ||
+                    it.albumName.convertUnaccentText().contains(unaccentedQuery, ignoreCase = true)
+        }
     }
 
     override fun song(songId: Long): Song {
@@ -243,5 +248,10 @@ class RealSongRepository(private val context: Context) : SongRepository {
             newSelectionValues[i] = paths[i - selectionValuesFinal.size] + "%"
         }
         return newSelectionValues
+    }
+
+    private fun String.convertUnaccentText(): String {
+        val temp = java.text.Normalizer.normalize(this, java.text.Normalizer.Form.NFD)
+        return "\\p{InCombiningDiacriticalMarks}+".toRegex().replace(temp, "")
     }
 }
