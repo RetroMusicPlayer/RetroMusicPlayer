@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
+import java.text.Normalizer
 
 /**
  * Created by hemanths on 10/08/17.
@@ -251,7 +252,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
     }
 
     private fun String.convertUnaccentText(): String {
-        val temp = java.text.Normalizer.normalize(this, java.text.Normalizer.Form.NFD)
+        val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
         return "\\p{InCombiningDiacriticalMarks}+".toRegex().replace(temp, "")
     }
 }
