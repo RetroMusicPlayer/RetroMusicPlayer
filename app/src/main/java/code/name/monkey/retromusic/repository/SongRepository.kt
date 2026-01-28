@@ -251,8 +251,12 @@ class RealSongRepository(private val context: Context) : SongRepository {
         return newSelectionValues
     }
 
+    private val convertedUnaccentTextCache = mutableMapOf<String, String>()
+
     private fun String.convertUnaccentText(): String {
-        val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
-        return "\\p{InCombiningDiacriticalMarks}+".toRegex().replace(temp, "")
+        return convertedUnaccentTextCache.getOrPut(this) {
+            val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+            "\\p{InCombiningDiacriticalMarks}+".toRegex().replace(temp, "")
+        }
     }
 }
