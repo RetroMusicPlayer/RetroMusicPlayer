@@ -243,7 +243,6 @@ open class SongAdapter(
                 toggleChecked(layoutPosition)
             } else {
                 MusicPlayerRemote.openQueueKeepShuffleMode(dataSet, layoutPosition, true)
-                notifyDataSetChanged()
             }
         }
 

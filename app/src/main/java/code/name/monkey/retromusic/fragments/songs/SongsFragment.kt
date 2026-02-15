@@ -18,17 +18,22 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.fragments.GridStyle
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
 class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>() {
+
+    private var previousPlayingPosition: Int = RecyclerView.NO_POSITION
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         libraryViewModel.getSongs().observe(viewLifecycleOwner) {
@@ -51,6 +56,27 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
     override fun onShuffleClicked() {
         libraryViewModel.shuffleSongs()
     }
+
+    override fun onPlayStateChanged() {
+        super.onPlayStateChanged()
+
+        val adapter = adapter ?: return
+        val currentPosition = adapter.dataSet
+            .indexOfFirst { it.id == MusicPlayerRemote.currentSong.id }
+
+        if (currentPosition == -1) return
+
+        if (previousPlayingPosition != RecyclerView.NO_POSITION) {
+            adapter.notifyItemChanged(previousPlayingPosition)
+        }
+
+        adapter.notifyItemChanged(currentPosition)
+
+        recyclerView.scrollToPosition(currentPosition)
+
+        previousPlayingPosition = currentPosition
+    }
+
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireActivity(), getGridSize())
