@@ -3,7 +3,11 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.media.audiofx.AudioEffect
+import android.media.AudioDeviceInfo
+import android.media.AudioManager
 import android.net.Uri
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -34,6 +38,8 @@ class PlaybackManager(val context: Context) {
     val isPlaying: Boolean
         get() = playback != null && playback!!.isPlaying
 
+    private val audioManager: AudioManager = context.getSystemService(AudioManager::class.java)
+
     init {
         playback = createLocalPlayback()
     }
@@ -43,6 +49,10 @@ class PlaybackManager(val context: Context) {
     }
 
     fun play(onNotInitialized: () -> Unit) {
+        if (PreferenceUtil.isSpeakerDisabled && speakerEnabled()) {
+            context.showToast(R.string.speaker_disabled)
+            return
+        }
         if (playback != null && !playback!!.isPlaying) {
             if (!playback!!.isInitialized) {
                 onNotInitialized()
@@ -182,6 +192,26 @@ class PlaybackManager(val context: Context) {
 
     fun setPlaybackSpeedPitch(playbackSpeed: Float, playbackPitch: Float) {
         playback?.setPlaybackSpeedPitch(playbackSpeed, playbackPitch)
+    }
+
+    private fun speakerEnabled(): Boolean {
+        val headsetTypes = setOf(
+            AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+            AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
+            AudioDeviceInfo.TYPE_BLE_HEADSET,
+            AudioDeviceInfo.TYPE_BLE_SPEAKER,
+            AudioDeviceInfo.TYPE_WIRED_HEADSET,
+            AudioDeviceInfo.TYPE_WIRED_HEADPHONES,
+            AudioDeviceInfo.TYPE_USB_HEADSET,
+            AudioDeviceInfo.TYPE_USB_DEVICE
+        )
+        val devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
+        for (device in devices) {
+            if (device.type in headsetTypes) {
+                return false
+            }
+        }
+        return true
     }
 }
 
