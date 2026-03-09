@@ -386,6 +386,8 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 if (uri != null) {
                     CustomArtistImageUtil.getInstance(requireContext())
                         .setCustomArtistImage(artist, uri)
+
+                    detailsViewModel.refreshArtistInfo()
                 }
             }
         }

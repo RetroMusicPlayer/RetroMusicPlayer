@@ -42,6 +42,10 @@ class ArtistDetailsViewModel(
         }
     }
 
+    fun refreshArtistInfo(){
+        fetchArtist()
+    }
+
     fun getArtist(): LiveData<Artist> = artistDetails
 
     fun getArtistInfo(
