@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -90,7 +91,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
     }
 
     private fun updateSongTitle() {
-
         val song = MusicPlayerRemote.currentSong
 
         val builder = SpannableStringBuilder()
@@ -98,18 +98,15 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(R.layout.fragment_mini_p
         val title = song.title.toSpannable()
         title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
 
-        val text = song.artistName.toSpannable()
+        // Format artist names using ArtistSeparator
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        val text = formattedArtistName.toSpannable()
         text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)
 
         binding.miniPlayerTitle.isSelected = true
         binding.miniPlayerTitle.text = builder
-
-//        binding.title.isSelected = true
-//        binding.title.text = song.title
-//        binding.text.isSelected = true
-//        binding.text.text = song.artistName
     }
 
     private fun updateSongCover() {

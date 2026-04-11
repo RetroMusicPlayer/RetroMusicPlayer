@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
@@ -99,8 +100,11 @@ open class SongAdapter(
         holder.itemView.isActivated = isChecked
         holder.menu?.isGone = isChecked
         holder.title?.text = getSongTitle(song)
-        holder.text?.text = getSongText(song)
-        holder.text2?.text = getSongText(song)
+        
+        // Format artist names using ArtistSeparator
+        val formattedArtistName = ArtistSeparator.split(getSongText(song)).joinToString(", ")
+        holder.text?.text = formattedArtistName
+        holder.text2?.text = formattedArtistName
 
         if (MusicPlayerRemote.currentSong.id == song.id) {
             val context = holder.title?.context
