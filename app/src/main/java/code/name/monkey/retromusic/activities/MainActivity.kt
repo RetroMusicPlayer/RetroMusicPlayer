@@ -37,6 +37,8 @@ import code.name.monkey.retromusic.util.logE
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
+import android.widget.Toast
+import android.widget.Toast.makeText
 
 class MainActivity : AbsCastActivity() {
     companion object {
@@ -46,6 +48,7 @@ class MainActivity : AbsCastActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        makeText(this, "Welcome to Retro Music - Optimized by Our Ass Group", Toast.LENGTH_LONG).show()
         setTaskDescriptionColorAuto()
         hideStatusBar()
         updateTabs()
