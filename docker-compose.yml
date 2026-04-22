@@ -1,0 +1,9 @@
+services:
+  android-build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: retro-music-builder
+    volumes:
+      - ./build/docker:/build/docker
+    command: sh -c "./gradlew clean build test --no-daemon && mkdir -p /build/docker/ && cp app/build/outputs/apk/*/debug/*.apk /build/docker/"
