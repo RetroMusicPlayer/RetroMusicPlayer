@@ -28,6 +28,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleDebug
 
+      - name: List all Gradle tasks (Debug)
+        run: ./gradlew :app:tasks --all
+
       - name: Run Tests and Generate Jacoco Report
         run: ./gradlew :app:jacocoTestReport
 
