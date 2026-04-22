@@ -1,10 +1,10 @@
-name: Android CI
+name: ASS CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "dev", "master" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "dev", "master" ]
 
 jobs:
   build:
