@@ -29,10 +29,10 @@ jobs:
         run: ./gradlew assembleDebug
 
       - name: Run Tests and Generate Jacoco Report
-        run: ./gradlew jacocoTestReport
+        run: ./gradlew :app:jacocoTestReport
 
       - name: Upload Jacoco Report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-test-report
-          path: app/build/reports/jacoco/jacocoTestReport/
+          path: "**/build/reports/jacoco/jacocoTestReport/"
