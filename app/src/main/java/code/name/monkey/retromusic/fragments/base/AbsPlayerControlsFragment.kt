@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
+import code.name.monkey.retromusic.fragments.player.InlineLyricsController
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.service.MusicService
@@ -77,6 +78,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
     open val songCurrentProgress: TextView? = null
 
     private var progressAnimator: ObjectAnimator? = null
+    private var inlineLyricsController: InlineLyricsController? = null
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         if (seekBar == null) {
@@ -101,6 +103,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         }
         songTotalTime?.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress?.text = MusicUtil.getReadableDurationString(progress.toLong())
+        inlineLyricsController?.onProgress(progress)
     }
 
     private fun setUpProgressSlider() {
@@ -192,10 +195,19 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
 
     override fun onStart() {
         super.onStart()
+        if (inlineLyricsController == null) {
+            inlineLyricsController = InlineLyricsController(this, requireView())
+        }
+        inlineLyricsController?.start()
         setUpProgressSlider()
         setUpPrevNext()
         setUpShuffleButton()
         setUpRepeatButton()
+    }
+
+    override fun onPlayingMetaChanged() {
+        super.onPlayingMetaChanged()
+        inlineLyricsController?.onSongChanged()
     }
 
     @SuppressLint("ClickableViewAccessibility")

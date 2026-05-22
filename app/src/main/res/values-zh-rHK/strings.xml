@@ -433,4 +433,21 @@
     <string name="pref_title_expand_now_playing_panel">顯示現在播放</string>
     <string name="pref_summary_expand_now_playing_panel">點擊現在播放將顯示現在播放而非主頁</string>
     <string name="tiny_card_style">迷你卡片</string>
+    <string name="center">置中</string>
+    <string name="left">靠左</string>
+    <string name="right">靠右</string>
+    <string name="pref_header_inline_lyrics">播放頁滾動歌詞</string>
+    <string name="pref_title_show_inline_lyrics">在播放頁顯示滾動歌詞</string>
+    <string name="pref_summary_show_inline_lyrics">在現在播放控制區顯示目前歌詞和下一句同步歌詞。</string>
+    <string name="pref_title_inline_lyrics_gravity">播放頁歌詞對齊方式</string>
+    <string name="pref_title_inline_lyrics_color">播放頁歌詞顏色</string>
+    <string name="pref_summary_inline_lyrics_color">預設使用播放器 Material 配色，啟用自訂顏色後使用所選顏色。</string>
+    <string name="pref_title_inline_lyrics_use_custom_color">使用自訂播放頁歌詞顏色</string>
+    <string name="pref_title_inline_lyrics_bold">播放頁歌詞加粗</string>
+    <string name="pref_header_full_lyrics">播放器歌詞覆蓋層</string>
+    <string name="pref_title_full_lyrics_text_size">播放器歌詞字級</string>
+    <string name="pref_title_full_lyrics_bold">播放器歌詞加粗</string>
+    <string name="lyrics_text_smaller">更小</string>
+    <string name="lyrics_text_larger">更大</string>
+    <string name="lyrics_text_size_label">字級：%1$d sp</string>
 </resources>

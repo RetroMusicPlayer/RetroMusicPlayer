@@ -19,8 +19,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
+import code.name.monkey.appthemehelper.ACCENT_COLORS
+import code.name.monkey.appthemehelper.ACCENT_COLORS_SUB
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.color.colorChooser
 
 /**
  * @author Hemanth S (h4h13).
@@ -40,6 +46,25 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
                 return@setOnPreferenceChangeListener false
             }
             return@setOnPreferenceChangeListener true
+        }
+
+        val inlineLyricsColorPref: ATEColorPreference? = findPreference(INLINE_LYRICS_COLOR)
+        val inlineLyricsColor = PreferenceUtil.inlineLyricsColor
+        inlineLyricsColorPref?.setColor(inlineLyricsColor, ColorUtil.darkenColor(inlineLyricsColor))
+        inlineLyricsColorPref?.setOnPreferenceClickListener {
+            materialDialog().show {
+                colorChooser(
+                    initialSelection = inlineLyricsColor,
+                    showAlphaSelector = false,
+                    colors = ACCENT_COLORS,
+                    subColors = ACCENT_COLORS_SUB,
+                    allowCustomArgb = true
+                ) { _, color ->
+                    PreferenceUtil.inlineLyricsColor = color
+                    inlineLyricsColorPref.setColor(color, ColorUtil.darkenColor(color))
+                }
+            }
+            true
         }
     }
 

@@ -32,6 +32,18 @@
         <item>@string/over_cover</item>
     </array>
 
+    <string-array name="pref_inline_lyrics_gravity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <array name="pref_inline_lyrics_gravity_entries">
+        <item>@string/left</item>
+        <item>@string/center</item>
+        <item>@string/right</item>
+    </array>
+
     <string-array name="pref_tab_text_mode_values">
         <item>0</item>
         <item>1</item>

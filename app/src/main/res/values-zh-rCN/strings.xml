@@ -570,4 +570,21 @@
     <string name="pref_save_last_directory_summary">切换到文件夹视图时恢复上次使用的目录</string>
     <string name="pref_save_last_directory_title">保存上次目录</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="center">居中</string>
+    <string name="left">靠左</string>
+    <string name="right">靠右</string>
+    <string name="pref_header_inline_lyrics">播放页滚动歌词</string>
+    <string name="pref_title_show_inline_lyrics">在播放页显示滚动歌词</string>
+    <string name="pref_summary_show_inline_lyrics">在正在播放控制区显示当前歌词和下一句同步歌词。</string>
+    <string name="pref_title_inline_lyrics_gravity">播放页歌词对齐方式</string>
+    <string name="pref_title_inline_lyrics_color">播放页歌词颜色</string>
+    <string name="pref_summary_inline_lyrics_color">默认使用播放器 Material 配色，开启自定义颜色后使用所选颜色。</string>
+    <string name="pref_title_inline_lyrics_use_custom_color">使用自定义播放页歌词颜色</string>
+    <string name="pref_title_inline_lyrics_bold">播放页歌词加粗</string>
+    <string name="pref_header_full_lyrics">播放器歌词覆盖层</string>
+    <string name="pref_title_full_lyrics_text_size">播放器歌词字号</string>
+    <string name="pref_title_full_lyrics_bold">播放器歌词加粗</string>
+    <string name="lyrics_text_smaller">更小</string>
+    <string name="lyrics_text_larger">更大</string>
+    <string name="lyrics_text_size_label">字号：%1$d sp</string>
 </resources>

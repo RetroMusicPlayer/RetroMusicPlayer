@@ -30,6 +30,8 @@ import androidx.viewpager.widget.ViewPager
 import kotlinx.coroutines.launch
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.FULL_LYRICS_BOLD
+import code.name.monkey.retromusic.FULL_LYRICS_TEXT_SIZE
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SHOW_LYRICS
@@ -121,6 +123,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         maybeInitLyrics()
         lrcView.apply {
+            applyLyricsTextStyle()
             setDraggable(true) { time ->
                 MusicPlayerRemote.seekTo(time.toInt())
                 MusicPlayerRemote.resumePlaying()
@@ -205,7 +208,15 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             LYRICS_TYPE -> {
                 maybeInitLyrics()
             }
+            FULL_LYRICS_TEXT_SIZE, FULL_LYRICS_BOLD -> {
+                applyLyricsTextStyle()
+            }
         }
+    }
+
+    private fun applyLyricsTextStyle() {
+        lrcView.setLyricsTextSizeSp(PreferenceUtil.fullLyricsTextSize.toFloat())
+        lrcView.setLyricsBold(PreferenceUtil.fullLyricsBold)
     }
 
     private fun setLRCViewColors(@ColorInt primaryColor: Int, @ColorInt secondaryColor: Int) {

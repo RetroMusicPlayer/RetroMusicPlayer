@@ -25,6 +25,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.text.format.DateUtils
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
@@ -271,6 +272,25 @@ class CoverLrcView @JvmOverloads constructor(
 
     fun setTimeTextColor(timeTextColor: Int) {
         mTimeTextColor = timeTextColor
+        postInvalidate()
+    }
+
+    fun setLyricsTextSizeSp(textSizeSp: Float) {
+        val normalSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            textSizeSp,
+            resources.displayMetrics
+        )
+        mNormalTextSize = normalSize
+        mCurrentTextSize = normalSize * 1.08f
+        mLrcPaint.textSize = mNormalTextSize
+        initEntryList()
+        postInvalidate()
+    }
+
+    fun setLyricsBold(bold: Boolean) {
+        mLrcPaint.isFakeBoldText = bold
+        initEntryList()
         postInvalidate()
     }
 

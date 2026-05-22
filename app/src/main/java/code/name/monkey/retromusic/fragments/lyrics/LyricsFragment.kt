@@ -45,6 +45,7 @@ import code.name.monkey.retromusic.model.AudioTagInfo
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.FileUtils
 import code.name.monkey.retromusic.util.LyricUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
 import kotlinx.coroutines.GlobalScope
@@ -125,6 +126,8 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
             setTimeTextColor(accentColor())
             setTimelineColor(accentColor())
             setTimelineTextColor(accentColor())
+            setLyricsTextSizeSp(PreferenceUtil.fullLyricsTextSize.toFloat())
+            setLyricsBold(PreferenceUtil.fullLyricsBold)
             setDraggable(true, LrcView.OnPlayClickListener {
                 MusicPlayerRemote.seekTo(it.toInt())
                 return@OnPlayClickListener true
