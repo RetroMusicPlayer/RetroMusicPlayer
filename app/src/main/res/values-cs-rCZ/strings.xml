@@ -575,4 +575,5 @@
     <string name="pref_save_last_directory_summary">Při přepnutí do zobrazení složek, obnovit poslední použitý adresář</string>
     <string name="pref_save_last_directory_title">Uložit poslední složku</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Přejít na interpreta</string>
 </resources>
