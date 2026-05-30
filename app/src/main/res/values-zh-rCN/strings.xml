@@ -570,4 +570,5 @@
     <string name="pref_save_last_directory_summary">切换到文件夹视图时恢复上次使用的目录</string>
     <string name="pref_save_last_directory_title">保存上次目录</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">查看艺术家</string>
 </resources>
