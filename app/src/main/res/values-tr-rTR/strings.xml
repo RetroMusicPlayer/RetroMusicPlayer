@@ -571,4 +571,5 @@
     <string name="pref_save_last_directory_summary">Klasör görünümüne geçerken son kullanılan dizini geri getir</string>
     <string name="pref_save_last_directory_title">Son Dizini Kaydet</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Sanatçıya git</string>
 </resources>
