@@ -572,4 +572,5 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_save_last_directory_summary">Quando passi alla vista cartella, ripristina l\'ultimo percorso utilizzato</string>
     <string name="pref_save_last_directory_title">Salva l\'ultimo percorso</string>
     <string name="artist_separator_helper_text">Per aggiungere artisti multipli, separali con: %1$s</string>
+    <string name="go_to_artist">Vai all\'artista</string>
 </resources>
