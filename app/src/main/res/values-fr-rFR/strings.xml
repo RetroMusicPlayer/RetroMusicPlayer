@@ -571,4 +571,5 @@
     <string name="pref_save_last_directory_summary">Lors du passage à la vue des dossiers, restaurer le dernier répertoire utilisé</string>
     <string name="pref_save_last_directory_title">Enregistrer le dernier répertoire</string>
     <string name="artist_separator_helper_text">Pour ajouter plusieurs artistes, séparez-les par : %1$s</string>
+    <string name="go_to_artist">Aller à l\'artiste</string>
 </resources>
