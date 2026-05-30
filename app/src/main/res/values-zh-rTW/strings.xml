@@ -569,4 +569,5 @@
     <string name="pref_save_last_directory_summary">切換到資料夾檢視時，還原上次使用的資料夾</string>
     <string name="pref_save_last_directory_title">儲存上次使用的資料夾</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">前往藝人頁面</string>
 </resources>
