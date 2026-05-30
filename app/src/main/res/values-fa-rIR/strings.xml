@@ -571,4 +571,5 @@
     <string name="pref_save_last_directory_summary">هنگام تغییر به نمای پوشه، آخرین فهرست استفاده شده را بازیابی کنید</string>
     <string name="pref_save_last_directory_title">ذخیره آخرین فهرست</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">رفتن به صفحه هنرمند</string>
 </resources>
