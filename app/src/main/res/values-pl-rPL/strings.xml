@@ -575,4 +575,5 @@
     <string name="pref_save_last_directory_summary">Podczas przełączania na widok folderu przywróć ostatnio używany katalog</string>
     <string name="pref_save_last_directory_title">Zapisz ostatni katalog</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Przejdź do wykonawcy</string>
 </resources>
