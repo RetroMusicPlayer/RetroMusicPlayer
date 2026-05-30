@@ -570,4 +570,5 @@
     <string name="pref_save_last_directory_summary">フォルダビューに切り替えると、最後に使用したディレクトリが復元されます</string>
     <string name="pref_save_last_directory_title">最終ディレクトリを保存</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">アーティストに移動</string>
 </resources>
