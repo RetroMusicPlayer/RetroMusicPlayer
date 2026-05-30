@@ -571,4 +571,5 @@
     <string name="pref_save_last_directory_summary">Stelle das zuletzt verwendete Verzeichnis nach dem wechsel der Ordneransicht wieder her</string>
     <string name="pref_save_last_directory_title">Letztes Verzeichnis speichern.</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Zum Interpreten gehen</string>
 </resources>
