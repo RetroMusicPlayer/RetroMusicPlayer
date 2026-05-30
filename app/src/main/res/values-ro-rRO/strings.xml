@@ -573,4 +573,5 @@
     <string name="pref_save_last_directory_summary">Când se trece la vizualizarea folderului, se restabilește ultimul director folosit</string>
     <string name="pref_save_last_directory_title">Salvează ultimul director</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Pagină artist</string>
 </resources>
