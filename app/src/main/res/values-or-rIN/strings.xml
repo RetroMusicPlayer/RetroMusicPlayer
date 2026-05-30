@@ -571,4 +571,5 @@
     <string name="pref_save_last_directory_summary">ଫୋଲ୍ଡର୍ ଭ୍ୟୁକୁ ଯିବାବେଳେ, ଶେଷ ବ୍ୟବହୃତ ଡିରେକ୍ଟୋରୀ ରିଷ୍ଟୋର୍ କରନ୍ତୁ</string>
     <string name="pref_save_last_directory_title">ଶେଷ ଡିରେକ୍ଟୋରୀ ସଞ୍ଚୟ କରନ୍ତୁ</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">କଳାକାରଙ୍କ ନିକଟକୁ ଯାଆନ୍ତୁ</string>
 </resources>
