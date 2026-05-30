@@ -575,4 +575,5 @@
     <string name="pref_save_last_directory_summary">При переході до перегляду тек відновлювати останній використаний каталог</string>
     <string name="pref_save_last_directory_title">Зберегти останній каталог</string>
     <string name="artist_separator_helper_text">Щоби додати декількох виконавців, розділіть їх таким символом: %1$s</string>
+    <string name="go_to_artist">Перейти до виконавця</string>
 </resources>
