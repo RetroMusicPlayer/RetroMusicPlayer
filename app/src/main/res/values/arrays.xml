@@ -39,8 +39,8 @@
     </string-array>
 
     <array name="pref_inline_lyrics_gravity_entries">
-        <item>@string/left</item>
         <item>@string/center</item>
+        <item>@string/left</item>
         <item>@string/right</item>
     </array>
 

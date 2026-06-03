@@ -581,10 +581,8 @@
     <string name="pref_summary_inline_lyrics_color">默认使用播放器 Material 配色，开启自定义颜色后使用所选颜色。</string>
     <string name="pref_title_inline_lyrics_use_custom_color">使用自定义播放页歌词颜色</string>
     <string name="pref_title_inline_lyrics_bold">播放页歌词加粗</string>
-    <string name="pref_header_full_lyrics">播放器歌词覆盖层</string>
+    <string name="pref_header_full_lyrics">歌词大小</string>
     <string name="pref_title_full_lyrics_text_size">播放器歌词字号</string>
     <string name="pref_title_full_lyrics_bold">播放器歌词加粗</string>
-    <string name="lyrics_text_smaller">更小</string>
-    <string name="lyrics_text_larger">更大</string>
     <string name="lyrics_text_size_label">字号：%1$d sp</string>
 </resources>

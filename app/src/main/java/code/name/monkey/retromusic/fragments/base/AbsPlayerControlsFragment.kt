@@ -210,6 +210,12 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         inlineLyricsController?.onSongChanged()
     }
 
+    override fun onDestroyView() {
+        inlineLyricsController?.destroy()
+        inlineLyricsController = null
+        super.onDestroyView()
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpPrevNext() {
         nextButton?.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
@@ -278,6 +284,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
 
     override fun onResume() {
         super.onResume()
+        inlineLyricsController?.onProgress(MusicPlayerRemote.songProgressMillis)
         progressViewUpdateHelper.start()
     }
 

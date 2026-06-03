@@ -797,7 +797,7 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(SHOW_INLINE_LYRICS, true)
 
     val inlineLyricsGravity: Int
-        get() = sharedPreferences.getStringOrDefault(INLINE_LYRICS_GRAVITY, "1").toInt()
+        get() = sharedPreferences.getStringOrDefault(INLINE_LYRICS_GRAVITY, "0").toInt()
 
     val inlineLyricsUseCustomColor: Boolean
         get() = sharedPreferences.getBoolean(INLINE_LYRICS_USE_CUSTOM_COLOR, false)
@@ -810,8 +810,8 @@ object PreferenceUtil {
         get() = sharedPreferences.getBoolean(INLINE_LYRICS_BOLD, false)
 
     var fullLyricsTextSize: Int
-        get() = sharedPreferences.getInt(FULL_LYRICS_TEXT_SIZE, 28)
-        set(value) = sharedPreferences.edit { putInt(FULL_LYRICS_TEXT_SIZE, value) }
+        get() = sharedPreferences.getInt(FULL_LYRICS_TEXT_SIZE, 28).coerceIn(18, 42)
+        set(value) = sharedPreferences.edit { putInt(FULL_LYRICS_TEXT_SIZE, value.coerceIn(18, 42)) }
 
     var fullLyricsBold: Boolean
         get() = sharedPreferences.getBoolean(FULL_LYRICS_BOLD, false)

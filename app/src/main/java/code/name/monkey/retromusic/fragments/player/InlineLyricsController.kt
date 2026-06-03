@@ -6,6 +6,8 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -35,29 +37,50 @@ class InlineLyricsController(
     private var container: LinearLayout? = null
     private var currentLineView: MaterialTextView? = null
     private var nextLineView: MaterialTextView? = null
-    private var optionsButton: MaterialTextView? = null
+    private var optionsButton: ImageButton? = null
     private var lyrics: Lyrics? = null
     private var songId: Long = -1L
     private var currentLine: String? = null
     private var nextLine: String? = null
+    private var isSupportedLayout = true
+    private var isDestroyed = false
 
     fun start() {
-        ensureViews()
+        isDestroyed = false
+        isSupportedLayout = ensureViews()
+        if (!isSupportedLayout) return
         loadLyrics()
     }
 
+    fun destroy() {
+        isDestroyed = true
+        lyrics = null
+        songId = -1L
+        currentLine = null
+        nextLine = null
+        (container?.parent as? ViewGroup)?.removeView(container)
+        (optionsButton?.parent as? ViewGroup)?.removeView(optionsButton)
+        container = null
+        currentLineView = null
+        nextLineView = null
+        optionsButton = null
+    }
+
     fun onSongChanged() {
+        if (!isSupportedLayout) return
         loadLyrics()
     }
 
     fun onProgress(progress: Int) {
+        if (!isSupportedLayout || isDestroyed) return
         if (songId != MusicPlayerRemote.currentSong.id) {
             loadLyrics()
             return
         }
         val synchronizedLyrics = lyrics as? AbsSynchronizedLyrics
         if (PreferenceUtil.showLyrics) {
-            hide(preserveSpace = true)
+            applyStyle()
+            showLyricsOptionsButton()
             return
         }
         if (!PreferenceUtil.showInlineLyrics || synchronizedLyrics?.isValid != true) {
@@ -87,16 +110,17 @@ class InlineLyricsController(
         }
     }
 
-    private fun ensureViews() {
-        if (container != null) return
-        val root = rootView as? ConstraintLayout ?: return
-        val progress = root.findViewById<View>(R.id.progressSlider) ?: return
+    private fun ensureViews(): Boolean {
+        if (container != null) return true
+        val root = rootView as? ConstraintLayout ?: return false
+        val progress = root.findViewById<View>(R.id.progressSlider) ?: return false
         val lyricsContainer = LinearLayout(root.context).apply {
             id = View.generateViewId()
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             isVisible = false
             clipToPadding = false
+            minimumHeight = root.context.dp(48f)
             setPadding(root.context.dp(24f), 0, root.context.dp(24f), root.context.dp(8f))
             layoutParams = ConstraintLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
@@ -131,6 +155,7 @@ class InlineLyricsController(
         nextLineView = next
         optionsButton = button
         applyStyle()
+        return true
     }
 
     private fun newLineView(context: android.content.Context): MaterialTextView {
@@ -148,19 +173,16 @@ class InlineLyricsController(
         }
     }
 
-    private fun newOptionsButton(context: android.content.Context): MaterialTextView {
-        return MaterialTextView(context).apply {
+    private fun newOptionsButton(context: android.content.Context): ImageButton {
+        return ImageButton(context).apply {
             id = View.generateViewId()
-            layoutParams = ConstraintLayout.LayoutParams(context.dp(26f), context.dp(26f))
-            background = androidx.appcompat.content.res.AppCompatResources.getDrawable(
-                context,
-                R.drawable.bg_lyrics_text_options
-            )
+            layoutParams = ConstraintLayout.LayoutParams(context.dp(34f), context.dp(34f))
+            background = null
+            setImageResource(R.drawable.ic_lyrics_size)
             contentDescription = context.getString(R.string.pref_header_full_lyrics)
-            gravity = Gravity.CENTER
-            text = "词"
-            textSize = 11f
-            typeface = Typeface.DEFAULT_BOLD
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            adjustViewBounds = true
+            setPadding(context.dp(2f), context.dp(2f), context.dp(2f), context.dp(2f))
             isVisible = false
             setOnClickListener { showLyricsTextOptionsDialog() }
         }
@@ -172,7 +194,12 @@ class InlineLyricsController(
         lyrics = null
         currentLine = null
         nextLine = null
-        hide()
+        if (PreferenceUtil.showLyrics) {
+            applyStyle()
+            showLyricsOptionsButton()
+        } else {
+            hide()
+        }
 
         (fragment as Fragment).lifecycleScope.launch(Dispatchers.IO) {
             val syncedLyrics = runCatching {
@@ -184,6 +211,7 @@ class InlineLyricsController(
             }.getOrNull()
 
             withContext(Dispatchers.Main) {
+                if (isDestroyed) return@withContext
                 if (songId != song.id) return@withContext
                 lyrics = syncedLyrics
                 onProgress(MusicPlayerRemote.songProgressMillis)
@@ -193,12 +221,12 @@ class InlineLyricsController(
 
     private fun applyStyle() {
         val gravity = when (PreferenceUtil.inlineLyricsGravity) {
-            0 -> Gravity.START
+            1 -> Gravity.START
             2 -> Gravity.END
             else -> Gravity.CENTER
         }
         val textAlignment = when (PreferenceUtil.inlineLyricsGravity) {
-            0 -> View.TEXT_ALIGNMENT_TEXT_START
+            1 -> View.TEXT_ALIGNMENT_TEXT_START
             2 -> View.TEXT_ALIGNMENT_TEXT_END
             else -> View.TEXT_ALIGNMENT_CENTER
         }
@@ -221,7 +249,7 @@ class InlineLyricsController(
             setTypeface(Typeface.DEFAULT, typeface)
             this.textAlignment = textAlignment
         }
-        optionsButton?.setTextColor(color)
+        optionsButton?.setColorFilter(color)
     }
 
     private fun animateLineChange(line: String, upcomingLine: String) {
@@ -242,18 +270,21 @@ class InlineLyricsController(
         }
     }
 
-    private fun hide(preserveSpace: Boolean = false) {
-        if (preserveSpace && (currentLine != null || nextLine != null)) {
-            container?.apply {
-                alpha = 1f
-                isVisible = true
-            }
-            currentLineView?.alpha = 0f
-            nextLineView?.alpha = 0f
-            optionsButton?.isVisible = true
-            return
+    private fun showLyricsOptionsButton() {
+        container?.apply {
+            alpha = 1f
+            isVisible = true
+            minimumHeight = rootView.context.dp(48f)
         }
+        currentLineView?.alpha = 0f
+        nextLineView?.alpha = 0f
+        optionsButton?.apply {
+            isVisible = true
+            bringToFront()
+        }
+    }
 
+    private fun hide() {
         container?.apply {
             alpha = 1f
             isVisible = false
@@ -275,10 +306,12 @@ class InlineLyricsController(
             text = context.getString(R.string.lyrics_text_size_label, PreferenceUtil.fullLyricsTextSize)
         }
         val sizeSlider = Slider(context).apply {
-            valueFrom = 18f
-            valueTo = 48f
+            valueFrom = MIN_FULL_LYRICS_TEXT_SIZE.toFloat()
+            valueTo = MAX_FULL_LYRICS_TEXT_SIZE.toFloat()
             stepSize = 1f
-            value = PreferenceUtil.fullLyricsTextSize.coerceIn(18, 48).toFloat()
+            value = PreferenceUtil.fullLyricsTextSize
+                .coerceIn(MIN_FULL_LYRICS_TEXT_SIZE, MAX_FULL_LYRICS_TEXT_SIZE)
+                .toFloat()
         }
         val boldCheckBox = CheckBox(context).apply {
             text = context.getString(R.string.pref_title_full_lyrics_bold)
@@ -312,5 +345,10 @@ class InlineLyricsController(
 
     private fun android.content.Context.dp(value: Float): Int {
         return (value * resources.displayMetrics.density).toInt()
+    }
+
+    companion object {
+        private const val MIN_FULL_LYRICS_TEXT_SIZE = 18
+        private const val MAX_FULL_LYRICS_TEXT_SIZE = 42
     }
 }

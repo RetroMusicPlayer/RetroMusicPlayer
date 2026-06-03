@@ -586,11 +586,9 @@
     <string name="pref_summary_inline_lyrics_color">Uses the Material player color unless custom color is enabled.</string>
     <string name="pref_title_inline_lyrics_use_custom_color">Use custom inline lyrics color</string>
     <string name="pref_title_inline_lyrics_bold">Bold inline lyrics</string>
-    <string name="pref_header_full_lyrics">Player lyrics overlay</string>
+    <string name="pref_header_full_lyrics">Lyrics size</string>
     <string name="pref_title_full_lyrics_text_size">Player lyrics text size</string>
     <string name="pref_title_full_lyrics_bold">Bold player lyrics text</string>
-    <string name="lyrics_text_smaller">Smaller</string>
-    <string name="lyrics_text_larger">Larger</string>
     <string name="lyrics_text_size_label">Size: %1$d sp</string>
 
 </resources>

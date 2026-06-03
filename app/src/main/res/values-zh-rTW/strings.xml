@@ -580,10 +580,8 @@
     <string name="pref_summary_inline_lyrics_color">預設使用播放器 Material 配色，啟用自訂顏色後使用所選顏色。</string>
     <string name="pref_title_inline_lyrics_use_custom_color">使用自訂播放頁歌詞顏色</string>
     <string name="pref_title_inline_lyrics_bold">播放頁歌詞加粗</string>
-    <string name="pref_header_full_lyrics">播放器歌詞覆蓋層</string>
+    <string name="pref_header_full_lyrics">歌詞大小</string>
     <string name="pref_title_full_lyrics_text_size">播放器歌詞字級</string>
     <string name="pref_title_full_lyrics_bold">播放器歌詞加粗</string>
-    <string name="lyrics_text_smaller">更小</string>
-    <string name="lyrics_text_larger">更大</string>
     <string name="lyrics_text_size_label">字級：%1$d sp</string>
 </resources>

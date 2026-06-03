@@ -48,7 +48,7 @@
             android:title="@string/pref_title_show_inline_lyrics" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-            android:defaultValue="1"
+            android:defaultValue="0"
             android:entries="@array/pref_inline_lyrics_gravity_entries"
             android:entryValues="@array/pref_inline_lyrics_gravity_values"
             android:key="inline_lyrics_gravity"
@@ -84,6 +84,7 @@
             android:key="full_lyrics_text_size"
             android:layout="@layout/list_item_view_seekbar"
             android:max="42"
+            android:min="18"
             android:title="@string/pref_title_full_lyrics_text_size"
             app:ateKey_pref_unit="sp"
             app:showSeekBarValue="true" />
