@@ -569,6 +569,6 @@
     <string name="scan_complete">扫描完成：找到 %1$d 个媒体项目。</string>
     <string name="pref_save_last_directory_summary">切换到文件夹视图时恢复上次使用的目录</string>
     <string name="pref_save_last_directory_title">保存上次目录</string>
-    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="artist_separator_helper_text">如需添加多位艺术家，请用以下符号分隔：%1$s</string>
     <string name="go_to_artist">查看艺术家</string>
 </resources>
