@@ -138,6 +138,8 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var pendingQuit = false
 
+    private var isQuitting = false
+
     private lateinit var playbackManager: PlaybackManager
 
     val playback: Playback? get() = playbackManager.playback
@@ -720,6 +722,13 @@ class MusicService : MediaBrowserServiceCompat(),
         return START_NOT_STICKY
     }
 
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        if (!isPlaying) {
+            quit()
+        }
+    }
+
     override fun onTrackEnded() {
         acquireWakeLock()
         // if there is a timer finished, don't continue
@@ -879,7 +888,8 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun quit() {
-        pause()
+        isQuitting = true
+        pause(true)
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
@@ -1181,6 +1191,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun startForegroundOrNotify() {
+        if (isQuitting) return
         if (playingNotification != null && currentSong.id != -1L) {
             if (isForeground && !isPlaying) {
                 // This makes the notification dismissible
