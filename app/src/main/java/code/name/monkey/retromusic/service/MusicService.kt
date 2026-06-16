@@ -722,13 +722,6 @@ class MusicService : MediaBrowserServiceCompat(),
         return START_NOT_STICKY
     }
 
-    override fun onTaskRemoved(rootIntent: Intent?) {
-        super.onTaskRemoved(rootIntent)
-        if (!isPlaying) {
-            quit()
-        }
-    }
-
     override fun onTrackEnded() {
         acquireWakeLock()
         // if there is a timer finished, don't continue
