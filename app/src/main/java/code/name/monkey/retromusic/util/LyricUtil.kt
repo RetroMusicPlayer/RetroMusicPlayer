@@ -118,7 +118,9 @@ object LyricUtil {
     }
 
     private fun getLrcOriginalPath(filePath: String): String {
-        return filePath.replace(filePath.substring(filePath.lastIndexOf(".") + 1), "lrc")
+        val file = File(filePath)
+        val lrcName = "${file.nameWithoutExtension}.lrc"
+        return file.parentFile?.resolve(lrcName)?.path ?: lrcName
     }
 
     @Throws(Exception::class)
