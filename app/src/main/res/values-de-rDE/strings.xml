@@ -508,7 +508,7 @@
     <string name="sort_order_year_asc">Jahr aufsteigend</string>
     <string name="sort_order_year_desc">Jahr absteigend</string>
     <string name="sort_order_z_a">Absteigend</string>
-    <string name="speaker_disabled">Internal speaker playback is disabled</string>
+    <string name="speaker_disabled">Interner Lautsprecher ist deaktiviert</string>
     <string name="speech_not_supported">Tut uns leid! Dein Gerät unterstützt keine Spracheingabe</string>
     <string name="speech_prompt">Bibliothek durchsuchen</string>
     <string name="stack">Gestapelt</string>
@@ -570,6 +570,6 @@
     <string name="scan_complete">Scan abgeschlossen: %1$d Medienelemente gefunden.</string>
     <string name="pref_save_last_directory_summary">Stelle das zuletzt verwendete Verzeichnis nach dem wechsel der Ordneransicht wieder her</string>
     <string name="pref_save_last_directory_title">Letztes Verzeichnis speichern.</string>
-    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="artist_separator_helper_text">Um mehrere Sänger hinzuzufügen, trenne mit: %1$s</string>
     <string name="go_to_artist">Zum Interpreten gehen</string>
 </resources>
