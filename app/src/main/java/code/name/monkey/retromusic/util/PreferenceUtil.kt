@@ -10,6 +10,7 @@ import androidx.core.content.res.use
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.ADAPTIVE_COLOR_APP
 import code.name.monkey.retromusic.ALBUM_ARTISTS_ONLY
@@ -51,7 +52,13 @@ import code.name.monkey.retromusic.GENRE_SORT_ORDER
 import code.name.monkey.retromusic.HOME_ALBUM_GRID_STYLE
 import code.name.monkey.retromusic.HOME_ARTIST_GRID_STYLE
 import code.name.monkey.retromusic.IGNORE_MEDIA_STORE_ARTWORK
+import code.name.monkey.retromusic.FULL_LYRICS_BOLD
+import code.name.monkey.retromusic.FULL_LYRICS_TEXT_SIZE
 import code.name.monkey.retromusic.INITIALIZED_BLACKLIST
+import code.name.monkey.retromusic.INLINE_LYRICS_BOLD
+import code.name.monkey.retromusic.INLINE_LYRICS_COLOR
+import code.name.monkey.retromusic.INLINE_LYRICS_GRAVITY
+import code.name.monkey.retromusic.INLINE_LYRICS_USE_CUSTOM_COLOR
 import code.name.monkey.retromusic.KEEP_SCREEN_ON
 import code.name.monkey.retromusic.LANGUAGE_NAME
 import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
@@ -82,6 +89,7 @@ import code.name.monkey.retromusic.REMEMBER_LAST_TAB
 import code.name.monkey.retromusic.SAF_SDCARD_URI
 import code.name.monkey.retromusic.SAVE_LAST_DIRECTORY
 import code.name.monkey.retromusic.SCREEN_ON_LYRICS
+import code.name.monkey.retromusic.SHOW_INLINE_LYRICS
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.SHOW_WHEN_LOCKED
 import code.name.monkey.retromusic.SLEEP_TIMER_FINISH_SONG
@@ -784,6 +792,30 @@ object PreferenceUtil {
     var showLyrics: Boolean
         get() = sharedPreferences.getBoolean(SHOW_LYRICS, false)
         set(value) = sharedPreferences.edit { putBoolean(SHOW_LYRICS, value) }
+
+    val showInlineLyrics: Boolean
+        get() = sharedPreferences.getBoolean(SHOW_INLINE_LYRICS, true)
+
+    val inlineLyricsGravity: Int
+        get() = sharedPreferences.getStringOrDefault(INLINE_LYRICS_GRAVITY, "0").toInt()
+
+    val inlineLyricsUseCustomColor: Boolean
+        get() = sharedPreferences.getBoolean(INLINE_LYRICS_USE_CUSTOM_COLOR, false)
+
+    var inlineLyricsColor: Int
+        get() = sharedPreferences.getInt(INLINE_LYRICS_COLOR, ThemeStore.accentColor(App.getContext()))
+        set(value) = sharedPreferences.edit { putInt(INLINE_LYRICS_COLOR, value) }
+
+    val inlineLyricsBold: Boolean
+        get() = sharedPreferences.getBoolean(INLINE_LYRICS_BOLD, false)
+
+    var fullLyricsTextSize: Int
+        get() = sharedPreferences.getInt(FULL_LYRICS_TEXT_SIZE, 28).coerceIn(18, 42)
+        set(value) = sharedPreferences.edit { putInt(FULL_LYRICS_TEXT_SIZE, value.coerceIn(18, 42)) }
+
+    var fullLyricsBold: Boolean
+        get() = sharedPreferences.getBoolean(FULL_LYRICS_BOLD, false)
+        set(value) = sharedPreferences.edit { putBoolean(FULL_LYRICS_BOLD, value) }
 
     val rememberLastTab: Boolean
         get() = sharedPreferences.getBoolean(REMEMBER_LAST_TAB, true)

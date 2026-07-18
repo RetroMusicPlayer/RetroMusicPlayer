@@ -575,5 +575,20 @@
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
     <string name="go_to_artist">Go to artist</string>
+    <string name="center">Center</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="pref_header_inline_lyrics">Inline lyrics</string>
+    <string name="pref_title_show_inline_lyrics">Show rolling lyrics on player</string>
+    <string name="pref_summary_show_inline_lyrics">Display the current and next synced lyric lines in the now playing controls.</string>
+    <string name="pref_title_inline_lyrics_gravity">Inline lyrics alignment</string>
+    <string name="pref_title_inline_lyrics_color">Inline lyrics color</string>
+    <string name="pref_summary_inline_lyrics_color">Uses the Material player color unless custom color is enabled.</string>
+    <string name="pref_title_inline_lyrics_use_custom_color">Use custom inline lyrics color</string>
+    <string name="pref_title_inline_lyrics_bold">Bold inline lyrics</string>
+    <string name="pref_header_full_lyrics">Lyrics size</string>
+    <string name="pref_title_full_lyrics_text_size">Player lyrics text size</string>
+    <string name="pref_title_full_lyrics_bold">Bold player lyrics text</string>
+    <string name="lyrics_text_size_label">Size: %1$d sp</string>
 
 </resources>

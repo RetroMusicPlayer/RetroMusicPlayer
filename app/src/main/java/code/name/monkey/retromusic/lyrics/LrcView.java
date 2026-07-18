@@ -28,6 +28,7 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.TypedValue;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -290,6 +291,23 @@ public class LrcView extends View {
         postInvalidate();
     }
 
+    public void setLyricsTextSizeSp(float textSizeSp) {
+        float normalSize = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP,
+                textSizeSp,
+                getResources().getDisplayMetrics());
+        mNormalTextSize = normalSize;
+        mCurrentTextSize = normalSize * 1.08F;
+        mLrcPaint.setTextSize(mNormalTextSize);
+        initEntryList();
+        postInvalidate();
+    }
+
+    public void setLyricsBold(boolean bold) {
+        mLrcPaint.setFakeBoldText(bold);
+        initEntryList();
+        postInvalidate();
+    }
 
     public void setDraggable(boolean draggable, OnPlayClickListener onPlayClickListener) {
         if (draggable) {

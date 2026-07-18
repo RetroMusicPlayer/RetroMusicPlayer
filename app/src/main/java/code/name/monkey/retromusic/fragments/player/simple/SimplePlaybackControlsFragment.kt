@@ -130,6 +130,7 @@ class SimplePlaybackControlsFragment :
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
+        super.onUpdateProgressViews(progress, total)
         binding.songCurrentProgress.text = String.format(
             "%s / %s",
             MusicUtil.getReadableDurationString(progress.toLong()),

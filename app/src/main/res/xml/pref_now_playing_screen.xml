@@ -36,6 +36,66 @@
         android:summary="@string/pref_keep_screen_on_summary"
         android:title="@string/pref_title_lyrics_screen_on" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_inline_lyrics">
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="true"
+            android:key="show_inline_lyrics"
+            android:layout="@layout/list_item_view_switch"
+            android:summary="@string/pref_summary_show_inline_lyrics"
+            android:title="@string/pref_title_show_inline_lyrics" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_inline_lyrics_gravity_entries"
+            android:entryValues="@array/pref_inline_lyrics_gravity_values"
+            android:key="inline_lyrics_gravity"
+            android:layout="@layout/list_item_view"
+            android:title="@string/pref_title_inline_lyrics_gravity" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="inline_lyrics_use_custom_color"
+            android:layout="@layout/list_item_view_switch"
+            android:title="@string/pref_title_inline_lyrics_use_custom_color" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+            android:key="inline_lyrics_color"
+            android:layout="@layout/list_item_color_view"
+            android:persistent="false"
+            android:summary="@string/pref_summary_inline_lyrics_color"
+            android:title="@string/pref_title_inline_lyrics_color" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="inline_lyrics_bold"
+            android:layout="@layout/list_item_view_switch_no_title"
+            android:title="@string/pref_title_inline_lyrics_bold" />
+    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_full_lyrics">
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
+            android:defaultValue="28"
+            android:key="full_lyrics_text_size"
+            android:layout="@layout/list_item_view_seekbar"
+            android:max="42"
+            android:min="18"
+            android:title="@string/pref_title_full_lyrics_text_size"
+            app:ateKey_pref_unit="sp"
+            app:showSeekBarValue="true" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="full_lyrics_bold"
+            android:layout="@layout/list_item_view_switch_no_title"
+            android:title="@string/pref_title_full_lyrics_bold" />
+    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="circle_play_button"

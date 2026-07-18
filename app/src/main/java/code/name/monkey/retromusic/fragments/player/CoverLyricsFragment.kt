@@ -1,7 +1,9 @@
 package code.name.monkey.retromusic.fragments.player
 
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -9,6 +11,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.FULL_LYRICS_BOLD
+import code.name.monkey.retromusic.FULL_LYRICS_TEXT_SIZE
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.databinding.FragmentCoverLyricsBinding
 import code.name.monkey.retromusic.extensions.dipToPix
@@ -56,6 +60,7 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
         binding.playerLyricsLine2.setOnClickListener {
             goToLyrics(requireActivity())
         }
+        applyLyricsTextStyle()
     }
 
     fun setColors(color: MediaNotificationProcessor) {
@@ -79,7 +84,19 @@ class CoverLyricsFragment : AbsMusicServiceFragment(R.layout.fragment_cover_lyri
                 progressViewUpdateHelper?.stop()
                 binding.root.isVisible = false
             }
+        } else if (key == FULL_LYRICS_TEXT_SIZE || key == FULL_LYRICS_BOLD) {
+            applyLyricsTextStyle()
         }
+    }
+
+    private fun applyLyricsTextStyle() {
+        if (_binding == null) return
+        val textSize = PreferenceUtil.fullLyricsTextSize.toFloat()
+        val typefaceStyle = if (PreferenceUtil.fullLyricsBold) Typeface.BOLD else Typeface.NORMAL
+        lyricsLine1.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        lyricsLine2.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        lyricsLine1.setTypeface(Typeface.DEFAULT, typefaceStyle)
+        lyricsLine2.setTypeface(Typeface.DEFAULT, typefaceStyle)
     }
 
     override fun onPlayingMetaChanged() {

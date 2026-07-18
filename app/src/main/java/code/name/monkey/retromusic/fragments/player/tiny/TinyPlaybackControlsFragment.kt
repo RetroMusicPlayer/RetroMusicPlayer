@@ -47,6 +47,7 @@ class TinyPlaybackControlsFragment :
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
+        super.onUpdateProgressViews(progress, total)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
