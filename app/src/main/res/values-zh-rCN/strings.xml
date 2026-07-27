@@ -10,7 +10,7 @@
     <string name="action_add_to_playing_queue">加入播放队列</string>
     <string name="action_add_to_playlist">加入播放列表</string>
     <string name="action_cancel">取消</string>
-    <string name="action_cast">投射</string>
+    <string name="action_cast">投屏</string>
     <string name="action_clear_playing_queue">清空播放队列</string>
     <string name="action_cycle_repeat">循环重复模式</string>
     <string name="action_delete">删除</string>
@@ -20,7 +20,7 @@
     <string name="action_go_to_album">查看专辑</string>
     <string name="action_go_to_artist">查看艺术家</string>
     <string name="action_go_to_genre">查看流派</string>
-    <string name="action_go_to_lyrics">查看歌词</string>
+    <string name="action_go_to_lyrics">歌词页</string>
     <string name="action_go_to_start_directory">返回起始目录</string>
     <string name="action_grant">授权</string>
     <string name="action_grid_size">网格大小</string>
