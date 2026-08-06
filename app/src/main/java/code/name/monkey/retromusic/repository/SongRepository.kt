@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.repository
 
 import android.content.Context
 import android.database.Cursor
+import android.media.MediaMetadataRetriever
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
@@ -130,7 +131,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         cursor: Cursor
     ): Song {
         val id = cursor.getLong(AudioColumns._ID)
-        val title = cursor.getString(AudioColumns.TITLE)
+        var title = cursor.getString(AudioColumns.TITLE)
         val trackNumber = cursor.getInt(AudioColumns.TRACK)
         val year = cursor.getInt(AudioColumns.YEAR)
         val duration = cursor.getLong(AudioColumns.DURATION)
@@ -142,6 +143,9 @@ class RealSongRepository(private val context: Context) : SongRepository {
         val artistName = cursor.getStringOrNull(AudioColumns.ARTIST)
         val composer = cursor.getStringOrNull(AudioColumns.COMPOSER)
         val albumArtist = cursor.getStringOrNull("album_artist")
+        if (title.all { it == '?' }) {
+            title = retrieveTitleFromFile(data) ?: title
+        }
         return Song(
             id,
             title,
@@ -243,5 +247,17 @@ class RealSongRepository(private val context: Context) : SongRepository {
             newSelectionValues[i] = paths[i - selectionValuesFinal.size] + "%"
         }
         return newSelectionValues
+    }
+
+    private fun retrieveTitleFromFile(path: String): String? {
+        return try {
+            val retriever = MediaMetadataRetriever()
+            retriever.setDataSource(path)
+            val result = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
+            retriever.release()
+            result?.takeIf { it.isNotBlank() }
+        } catch (e: Exception) {
+            null
+        }
     }
 }
