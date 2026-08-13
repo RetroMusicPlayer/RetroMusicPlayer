@@ -19,6 +19,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -60,7 +61,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDivider(ColorDrawable(Color.TRANSPARENT))
+        setDivider(Color.TRANSPARENT.toDrawable())
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
         }

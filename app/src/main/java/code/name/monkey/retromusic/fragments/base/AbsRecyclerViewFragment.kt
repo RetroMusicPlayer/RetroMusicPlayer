@@ -161,7 +161,6 @@ abstract class AbsRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : Recycle
 
     protected abstract fun createLayoutManager(): LM
 
-    @NonNull
     protected abstract fun createAdapter(): A
 
     protected fun invalidateLayoutManager() {

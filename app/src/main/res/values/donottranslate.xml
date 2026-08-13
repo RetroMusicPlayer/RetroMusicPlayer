@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="donation_ids" translatable="false">
-        <item>code_name_monkey_donate_1</item>
-        <item>code_name_monkey_donate_2</item>
-        <item>code_name_monkey_donate_3</item>
-        <item>code_name_monkey_donate_4</item>
-        <item>code_name_monkey_donate_5</item>
-        <item>code_name_monkey_donate_6</item>
-        <item>code_name_monkey_donate_7</item>
-        <item>code_name_monkey_donate_8</item>
-    </string-array>
 
     <string name="app_name" translatable="false">Retro Music</string>
     <string name="git_hub" translatable="false">GitHub</string>

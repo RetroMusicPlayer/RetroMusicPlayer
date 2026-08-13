@@ -32,18 +32,10 @@ object ViewUtil {
     const val RETRO_MUSIC_ANIM_TIME = 1000
 
     fun setProgressDrawable(progressSlider: SeekBar, newColor: Int, thumbTint: Boolean = false) {
-
         if (thumbTint) {
             progressSlider.thumbTintList = ColorStateList.valueOf(newColor)
         }
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            val layerDrawable = progressSlider.progressDrawable as LayerDrawable
-            val progressDrawable = layerDrawable.findDrawableByLayerId(android.R.id.progress)
-            progressDrawable.colorFilter =
-                BlendModeColorFilterCompat.createBlendModeColorFilterCompat(newColor, SRC_IN)
-        } else {
-            progressSlider.progressTintList = ColorStateList.valueOf(newColor)
-        }
+        progressSlider.progressTintList = ColorStateList.valueOf(newColor)
     }
 
 

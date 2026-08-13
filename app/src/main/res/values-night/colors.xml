@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="window_color">@android:color/black</color>
-
-    <color name="bottomSheetColor">#202020</color>
-    <color name="widget_md3_bg_color">@color/darkerColorSurface</color>
 </resources>

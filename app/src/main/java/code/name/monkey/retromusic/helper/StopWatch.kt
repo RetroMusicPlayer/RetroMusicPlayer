@@ -19,6 +19,8 @@ package code.name.monkey.retromusic.helper
  *
  * @author Karim Abou Zeid (kabouzeid)
  */
+import java.util.Locale
+
 class StopWatch {
 
     /**
@@ -89,6 +91,6 @@ class StopWatch {
     }
 
     override fun toString(): String {
-        return String.format("%d millis", elapsedTime)
+        return String.format(Locale.getDefault(), "%d millis", elapsedTime)
     }
 }

@@ -101,29 +101,12 @@
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
 
-    <string name="bug_report_failed">Unable to send report</string>
-    <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
-    <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
-    <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
-    <string name="bug_report_failed_wrong_credentials">Wrong username or password</string>
-    <string name="bug_report_issue">Issue</string>
     <string name="bug_report_manual">Send manually</string>
-    <string name="bug_report_no_description">Please enter an issue description</string>
-    <string name="bug_report_no_password">Please enter your valid GitHub password</string>
-    <string name="bug_report_no_title">Please enter an issue title</string>
-    <string name="bug_report_no_username">Please enter your valid GitHub username</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
-    <string name="bug_report_use_account">Send using GitHub account</string>
-
-    <string name="buy_now">Buy now</string>
-
-    <string name="cancel_current_timer">Cancel</string>
 
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_style">Card</string>
-
-    <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
 
     <string name="cascading">Cascading</string>
 
@@ -148,14 +131,10 @@
 
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
 
-    <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
     <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
-    <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
 
     <string name="create_action">Create</string>
-
-    <string name="created_playlist_x">Created playlist %1$s.</string>
 
     <string name="credit_title">Members and contributors </string>
 
@@ -176,8 +155,6 @@
 
     <string name="depth">Depth</string>
 
-    <string name="description">Description</string>
-
     <string name="device_info">Device info</string>
 
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
@@ -188,8 +165,6 @@
 
     <string name="donate">Donate</string>
     <string name="donate_summary">If you think I deserve to get paid for my work, you can leave some money here</string>
-
-    <string name="donation_header">Buy me a:</string>
 
     <string name="drive_mode">Drive mode</string>
 
@@ -212,8 +187,6 @@
     <string name="follow_system">Follow system</string>
 
     <string name="for_you">For you</string>
-
-    <string name="free">Free</string>
 
     <string name="full">Full</string>
     <string name="full_card">Full card</string>
@@ -249,8 +222,6 @@
     <string name="image_gradient">Gradient image</string>
     <string name="image_settings_summary">Change artist image download settings</string>
 
-    <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
-
 
     <string name="keyboard">Keyboard</string>
 
@@ -276,12 +247,6 @@
     <string name="light_theme_name">Clearly White</string>
 
     <string name="listeners_label">Listeners</string>
-
-    <string name="listing_files">Listing files</string>
-
-    <string name="loading_products">Loading products…</string>
-
-    <string name="login">Login</string>
 
     <string name="lyrics">Lyrics</string>
 
@@ -310,7 +275,6 @@
     <string name="no_lyrics_found">No lyrics found</string>
     <string name="no_playing_queue">No songs playing</string>
     <string name="no_playlists">You have no playlists</string>
-    <string name="no_purchase_found">No purchase found.</string>
     <string name="no_results">No results</string>
     <string name="no_songs">You have no songs</string>
 
@@ -319,22 +283,18 @@
 
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
 
-    <string name="nothing_to_scan">Nothing to scan.</string>
     <string name="nothing_to_see">Nothing to see</string>
 
 
     <string name="now_playing">Now playing</string>
     <string name="now_playing_queue">Now playing queue</string>
     <string name="now_playing_summary">Customize the now playing screen</string>
-    <string name="now_playing_themes">9+ now playing themes</string>
 
     <string name="only_on_wifi">Only on Wi-Fi</string>
 
     <string name="other_settings_summary">Advanced testing features</string>
 
     <string name="others">Other</string>
-
-    <string name="password">Password</string>
 
     <string name="past_three_months">Past 3 months</string>
 
@@ -382,14 +342,12 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_language_name">Select language</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
-    <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
     <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
     <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
-    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
@@ -401,19 +359,15 @@
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
     <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
-    <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="pref_title_album_cover_transform">Album cover skip</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-    <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
-    <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_colored_app">Adaptive color</string>
-    <string name="pref_title_colored_notification">Colored notification</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
@@ -430,15 +384,11 @@
     <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
     <string name="pref_title_toggle_full_screen">Fullscreen app</string>
     <string name="pref_title_toggle_toggle_headset">Auto-play</string>
-    <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
 
     <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
 
     <string name="profile">Profile</string>
-
-    <string name="purchase">Purchase</string>
 
     <string name="queue">Playing Queue</string>
 
@@ -466,13 +416,7 @@
 
     <string name="restore">Restore</string>
 
-    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
-    <string name="restored_previous_purchases">Restored previous purchases.</string>
-
-    <string name="restoring_purchase">Restoring purchase…</string>
-
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
 
     <string name="saf_delete_failed">File delete failed: %s</string>
     <!-- SAF -->
@@ -494,8 +438,6 @@
     <string name="save_playlists_title">Save as files</string>
 
     <string name="saved_playlist_to">Saved playlist to %s.</string>
-
-    <string name="saving_changes">Saving changes</string>
 
     <string name="scan_media">Scan media</string>
 
@@ -543,8 +485,6 @@
 
     <string name="stack">Stack</string>
 
-    <string name="start_play_music">Start playing music.</string>
-
     <string name="suggestion_songs">Suggestions</string>
 
     <string name="support_development">Support development</string>
@@ -557,8 +497,6 @@
     <string name="telegram_group">Telegram</string>
     <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
 
-    <string name="thank_you">Thank you!</string>
-
     <string name="the_audio_file">The audio file</string>
 
     <string name="this_month">This month</string>
@@ -567,8 +505,6 @@
 
     <string name="tiny">Tiny</string>
     <string name="tiny_card_style">Tiny card</string>
-
-    <string name="title">Title</string>
 
     <string name="today">Today</string>
 
@@ -580,8 +516,6 @@
 
     <string name="translate">Translate</string>
     <string name="translate_community">Help us translate the app to your language</string>
-
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
 
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
@@ -596,8 +530,6 @@
 
     <string name="updating">Updating…</string>
 
-    <string name="username">Username</string>
-
     <string name="version">Version</string>
 
     <string name="vertical_flip">Vertical flip</string>
@@ -610,10 +542,7 @@
 
     <string name="what_do_you_want_to_share">What do you want to share?</string>
 
-    <string name="whats_new">What\'s New</string>
-
     <string name="window">Window</string>
-    <string name="window_corner_edges">Rounded corners</string>
 
     <string name="x_has_been_set_as_ringtone">Set %1$s as your ringtone.</string>
     <string name="x_selected">%1$d selected</string>
@@ -623,5 +552,4 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
 
-    <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
 </resources>

@@ -7,8 +7,6 @@
     <color name="md_red_500">#F44336</color>
     <color name="md_red_A400">#FF1744</color>
 
-    <color name="md_yellow_A400">#FFD600</color>
-
     <color name="md_deep_purple_A400">#651FFF</color>
 
     <color name="md_deep_purple_300">#9575CD</color>
@@ -20,7 +18,6 @@
     <color name="md_deep_purple_A200">#7C4DFF</color>
 
 
-    <color name="md_blue_500">#2196F3</color>
     <color name="md_blue_A400">#2979FF</color>
 
     <color name="md_cyan_400">#26c6da</color>
@@ -32,8 +29,6 @@
     <color name="md_grey_200">#EEEEEE</color>
     <color name="md_grey_400">#BDBDBD</color>
     <color name="md_grey_500">#9E9E9E</color>
-    <color name="md_grey_600">#757575</color>
-    <color name="md_grey_700">#616161</color>
     <color name="md_grey_800">#424242</color>
 
     <color name="md_black_1000">#000000</color>

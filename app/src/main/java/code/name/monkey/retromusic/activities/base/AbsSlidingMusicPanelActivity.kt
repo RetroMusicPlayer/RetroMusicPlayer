@@ -30,6 +30,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.size
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
@@ -471,7 +472,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                     .setIcon(menu.icon)
             }
         }
-        if (binding.navigationView.menu.size() == 1) {
+        if (binding.navigationView.menu.size == 1) {
             isInOneTabMode = true
             binding.navigationView.isVisible = false
         } else {

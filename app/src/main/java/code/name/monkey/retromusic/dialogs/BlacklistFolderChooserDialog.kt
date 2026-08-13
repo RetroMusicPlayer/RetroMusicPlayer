@@ -20,9 +20,6 @@ import android.widget.FrameLayout
 import android.text.TextWatcher
 import android.text.Editable
 import com.afollestad.materialdialogs.customview.customView
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
 
 class BlacklistFolderChooserDialog : DialogFragment() {
     private var initialPath: String = getExternalStorageDirectory().absolutePath
@@ -113,9 +110,9 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                var currentValue = s.toString()
+                val currentValue = s.toString()
                 parentFolder = File(currentValue)
-                if (canAccessFolderNio(currentValue)){
+                if (canAccessFolder(currentValue)) {
                     updateDialog()
                 }
             }
@@ -158,13 +155,9 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         canGoUp = parentFolder?.parent != null
     }
 
-    private fun canAccessFolderNio(path: String): Boolean {
-        val folderPath: Path = Paths.get(path)
-
-        val existsAndIsDirectory = Files.exists(folderPath) && Files.isDirectory(folderPath)
-        val hasReadAccess = Files.isReadable(folderPath)
-
-        return existsAndIsDirectory && hasReadAccess
+    private fun canAccessFolder(path: String): Boolean {
+        val file = File(path)
+        return file.exists() && file.isDirectory && file.canRead()
     }
 
     private fun updateDialog() {

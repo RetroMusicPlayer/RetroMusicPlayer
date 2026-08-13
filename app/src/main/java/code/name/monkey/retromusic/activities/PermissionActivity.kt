@@ -147,7 +147,6 @@ class PermissionActivity : AbsMusicServiceActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasAudioPermission(): Boolean {
         return Settings.System.canWrite(this)
     }

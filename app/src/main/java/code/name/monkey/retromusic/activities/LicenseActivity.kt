@@ -29,6 +29,8 @@ import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 
 /** Created by hemanths on 2019-09-27.  */
+import java.util.Locale
+
 class LicenseActivity : AbsThemeActivity() {
     private lateinit var binding: ActivityLicenseBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +87,7 @@ class LicenseActivity : AbsThemeActivity() {
 
     private fun colorToCSS(color: Int): String {
         return String.format(
+            Locale.getDefault(),
             "rgb(%d, %d, %d)",
             Color.red(color),
             Color.green(color),

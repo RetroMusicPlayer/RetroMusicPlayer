@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.model.lyrics;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,8 +48,8 @@ class SynchronizedLyricsLRC extends AbsSynchronizedLyrics {
       Matcher attrMatcher = SynchronizedLyricsLRC.LRC_ATTRIBUTE_PATTERN.matcher(line);
       if (attrMatcher.find()) {
         try {
-          String attr = attrMatcher.group(1).toLowerCase().trim();
-          String value = attrMatcher.group(2).toLowerCase().trim();
+          String attr = attrMatcher.group(1).toLowerCase(Locale.ROOT).trim();
+          String value = attrMatcher.group(2).toLowerCase(Locale.ROOT).trim();
           if ("offset".equals(attr)) {
             this.offset = Integer.parseInt(value);
           }
