@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.util
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.SeekBar

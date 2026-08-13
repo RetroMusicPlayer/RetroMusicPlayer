@@ -169,7 +169,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
         if (!ignoreBlacklist) {
-            selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
+            selectionFinal = if (selection != null && selection.trim() != "") {
                 "$IS_MUSIC AND $selectionFinal"
             } else {
                 IS_MUSIC
@@ -219,7 +219,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
         pathCount: Int
     ): String {
         val newSelection = StringBuilder(
-            if (selection != null && selection.trim { it <= ' ' } != "") "$selection AND " else "")
+            if (selection != null && selection.trim() != "") "$selection AND " else "")
         newSelection.append(Constants.DATA + " NOT LIKE ?")
         for (i in 0 until pathCount - 1) {
             newSelection.append(" AND " + Constants.DATA + " NOT LIKE ?")

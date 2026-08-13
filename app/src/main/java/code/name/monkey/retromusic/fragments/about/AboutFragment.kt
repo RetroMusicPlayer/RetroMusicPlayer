@@ -21,7 +21,6 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.ContributorAdapter
@@ -89,10 +88,9 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
 
     private fun getAppVersion(): String {
         return try {
-            val isPro = if (App.isProVersion()) "Pro" else "Free"
             val packageInfo =
                 requireActivity().packageManager.getPackageInfo(requireActivity().packageName, 0)
-            "${packageInfo.versionName} $isPro"
+            packageInfo.versionName ?: "0.0.0"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             "0.0.0"
@@ -102,7 +100,13 @@ class AboutFragment : Fragment(R.layout.fragment_about), View.OnClickListener {
     private fun shareApp() {
         ShareCompat.IntentBuilder(requireActivity()).setType("text/plain")
             .setChooserTitle(R.string.share_app)
-            .setText(String.format(getString(R.string.app_share), requireActivity().packageName))
+            .setText(
+                String.format(
+                    java.util.Locale.getDefault(),
+                    getString(R.string.app_share),
+                    requireActivity().packageName
+                )
+            )
             .startChooser()
     }
 

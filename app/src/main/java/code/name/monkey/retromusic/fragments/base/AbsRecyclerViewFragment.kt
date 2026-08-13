@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw

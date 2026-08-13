@@ -154,7 +154,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
         } else if (requestCode == BLUETOOTH_PERMISSION_REQUEST) {
             for (grantResult in grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    if (VersionUtils.hasS() && ActivityCompat.shouldShowRequestPermissionRationale(
                             this@AbsBaseActivity, Manifest.permission.BLUETOOTH_CONNECT
                         )
                     ) {
@@ -165,9 +165,13 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                             Snackbar.LENGTH_SHORT
                         )
                             .setAction(R.string.action_grant) {
-                                ActivityCompat.requestPermissions(this,
-                                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
-                                    BLUETOOTH_PERMISSION_REQUEST)
+                                if (VersionUtils.hasS()) {
+                                    ActivityCompat.requestPermissions(
+                                        this,
+                                        arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+                                        BLUETOOTH_PERMISSION_REQUEST
+                                    )
+                                }
                             }
                             .setActionTextColor(accentColor()).show()
                     }

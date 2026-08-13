@@ -175,7 +175,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
     private fun artistInfo(lastFmArtist: LastFmArtist?) {
         if (lastFmArtist != null && lastFmArtist.artist != null && lastFmArtist.artist.bio != null) {
             val bioContent = lastFmArtist.artist.bio.content
-            if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
+            if (bioContent != null && bioContent.trim().isNotEmpty()) {
                 binding.fragmentArtistContent.run {
                     biographyText.isVisible = true
                     biographyTitle.isVisible = true

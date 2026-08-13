@@ -25,6 +25,7 @@ import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.DialogFileDetailsBinding
@@ -79,9 +80,16 @@ class SongDetailDialog : DialogFragment() {
                         try {
                             retriever.setDataSource(songFile.absolutePath)
 
-                            val bitrate = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)?.toIntOrNull() ?: 0
-                            val sampleRate = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_SAMPLERATE)?.toIntOrNull() ?: 0
-                            val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull() ?: 0L
+                            val bitrate =
+                                retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)
+                                    ?.toIntOrNull() ?: 0
+                            val sampleRate = if (VersionUtils.hasS()) {
+                                retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_SAMPLERATE)
+                                    ?.toIntOrNull() ?: 0
+                            } else 0
+                            val duration =
+                                retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+                                    ?.toLongOrNull() ?: 0L
 
                             binding.fileFormat.text =
                                 makeTextWithTitle(context, R.string.label_file_format, "Opus")

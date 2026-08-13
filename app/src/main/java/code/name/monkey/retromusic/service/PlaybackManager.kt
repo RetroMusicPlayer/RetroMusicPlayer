@@ -6,6 +6,7 @@ import android.media.audiofx.AudioEffect
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.net.Uri
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.model.Song
@@ -195,16 +196,20 @@ class PlaybackManager(val context: Context) {
     }
 
     private fun speakerEnabled(): Boolean {
-        val headsetTypes = setOf(
+        val headsetTypes = mutableSetOf(
             AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
             AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
-            AudioDeviceInfo.TYPE_BLE_HEADSET,
-            AudioDeviceInfo.TYPE_BLE_SPEAKER,
             AudioDeviceInfo.TYPE_WIRED_HEADSET,
             AudioDeviceInfo.TYPE_WIRED_HEADPHONES,
-            AudioDeviceInfo.TYPE_USB_HEADSET,
             AudioDeviceInfo.TYPE_USB_DEVICE
         )
+        if (VersionUtils.hasS()) {
+            headsetTypes.add(AudioDeviceInfo.TYPE_BLE_HEADSET)
+            headsetTypes.add(AudioDeviceInfo.TYPE_BLE_SPEAKER)
+        }
+        if (VersionUtils.hasOreo()) {
+            headsetTypes.add(AudioDeviceInfo.TYPE_USB_HEADSET)
+        }
         val devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
         for (device in devices) {
             if (device.type in headsetTypes) {

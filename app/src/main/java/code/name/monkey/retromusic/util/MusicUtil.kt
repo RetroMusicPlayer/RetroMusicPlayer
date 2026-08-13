@@ -150,7 +150,7 @@ object MusicUtil : KoinComponent {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        if (lyrics == null || lyrics.trim { it <= ' ' }.isEmpty() || AbsSynchronizedLyrics
+        if (lyrics == null || lyrics.trim().isEmpty() || AbsSynchronizedLyrics
                 .isSynchronized(lyrics)
         ) {
             val dir = file.absoluteFile.parentFile
@@ -188,7 +188,7 @@ object MusicUtil : KoinComponent {
                         try {
                             val newLyrics =
                                 FileUtil.read(f)
-                            if (newLyrics != null && newLyrics.trim { it <= ' ' }.isNotEmpty()) {
+                            if (newLyrics != null && newLyrics.trim().isNotEmpty()) {
                                 if (AbsSynchronizedLyrics.isSynchronized(newLyrics)) {
                                     return newLyrics
                                 }
@@ -258,7 +258,7 @@ object MusicUtil : KoinComponent {
             if (musicMediaTitle.isNullOrEmpty()) {
                 return "-"
             }
-            musicMediaTitle = musicMediaTitle.trim { it <= ' ' }.lowercase()
+            musicMediaTitle = musicMediaTitle.trim().lowercase()
             if (stripPrefix) {
                 if (musicMediaTitle.startsWith("the ")) {
                     musicMediaTitle = musicMediaTitle.substring(4)
@@ -351,7 +351,7 @@ object MusicUtil : KoinComponent {
         if (artistName == Artist.UNKNOWN_ARTIST_DISPLAY_NAME) {
             return true
         }
-        val tempName = artistName.trim { it <= ' ' }.lowercase()
+        val tempName = artistName.trim().lowercase()
         return tempName == "unknown" || tempName == "<unknown>"
     }
 

@@ -5,5 +5,5 @@
 
     <bool name="allowBackup">true</bool>
 
-    <bool name="isMarshmallow">false</bool>
+    <bool name="isMarshmallow">true</bool>
 </resources>

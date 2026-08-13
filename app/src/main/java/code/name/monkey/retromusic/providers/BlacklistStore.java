@@ -71,7 +71,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
             + BlacklistStoreColumns.NAME
             + " ("
             + BlacklistStoreColumns.PATH
-            + " STRING NOT NULL);");
+            + " TEXT NOT NULL);");
   }
 
   @Override

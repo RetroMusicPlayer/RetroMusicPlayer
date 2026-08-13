@@ -509,4 +509,21 @@
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="go_to_artist">Go to artist</string>
 
+    <!-- The following strings are unused but kept as non-translatable to resolve ExtraTranslation lint errors in 45+ languages without bulk-editing them. -->
+    <string name="buy_now" translatable="false" />
+    <string name="could_not_restore_purchase" translatable="false" />
+    <string name="loading_products" translatable="false" />
+    <string name="message_pro_feature" translatable="false" />
+    <string name="no_purchase_found" translatable="false" />
+    <string name="pro" translatable="false" />
+    <string name="pro_summary" translatable="false" />
+    <string name="purchase" translatable="false" />
+    <string name="restored_previous_purchase_please_restart" translatable="false" />
+    <string name="restored_previous_purchases" translatable="false" />
+    <string name="restoring_purchase" translatable="false" />
+    <string name="billing_error" translatable="false" />
+    <string name="retro_music_pro" translatable="false" />
+    <string name="try_retro_music_premium" translatable="false" />
+    <string name="listing_files" translatable="false" />
+
 </resources>

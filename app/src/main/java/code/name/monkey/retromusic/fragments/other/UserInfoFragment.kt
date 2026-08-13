@@ -97,7 +97,7 @@ class UserInfoFragment : Fragment() {
         }
 
         binding.next.setOnClickListener {
-            val nameString = binding.name.text.toString().trim { it <= ' ' }
+            val nameString = binding.name.text.toString().trim()
             if (nameString.isEmpty()) {
                 showToast(R.string.error_empty_name)
                 return@setOnClickListener
