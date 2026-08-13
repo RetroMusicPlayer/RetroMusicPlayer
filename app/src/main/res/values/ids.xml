@@ -8,6 +8,7 @@
     <item name="action_album_sort_order_desc" type="id" />
     <item name="action_album_sort_order_artist" type="id" />
     <item name="action_album_sort_order_year" type="id" />
+    <item name="action_album_sort_order_dateadded" type="id" />
     <item name="action_album_sort_order_num_songs" type="id" />
     <item name="action_import_playlist" type="id" />
     <item name="action_artist_sort_order_asc" type="id" />

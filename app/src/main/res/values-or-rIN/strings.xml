@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"ଆଲବମ୍ କଭରର ଉଜ୍ଜ୍ୱଳ ରଙ୍ଗରେ ବିଜ୍ଞପ୍ତିକୁ ରଙ୍ଗ କରେ"</string>
     <string name="pref_summary_cross_fade">ଗୀତଗୁଡ଼ିକ ମଧ୍ୟରେ କ୍ରସ୍‌ଫେଡ୍ କରିବାର ଅବଧି</string>
     <string name="pref_summary_desaturated_color">ମ୍ୟାଟେରିଆଲ୍ ଡିଜାଇନ୍ ଗାଇଡଲାଇନ୍ ଅନୁଯାୟୀ ଡାର୍କ ମୋଡ୍‌ରେ ରଙ୍ଗଗୁଡ଼ିକ ଡିସାଚୁରେଟେଡ୍ ହେବା ଉଚିତ୍</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">ବିଜ୍ଞପ୍ତି ଉପରେ କ୍ଲିକ୍ କଲେ ହୋମ୍ ସ୍କ୍ରିନ୍ ବଦଳରେ ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍ ଦେଖାଇବ</string>
     <string name="pref_summary_extra_controls">ମିନି ପ୍ଲେୟାର୍ ପାଇଁ ଅତିରିକ୍ତ ନିୟନ୍ତ୍ରଣ ଯୋଡନ୍ତୁ</string>
     <string name="pref_summary_extra_song_info">ଅତିରିକ୍ତ ଗୀତ ସୂଚନା ଦେଖାନ୍ତୁ, ଯେପରିକି ଫାଇଲ୍ ଫର୍ମାଟ୍, ବିଟ୍‌ରେଟ୍ ଏବଂ ଫ୍ରିକ୍ୱେନ୍ସି</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">କ୍ରସ୍‌ଫେଡ୍ (ବିଟା)</string>
     <string name="pref_title_custom_font">ମାନରୋପ୍ ଫଣ୍ଟ୍ ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="pref_title_desaturated_color">ଡିସାଚୁରେଟେଡ୍ ରଙ୍ଗ</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍ ଦେଖାନ୍ତୁ</string>
     <string name="pref_title_extra_controls">ଅତିରିକ୍ତ ନିୟନ୍ତ୍ରଣ</string>
     <string name="pref_title_extra_song_info">ଗୀତ ସୂଚନା</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">ବର୍ଷ ଆରୋହୀ</string>
     <string name="sort_order_year_desc">ବର୍ଷ ଅବରୋହୀ</string>
     <string name="sort_order_z_a">ଅବରୋହୀ</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">ଦୁଃଖିତ! ଆପଣଙ୍କ ଡିଭାଇସ୍ ସ୍ପିଚ୍ ଇନପୁଟ୍ ସମର୍ଥନ କରେ ନାହିଁ</string>
     <string name="speech_prompt">ଆପଣଙ୍କ ଲାଇବ୍ରେରୀ ସନ୍ଧାନ କରନ୍ତୁ</string>
     <string name="stack">ଷ୍ଟାକ୍</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">ସ୍କାନ୍ ସମ୍ପୂର୍ଣ୍ଣ: %1$d ମିଡିଆ ଆଇଟମ୍ ମିଳିଲା।</string>
     <string name="pref_save_last_directory_summary">ଫୋଲ୍ଡର୍ ଭ୍ୟୁକୁ ଯିବାବେଳେ, ଶେଷ ବ୍ୟବହୃତ ଡିରେକ୍ଟୋରୀ ରିଷ୍ଟୋର୍ କରନ୍ତୁ</string>
     <string name="pref_save_last_directory_title">ଶେଷ ଡିରେକ୍ଟୋରୀ ସଞ୍ଚୟ କରନ୍ତୁ</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

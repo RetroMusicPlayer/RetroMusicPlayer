@@ -273,7 +273,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="no_purchase_found">Kirîn nehate dîtin.</string>
     <string name="no_results">Encam tune</string>
     <string name="no_songs">Stran tune ne</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Encamên lêgerînê tune ne</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Peyvên stranê yên normal</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> di marketa medyayê de nehatiye rêzkirin.]]></string>
@@ -350,6 +350,7 @@ têne guhertin</string>
     <string name="pref_summary_colored_notification">"Rengê agahiyan di berga albumê de bi \u2019 rengê jîndar reng bide"</string>
     <string name="pref_summary_cross_fade">Dema rawestandinê di navbera stranan de</string>
     <string name="pref_summary_desaturated_color">Li gorî rêzikên rêbernameya materyalê, divê reng di awaya tarî de têrkirî bin</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Tikandina li ser agahiyan wê niha tê lêdan li şûna dîmendera sereke nîşan bidê</string>
     <string name="pref_summary_extra_controls">Bêtir kontrol ji bo lêdera biçûk tevlî bike</string>
     <string name="pref_summary_extra_song_info">Bêtir zanyariyên stranê, wekî formata pelê, leza bitê û frekansê nîşan bide</string>
@@ -390,6 +391,7 @@ têne guhertin</string>
     <string name="pref_title_cross_fade">Derbasbûn (Beta)</string>
     <string name="pref_title_custom_font">Cure nivîsa Manrope bi kar bîne</string>
     <string name="pref_title_desaturated_color">Rengên têrkirî</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Dîmendera lêdanê nîşan bide</string>
     <string name="pref_title_extra_controls">Bêtir kontrol</string>
     <string name="pref_title_extra_song_info">Zanyariyên stranê</string>
@@ -508,6 +510,7 @@ têne guhertin</string>
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Berjêr (Z-A)</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Bibore! Amûra te piştgiriya têketina axaftinê nake</string>
     <string name="speech_prompt">Di pirtûkxaneya xwe de bigere</string>
     <string name="stack">Lodkirin</string>
@@ -569,4 +572,5 @@ têne guhertin</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

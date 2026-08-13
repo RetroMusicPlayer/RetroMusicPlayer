@@ -23,7 +23,16 @@ import code.name.monkey.retromusic.util.PreferenceUtil.playbackSpeed
 import code.name.monkey.retromusic.util.logE
 
 class RetroExoPlayer(context: Context) : AudioManagerPlayback(context), Player.Listener {
-    private var player: ExoPlayer = ExoPlayer.Builder(context).build()
+    // Fix provided by : Zak (github: @arrhenius975, mail: zakariatalukdar123@gmail.com)
+    // Definition and fix: Fix USB-C/Bluetooth audio routing by setting attributes at init
+    private val audioAttributes = AudioAttributes.Builder()
+        .setUsage(C.USAGE_MEDIA)
+        .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
+        .build()
+
+    private var player: ExoPlayer = ExoPlayer.Builder(context)
+        .setAudioAttributes(audioAttributes, false)
+        .build()
     override var callbacks: PlaybackCallbacks? = null
 
     /**
@@ -50,13 +59,7 @@ class RetroExoPlayer(context: Context) : AudioManagerPlayback(context), Player.L
         try {
             Handler(Looper.getMainLooper()).post {
                 player.setMediaItem(mediaItem)
-                player.setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(C.USAGE_MEDIA)
-                        .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
-                        .build(),
-                    false
-                )
+                player.setAudioAttributes(audioAttributes, false)
                 player.playbackParameters = PlaybackParameters(playbackSpeed, playbackPitch)
 
                 player.addListener(object : Player.Listener {
@@ -224,7 +227,9 @@ class RetroExoPlayer(context: Context) : AudioManagerPlayback(context), Player.L
         logE(error)
         isInitialized = false
         player.release()
-        player = ExoPlayer.Builder(context).build()
+        player = ExoPlayer.Builder(context)
+            .setAudioAttributes(audioAttributes, false)
+            .build()
         player.setWakeMode(C.WAKE_MODE_LOCAL)
         context.showToast(R.string.unplayable_file)
     }

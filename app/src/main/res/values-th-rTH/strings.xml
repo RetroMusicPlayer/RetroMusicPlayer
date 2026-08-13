@@ -120,7 +120,7 @@
     <string name="choose_image">Choose Image</string>
     <string name="choose_restore_title">Choose what to restore</string>
     <string name="circle">Circle</string>
-    <string name="circular">Circular</string>
+    <string name="circular">หมุนเวียน</string>
     <string name="classic">คลาสสิก</string>
     <string name="clear_action">ล้างทั้งหมด</string>
     <string name="clear_blacklist">ล้างรายชื่อแบล็คลิสต์</string>
@@ -346,6 +346,7 @@
     <string name="pref_summary_colored_notification">"ใช้สีสดในของการแจ้งเตือน"</string>
     <string name="pref_summary_cross_fade">ระยะเวลาในการลดเสียงก่อนเปลี่ยนเพลง</string>
     <string name="pref_summary_desaturated_color">สำหรับแนวทางของ Material Design บนโหมดมืดควรลดความอิ่มตัวของสีลง</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">คลิกที่การแจ้งเตือนจะแสดงหน้าจอ Now Playing แทนที่จะแสดงหน้าแรก</string>
     <string name="pref_summary_extra_controls">เพิ่มปุ่มควบคุมเพิ่มเติมใน mini player</string>
     <string name="pref_summary_extra_song_info">แสดงข้อมูลเพลงเพิ่มเติม เช่น ประเภทไฟล์, ความถี่ และ บิตเรท</string>
@@ -386,6 +387,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">ลดความอิ่มตัวของสี</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">แสดงหน้าจอ Now Playing</string>
     <string name="pref_title_extra_controls">ปุ่มควบความเพิ่มเติม</string>
     <string name="pref_title_extra_song_info">รายละเอียดเพลง</string>
@@ -504,6 +506,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Z-A</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">ขออภัยเครื่องของท่านไม่รองรับ Speech Input</string>
     <string name="speech_prompt">ค้นหาคลังเพลง</string>
     <string name="stack">Stack</string>
@@ -565,4 +568,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

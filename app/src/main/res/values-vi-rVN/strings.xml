@@ -347,6 +347,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_summary_colored_notification">"M\u00e0u s\u1eafc th\u00f4ng b\u00e1o thay \u0111\u1ed5i theo m\u00e0u s\u1eafc chi ph\u1ed1i \u1ea3nh b\u00eca album"</string>
     <string name="pref_summary_cross_fade">Độ dài khoảng lặng giữa các bài hát</string>
     <string name="pref_summary_desaturated_color">Để phù hợp với Thiết kế Material, màu sắc sẽ được điều chỉnh để tương thích với chế độ tối</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Nhấn vào thông báo sẽ hiển thị màn hình phát nhạc thay vì màn hình chính</string>
     <string name="pref_summary_extra_controls">Thêm điều khiển bổ sung cho trình phát mini</string>
     <string name="pref_summary_extra_song_info">Hiển thị thêm thông tin Bài hát, như là định dạng, tốc độ bit và tần số</string>
@@ -387,6 +388,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_cross_fade">Khoảng lặng (Beta)</string>
     <string name="pref_title_custom_font">Sử dụng font chữ Manrope</string>
     <string name="pref_title_desaturated_color">Màu sắc tương thích</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Hiển thị màn hình phát nhạc</string>
     <string name="pref_title_extra_controls">Điều khiển bổ sung</string>
     <string name="pref_title_extra_song_info">Thông tin bài hát</string>
@@ -505,6 +507,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="sort_order_year_asc">Năm tăng dần</string>
     <string name="sort_order_year_desc">Năm giảm dần</string>
     <string name="sort_order_z_a">Giảm dần</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Xin lỗi! Thiết bị không hỗ trợ nhập liệu bằng giọng nói</string>
     <string name="speech_prompt">Tìm kiếm trong thư viện của bạn</string>
     <string name="stack">Ngăn xếp</string>
@@ -566,4 +569,5 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

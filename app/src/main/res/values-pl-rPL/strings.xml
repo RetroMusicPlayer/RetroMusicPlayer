@@ -352,6 +352,7 @@
     <string name="pref_summary_colored_notification">"Koloruje powiadomienie dominującym kolorem okładki albumu."</string>
     <string name="pref_summary_cross_fade">Czas płynnego przejścia między utworami</string>
     <string name="pref_summary_desaturated_color">Podążaj za zaleceniami Material Design; w trybie ciemnym kolory powinny być mniej nasycone</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Kliknięcie powiadomienia pokaże odtwarzacz zamiast ekranu głównego</string>
     <string name="pref_summary_extra_controls">Dodaj dodatkowe przyciski do miniodtwarzacza</string>
     <string name="pref_summary_extra_song_info">Pokaż dodatkowe informacje o utworze, takie jak format pliku, próbkowanie i jakość</string>
@@ -392,6 +393,7 @@
     <string name="pref_title_cross_fade">Płynne przejście (Beta)</string>
     <string name="pref_title_custom_font">Użyj czcionki Manrope</string>
     <string name="pref_title_desaturated_color">Mniej nasycony kolor</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Wyświetl teraz odtwarzane</string>
     <string name="pref_title_extra_controls">Dodatkowe przyciski kontroli</string>
     <string name="pref_title_extra_song_info">Informacje o utworze</string>
@@ -450,7 +452,7 @@
     <string name="restored_previous_purchase_please_restart">Przywrócono poprzedni zakup. Zrestartuj aplikacje aby korzystać z wszystkich funkcji.</string>
     <string name="restored_previous_purchases">Przywrócono poprzednie zakupy.</string>
     <string name="restoring_purchase">Przywracanie zakupu...</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Wystąpił błąd podczas komunikacji z Google Play billing</string>
     <string name="retro_music_player">Odtwarzacz Retro Music</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Potrzebujemy uprawnień do ustawień Twojego urządzenia, aby ustawić utwór jako dzwonek</string>
@@ -508,8 +510,9 @@
     <string name="sort_order_num_songs_desc">Liczba utworów malejąco</string>
     <string name="sort_order_year">Rok</string>
     <string name="sort_order_year_asc"></string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_desc">Rok malejąco</string>
     <string name="sort_order_z_a">Malejąco</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Twoje urządzenie nie obsługuje wprowadzania głosowego</string>
     <string name="speech_prompt">Przeszukaj swoją bibliotekę</string>
     <string name="stack">Stos</string>
@@ -567,8 +570,9 @@
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
     <string name="could_not_write_tags_to_file">Nie udało się przypisać tagów do pliku!</string>
     <string name="sleep_timer_no_permission">Brak uprawnień do ustawiania alarmów, proszę zezwolić na to Retro Music.</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
-    <string name="scan_complete">Scan complete: %1$d media items found.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="scanning_folders_files">Skanowanie folderów i plików…</string>
+    <string name="scan_complete">Skanowanie zakończone: Znaleziono %1$d elementów multimedialnych.</string>
+    <string name="pref_save_last_directory_summary">Podczas przełączania na widok folderu przywróć ostatnio używany katalog</string>
+    <string name="pref_save_last_directory_title">Zapisz ostatni katalog</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

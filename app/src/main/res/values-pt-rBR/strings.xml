@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Colore a notificação com a cor da capa do álbum"</string>
     <string name="pref_summary_cross_fade">Duração de transição entre músicas</string>
     <string name="pref_summary_desaturated_color">Conforme o guia do Material Design, as cores devem ser dessaturadas no modo escuro</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Clicar na notificação irá mostrar a tela de reprodução ao invés da tela inicial</string>
     <string name="pref_summary_extra_controls">Adicionar botões extras para o mini reprodutor</string>
     <string name="pref_summary_extra_song_info">Mostrar informações extras da música, como formato de arquivo, taxa de bits e frequência</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Usar a fonte Manrope</string>
     <string name="pref_title_desaturated_color">Cor dessaturada</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar tela de reprodução</string>
     <string name="pref_title_extra_controls">Controles extras</string>
     <string name="pref_title_extra_song_info">Informações da música</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Ordenação por ano (crescente)</string>
     <string name="sort_order_year_desc">Ordenação por ano (decrescente)</string>
     <string name="sort_order_z_a">Nome (decrescente)</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Desculpe! O seu dispositivo não suporta entrada de voz</string>
     <string name="speech_prompt">Pesquisar sua biblioteca</string>
     <string name="stack">Pilha</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Escaneamento completo: %1$d itens encontrados.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Χρωματίζει την ειδοποίηση με το κυρίαρχο χρώμα του εξωφύλλου του άλμπουμ"</string>
     <string name="pref_summary_cross_fade">Διάρκεια crossfade μεταξύ τραγουδιών</string>
     <string name="pref_summary_desaturated_color">Σύμφωνα με τις κατευθυντήριες γραμμές του Material Design, τα χρώματα θα πρέπει να αποκορεσθούν σε σκοτεινή λειτουργία</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Κάνοντας κλικ στην ειδοποίηση θα εμφανίζεται η οθόνη αναπαραγωγής αντί της αρχικής οθόνης</string>
     <string name="pref_summary_extra_controls">Προσθήκη επιπλέον ελέγχων για τον μίνι αναπαραγωγέα</string>
     <string name="pref_summary_extra_song_info">Εμφάνιση επιπλέον πληροφοριών τραγουδιού, όπως μορφή αρχείου, ρυθμό μετάδοσης δεδομένων και συχνότητα</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Χρήση γραμματοσειράς Manrope</string>
     <string name="pref_title_desaturated_color">Αποκορεσμένο χρώμα</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Εμφάνιση οθόνης αναπαραγωγής</string>
     <string name="pref_title_extra_controls">Πρόσθετα στοιχεία ελέγχου</string>
     <string name="pref_title_extra_song_info">Πληροφορίες τραγουδιού</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Χρονολογία αύξουσα</string>
     <string name="sort_order_year_desc">Χρονολογία φθίνουσα</string>
     <string name="sort_order_z_a">Φθίνουσα</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Ωπ! Η συσκευή σου δεν υποστηρίζει εισαγωγή φωνής</string>
     <string name="speech_prompt">Αναζήτηση στη βιβλιοθήκη σας</string>
     <string name="stack">Στοίβα</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

@@ -359,6 +359,7 @@
     <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
     <string name="pref_summary_cross_fade">مدة التقاطع بين الأغاني</string>
     <string name="pref_summary_desaturated_color">حسب إرشادات التصميم المادي في الوضع المظلم الألوان يجب أن تكون غير مشبعه</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
     <string name="pref_summary_extra_song_info">إظهار معلومات الأغنية الإضافية، مثل تنسيق الملف، معدل البت، والتواتر</string>
@@ -399,6 +400,7 @@
     <string name="pref_title_cross_fade">التلاشي (تجريبي)</string>
     <string name="pref_title_custom_font">استخدام خط مانروب</string>
     <string name="pref_title_desaturated_color">لون مفصّل</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
     <string name="pref_title_extra_song_info">معلومات الأغنية</string>
@@ -517,6 +519,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">تنازلي</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">عذرا! جهازك لايدعم الادخال الصوتي</string>
     <string name="speech_prompt">أبحث في مكتبتك</string>
     <string name="stack">التكدس</string>
@@ -578,4 +581,5 @@
     <string name="scan_complete">اكتمل المسح: %1$d تم العثور على وسائط صوتية.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

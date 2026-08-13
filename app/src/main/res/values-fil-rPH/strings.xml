@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Kinukulayan ang notification sa makulay na kulay ng album cover"</string>
     <string name="pref_summary_cross_fade">Duration ng crossfade sa pagitan ng mga kanta</string>
     <string name="pref_summary_desaturated_color">Alinsunod sa mga linya ng gabay sa Material Design sa dark mode na mga kulay ay dapat na desaturated</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Ang pag-click sa notification ay deretso sa nagpe-play ngayon ng screen sa halip na sa home screen</string>
     <string name="pref_summary_extra_controls">Magdagdag ng mga karagdagang kontrol para sa mini player</string>
     <string name="pref_summary_extra_song_info">Magpakita ng karagdagang impormasyon ng Kanta, gaya ng format file, bitrate at dalas</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturated na kulay</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Ipakita ang now playing screen</string>
     <string name="pref_title_extra_controls">Mga karagdagang kontrol</string>
     <string name="pref_title_extra_song_info">Impormasyon ng kanta</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Pababa</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Paumanhin! Hindi sinusuportahan ng iyong device ang speech input</string>
     <string name="speech_prompt">Hanapin ang iyong librerya</string>
     <string name="stack">Salansan</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

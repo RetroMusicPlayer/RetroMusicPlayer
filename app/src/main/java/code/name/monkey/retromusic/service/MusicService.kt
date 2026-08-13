@@ -30,6 +30,8 @@ import android.database.ContentObserver
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
+import android.media.AudioDeviceCallback
+import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Binder
 import android.os.Bundle
@@ -136,6 +138,8 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var pendingQuit = false
 
+    private var isQuitting = false
+
     private lateinit var playbackManager: PlaybackManager
 
     val playback: Playback? get() = playbackManager.playback
@@ -196,6 +200,7 @@ class MusicService : MediaBrowserServiceCompat(),
     private val bluetoothConnectedIntentFilter = IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED)
     private var bluetoothConnectedRegistered = false
     private val headsetReceiverIntentFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
+    private var audioDeviceCallback: AudioDeviceCallback? = null
     private var headsetReceiverRegistered = false
     private var mediaSession: MediaSessionCompat? = null
     private lateinit var mediaStoreObserver: ContentObserver
@@ -320,7 +325,14 @@ class MusicService : MediaBrowserServiceCompat(),
         LocalBroadcastManager.getInstance(this).registerReceiver(
             updateFavoriteReceiver, IntentFilter(FAVORITE_STATE_CHANGED)
         )
-        registerReceiver(lockScreenReceiver, IntentFilter(Intent.ACTION_SCREEN_ON))
+        // Fix provided by : Zak (github: @arrhenius975, mail: zakariatalukdar123@gmail.com)
+        // Definition and fix: Fix Android 12+ receiver export flags
+        ContextCompat.registerReceiver(
+            this,
+            lockScreenReceiver,
+            IntentFilter(Intent.ACTION_SCREEN_ON),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
         sessionToken = mediaSession?.sessionToken
         notificationManager = getSystemService()
         initNotification()
@@ -360,6 +372,9 @@ class MusicService : MediaBrowserServiceCompat(),
         if (bluetoothConnectedRegistered) {
             unregisterReceiver(bluetoothReceiver)
             bluetoothConnectedRegistered = false
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && audioDeviceCallback != null) {
+            getSystemService<AudioManager>()?.unregisterAudioDeviceCallback(audioDeviceCallback!!)
         }
         mediaSession?.isActive = false
         quit()
@@ -870,7 +885,8 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     fun quit() {
-        pause()
+        isQuitting = true
+        pause(true)
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         isForeground = false
         notificationManager?.cancel(PlayingNotification.NOTIFICATION_ID)
@@ -1172,6 +1188,7 @@ class MusicService : MediaBrowserServiceCompat(),
     }
 
     private fun startForegroundOrNotify() {
+        if (isQuitting) return
         if (playingNotification != null && currentSong.id != -1L) {
             if (isForeground && !isPlaying) {
                 // This makes the notification dismissible
@@ -1284,8 +1301,30 @@ class MusicService : MediaBrowserServiceCompat(),
 
     private fun registerBluetoothConnected() {
         Log.i(TAG, "registerBluetoothConnected: ")
-        if (!bluetoothConnectedRegistered) {
-            registerReceiver(bluetoothReceiver, bluetoothConnectedIntentFilter)
+        // Fixed by : Zak (github: @arrhenius975) - Fix Bluetooth auto-play reliability using AudioDeviceCallback
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (audioDeviceCallback == null) {
+                audioDeviceCallback = object : AudioDeviceCallback() {
+                    override fun onAudioDevicesAdded(addedDevices: Array<out AudioDeviceInfo>) {
+                        if (isBluetoothSpeaker) {
+                            for (device in addedDevices) {
+                                if (device.type == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
+                                    play()
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                getSystemService<AudioManager>()?.registerAudioDeviceCallback(audioDeviceCallback!!, Handler(Looper.getMainLooper()))
+            }
+        } else if (!bluetoothConnectedRegistered) {
+            ContextCompat.registerReceiver(
+                this,
+                bluetoothReceiver,
+                bluetoothConnectedIntentFilter,
+                ContextCompat.RECEIVER_NOT_EXPORTED
+            )
             bluetoothConnectedRegistered = true
         }
     }

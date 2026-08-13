@@ -191,8 +191,15 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             currentSortOrder.equals(AlbumSortOrder.ALBUM_YEAR)
         sortOrderMenu.add(
             0,
-            R.id.action_album_sort_order_num_songs,
+            R.id.action_album_sort_order_dateadded,
             4,
+            R.string.sort_order_date
+        ).isChecked =
+            currentSortOrder.equals(AlbumSortOrder.ALBUM_DATE_ADDED)
+        sortOrderMenu.add(
+            0,
+            R.id.action_album_sort_order_num_songs,
+            5,
             R.string.sort_order_num_songs
         ).isChecked =
             currentSortOrder.equals(AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)
@@ -272,6 +279,7 @@ class AlbumsFragment : AbsRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridL
             R.id.action_album_sort_order_desc -> AlbumSortOrder.ALBUM_Z_A
             R.id.action_album_sort_order_artist -> AlbumSortOrder.ALBUM_ARTIST
             R.id.action_album_sort_order_year -> AlbumSortOrder.ALBUM_YEAR
+            R.id.action_album_sort_order_dateadded -> AlbumSortOrder.ALBUM_DATE_ADDED
             R.id.action_album_sort_order_num_songs -> AlbumSortOrder.ALBUM_NUMBER_OF_SONGS
             else -> PreferenceUtil.albumSortOrder
         }

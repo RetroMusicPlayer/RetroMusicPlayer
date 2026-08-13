@@ -5,7 +5,7 @@
     <string name="accent_color">Barva zvýraznění</string>
     <string name="accent_color_desc">Barva motivu zvýraznění, výchozí je fialová</string>
     <string name="action_about">O aplikaci</string>
-    <string name="action_add_to_blacklist">Přidat na Černou listinu</string>
+    <string name="action_add_to_blacklist">Přidat na černou listinu</string>
     <string name="action_add_to_favorites">Přidat k oblíbeným</string>
     <string name="action_add_to_playing_queue">Přidat do fronty přehrávání</string>
     <string name="action_add_to_playlist">Přidat do seznamu skladeb</string>
@@ -20,7 +20,7 @@
     <string name="action_go_to_album">Přejít na album</string>
     <string name="action_go_to_artist">Přejít na interpreta</string>
     <string name="action_go_to_genre">Přejít na žánr</string>
-    <string name="action_go_to_lyrics">Přejít na texty</string>
+    <string name="action_go_to_lyrics">Přejít na text</string>
     <string name="action_go_to_start_directory">Přejít do začátečního adresáře</string>
     <string name="action_grant">Povolit přístup</string>
     <string name="action_grid_size">Velikost mřížky</string>
@@ -37,7 +37,7 @@
     <string name="action_remove_from_playlist">Odstranit ze seznamu skladeb</string>
     <string name="action_rename">Přejmenovat</string>
     <string name="action_save_playing_queue">Uložit frontu přehrávání</string>
-    <string name="action_scan">Skenovat</string>
+    <string name="action_scan">Prohledat</string>
     <string name="action_search">Hledat</string>
     <string name="action_set">Nastavit</string>
     <string name="action_set_as_ringtone">Nastavit jako tón vyzvánění</string>
@@ -55,7 +55,7 @@
     <string name="add_action">Přidat</string>
     <string name="add_playlist_title">"Přidat do seznamu skladeb"</string>
     <string name="add_time_framed_lryics">Add Time Framed Lyrics</string>
-    <string name="added_song_count_to_playlist">Přidána/přidány %1$d skladba/skladby do %2$s</string>
+    <string name="added_song_count_to_playlist">Přidána/přidány %1$d skladba (skladby) do %2$s</string>
     <string name="added_title_to_playing_queue">"Přidán 1 titul do fronty přehrávání."</string>
     <string name="added_x_titles_to_playing_queue">Přidán/přidány %1$d titul(y) do fronty přehrávání.</string>
     <string name="album">Album</string>
@@ -65,7 +65,7 @@
         <item quantity="many">Skladeb</item>
         <item quantity="other">Skladeb</item>
     </plurals>
-    <string name="album_artist">Umělec Alba</string>
+    <string name="album_artist">Interpret</string>
     <string name="albums">Alba</string>
     <plurals name="albums">
         <item quantity="one">Album</item>
@@ -93,12 +93,12 @@
     <string name="backup_restore_title"><![CDATA[Záloha a obnova]]></string>
     <string name="backup_title">Zálohy</string>
     <string name="biography">Bio</string>
-    <string name="black_theme_name">Velmi černá</string>
+    <string name="black_theme_name">Jen černá</string>
     <string name="blacklist">Černá listina</string>
     <string name="bluetooth_summary">Aplikace potřebuje oprávnění zařízení v okolí pro kontrolu bluetooth zařízení</string>
     <string name="bluetooth_title">Zařízení v okolí</string>
     <string name="blur">Rozostření</string>
-    <string name="blur_card">Blur Card</string>
+    <string name="blur_card">Rozostřit karty</string>
     <string name="bug_report_failed">Hlášení se nepodařilo odeslat</string>
     <string name="bug_report_failed_invalid_token">Neplatný přístupový token. Prosím kontaktujte vývojáře aplikace.</string>
     <string name="bug_report_failed_issues_not_available">Ve vybraném repozitáři není povoleno hlášení chyb. Prosím kontaktujte vývojáře aplikace.</string>
@@ -137,8 +137,8 @@
     <string name="compact">Kompaktní</string>
     <string name="composer">Skladatel</string>
     <string name="copied_device_info_to_clipboard">Informace o zařízení zkopírovány do schránky.</string>
-    <string name="could_not_create_playlist">Nelze vytvo\u0159it playlist.</string>
-    <string name="could_not_download_album_cover">"Nelze st\u00e1hnout odpov\u00eddaj\u00edc\u00ed obal alba."</string>
+    <string name="could_not_create_playlist">Nelze vytvořit seznam skladeb.</string>
+    <string name="could_not_download_album_cover">"Nelze stáhnout odpovídající obrázek alba."</string>
     <string name="could_not_restore_purchase">Nepodařilo se obnovit nákup.</string>
     <string name="could_not_scan_files">Nelze skenovat %d soubory.</string>
     <string name="create_action">Vytvořit</string>
@@ -352,6 +352,7 @@
     <string name="pref_summary_colored_notification">"Vybarv\u00ed ozn\u00e1men\u00ed v \u017eiv\u00e9 barv\u011b krytu alba."</string>
     <string name="pref_summary_cross_fade">Doba prolínání mezi skladbami</string>
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
+    <string name="pref_summary_disable_speaker">Vypnout přehrávání ze vestavěného reproduktoru</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
@@ -392,6 +393,7 @@
     <string name="pref_title_cross_fade">Prolínání (Beta)</string>
     <string name="pref_title_custom_font">Použít písmo Manrope</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
+    <string name="pref_title_disable_speaker">Vypnout vestavěný reproduktor</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_extra_song_info">Song info</string>
@@ -450,7 +452,7 @@
     <string name="restored_previous_purchase_please_restart">Předchozí nákup byl obnoven. Restartujte aplikaci pro využití všech funkcí.</string>
     <string name="restored_previous_purchases">Předchozí nákupy byly obnoveny.</string>
     <string name="restoring_purchase">Obnovuji nákup…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Při komunikaci s účtem Google Play došlo k chybě</string>
     <string name="retro_music_player">Retro Music Přehrávač</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Aplikace potřebuje přístup k nastavení zařízení pro nastavení hudby jako vyzvánění</string>
@@ -510,6 +512,7 @@
     <string name="sort_order_year_asc">Rok vzestupně</string>
     <string name="sort_order_year_desc">Rok sestupně</string>
     <string name="sort_order_z_a">Sestupně</string>
+    <string name="speaker_disabled">Přehrávání z vestavěného reproduktoru je vypnuto</string>
     <string name="speech_not_supported">Promiňte! Vaše zařízení nepodporuje vstup řeči</string>
     <string name="speech_prompt">Prohledat knihovnu</string>
     <string name="stack">Stack</string>
@@ -567,8 +570,9 @@
     <string name="your_account_data_is_only_used_for_authentication">Vaše údaje k účtu jsou použity pouze k ověření.</string>
     <string name="could_not_write_tags_to_file">Nelze uložit tagy do hudebního souboru!</string>
     <string name="sleep_timer_no_permission">Žádné oprávnění k naplánování budíků, povolte prosím oprávnění Retro Music.</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
-    <string name="scan_complete">Scan complete: %1$d media items found.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="scanning_folders_files">Skenování složek a souborů…</string>
+    <string name="scan_complete">Sken dokončen: %1$d položek nalezeno.</string>
+    <string name="pref_save_last_directory_summary">Při přepnutí do zobrazení složek, obnovit poslední použitý adresář</string>
+    <string name="pref_save_last_directory_title">Uložit poslední složku</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

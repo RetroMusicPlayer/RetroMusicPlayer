@@ -350,6 +350,7 @@
     <string name="pref_summary_colored_notification">"Coloreaz\u0103 notificarea dup\u0103 culoarea copertei de album."</string>
     <string name="pref_summary_cross_fade">Durata de intersectare între melodii</string>
     <string name="pref_summary_desaturated_color">Conform schemei folosite, Material Design, în modul întunecat, culorile ar trebui să fie mai desaturate</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Apăsând pe notificare se va afișa ecranul cu actuala melodia redată, în locul ecranului principal</string>
     <string name="pref_summary_extra_controls">Adaugă controale suplementare pentru mini player</string>
     <string name="pref_summary_extra_song_info">Afișează informații suplimentare despre piesă, cum ar fi formatul fișierului, rata de biți și frecvența</string>
@@ -390,6 +391,7 @@
     <string name="pref_title_cross_fade">Suprapunere între piese (Beta)</string>
     <string name="pref_title_custom_font">Utilizează fontul Manrope</string>
     <string name="pref_title_desaturated_color">Culoare desaturată</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Arată ecranul de redare actuală</string>
     <string name="pref_title_extra_controls">Comenzi suplimentare</string>
     <string name="pref_title_extra_song_info">Informații melodie</string>
@@ -508,6 +510,7 @@
     <string name="sort_order_year_asc">An crescător</string>
     <string name="sort_order_year_desc">An descrescător</string>
     <string name="sort_order_z_a">Descrescător</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Scuze! Dispozitivul tau nu suporta comenzi vocale</string>
     <string name="speech_prompt">Caută în colecția ta</string>
     <string name="stack">Stivă</string>
@@ -569,4 +572,5 @@
     <string name="scan_complete">Scanare completă: s-au găsit %1$d elemente media.</string>
     <string name="pref_save_last_directory_summary">Când se trece la vizualizarea folderului, se restabilește ultimul director folosit</string>
     <string name="pref_save_last_directory_title">Salvează ultimul director</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

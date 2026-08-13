@@ -32,10 +32,11 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
 
 class BlurPlaybackControlsFragment :
@@ -74,14 +75,43 @@ class BlurPlaybackControlsFragment :
             goToAlbum(requireActivity())
         }
         binding.text.setOnClickListener {
-            goToArtist(requireActivity())
+            handleArtistClick()
+        }
+    }
+    
+    private fun handleArtistClick() {
+        val song = MusicPlayerRemote.currentSong
+        val artistNames = ArtistSeparator.split(song.artistName)
+
+        if (artistNames.size > 1) {
+            // Show dialog for multiple artists
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.go_to_artist))
+                .setItems(artistNames.toTypedArray()) { _, which ->
+                    // TODO: Navigate to artist details when artistByName() is implemented
+                    android.widget.Toast.makeText(
+                        requireContext(),
+                        getString(R.string.go_to_artist) + ": ${artistNames[which]}",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .show()
+        } else if (artistNames.isNotEmpty()) {
+            // Single artist - direct action
+            android.widget.Toast.makeText(
+                requireContext(),
+                getString(R.string.go_to_artist) + ": ${artistNames[0]}",
+                android.widget.Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = String.format("%s • %s", song.artistName, song.albumName)
+        
+        val formattedArtistName = ArtistSeparator.split(song.artistName).joinToString(", ")
+        binding.text.text = String.format("%s • %s", formattedArtistName, song.albumName)
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.show()

@@ -349,6 +349,7 @@
     <string name="pref_summary_colored_notification">"Оцветява известието в доминиращия цвят на корицата на албума"</string>
     <string name="pref_summary_cross_fade">Продължителност на пазуите между песните</string>
     <string name="pref_summary_desaturated_color">Според стила Material Design, в тъмен режим, цветовете трябва да са леко ненаситени</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Щракването върху известие ще покаже екрана за възпроизвеждане вместо началния екран</string>
     <string name="pref_summary_extra_controls">Добавете още контроли за миниплейъра</string>
     <string name="pref_summary_extra_song_info">Показване на допълнителна информация за песента като файлов формат, битрейт и честота</string>
@@ -389,6 +390,7 @@
     <string name="pref_title_cross_fade">Плавно затихване (бета-версия)</string>
     <string name="pref_title_custom_font">Използвайте шрифт Manrope</string>
     <string name="pref_title_desaturated_color">Матов цвят</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Показване на екрана за възпроизвеждане</string>
     <string name="pref_title_extra_controls">Допълнителен контрол</string>
     <string name="pref_title_extra_song_info">Инфо за песента</string>
@@ -507,6 +509,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Низходящо</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Съжалявам! Вашето устройство не поддържа гласово въвеждане</string>
     <string name="speech_prompt">Търсете във вашата библиотека</string>
     <string name="stack">Стопка</string>
@@ -556,7 +559,7 @@
     <string name="whats_new">Какво ново:</string>
     <string name="window">Прозорец</string>
     <string name="window_corner_edges">Заоблени ъгли</string>
-    <string name="x_has_been_set_as_ringtone">.</string>
+    <string name="x_has_been_set_as_ringtone">Set %1$s as your ringtone.</string>
     <string name="x_selected">Избрано %1$d</string>
     <string name="year">Година</string>
     <string name="you_have_to_select_at_least_one_category">Моля, изберете поне една категория.</string>
@@ -568,4 +571,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

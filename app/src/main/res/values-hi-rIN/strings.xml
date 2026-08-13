@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"अधिसूचना को एल्बम कवर\u2019 के जीवंत रंग में रंग दे।"</string>
     <string name="pref_summary_cross_fade">गानों के बीच क्रॉसफ़ेड करने की अवधि</string>
     <string name="pref_summary_desaturated_color">मटेरियल ज़ाइन दिशानिर्देशों के अनुसार डार्क मोड में रंग को असंतृप्त किया जाना चाहिए</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">नोटिफिकेशन पर क्लिक करने पर होम स्क्रीन की जगह \"नाउ प्लेइंग\" स्क्रीन दिखाई देगी</string>
     <string name="pref_summary_extra_controls">मिनी प्लेयर के लिए अतिरिक्त नियंत्रण जोड़ें</string>
     <string name="pref_summary_extra_song_info">अतिरिक्त जानकारी दिखाएँ, जैसे फ़ाइल स्वरूप, बिटरेट और आवृत्ति</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">क्रॉसफ़ेड (बीटा)</string>
     <string name="pref_title_custom_font">मैनरोप फ़ॉन्ट का प्रयोग करें</string>
     <string name="pref_title_desaturated_color">असंतृप्त रंग</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">नाउ प्लेइंग स्क्रीन दिखाएँ</string>
     <string name="pref_title_extra_controls">अतिरिक्त नियंत्रण</string>
     <string name="pref_title_extra_song_info">गाने की जानकारी</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">अवरोही</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">क्षमा! आपका उपकरण स्पीच इनपुट का समर्थन नहीं करता है।</string>
     <string name="speech_prompt">अपनी लाइब्रेरी खोजें</string>
     <string name="stack">स्टैक</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

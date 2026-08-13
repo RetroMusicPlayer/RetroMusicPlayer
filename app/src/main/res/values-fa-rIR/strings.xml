@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"به اعلان های جلد آلبوم\u2019 رنگ های متنوع بدهید"</string>
     <string name="pref_summary_cross_fade">مدت زمان تقاطع بین آهنگ ها</string>
     <string name="pref_summary_desaturated_color">طبق دستورالعمل طراحی Material، خطوط در رنگ‌های حالت تاریک باید غیراشباع باشند</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">با کلیک بر روی اعلان، به جای صفحه اصلی، صفحه در حال پخش نمایش داده می شود</string>
     <string name="pref_summary_extra_controls">اضافه کردن کنترل های اضافی برای پخش‌کننده کوچک</string>
     <string name="pref_summary_extra_song_info">نمایش اطلاعات اضافی آهنگ، مانند فرمت فایل، میزان بیت و فرکانس</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">پخش بعدی قبل از اتمام فعلی (میلی ثانیه)</string>
     <string name="pref_title_custom_font">از فونت مانروپ استفاده کنید</string>
     <string name="pref_title_desaturated_color">رنگ غیر اشباع</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">نمایش در حال پخش صفحه نمایش</string>
     <string name="pref_title_extra_controls">کنترل های اضافی</string>
     <string name="pref_title_extra_song_info">اطلاعات آهنگ</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">نزولی</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">متاسفم! دستگاه شما از ورودی گفتار پشتیبانی نمی کند</string>
     <string name="speech_prompt">جستجو کتابخانه شما</string>
     <string name="stack">دسته</string>
@@ -565,6 +568,7 @@
     <string name="sleep_timer_no_permission">دسترسی به تنظیم آلارم وجود ندارد، لطفا به پلیر رترو میوزیک این دسترسی را بدهید.</string>
     <string name="scanning_folders_files">Scanning folders and files…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_summary">هنگام تغییر به نمای پوشه، آخرین فهرست استفاده شده را بازیابی کنید</string>
+    <string name="pref_save_last_directory_title">ذخیره آخرین فهرست</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Pinta la notificació amb el color viu de l'àlbum"</string>
     <string name="pref_summary_cross_fade">Durada de l\'esvaïment entre cançons</string>
     <string name="pref_summary_desaturated_color">Segons les directrius del Material Design, els colors s\'han de dessaturar en el mode fosc</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Si feu clic a la notificació, es mostrarà la pantalla de la reproducció en curs en lloc de la pantalla d\'inici</string>
     <string name="pref_summary_extra_controls">Afegiu controls addicionals per al mini reproductor</string>
     <string name="pref_summary_extra_song_info">Mostra informació addicional de la cançó, com ara el format del fitxer, la taxa de bits i la freqüència</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Esvaïment creuat (Beta)</string>
     <string name="pref_title_custom_font">Utilitzeu el tipus de lletra Manrope</string>
     <string name="pref_title_desaturated_color">Color Dessaturat</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Mostra la pantalla de reproducció en curs</string>
     <string name="pref_title_extra_controls">Controls addicionals</string>
     <string name="pref_title_extra_song_info">Informació de la cançó</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Any ascendent</string>
     <string name="sort_order_year_desc">Any descendent</string>
     <string name="sort_order_z_a">Descendent</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">El vostre dispositiu no permet l’entrada de veu</string>
     <string name="speech_prompt">Cerca a la biblioteca</string>
     <string name="stack">Apila</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

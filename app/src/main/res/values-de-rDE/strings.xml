@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Färbt die Benachrichtigung in der lebendigen Farbe des Album-Covers"</string>
     <string name="pref_summary_cross_fade">Dauer der Überblendung zwischen den Titeln</string>
     <string name="pref_summary_desaturated_color">Laut Material-Design-Richtlinien sollen Farben im dunklen Design entsättigt werden</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Beim Tippen auf die Benachrichtigung wird der Wiedergabe-Bildschirm statt des Willkommensbildschirms angezeigt</string>
     <string name="pref_summary_extra_controls">Zusätzliche Steuerelemente für Mini-Player hinzufügen</string>
     <string name="pref_summary_extra_song_info">Zeige zusätzliche Titel-Informationen wie Dateiformat, Bitrate und Frequenz an</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Überblenden (experimentell)</string>
     <string name="pref_title_custom_font">Manrope-Schriftart verwenden</string>
     <string name="pref_title_desaturated_color">Entsättigte Farben</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Wiedergabe-Bildschirm anzeigen</string>
     <string name="pref_title_extra_controls">Zusätzliche Steuerelemente</string>
     <string name="pref_title_extra_song_info">Titel-Info</string>
@@ -446,7 +448,7 @@
     <string name="restored_previous_purchase_please_restart">Früherer Kauf wiederhergestellt. Starte die App bitte neu, um alle Funktionen nutzen zu können.</string>
     <string name="restored_previous_purchases">Frühere Käufe wiederhergestellt.</string>
     <string name="restoring_purchase">Kauf wird wiederhergestellt…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Bei der Kommunikation mit der Google Play Abrechnung ist ein Fehler aufgetreten</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Die App benötigt die Berechtigung zum Ändern von Systemeinstellungen, um Musik als Klingelton festlegen zu können</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Jahr aufsteigend</string>
     <string name="sort_order_year_desc">Jahr absteigend</string>
     <string name="sort_order_z_a">Absteigend</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Tut uns leid! Dein Gerät unterstützt keine Spracheingabe</string>
     <string name="speech_prompt">Bibliothek durchsuchen</string>
     <string name="stack">Gestapelt</string>
@@ -565,6 +568,7 @@
     <string name="sleep_timer_no_permission">Keine Berechtigung, genaue Wecker zu stellen, bitte erlaube Retro Music.</string>
     <string name="scanning_folders_files">Scanne Ordner und Dateien…</string>
     <string name="scan_complete">Scan abgeschlossen: %1$d Medienelemente gefunden.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_summary">Stelle das zuletzt verwendete Verzeichnis nach dem wechsel der Ordneransicht wieder her</string>
+    <string name="pref_save_last_directory_title">Letztes Verzeichnis speichern.</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

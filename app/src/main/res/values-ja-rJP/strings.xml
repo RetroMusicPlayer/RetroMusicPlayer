@@ -24,7 +24,7 @@
     <string name="action_go_to_start_directory">最初のディレクトリに移動</string>
     <string name="action_grant">承諾</string>
     <string name="action_grid_size">グリッドサイズ</string>
-    <string name="action_grid_size_land">グリッドサイズ（土地）</string>
+    <string name="action_grid_size_land">グリッドサイズ（横向き）</string>
     <string name="action_new_playlist">新しいプレイリスト</string>
     <string name="action_next">次</string>
     <string name="action_play">再生</string>
@@ -105,8 +105,7 @@
     <string name="bug_report_no_title">問題のタイトルを入力してください</string>
     <string name="bug_report_no_username">有効なGitHubアカウントのユーザー名を入力してください</string>
     <string name="bug_report_success">バグ報告に成功しました</string>
-    <string name="bug_report_summary">予期しないエラーが発生しました。申し訳ございません。
-このバグが何度も発生する場合は、端末のアプリ設定より「データを削除する(Androidバージョンによって異なります)」を実行するか、概要をメールで送信してください。</string>
+    <string name="bug_report_summary">予期しないエラーが発生しました。申し訳ないですが、このバグが何度も発生する場合は、端末のアプリ設定より「アプリデータを削除」を実行するか、概要をメールで送信してください </string>
     <string name="bug_report_use_account">GitHubアカウントを使って送信</string>
     <string name="buy_now">今すぐ購入</string>
     <string name="cancel_current_timer">キャンセル</string>
@@ -348,6 +347,7 @@
     <string name="pref_summary_colored_notification">"\u30b8\u30e3\u30b1\u30c3\u30c8\u304b\u3089\u62bd\u51fa\u3055\u308c\u305f\u8272\u3067\u901a\u77e5\u3092\u7740\u8272\u3059\u308b"</string>
     <string name="pref_summary_cross_fade">曲間でクロスフェードする時間</string>
     <string name="pref_summary_desaturated_color">マテリアルデザインのガイドラインに従いダークモードで彩度の低い色を使用する</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">通知をタップすることでアプリのトップ画面ではなく、再生画面を表示するようにする</string>
     <string name="pref_summary_extra_controls">ミニプレイヤー専用のコントロールボタンを追加する</string>
     <string name="pref_summary_extra_song_info">ファイル形式、ビットレート、サンプリング周波数などの曲のメタデータを再生画面に表示する</string>
@@ -388,6 +388,7 @@
     <string name="pref_title_cross_fade">クロスフェード (ベータ版)</string>
     <string name="pref_title_custom_font">フォントに Manrope を使用する</string>
     <string name="pref_title_desaturated_color">彩度の低い色</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">通知から再生画面を開く</string>
     <string name="pref_title_extra_controls">追加コントロール</string>
     <string name="pref_title_extra_song_info">曲の情報を表示</string>
@@ -506,6 +507,7 @@
     <string name="sort_order_year_asc">年（昇順）</string>
     <string name="sort_order_year_desc">年（降順）</string>
     <string name="sort_order_z_a">降順</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">申し訳ありませんが、お使いのデバイスでは音声入力には対応していません</string>
     <string name="speech_prompt">ライブラリを検索</string>
     <string name="stack">スタック</string>
@@ -521,7 +523,7 @@
     <string name="this_month">今月</string>
     <string name="this_week">今週</string>
     <string name="this_year">今年</string>
-    <string name="tiny">ティニー</string>
+    <string name="tiny">タイニー</string>
     <string name="tiny_card_style">小さいカード</string>
     <string name="title">主題</string>
     <string name="title_new_backup">新規バックアップ</string>
@@ -567,4 +569,5 @@
     <string name="scan_complete">スキャン完了: %1$d 件のメディアアイテムが見つかりました。</string>
     <string name="pref_save_last_directory_summary">フォルダビューに切り替えると、最後に使用したディレクトリが復元されます</string>
     <string name="pref_save_last_directory_title">最終ディレクトリを保存</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

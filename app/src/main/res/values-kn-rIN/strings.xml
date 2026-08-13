@@ -349,6 +349,7 @@
     <string name="pref_summary_colored_notification">"ಆಲ್ಬಮ್ ಕವರ್‌ನ ರೋಮಾಂಚಕ ಬಣ್ಣದಲ್ಲಿ ಅಧಿಸೂಚನೆಯನ್ನು ಬಣ್ಣಿಸುತ್ತದೆ"</string>
     <string name="pref_summary_cross_fade">ಹಾಡುಗಳ ನಡುವೆ ಕ್ರಾಸ್‌ಫೇಡ್ ಮಾಡುವ ಅವಧಿ</string>
     <string name="pref_summary_desaturated_color">ಡಾರ್ಕ್ ಮೋಡ್‌ನಲ್ಲಿನ ಮೆಟೀರಿಯಲ್ ಡಿಸೈನ್ ಮಾರ್ಗಸೂಚಿಗಳ ಪ್ರಕಾರ ಡಿಸ್ಯಾಚುರೇಟೆಡ್ ಆಗಿರಬೇಕು</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">ಅಧಿಸೂಚನೆಯ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡುವುದರಿಂದ ಹೋಮ್ ಸ್ಕ್ರೀನ್ ಬದಲಿಗೆ ಪ್ಲೇಯಿಂಗ್ ಸ್ಕ್ರೀನ್ ಅನ್ನು ತೋರಿಸುತ್ತದೆ</string>
     <string name="pref_summary_extra_controls">ಮಿನಿ ಪ್ಲೇಯರ್‌ಗೆ ಹೆಚ್ಚುವರಿ ನಿಯಂತ್ರಣಗಳನ್ನು ಸೇರಿಸಿ</string>
     <string name="pref_summary_extra_song_info">ಫೈಲ್ ಫಾರ್ಮ್ಯಾಟ್, ಬಿಟ್ರೇಟ್ ಮತ್ತು ಆವರ್ತನದಂತಹ ಹೆಚ್ಚುವರಿ ಸಾಂಗ್ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ</string>
@@ -389,6 +390,7 @@
     <string name="pref_title_cross_fade">ಕ್ರಾಸ್ಫೇಡ್ (ಬೀಟಾ)</string>
     <string name="pref_title_custom_font">Manrope ಫಾಂಟ್ ಬಳಸಿ</string>
     <string name="pref_title_desaturated_color">ಅಪರ್ಯಾಪ್ತ ಬಣ್ಣ</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">ಈಗ ಪ್ಲೇ ಆಗುತ್ತಿರುವ ಪರದೆಯನ್ನು ತೋರಿಸಿ</string>
     <string name="pref_title_extra_controls">ಹೆಚ್ಚುವರಿ ನಿಯಂತ್ರಣಗಳು</string>
     <string name="pref_title_extra_song_info">ಹಾಡಿನ ಮಾಹಿತಿ</string>
@@ -507,6 +509,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">ಅವರೋಹಣ ಕ್ರಮ</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">ಕ್ಷಮಿಸಿ! ನಿಮ್ಮ ಸಾಧನವು ಧ್ವನಿ ಇನ್‌ಪುಟ್ ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ</string>
     <string name="speech_prompt">ನಿಮ್ಮ ಸಂಗ್ರಹವನ್ನು ಹುಡುಕಿ</string>
     <string name="stack">ಪೇರಿಸಿ</string>
@@ -568,4 +571,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

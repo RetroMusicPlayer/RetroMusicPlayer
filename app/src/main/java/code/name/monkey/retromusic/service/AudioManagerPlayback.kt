@@ -61,7 +61,11 @@ abstract class AudioManagerPlayback(val context: Context) : Playback {
             .setOnAudioFocusChangeListener(audioFocusListener)
             .setAudioAttributes(
                 AudioAttributesCompat.Builder()
-                    .setContentType(AudioAttributesCompat.CONTENT_TYPE_MUSIC).build()
+                    // Fix provided by : Zak (github: @arrhenius975, mail: zakariatalukdar123@gmail.com)
+                    // Definition and fix: Ensure correct audio routing for focus requests
+                    .setUsage(AudioAttributesCompat.USAGE_MEDIA)
+                    .setContentType(AudioAttributesCompat.CONTENT_TYPE_MUSIC)
+                    .build()
             ).build()
 
     private val becomingNoisyReceiverIntentFilter =

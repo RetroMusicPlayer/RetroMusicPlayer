@@ -27,11 +27,12 @@ import code.name.monkey.retromusic.databinding.FragmentMd3PlayerPlaybackControls
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
 
 class MD3PlaybackControlsFragment :
@@ -78,7 +79,34 @@ class MD3PlaybackControlsFragment :
             goToAlbum(requireActivity())
         }
         binding.text.setOnClickListener {
-            goToArtist(requireActivity())
+            handleArtistClick()
+        }
+    }
+    
+    private fun handleArtistClick() {
+        val song = MusicPlayerRemote.currentSong
+        val artistNames = ArtistSeparator.split(song.artistName)
+
+        if (artistNames.size > 1) {
+            // Show dialog for multiple artists
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.go_to_artist)
+                .setItems(artistNames.toTypedArray()) { _, which ->
+                    // TODO: Navigate to artist details when artistByName() is implemented
+                    android.widget.Toast.makeText(
+                        requireContext(),
+                        getString(R.string.go_to_artist) + ": ${artistNames[which]}",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .show()
+        } else if (artistNames.isNotEmpty()) {
+            // Single artist - direct action
+            android.widget.Toast.makeText(
+                requireContext(),
+                getString(R.string.go_to_artist) + ": ${artistNames[0]}",
+                android.widget.Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -119,7 +147,7 @@ class MD3PlaybackControlsFragment :
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+        binding.text.text = ArtistSeparator.split(song.artistName).joinToString(", ")
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(song)

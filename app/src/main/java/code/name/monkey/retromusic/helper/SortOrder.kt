@@ -62,6 +62,9 @@ class SortOrder {
 
             /* Album sort order year */
             const val ALBUM_YEAR = MediaStore.Audio.Media.YEAR + " DESC"
+
+            /* Album sort order by date added to library */
+            const val ALBUM_DATE_ADDED = MediaStore.Audio.Media.DATE_ADDED + " DESC"
         }
     }
 

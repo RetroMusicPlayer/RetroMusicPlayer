@@ -20,6 +20,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -29,7 +30,6 @@ import code.name.monkey.retromusic.databinding.FragmentCardPlayerPlaybackControl
 import code.name.monkey.retromusic.extensions.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.goToAlbum
-import code.name.monkey.retromusic.fragments.base.goToArtist
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -71,15 +71,20 @@ class CardPlaybackControlsFragment :
         binding.title.setOnClickListener {
             goToAlbum(requireActivity())
         }
-        binding.text.setOnClickListener {
-            goToArtist(requireActivity())
-        }
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         binding.title.text = song.title
-        binding.text.text = song.artistName
+        
+        binding.text.setArtistLinks(song.artistName) { artistName ->
+            // TODO: Navigate to artist details when artistByName() is implemented
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.go_to_artist) + ": $artistName",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         if (PreferenceUtil.isSongInfo) {
             binding.songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)

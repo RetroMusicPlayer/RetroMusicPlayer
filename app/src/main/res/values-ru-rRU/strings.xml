@@ -352,6 +352,7 @@
     <string name="pref_summary_colored_notification">"Окрашивает уведомление в доминирующий цвет обложки альбома"</string>
     <string name="pref_summary_cross_fade">Продолжительность плавного затухания между треками</string>
     <string name="pref_summary_desaturated_color">Согласно стилю Material Design, в тёмном режиме цвета должны быть немного обесцвечены</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Нажатие на уведомление будет показывать экран воспроизведения вместо домашнего экрана</string>
     <string name="pref_summary_extra_controls">Добавить дополнительные элементы управления для мини-плеера</string>
     <string name="pref_summary_extra_song_info">Показывать дополнительную информацию о треке, такую как расширение файла, битрейт и частота</string>
@@ -392,6 +393,7 @@
     <string name="pref_title_cross_fade">Плавное затухание (бета-версия)</string>
     <string name="pref_title_custom_font">Использовать шрифт Manrope</string>
     <string name="pref_title_desaturated_color">Тусклый цвет</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Показывать экран воспроизведения</string>
     <string name="pref_title_extra_controls">Дополнительные элементы управления</string>
     <string name="pref_title_extra_song_info">Информация о треке</string>
@@ -510,6 +512,7 @@
     <string name="sort_order_year_asc">Год по возрастанию</string>
     <string name="sort_order_year_desc">Год по убыванию</string>
     <string name="sort_order_z_a">По убыванию</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Извините! Ваше устройство не поддерживает голосовой ввод</string>
     <string name="speech_prompt">Поиск в вашей библиотеке</string>
     <string name="stack">Стопка</string>
@@ -571,4 +574,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

@@ -91,7 +91,7 @@
     <string name="biography">Biographie</string>
     <string name="black_theme_name">Noir Complet</string>
     <string name="blacklist">Liste noire</string>
-    <string name="bluetooth_summary">L\'application nécessite la permission des appareils à proximité pour vérifier la disponibilité d\'appareils Bluetooth</string>
+    <string name="bluetooth_summary">L\'application nécessite la permission de chercher des appareils à proximité pour vérifier la disponibilité d\'appareils Bluetooth</string>
     <string name="bluetooth_title">Appareils à proximité</string>
     <string name="blur">Flou</string>
     <string name="blur_card">Carte floue</string>
@@ -252,7 +252,7 @@
     <string name="message_pro_feature">%s est une fonctionnalité Pro.</string>
     <string name="message_restore_success">Restauration effectuée avec succès.</string>
     <string name="message_updated">Mis à jour</string>
-    <string name="message_welcome"><![CDATA[Bonjour ! <br>Bienvenue dans %s]]></string>
+    <string name="message_welcome"><![CDATA[Bonjour ! <br>Bienvenu dans %s]]></string>
     <string name="my_name">Nom</string>
     <string name="my_top_tracks">Plus jouées</string>
     <string name="never">Jamais</string>
@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Colorie la notification avec la couleur dominante des pochettes d'albums"</string>
     <string name="pref_summary_cross_fade">Durée du fondu enchaîné entre les titres</string>
     <string name="pref_summary_desaturated_color">Selon les lignes directrices du Material Design, les couleurs devraient être désaturées en mode sombre</string>
+    <string name="pref_summary_disable_speaker">Désactiver la lecture depuis le haut-parleur interne</string>
     <string name="pref_summary_expand_now_playing_panel">Toucher la notification affichera l\'écran de lecture en cours au lieu de l\'écran d\'accueil</string>
     <string name="pref_summary_extra_controls">Ajouter des contrôles supplémentaires pour le mini lecteur</string>
     <string name="pref_summary_extra_song_info">Afficher les informations supplémentaires du morceau, comme le format de fichier, le débit et la fréquence</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Fondu enchaîné (Bêta)</string>
     <string name="pref_title_custom_font">Utiliser la police Manrope</string>
     <string name="pref_title_desaturated_color">Couleur désaturée</string>
+    <string name="pref_title_disable_speaker">Désactiver le haut-parleur interne</string>
     <string name="pref_title_expand_now_playing_panel">Afficher l\'écran de lecture en cours</string>
     <string name="pref_title_extra_controls">Contrôles supplémentaires</string>
     <string name="pref_title_extra_song_info">Informations sur le titre</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Année ascendant</string>
     <string name="sort_order_year_desc">Année descendant</string>
     <string name="sort_order_z_a">Descendant</string>
+    <string name="speaker_disabled">La lecture par haut-parleur interne est désactivée.</string>
     <string name="speech_not_supported">Désolé ! Votre appareil ne prend pas en charge la saisie vocale.</string>
     <string name="speech_prompt">Rechercher dans votre bibliothèque</string>
     <string name="stack">Empiler</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Analyse terminée : %1$d éléments multimédias trouvés.</string>
     <string name="pref_save_last_directory_summary">Lors du passage à la vue des dossiers, restaurer le dernier répertoire utilisé</string>
     <string name="pref_save_last_directory_title">Enregistrer le dernier répertoire</string>
+    <string name="artist_separator_helper_text">Pour ajouter plusieurs artistes, séparez-les par : %1$s</string>
 </resources>

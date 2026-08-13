@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Färgar notisen i albumomslagets framträdande färg"</string>
     <string name="pref_summary_cross_fade">Duration to crossfade between songs</string>
     <string name="pref_summary_desaturated_color">I enlighet med riktlinjer för Material Design ska färger desatureras i mörkt läge</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">När du klickar på notisen visas spelarskärmen istället för hemskärmen</string>
     <string name="pref_summary_extra_controls">Lägg till extra kontroller för minispelaren</string>
     <string name="pref_summary_extra_song_info">Visa extra låtinformation, till exempel filformat, bitrate och frekvens</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Use Manrope font</string>
     <string name="pref_title_desaturated_color">Desaturerad färg</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Öppna spelaren</string>
     <string name="pref_title_extra_controls">Extra kontroller</string>
     <string name="pref_title_extra_song_info">Låtinfo</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sjunkande</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Hoppsan! Din enhet stöder inte talinmatning</string>
     <string name="speech_prompt">Sök i ditt bibliotek</string>
     <string name="stack">Stack</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

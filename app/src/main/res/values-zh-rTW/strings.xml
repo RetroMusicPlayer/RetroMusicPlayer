@@ -346,6 +346,7 @@
     <string name="pref_summary_colored_notification">"以鮮豔的專輯封面色調作為通知欄顏色"</string>
     <string name="pref_summary_cross_fade">歌曲淡化/淡出的持續時間</string>
     <string name="pref_summary_desaturated_color">根據 Material Design 指引，於深色模式時，顏色應不飽和</string>
+    <string name="pref_summary_disable_speaker">停用內建揚聲器的播放功能</string>
     <string name="pref_summary_expand_now_playing_panel">按兩下通知欄以顯示現正播放畫面，而非首頁</string>
     <string name="pref_summary_extra_controls">於迷你播放列顯示更多控制鍵</string>
     <string name="pref_summary_extra_song_info">顯示更多歌曲資訊，例如檔案格式、位元速率、頻率</string>
@@ -386,6 +387,7 @@
     <string name="pref_title_cross_fade">淡入/淡出 (測試中)</string>
     <string name="pref_title_custom_font">使用 Manrope 字型</string>
     <string name="pref_title_desaturated_color">不飽和顏色</string>
+    <string name="pref_title_disable_speaker">停用內建揚聲器</string>
     <string name="pref_title_expand_now_playing_panel">顯示現正播放畫面</string>
     <string name="pref_title_extra_controls">更多控制項</string>
     <string name="pref_title_extra_song_info">音樂資訊</string>
@@ -444,7 +446,7 @@
     <string name="restored_previous_purchase_please_restart">已復原先前的購買。請重新開啟應用程式以啟用全數功能。</string>
     <string name="restored_previous_purchases">已復原先前購買。</string>
     <string name="restoring_purchase">正在復原購買…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">與 Google Play 結帳系統通訊時發生錯誤</string>
     <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">應用程式需要取得權限以存取您的裝置設定，並將歌曲設為鈴聲</string>
@@ -504,6 +506,7 @@
     <string name="sort_order_year_asc">年份升冪</string>
     <string name="sort_order_year_desc">年份降冪</string>
     <string name="sort_order_z_a">遞減</string>
+    <string name="speaker_disabled">已停用內建揚聲器播放</string>
     <string name="speech_not_supported">抱歉！您的裝置不支援語音輸入</string>
     <string name="speech_prompt">搜尋音樂庫</string>
     <string name="stack">堆疊風</string>
@@ -561,8 +564,9 @@
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶資料僅用於驗證。</string>
     <string name="could_not_write_tags_to_file">無法寫入資訊至音樂檔案！</string>
     <string name="sleep_timer_no_permission">尚未給予 Retro Music 取用鬧鐘的權限。</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
-    <string name="scan_complete">Scan complete: %1$d media items found.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="scanning_folders_files">正在掃描資料夾和文件……</string>
+    <string name="scan_complete">掃描完成: 尋找到%1$d個媒體檔案。</string>
+    <string name="pref_save_last_directory_summary">切換到資料夾檢視時，還原上次使用的資料夾</string>
+    <string name="pref_save_last_directory_title">儲存上次使用的資料夾</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

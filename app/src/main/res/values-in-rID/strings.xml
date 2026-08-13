@@ -346,6 +346,7 @@
     <string name="pref_summary_colored_notification">"Mewarnai notifikasi di sampul album\u2019 dengan warna cerah"</string>
     <string name="pref_summary_cross_fade">Durasi crossfade antar lagu</string>
     <string name="pref_summary_desaturated_color">Desaturasi warna aksen dalam mode gelap</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Menekan notifikasi akan menampilkan layar putar sekarang daripada layar beranda</string>
     <string name="pref_summary_extra_controls">Tambahkan kontrol ekstra untuk pemutar mini</string>
     <string name="pref_summary_extra_song_info">Tampilkan informasi Lagu tambahan seperti format berkas, kecepatan bit, dan frekuensi</string>
@@ -386,6 +387,7 @@
     <string name="pref_title_cross_fade">Crossfade (Beta)</string>
     <string name="pref_title_custom_font">Gunakan fon Manrope</string>
     <string name="pref_title_desaturated_color">Desaturasi warna</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Tampilkan layar pemutaran</string>
     <string name="pref_title_extra_controls">Kontrol tambahan</string>
     <string name="pref_title_extra_song_info">Info lagu</string>
@@ -504,6 +506,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Sortir turun</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">Maaf! Perangkat Anda tidak mendukung input suara</string>
     <string name="speech_prompt">Cari pustaka Anda</string>
     <string name="stack">Tumpukan</string>
@@ -565,4 +568,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>

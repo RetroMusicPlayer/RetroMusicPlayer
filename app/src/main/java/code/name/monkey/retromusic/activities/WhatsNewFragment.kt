@@ -1,10 +1,12 @@
 package code.name.monkey.retromusic.activities
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,9 +88,14 @@ class WhatsNewFragment : BottomSheetDialogFragment() {
                     request: WebResourceRequest?
                 ): Boolean {
                     val url = request?.url ?: return false
-                    //you can do checks here e.g. url.host equals to target one
-                    startActivity(Intent(Intent.ACTION_VIEW, url))
-                    return true
+                    val intent = Intent(Intent.ACTION_VIEW, url)
+                    return try {
+                        startActivity(intent)
+                        true
+                    } catch (e: ActivityNotFoundException) {
+                        Log.w(TAG, "No app available to open $url", e)
+                        true
+                    }
                 }
             }
         } catch (e: Throwable) {

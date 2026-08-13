@@ -272,7 +272,7 @@
     <string name="no_purchase_found">Sem compras.</string>
     <string name="no_results">Sem resultados</string>
     <string name="no_songs">Sem músicas</string>
-    <string name="no_search_results">No search results</string>
+    <string name="no_search_results">Sem resultados de pesquisa</string>
     <string name="normal">Normal</string>
     <string name="normal_lyrics">Letras normais</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> não está listada no armazenamento.]]></string>
@@ -331,8 +331,8 @@
     <string name="pref_keep_pause_on_zero_volume_title">Pausar no zero</string>
     <string name="pref_keep_screen_on_summary">Esta funcionalidade pode afectar a vida da bateria</string>
     <string name="pref_keep_screen_on_title">Manter o ecrã ligado</string>
-    <string name="pref_show_when_locked_summary">Requires an app restart to take effect. The player must be on foreground before locking for this feature to work</string>
-    <string name="pref_show_when_locked_title">Show the player interface when locked</string>
+    <string name="pref_show_when_locked_summary">Requer uma reinicialização da aplicação para ter efeito. O aplicativo deve estar em primeiro plano antes de bloquear para que este recurso funcione</string>
+    <string name="pref_show_when_locked_title">Mostrar a interface do reprodutor no ecrã bloqueado</string>
     <string name="pref_language_name">Selecionar idioma</string>
     <string name="pref_snow_fall_title">Efeito de neve caída</string>
     <string name="pref_summary_album_art_on_lockscreen">Utilizar a capa do álbum da música actual como papel de parede do ecrã de bloqueio</string>
@@ -348,6 +348,7 @@
     <string name="pref_summary_colored_notification">"Colorir as notificações na capa do álbum"</string>
     <string name="pref_summary_cross_fade">Duração da transição entre músicas</string>
     <string name="pref_summary_desaturated_color">Segundo o guia do Material Design as cores do modo escuro não devem ser saturadas</string>
+    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
     <string name="pref_summary_expand_now_playing_panel">Tocar na notificação vai mostrar o ecrã A reproduzir em vez do ecrã inicial</string>
     <string name="pref_summary_extra_controls">Adicionar controlos extras para o mini leitor</string>
     <string name="pref_summary_extra_song_info">Mostrar info. extras da música, como o formato, taxa de bits e frequência</string>
@@ -359,7 +360,7 @@
     <string name="pref_summary_open_source_licences">Detalhes da licença do software open source</string>
     <string name="pref_summary_pause_history">Quando activado, as músicas novas reproduzidas não vão aparecer no histórico</string>
     <string name="pref_summary_remember_tab">Ir para o último separador ao iniciar</string>
-    <string name="pref_summary_enable_search_playlist">Show a search field in a playlist</string>
+    <string name="pref_summary_enable_search_playlist">Mostrar um campo de pesquisa numa lista de reprodução</string>
     <string name="pref_summary_show_lyrics">Mostrar letras por cima da capa do álbum</string>
     <string name="pref_summary_suggestions">Mostrar o novo música mix no ecrã inicial</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Activar a mudança de música ao deslizar em qualquer lado no ecrã de A reproduzir agora</string>
@@ -388,6 +389,7 @@
     <string name="pref_title_cross_fade">Crossfade (beta)</string>
     <string name="pref_title_custom_font">Utilizar tipo de letra Manrope</string>
     <string name="pref_title_desaturated_color">Cores não saturadas</string>
+    <string name="pref_title_disable_speaker">Disable internal speaker</string>
     <string name="pref_title_expand_now_playing_panel">Mostrar ecrã A reproduzir</string>
     <string name="pref_title_extra_controls">Controlos adicionais</string>
     <string name="pref_title_extra_song_info">Info. da música</string>
@@ -405,7 +407,7 @@
     <string name="pref_title_open_source_licences">Licenças open source</string>
     <string name="pref_title_pause_history">Pausar histórico</string>
     <string name="pref_title_remember_tab">Memorizar separador</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">Ativar busca na lista de reprodução</string>
     <string name="pref_title_show_lyrics">Mostrar letras</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
     <string name="pref_title_swipe_anywhere_now_playing">Deslizar em qualquer lado para alterar a música</string>
@@ -446,13 +448,13 @@
     <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Reinicie a aplicação para utilizar todas as funcionalidades.</string>
     <string name="restored_previous_purchases">Compras anteriores restauradas.</string>
     <string name="restoring_purchase">A restaurar compras…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
+    <string name="billing_error">Ocorreu um erro ao comunicar com o Google Play Billing</string>
     <string name="retro_music_player">Música Retro</string>
     <string name="retro_music_pro">Música Retro Pro</string>
     <string name="ringtone_summary">Esta aplicação necessita de permissão para aceder às definições para definir músicas como toques</string>
     <string name="ringtone_title">Toque (opcional)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">A aplicação precisa de permissão para agendar alarmes exatos para definir os temporizadores de sono</string>
+    <string name="permission_alarm_title">Alarme (opcional)</string>
     <string name="saf_delete_failed">Erro ao eliminar ficheiro: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">Não é possível obter URI SAF</string>
@@ -506,6 +508,7 @@
     <string name="sort_order_year_asc">Year ascending</string>
     <string name="sort_order_year_desc">Year descending</string>
     <string name="sort_order_z_a">Descendente</string>
+    <string name="speaker_disabled">Internal speaker playback is disabled</string>
     <string name="speech_not_supported">O seu dispositivo não suporta entrada de fala</string>
     <string name="speech_prompt">Procurar na sua biblioteca</string>
     <string name="stack">Pilha</string>
@@ -567,4 +570,5 @@
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
 </resources>
