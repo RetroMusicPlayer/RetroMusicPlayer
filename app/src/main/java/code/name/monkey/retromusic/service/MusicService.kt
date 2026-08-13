@@ -293,6 +293,7 @@ class MusicService : MediaBrowserServiceCompat(),
         }
     }
     private var throttledSeekHandler: ThrottledSeekHandler? = null
+    private var audioVolumeObserver: AudioVolumeObserver? = null
     private var uiThreadHandler: Handler? = null
     private var wakeLock: WakeLock? = null
     private var notificationManager: NotificationManager? = null
@@ -335,8 +336,9 @@ class MusicService : MediaBrowserServiceCompat(),
             true,
             mediaStoreObserver
         )
-        val audioVolumeObserver = AudioVolumeObserver(this)
-        audioVolumeObserver.register(AudioManager.STREAM_MUSIC, this)
+        audioVolumeObserver = AudioVolumeObserver(this).also {
+            it.register(AudioManager.STREAM_MUSIC, this)
+        }
         registerOnSharedPreferenceChangedListener(this)
         restoreState()
         sendBroadcast(Intent("$RETRO_MUSIC_PACKAGE_NAME.RETRO_MUSIC_SERVICE_CREATED"))
@@ -363,6 +365,8 @@ class MusicService : MediaBrowserServiceCompat(),
         quit()
         releaseResources()
         serviceScope.cancel()
+        audioVolumeObserver?.unregister()
+        audioVolumeObserver = null
         contentResolver.unregisterContentObserver(mediaStoreObserver)
         unregisterOnSharedPreferenceChangedListener(this)
         wakeLock?.release()

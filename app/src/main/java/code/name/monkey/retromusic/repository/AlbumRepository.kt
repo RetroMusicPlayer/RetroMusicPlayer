@@ -28,6 +28,8 @@ import java.text.Collator
 interface AlbumRepository {
     fun albums(): List<Album>
 
+    fun albums(songs: List<Song>): List<Album>
+
     fun albums(query: String): List<Album>
 
     fun album(albumId: Long): Album
@@ -44,6 +46,10 @@ class RealAlbumRepository(private val songRepository: RealSongRepository) :
                 getSongLoaderSortOrder()
             )
         )
+        return splitIntoAlbums(songs)
+    }
+
+    override fun albums(songs: List<Song>): List<Album> {
         return splitIntoAlbums(songs)
     }
 

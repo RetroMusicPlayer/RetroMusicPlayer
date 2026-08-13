@@ -25,6 +25,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
@@ -47,7 +48,6 @@ import code.name.monkey.retromusic.util.FileUtils
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.UriUtil
 import com.afollestad.materialdialogs.input.input
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
@@ -216,7 +216,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
             ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                GlobalScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     if (VersionUtils.hasR()) {
                         cacheFile = TagWriter.writeTagsToFilesR(
                             requireContext(), AudioTagInfo(
@@ -278,7 +278,7 @@ class LyricsFragment : AbsMainActivityFragment(R.layout.fragment_lyrics),
                     } else {
                         val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                         fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                        GlobalScope.launch {
+                        viewLifecycleOwner.lifecycleScope.launch {
                             cacheFile = TagWriter.writeTagsToFilesR(
                                 requireContext(),
                                 AudioTagInfo(listOf(song.data), fieldKeyValueMap, null)

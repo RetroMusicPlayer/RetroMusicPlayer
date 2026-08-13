@@ -33,10 +33,13 @@ import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.concurrent.atomic.AtomicInteger
 
 class LibraryViewModel(
     private val repository: RealRepository,
@@ -55,6 +58,8 @@ class LibraryViewModel(
     private val songHistory = MutableLiveData<List<Song>>()
     private val playCountSongsData = MutableLiveData<List<Song>>()
     private var previousSongHistory = ArrayList<HistoryEntity>()
+    private var libraryContentJob: Job? = null
+    private val searchRequestId = AtomicInteger()
     val paletteColor: LiveData<Int> = _paletteColor
 
     init {
@@ -62,16 +67,26 @@ class LibraryViewModel(
     }
 
     private fun loadLibraryContent() {
-        viewModelScope.launch(IO) {
-            fetchHomeSections()
-            awaitAll(
-                async { fetchSuggestions() },
-                async { fetchSongs() },
-                async { fetchAlbums() },
-                async { fetchArtists() },
-                async { fetchGenres() },
-                async { fetchPlaylists() },
-            )
+        libraryContentJob?.cancel()
+        libraryContentJob = viewModelScope.launch(IO) {
+            val homeDeferred = async { repository.homeSections() }
+            val suggestionsDeferred = async { repository.suggestions() }
+            val genresDeferred = async { repository.fetchGenres() }
+            val playlistsDeferred = async { repository.fetchPlaylistWithSongs() }
+
+            val songSnapshot = repository.allSongs()
+            if (!isActive) return@launch
+            songs.postValue(songSnapshot)
+
+            val albumSnapshot = repository.albumsForSongs(songSnapshot)
+            if (!isActive) return@launch
+            albums.postValue(albumSnapshot)
+            artists.postValue(repository.artistsForAlbums(albumSnapshot))
+
+            suggestions.postValue(suggestionsDeferred.await())
+            genres.postValue(genresDeferred.await())
+            playlists.postValue(playlistsDeferred.await())
+            home.postValue(homeDeferred.await())
         }
     }
 
@@ -127,8 +142,12 @@ class LibraryViewModel(
 
     fun search(query: String?, filter: Filter) =
         viewModelScope.launch(IO) {
+            val requestId = searchRequestId.incrementAndGet()
+            delay(250)
             val result = repository.search(query, filter)
-            searchResults.postValue(result)
+            if (isActive && requestId == searchRequestId.get()) {
+                searchResults.postValue(result)
+            }
         }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch(IO) {
@@ -339,6 +358,7 @@ class LibraryViewModel(
     fun favorites() = repository.favorites()
 
     fun clearSearchResult() {
+        searchRequestId.incrementAndGet()
         searchResults.value = emptyList()
     }
 

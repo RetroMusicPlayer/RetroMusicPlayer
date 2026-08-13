@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.network.Result.Error
 import code.name.monkey.retromusic.network.Result.Success
 import code.name.monkey.retromusic.network.model.LastFmAlbum
 import code.name.monkey.retromusic.network.model.LastFmArtist
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logE
 
 interface Repository {
@@ -132,11 +133,16 @@ class RealRepository(
 
     override suspend fun fetchAlbums(): List<Album> = albumRepository.albums()
 
+    fun albumsForSongs(songs: List<Song>): List<Album> = albumRepository.albums(songs)
+
     override suspend fun albumByIdAsync(albumId: Long): Album = albumRepository.album(albumId)
 
     override fun albumById(albumId: Long): Album = albumRepository.album(albumId)
 
     override suspend fun fetchArtists(): List<Artist> = artistRepository.artists()
+
+    fun artistsForAlbums(albums: List<Album>): List<Artist> =
+        artistRepository.artists(albums, PreferenceUtil.albumArtistsOnly)
 
     override suspend fun albumArtists(): List<Artist> = artistRepository.albumArtists()
 

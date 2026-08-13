@@ -27,7 +27,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.PreferenceDialogNowPlayingScreenBinding
 import code.name.monkey.retromusic.databinding.PreferenceNowPlayingScreenItemBinding
@@ -77,13 +76,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
         return materialDialog(R.string.pref_title_album_cover_style)
             .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]
-                if (isAlbumCoverStyle(coverStyle)) {
-                    val result = getString(coverStyle.titleRes) + " theme is Pro version feature."
-                    showToast(result)
-                    requireContext().goToProVersion()
-                } else {
-                    PreferenceUtil.albumCoverStyle = coverStyle
-                }
+                PreferenceUtil.albumCoverStyle = coverStyle
             }
             .setView(binding.root)
             .create()
@@ -111,12 +104,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
 
             Glide.with(context).load(albumCoverStyle.drawableResId).into(binding.image)
             binding.title.setText(albumCoverStyle.titleRes)
-            if (isAlbumCoverStyle(albumCoverStyle)) {
-                binding.proText.show()
-                binding.proText.setText(R.string.pro)
-            } else {
-                binding.proText.hide()
-            }
+            binding.proText.hide()
             return binding.root
         }
 
@@ -148,8 +136,4 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
             return AlbumCoverStylePreferenceDialog()
         }
     }
-}
-
-private fun isAlbumCoverStyle(style: AlbumCoverStyle): Boolean {
-    return (!App.isProVersion() && (style == Circle || style == Card || style == FullCard))
 }

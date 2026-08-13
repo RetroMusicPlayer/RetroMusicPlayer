@@ -27,11 +27,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.PreferenceNowPlayingScreenItemBinding
 import code.name.monkey.retromusic.extensions.*
-import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -86,14 +84,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
             .setCancelable(false)
             .setPositiveButton(R.string.set) { _, _ ->
                 val nowPlayingScreen = values()[viewPagerPosition]
-                if (isNowPlayingThemes(nowPlayingScreen)) {
-                    val result =
-                        "${getString(nowPlayingScreen.titleRes)} theme is Pro version feature."
-                    showToast(result)
-                    requireContext().goToProVersion()
-                } else {
-                    PreferenceUtil.nowPlayingScreen = nowPlayingScreen
-                }
+                PreferenceUtil.nowPlayingScreen = nowPlayingScreen
             }
             .setView(view)
             .create()
@@ -116,12 +107,7 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         val binding = PreferenceNowPlayingScreenItemBinding.inflate(inflater, collection, true)
         Glide.with(context).load(nowPlayingScreen.drawableResId).into(binding.image)
         binding.title.setText(nowPlayingScreen.titleRes)
-        if (isNowPlayingThemes(nowPlayingScreen)) {
-            binding.proText.show()
-            binding.proText.setText(R.string.pro)
-        } else {
-            binding.proText.hide()
-        }
+        binding.proText.hide()
         return binding.root
     }
 
@@ -144,8 +130,4 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
     override fun getPageTitle(position: Int): CharSequence {
         return context.getString(values()[position].titleRes)
     }
-}
-
-private fun isNowPlayingThemes(screen: NowPlayingScreen): Boolean {
-    return (screen == Full || screen == Card || screen == Plain || screen == Blur || screen == Color || screen == Simple || screen == BlurCard || screen == Circle || screen == Adaptive) && !App.isProVersion()
 }

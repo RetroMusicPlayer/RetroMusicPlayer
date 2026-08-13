@@ -1,5 +1,6 @@
 package code.name.monkey.appthemehelper.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 
+@SuppressLint("RestrictedApi")
 public final class ToolbarContentTintHelper {
 
     public static class InternalToolbarContentTintUtil {

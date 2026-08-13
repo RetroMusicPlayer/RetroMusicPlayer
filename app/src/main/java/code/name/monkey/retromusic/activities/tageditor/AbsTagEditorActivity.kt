@@ -51,7 +51,6 @@ import code.name.monkey.retromusic.util.logD
 import code.name.monkey.retromusic.util.logE
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -363,7 +362,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
 
         hideFab()
         logD(fieldKeyValueMap)
-        GlobalScope.launch {
+        lifecycleScope.launch {
             if (VersionUtils.hasR()) {
                 cacheFiles = TagWriter.writeTagsToFilesR(
                     this@AbsTagEditorActivity, AudioTagInfo(
@@ -391,7 +390,7 @@ abstract class AbsTagEditorActivity<VB : ViewBinding> : AbsBaseActivity() {
     }
 
     private fun writeTags(paths: List<String>?) {
-        GlobalScope.launch {
+        lifecycleScope.launch {
             if (VersionUtils.hasR()) {
                 cacheFiles = TagWriter.writeTagsToFilesR(
                     this@AbsTagEditorActivity, AudioTagInfo(

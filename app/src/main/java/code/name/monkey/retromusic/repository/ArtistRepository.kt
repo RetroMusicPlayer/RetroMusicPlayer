@@ -25,6 +25,8 @@ import java.text.Collator
 interface ArtistRepository {
     fun artists(): List<Artist>
 
+    fun artists(albums: List<Album>, albumArtistsOnly: Boolean): List<Artist>
+
     fun albumArtists(): List<Artist>
 
     fun albumArtists(query: String): List<Artist>
@@ -105,6 +107,15 @@ class RealArtistRepository(
             )
         )
         val artists = splitIntoArtists(albumRepository.splitIntoAlbums(songs))
+        return sortArtists(artists)
+    }
+
+    override fun artists(albums: List<Album>, albumArtistsOnly: Boolean): List<Artist> {
+        val artists = if (albumArtistsOnly) {
+            splitIntoAlbumArtists(albums)
+        } else {
+            splitIntoArtists(albums)
+        }
         return sortArtists(artists)
     }
 

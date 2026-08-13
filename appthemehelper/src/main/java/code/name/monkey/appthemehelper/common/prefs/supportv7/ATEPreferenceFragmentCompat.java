@@ -2,6 +2,7 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -14,8 +15,9 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEPrefere
 public abstract class ATEPreferenceFragmentCompat extends PreferenceFragmentCompat {
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
-        if (getCallbackFragment() instanceof OnPreferenceDisplayDialogCallback) {
-            ((OnPreferenceDisplayDialogCallback) getCallbackFragment()).onPreferenceDisplayDialog(this, preference);
+        Fragment parentFragment = getParentFragment();
+        if (parentFragment instanceof OnPreferenceDisplayDialogCallback) {
+            ((OnPreferenceDisplayDialogCallback) parentFragment).onPreferenceDisplayDialog(this, preference);
             return;
         }
 

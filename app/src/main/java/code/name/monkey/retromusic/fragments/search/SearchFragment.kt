@@ -77,9 +77,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
         }
         binding.searchView.apply {
             doAfterTextChanged {
-                if (!it.isNullOrEmpty())
+                if (!it.isNullOrEmpty()) {
                     search(it.toString())
-                else {
+                } else {
+                    job?.cancel()
+                    libraryViewModel.clearSearchResult()
                     TransitionManager.beginDelayedTransition(binding.appBarLayout)
                     binding.voiceSearch.isVisible = true
                     binding.clearText.isGone = true
@@ -181,6 +183,11 @@ class SearchFragment : AbsMainActivityFragment(R.layout.fragment_search),
     }
 
     private fun search(query: String) {
+        if (query.isBlank()) {
+            job?.cancel()
+            libraryViewModel.clearSearchResult()
+            return
+        }
         this.query = query
         TransitionManager.beginDelayedTransition(binding.appBarLayout)
         binding.voiceSearch.isGone = query.isNotEmpty()

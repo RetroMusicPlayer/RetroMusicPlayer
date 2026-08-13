@@ -3,10 +3,12 @@ package code.name.monkey.appthemehelper.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +28,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.ViewCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
@@ -115,25 +118,16 @@ public final class TintHelper {
     }
 
     public static void setCursorTint(@NonNull EditText editText, @ColorInt int color) {
-        try {
-            Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
-            fCursorDrawableRes.setAccessible(true);
-            int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
-            Field fEditor = TextView.class.getDeclaredField("mEditor");
-            fEditor.setAccessible(true);
-            Object editor = fEditor.get(editText);
-            Class<?> clazz = editor.getClass();
-            Field fCursorDrawable = clazz.getDeclaredField("mCursorDrawable");
-            fCursorDrawable.setAccessible(true);
-            Drawable[] drawables = new Drawable[2];
-            drawables[0] = ContextCompat.getDrawable(editText.getContext(), mCursorDrawableRes);
-            drawables[0] = createTintedDrawable(drawables[0], color);
-            drawables[1] = ContextCompat.getDrawable(editText.getContext(), mCursorDrawableRes);
-            drawables[1] = createTintedDrawable(drawables[1], color);
-            fCursorDrawable.set(editor, drawables);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            return;
         }
+        GradientDrawable cursorDrawable = new GradientDrawable();
+        cursorDrawable.setColor(color);
+        cursorDrawable.setSize(
+                Math.max(1, (int) (editText.getResources().getDisplayMetrics().density * 2)),
+                editText.getLineHeight()
+        );
+        editText.setTextCursorDrawable(cursorDrawable);
     }
 
     public static void setTint(@NonNull RadioButton radioButton, @ColorInt int color, boolean useDarker) {
@@ -184,11 +178,7 @@ public final class TintHelper {
                         useDarker ? R.color.ate_control_normal_dark : R.color.ate_control_normal_light),
                 color
         });
-        if (editText instanceof AppCompatEditText) {
-            ((AppCompatEditText) editText).setSupportBackgroundTintList(editTextColorStateList);
-        } else {
-            editText.setBackgroundTintList(editTextColorStateList);
-        }
+        ViewCompat.setBackgroundTintList(editText, editTextColorStateList);
         setCursorTint(editText, color);
     }
 
