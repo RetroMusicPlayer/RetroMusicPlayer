@@ -109,7 +109,6 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">هەڵەیەکی نەزانراو ڕوویدا ببورە بۆ ڕوودانی ئەم کێشەیە، ئەگەر بەردەوام بوو لە کارکەوتن \"داتاکانی بەرنامەکە\" بسڕەرەوە یان پەیامێک بنێرە بۆ </string>
     <string name="bug_report_use_account">ناردن لەڕێی هەژماری گیتهەب</string>
-    <string name="buy_now">کڕینی وەشانی پارەدان</string>
     <string name="cancel_current_timer">پاشگەزبونەوە</string>
     <string name="card">کارد</string>
     <string name="card_color_style">کارتی ڕەنگاوڕەنگ</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
     <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
-    <string name="could_not_restore_purchase">Could not restore purchase.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
     <string name="create_action">Create</string>
     <string name="create_new_backup">Create</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Clearly White</string>
     <string name="listeners_label">Listeners</string>
     <string name="listing_files">Listing files</string>
-    <string name="loading_products">Loading products…</string>
     <string name="login">Login</string>
     <string name="lyrics">هۆنراوەکان</string>
     <string name="made_with_love">کراوە بە کوردی لەلایەن گۆران غەریب ❤️</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Permission error</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[سڵاو! <br> بەخێربێی بۆ %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">No lyrics found</string>
     <string name="no_playing_queue">No songs playing</string>
     <string name="no_playlists">You have no playlists</string>
-    <string name="no_purchase_found">No purchase found.</string>
     <string name="no_results">No results</string>
     <string name="no_songs">You have no songs</string>
     <string name="no_search_results">No search results</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">پارەدان</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">کڕین</string>
     <string name="queue">Playing Queue</string>
     <string name="rate_app">هەڵسەنگاندنی بەرنامەکە</string>
     <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">گێڕانەوە</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
-    <string name="restored_previous_purchases">Restored previous purchases.</string>
-    <string name="restoring_purchase">Restoring purchase…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">زەنگ لێدان (دڵخواز)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Track number</string>
     <string name="translate">وەرگێڕان</string>
     <string name="translate_community">کراوە بە کوردی لەلایەن گۆران غەریب</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
     <string name="twitter_page">تویته‌ر</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
     <string name="unlabeled">Unlabeled</string>
