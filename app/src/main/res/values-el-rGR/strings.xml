@@ -109,7 +109,6 @@
     <string name="bug_report_success">Επιτυχής αναφορά σφάλματος</string>
     <string name="bug_report_summary">Προέκυψε ένα μη αναμενόμενο σφάλμα. Λυπούμαστε που βρήκατε αυτό το σφάλμα, εάν εξακολουθεί να παρουσιάζεται διαγράψτε τα δεδομένα εφαρμογής ή στείλτε ένα Email </string>
     <string name="bug_report_use_account">Αποστολή χρησιμοποιώντας λογαριασμό GitHub</string>
-    <string name="buy_now">Αγορά τώρα</string>
     <string name="cancel_current_timer">Ακύρωση τρέχοντος χρονοδιακόπτη</string>
     <string name="card">Κάρτα</string>
     <string name="card_color_style">Έγχρωμη κάρτα</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Οι πληροφορίες συσκευής αντιγράφηκαν στο πρόχειρο.</string>
     <string name="could_not_create_playlist">Αδυναμία δημιουργίας λίστας αναπαραγωγής.</string>
     <string name="could_not_download_album_cover">"Αδυναμία λήψης αντίστοιχου εξώφυλλου άλμπουμ."</string>
-    <string name="could_not_restore_purchase">Δεν ήταν δυνατή η επαναφορά της αγοράς.</string>
     <string name="could_not_scan_files">Αδυναμία σάρωσης %d αρχείων.</string>
     <string name="create_action">Δημιουργία</string>
     <string name="create_new_backup">Δημιουργία</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Ξεκάθαρα λευκό</string>
     <string name="listeners_label">Ακροατές</string>
     <string name="listing_files">Λίστα αρχείων</string>
-    <string name="loading_products">Φόρτωση προϊόντων...</string>
     <string name="login">Σύνδεση</string>
     <string name="lyrics">Στίχοι</string>
     <string name="made_with_love">Φτιαγμένο με ❤️ στην Ινδία</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Σφάλμα άδειας</string>
     <string name="message_backup_create_success">Επιτυχής δημιουργία αντιγράφου ασφαλείας.</string>
     <string name="message_limit_tabs">Το πολύ 5 επιλογές</string>
-    <string name="message_pro_feature">%s είναι μία δυνατότητα της έκδοσης Prο.</string>
     <string name="message_restore_success">Η επαναφορά ολοκληρώθηκε επιτυχώς.</string>
     <string name="message_updated">Ενημερώθηκε</string>
     <string name="message_welcome"><![CDATA[Γεια σας! <br>Καλώς ήρθατε στο %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Δε βρέθηκαν στίχοι</string>
     <string name="no_playing_queue">Δεν παίζει κανένα κομμάτι</string>
     <string name="no_playlists">Δε βρέθηκαν λίστες αναπαραγωγής</string>
-    <string name="no_purchase_found">Δε βρέθηκε αγορά.</string>
     <string name="no_results">Κανένα αποτέλεσμα</string>
     <string name="no_songs">Δε βρέθηκαν κομμάτια</string>
     <string name="no_search_results">Δεν βρέθηκαν αποτελέσματα αναζήτησης</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Πλήκτρα ελέγχου έντασης</string>
     <string name="pref_title_wallpaper_accent">Απόχρωση ταπετσαρίας</string>
     <string name="pref_title_whitelist">Λίστα επιτρεπόμενων κομματιών</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Μαύρο θέμα, θέματα οθόνης αναπαραγωγής, εφέ καρουσέλ και άλλα...</string>
     <string name="profile">Προφίλ</string>
-    <string name="purchase">Αγορά</string>
     <string name="queue">Ουρά αναπαραγωγής</string>
     <string name="rate_app">Βαθμολόγησε την εφαρμογή</string>
     <string name="rate_on_google_play_summary">Σας αρέσει η εφαρμογή; Γράψτε μας στο Google Play πώς να την κάνουμε ακόμα καλύτερη</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Επαναφορά εικόνας καλλιτέχνη</string>
     <string name="restore">Επαναφορά</string>
     <string name="restore_message">Θέλετε να επαναφέρετε το αντίγραφο ασφαλείας;</string>
-    <string name="restored_previous_purchase_please_restart">Επαναφορά προηγούμενης αγοράς. Επανεκκινήστε την εφαρμογή για να χρησιμοποιήσετε όλες τις δυνατότητες.</string>
-    <string name="restored_previous_purchases">Επαναφορά προηγούμενων αγορών επιτυχής.</string>
-    <string name="restoring_purchase">Επαναφορά αγοράς…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Η εφαρμογή χρειάζεται άδεια πρόσβασης στις ρυθμίσεις της συσκευής σας, για να ορίσει τη μουσική ως ήχο κλήσης</string>
     <string name="ringtone_title">Ήχος Κλήσης (Προαιρετικό)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Αριθμός κομματιού</string>
     <string name="translate">Μετάφραση</string>
     <string name="translate_community">Βοηθήστε μας να μεταφράσουμε την εφαρμογή στη γλώσσα σας</string>
-    <string name="try_retro_music_premium">Δοκιμάστε το Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Μοιραστείτε το σχέδιό σας με το Retro Music</string>
     <string name="unlabeled">Χωρίς ετικέτα</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Μετάβαση στον καλλιτέχνη</string>
 </resources>

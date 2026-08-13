@@ -109,7 +109,6 @@
     <string name="bug_report_success">बग रिपोर्ट सफल हुआ</string>
     <string name="bug_report_summary">एक अप्रत्याशित त्रुटि हुई। क्षमा करें, आपको यह बग मिल गया है, अगर यह \"क्लियर ऐप डेटा\" को क्रैश करता है या ईमेल भेजता है </string>
     <string name="bug_report_use_account">GitHub खाते का उपयोग करके भेजें</string>
-    <string name="buy_now">अभी खरीदें</string>
     <string name="cancel_current_timer">वर्तमान टाइमर को रद्द करें</string>
     <string name="card">कार्ड</string>
     <string name="card_color_style">रंगीन कार्ड</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">डिवाइस की जानकारी क्लिपबोर्ड पर कॉपी की गई।</string>
     <string name="could_not_create_playlist">\u2019 प्लेलिस्ट नहीं बनाई जा सकी।</string>
     <string name="could_not_download_album_cover">"\u2019 मेल खाने वाला एल्बम कवर डाउनलोड नहीं किया जा सका।"</string>
-    <string name="could_not_restore_purchase">खरीदारी को पुनः स्थापित नहीं किया जा सका।</string>
     <string name="could_not_scan_files">%d फ़ाइलें स्कैन नहीं की जा सकीं।</string>
     <string name="create_action">बनाएं</string>
     <string name="create_new_backup">बनाएं</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">सफ़ेद</string>
     <string name="listeners_label">श्रोताओं</string>
     <string name="listing_files">लिस्टिंग फाइल्स</string>
-    <string name="loading_products">उत्पाद लोड हो रहे हैं...</string>
     <string name="login">लॉग इन करें</string>
     <string name="lyrics">बोल</string>
     <string name="made_with_love">भारत में ❤️ के साथ बनाया गया</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">अनुमति त्रुटि</string>
     <string name="message_backup_create_success">प्रतिकृति सफलतापूर्वक बनाया गया</string>
     <string name="message_limit_tabs">5 से अधिक आइटम नहीं</string>
-    <string name="message_pro_feature">%s एक प्रो फीचर है</string>
     <string name="message_restore_success">पुनर्स्थापना सफलतापूर्वक पूर्ण हुई</string>
     <string name="message_updated">सुधारित</string>
     <string name="message_welcome"><![CDATA[नमस्ते! <br>%s में आपका स्वागत है]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">कोई गीतिकाव्य नहीं पाया गया</string>
     <string name="no_playing_queue">कोई गाना नहीं बज रहा है</string>
     <string name="no_playlists">आपके पास कोई प्लेलिस्ट नहीं है</string>
-    <string name="no_purchase_found">कोई खरीदारी नहीं मिली</string>
     <string name="no_results">कोई परिणाम नहीं</string>
     <string name="no_songs">आपके पास कोई गाना नहीं है</string>
     <string name="no_search_results">No search results</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">वॉल्यूम नियंत्रण</string>
     <string name="pref_title_wallpaper_accent">वॉलपेपर एक्सेंट रंग</string>
     <string name="pref_title_whitelist">श्वेतसूची संगीत</string>
-    <string name="pro">प्रो</string>
-    <string name="pro_summary">काली थीम, नाउ प्लेइंग थीम, कैरोसेल प्रभाव और बहुत कुछ...</string>
     <string name="profile">प्रोफ़ाइल</string>
-    <string name="purchase">खरीदें</string>
     <string name="queue">गानों की क़तार</string>
     <string name="rate_app">ऐप को रेटिंग दें</string>
     <string name="rate_on_google_play_summary">क्या आपको यह ऐप पसंद है? इसको भेतर बनाने के लिए राए दे।</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">कलाकार छवि रीसेट करें</string>
     <string name="restore">पुनर्स्थापित करें</string>
     <string name="restore_message">क्या आप बैकअप पुनर्स्थापित करना चाहते हैं?</string>
-    <string name="restored_previous_purchase_please_restart">पिछली खरीदारी पुनर्स्थापित की गई. कृपया सभी सुविधाओं का उपयोग करने के लिए ऐप को पुनः आरंभ करें।</string>
-    <string name="restored_previous_purchases">पिछली खरीद को पुनर्स्थापित करें</string>
-    <string name="restoring_purchase">खरीदारी पुनर्स्थापित की जा रही है..</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">रेट्रो म्यूजिक प्लेयर</string>
-    <string name="retro_music_pro">रेट्रो म्यूजिक प्रो</string>
     <string name="ringtone_summary">संगीत को रिंगटोन के रूप में सेट करने के लिए ऐप को आपकी डिवाइस सेटिंग्स तक पहुंचने की अनुमति की आवश्यकता है।</string>
     <string name="ringtone_title">रिंगटोन (वैकल्पिक)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +522,6 @@
     <string name="track_list">ट्रैक संख्या</string>
     <string name="translate">अनुवाद करें</string>
     <string name="translate_community">ऐप को अपनी मूल भाषा में अनुवाद करने में मेरी सहायता करें</string>
-    <string name="try_retro_music_premium">रेट्रो म्यूज़िक प्रीमियम आज़माएँ</string>
     <string name="twitter_page">ट्विटर</string>
     <string name="twitter_page_summary">रेट्रो म्यूजिक के साथ अपना डिज़ाइन साझा करें</string>
     <string name="unlabeled">लेबल नहीं किया गया</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">रचनाकार चुने</string>
 </resources>

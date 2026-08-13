@@ -109,7 +109,6 @@
     <string name="bug_report_success">Fehlerbericht erfolgreich</string>
     <string name="bug_report_summary">Ein unerwarteter Fehler ist aufgetreten. Sorry, dass du ihn entdeckt hast. Wenn er weiterhin auftritt, App-\"Speicherinhalt löschen\" oder eine E-Mail schicken </string>
     <string name="bug_report_use_account">Über GitHub-Konto senden</string>
-    <string name="buy_now">Jetzt kaufen</string>
     <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Farbige Karte</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Geräteinfo wurde in Zwischenablage kopiert.</string>
     <string name="could_not_create_playlist">Playlist konnte nicht erstellt werden.</string>
     <string name="could_not_download_album_cover">"Passendes Album-Cover konnte nicht heruntergeladen werden."</string>
-    <string name="could_not_restore_purchase">Kauf konnte nicht wiederhergestellt werden.</string>
     <string name="could_not_scan_files">%d Datei(en) konnte(n) nicht gescannt werden.</string>
     <string name="create_action">Erstellen</string>
     <string name="create_new_backup">Erstellen</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Deutlich weiß</string>
     <string name="listeners_label">Zuhörer</string>
     <string name="listing_files">Dateien auflisten</string>
-    <string name="loading_products">Produkte werden geladen…</string>
     <string name="login">Anmelden</string>
     <string name="lyrics">Liedtext</string>
     <string name="made_with_love">Mit ❤ in Indien gemacht</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Berechtigungsfehler</string>
     <string name="message_backup_create_success">Sicherung erfolgreich erstellt.</string>
     <string name="message_limit_tabs">Nicht mehr als 5 Registerkarten</string>
-    <string name="message_pro_feature">%s ist eine Pro-Funktion.</string>
     <string name="message_restore_success">Wiederherstellung erfolgreich abgeschlossen.</string>
     <string name="message_updated">Aktualisiert</string>
     <string name="message_welcome"><![CDATA[Hallo! <br>Willkommen bei %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Keine Liedtexte gefunden</string>
     <string name="no_playing_queue">Es werden keine Titel abgespielt</string>
     <string name="no_playlists">Du hast keine Playlists</string>
-    <string name="no_purchase_found">Kein Kauf gefunden.</string>
     <string name="no_results">Keine Ergebnisse</string>
     <string name="no_songs">Du hast keine Titel</string>
     <string name="no_search_results">Keine Suchergebnisse</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Lautstärkeregler</string>
     <string name="pref_title_wallpaper_accent">Akzentfarbe aus Hintergrundbild</string>
     <string name="pref_title_whitelist">Einbezogene Musik</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Dunkles Design, Stil des Wiedergabe-Bildschirms, Karussell-Effekt usw.</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Kaufen</string>
     <string name="queue">Warteschlange</string>
     <string name="rate_app">App bewerten</string>
     <string name="rate_on_google_play_summary">Du magst die App? Lass uns im Google Play Store wissen, wie wir sie verbessern können</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Interpreten-Bild zurücksetzen</string>
     <string name="restore">Wiederherstellen</string>
     <string name="restore_message">Möchtest du die Sicherung wiederherstellen?</string>
-    <string name="restored_previous_purchase_please_restart">Früherer Kauf wiederhergestellt. Starte die App bitte neu, um alle Funktionen nutzen zu können.</string>
-    <string name="restored_previous_purchases">Frühere Käufe wiederhergestellt.</string>
-    <string name="restoring_purchase">Kauf wird wiederhergestellt…</string>
-    <string name="billing_error">Bei der Kommunikation mit der Google Play Abrechnung ist ein Fehler aufgetreten</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Die App benötigt die Berechtigung zum Ändern von Systemeinstellungen, um Musik als Klingelton festlegen zu können</string>
     <string name="ringtone_title">Klingelton (optional)</string>
     <string name="permission_alarm_summary">Die App benötigt für den Einschlafmodus die Berechtigung, einen genauen Wecker zu stellen</string>
@@ -508,7 +495,7 @@
     <string name="sort_order_year_asc">Jahr aufsteigend</string>
     <string name="sort_order_year_desc">Jahr absteigend</string>
     <string name="sort_order_z_a">Absteigend</string>
-    <string name="speaker_disabled">Internal speaker playback is disabled</string>
+    <string name="speaker_disabled">Interner Lautsprecher ist deaktiviert</string>
     <string name="speech_not_supported">Tut uns leid! Dein Gerät unterstützt keine Spracheingabe</string>
     <string name="speech_prompt">Bibliothek durchsuchen</string>
     <string name="stack">Gestapelt</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Titel-Nummer</string>
     <string name="translate">Übersetzen</string>
     <string name="translate_community">Hilf uns, die App in deine Sprache zu übersetzen</string>
-    <string name="try_retro_music_premium">Retro Music Premium testen</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Teile dein Design mit Retro Music</string>
     <string name="unlabeled">Unbenannt</string>
@@ -570,5 +556,6 @@
     <string name="scan_complete">Scan abgeschlossen: %1$d Medienelemente gefunden.</string>
     <string name="pref_save_last_directory_summary">Stelle das zuletzt verwendete Verzeichnis nach dem wechsel der Ordneransicht wieder her</string>
     <string name="pref_save_last_directory_title">Letztes Verzeichnis speichern.</string>
-    <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="artist_separator_helper_text">Um mehrere Sänger hinzuzufügen, trenne mit: %1$s</string>
+    <string name="go_to_artist">Zum Interpreten gehen</string>
 </resources>

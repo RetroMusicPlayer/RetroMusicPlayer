@@ -109,7 +109,6 @@
     <string name="bug_report_success">Erro enviado com sucesso</string>
     <string name="bug_report_summary">Ocorreu um erro inesperado. Se continuar a acontecer limpe os dados da aplicação ou envie um email </string>
     <string name="bug_report_use_account">Enviar utilizando a conta GitHub</string>
-    <string name="buy_now">Comprar agora</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Cartão</string>
     <string name="card_color_style">Cartão colorido</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Informações copiadas para área de transferências.</string>
     <string name="could_not_create_playlist">Não foi possível criar a lista.</string>
     <string name="could_not_download_album_cover">"Não foi possível transferir a capa de álbum correspondente."</string>
-    <string name="could_not_restore_purchase">Não foi possível restaurar a compra.</string>
     <string name="could_not_scan_files">Não é possível verificar %d ficheiros.</string>
     <string name="create_action">Criar</string>
     <string name="create_new_backup">Criar</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Claramente branco</string>
     <string name="listeners_label">Ouvintes</string>
     <string name="listing_files">A listar ficheiros</string>
-    <string name="loading_products">A carregar produtos…</string>
     <string name="login">Iniciar sessão</string>
     <string name="lyrics">Letras</string>
     <string name="made_with_love">Feito com ❤️ na Índia</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Erro de permissões</string>
     <string name="message_backup_create_success">Cópia criada com sucesso</string>
     <string name="message_limit_tabs">Não mais do que 5 itens</string>
-    <string name="message_pro_feature">%s é uma funcionalidade Pro</string>
     <string name="message_restore_success">Restauro concluído com sucesso</string>
     <string name="message_updated">Actualizado</string>
     <string name="message_welcome"><![CDATA[Olá! <br>Bem-vindo a %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Sem letras</string>
     <string name="no_playing_queue">Sem músicas a tocar</string>
     <string name="no_playlists">Sem listas de reprodução</string>
-    <string name="no_purchase_found">Sem compras.</string>
     <string name="no_results">Sem resultados</string>
     <string name="no_songs">Sem músicas</string>
     <string name="no_search_results">Sem resultados de pesquisa</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Controlos de volume</string>
     <string name="pref_title_wallpaper_accent">Cor do papel de parede</string>
     <string name="pref_title_whitelist">Lista segura de música</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Tema escuro, temas A reproduzir, efeito carrossel e muito mais..</string>
     <string name="profile">Perfil</string>
-    <string name="purchase">Comprar</string>
     <string name="queue">Fila de reprodução</string>
     <string name="rate_app">Classificar a aplicação</string>
     <string name="rate_on_google_play_summary">Gosta desta aplicação? Deixe-nos saber na Google Play Store como torná-la ainda melhor</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Repor imagem do artista</string>
     <string name="restore">Restaurar</string>
     <string name="restore_message">Deseja restaurar a cópia?</string>
-    <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Reinicie a aplicação para utilizar todas as funcionalidades.</string>
-    <string name="restored_previous_purchases">Compras anteriores restauradas.</string>
-    <string name="restoring_purchase">A restaurar compras…</string>
-    <string name="billing_error">Ocorreu um erro ao comunicar com o Google Play Billing</string>
     <string name="retro_music_player">Música Retro</string>
-    <string name="retro_music_pro">Música Retro Pro</string>
     <string name="ringtone_summary">Esta aplicação necessita de permissão para aceder às definições para definir músicas como toques</string>
     <string name="ringtone_title">Toque (opcional)</string>
     <string name="permission_alarm_summary">A aplicação precisa de permissão para agendar alarmes exatos para definir os temporizadores de sono</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Número da faixa</string>
     <string name="translate">Traduzir</string>
     <string name="translate_community">Ajude-nos a traduzir a aplicação para o seu idioma</string>
-    <string name="try_retro_music_premium">Experimente Música Retro Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Partilhe o seu design com Música Retro</string>
     <string name="unlabeled">Sem etiqueta</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Ir para o artista</string>
 </resources>

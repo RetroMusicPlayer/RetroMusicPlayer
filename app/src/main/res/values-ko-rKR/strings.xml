@@ -107,7 +107,6 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it keeps crashing \"Clear app data\" or send an Email </string>
     <string name="bug_report_use_account">GitHub 계정을 사용하여 보내기</string>
-    <string name="buy_now">Buy now</string>
     <string name="cancel_current_timer">현재 타이머 취소</string>
     <string name="card">카드</string>
     <string name="card_color_style">Colored Card</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">\uc7ac\uc0dd\ubaa9\ub85d\uc744 \ub9cc\ub4e4 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.</string>
     <string name="could_not_download_album_cover">"\uc774 \uc568\ubc94\uacfc \uc77c\uce58\ud558\ub294 \uc568\ubc94 \ucee4\ubc84\ub97c \ub2e4\uc6b4\ub85c\ub4dc\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4."</string>
-    <string name="could_not_restore_purchase">구매내역을 복구할 수 없습니다.</string>
     <string name="could_not_scan_files">%d개의 파일을 스캔하지 못했습니다.</string>
     <string name="create_action">만들기</string>
     <string name="create_new_backup">만들기</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">클리어리 화이트</string>
     <string name="listeners_label">Listeners</string>
     <string name="listing_files">파일 목록 생성</string>
-    <string name="loading_products">제품을 불러오는 중...</string>
     <string name="login">Login</string>
     <string name="lyrics">가사</string>
     <string name="made_with_love">Made with ❤️ in India</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">Permission error</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">가사 없음</string>
     <string name="no_playing_queue">No songs playing</string>
     <string name="no_playlists">재생목록 없음</string>
-    <string name="no_purchase_found">구매내역을 찾을 수 없습니다.</string>
     <string name="no_results">결과 없음</string>
     <string name="no_songs">노래 없음</string>
     <string name="no_search_results">No search results</string>
@@ -418,10 +413,7 @@
     <string name="pref_title_toggle_volume">볼륨 조절</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">구매</string>
     <string name="queue">대기열</string>
     <string name="rate_app">앱 평가</string>
     <string name="rate_on_google_play_summary">앱이 마음에 드신다면 Google Play 스토어에 평가를 남겨주세요.</string>
@@ -443,12 +435,7 @@
     <string name="reset_artist_image">아티스트 이미지 초기화</string>
     <string name="restore">복원</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">지난 구매를 복원했습니다. 모든 기능을 사용하기 위해선 앱을 재시작해 주세요.</string>
-    <string name="restored_previous_purchases">이전 구매 내역을 복원했습니다.</string>
-    <string name="restoring_purchase">구매 복원 중...</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">RetroMusic Pro 구매</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -533,7 +520,6 @@
     <string name="track_list">트랙 번호</string>
     <string name="translate">번역</string>
     <string name="translate_community">Help us translate the app to your language</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
     <string name="unlabeled">Unlabeled</string>
@@ -569,4 +555,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">해당 아티스트로 이동</string>
 </resources>

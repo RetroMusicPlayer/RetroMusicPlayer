@@ -113,7 +113,6 @@
     <string name="bug_report_success">Отчёт об ошибке создан</string>
     <string name="bug_report_summary">Произошла непредвиденная ошибка. Приносим извинения за доставленные неудобства. Если проблемы не исчезают, очистите данные приложения или свяжитесь с нами по электронной почте </string>
     <string name="bug_report_use_account">Отправить с помощью учётной записи GitHub</string>
-    <string name="buy_now">Купить сейчас</string>
     <string name="cancel_current_timer">Отмена</string>
     <string name="card">Карточка</string>
     <string name="card_color_style">Цветная карточка</string>
@@ -139,7 +138,6 @@
     <string name="copied_device_info_to_clipboard">Скопировать информацию об устройстве в буфер обмена.</string>
     <string name="could_not_create_playlist">Не удалось создать плейлист.</string>
     <string name="could_not_download_album_cover">"Не удалось загрузить подходящую обложку для альбома."</string>
-    <string name="could_not_restore_purchase">Не удалось восстановить покупку.</string>
     <string name="could_not_scan_files">Не удалось просканировать %d файлов.</string>
     <string name="create_action">Создать</string>
     <string name="create_new_backup">Создать</string>
@@ -244,7 +242,6 @@
     <string name="light_theme_name">Светлое</string>
     <string name="listeners_label">Слушатели</string>
     <string name="listing_files">Список файлов</string>
-    <string name="loading_products">Загрузка товаров…</string>
     <string name="login">Войти</string>
     <string name="lyrics">Текст песни</string>
     <string name="made_with_love">Сделано с ❤️ в Индии</string>
@@ -253,7 +250,6 @@
     <string name="md_storage_perm_error">Ошибка доступа</string>
     <string name="message_backup_create_success">Резервная копия успешно создана.</string>
     <string name="message_limit_tabs">Должно быть не более 5 элементов</string>
-    <string name="message_pro_feature">%s является Pro функцией.</string>
     <string name="message_restore_success">Восстановление успешно завершено.</string>
     <string name="message_updated">Обновлено</string>
     <string name="message_welcome"><![CDATA[Здравствуйте! <br>Добро пожаловать в %s]]></string>
@@ -273,7 +269,6 @@
     <string name="no_lyrics_found">Текст не найден</string>
     <string name="no_playing_queue">Нет проигрываемых треков</string>
     <string name="no_playlists">У вас нет плейлистов</string>
-    <string name="no_purchase_found">Покупки отсутствуют.</string>
     <string name="no_results">Нет результатов</string>
     <string name="no_songs">У вас нет треков</string>
     <string name="no_search_results">Нет результатов поиска</string>
@@ -424,10 +419,7 @@
     <string name="pref_title_toggle_volume">Регулировка громкости</string>
     <string name="pref_title_wallpaper_accent">Цвет акцента обоев</string>
     <string name="pref_title_whitelist">Музыка из белого списка</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Чёрное оформление, больше стилей экрана воспроизведения, эффект карусели и многое другое..</string>
     <string name="profile">Профиль</string>
-    <string name="purchase">Купить</string>
     <string name="queue">Очередь воспроизведения</string>
     <string name="rate_app">Оценить приложение</string>
     <string name="rate_on_google_play_summary">Понравилось приложение? Напишите нам в Google Play Store о том, как мы можем сделать его ещё лучше</string>
@@ -449,12 +441,7 @@
     <string name="reset_artist_image">Сбросить изображение исполнителя</string>
     <string name="restore">Восстановить</string>
     <string name="restore_message">Вы уверены, что хотите восстановить резервную копию?</string>
-    <string name="restored_previous_purchase_please_restart">Предыдущая покупка восстановлена. Перезагрузите приложение, чтобы воспользоваться всеми функциями.</string>
-    <string name="restored_previous_purchases">Предыдущие покупки восстановлены.</string>
-    <string name="restoring_purchase">Восстановление покупки…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Приложению требуется разрешение на доступ к изменению настроек вашего устройства, чтобы устанавливать музыку в качестве мелодии звонка</string>
     <string name="ringtone_title">Мелодия звонка (необязательно)</string>
     <string name="permission_alarm_summary">Приложению нужно разрешение на установку будильников, чтобы устанавливать таймеры сна</string>
@@ -539,7 +526,6 @@
     <string name="track_list">Номер трека</string>
     <string name="translate">Помочь с переводом</string>
     <string name="translate_community">Помогите нам перевести приложение на ваш язык</string>
-    <string name="try_retro_music_premium">Попробуйте Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Поделитесь своим дизайном Retro Music</string>
     <string name="unlabeled">Не показывать</string>
@@ -575,4 +561,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Перейти к исполнителю</string>
 </resources>

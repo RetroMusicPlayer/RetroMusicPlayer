@@ -119,7 +119,6 @@
     <string name="bug_report_success">تم الإبلاغ عن الأخطاء</string>
     <string name="bug_report_summary">حصل خطأ غير متوقع. نأسف لذالك, اذا تكرر معك الخطأ \"قم بمسح بيانات التطبيق\"او ارسل ايميل</string>
     <string name="bug_report_use_account">ارسال بأستخدام حساب چيتهب</string>
-    <string name="buy_now">اشتري الآن</string>
     <string name="cancel_current_timer">إلغاء</string>
     <string name="card">بطاقة</string>
     <string name="card_color_style">بطاقة ملونة</string>
@@ -145,7 +144,6 @@
     <string name="copied_device_info_to_clipboard">تم نسخ معلومات الجهاز للحافظة.</string>
     <string name="could_not_create_playlist">تعذّر\u2019t إنشاء قائمة.</string>
     <string name="could_not_download_album_cover">"تعذّر تحميل\u2019t غلاف الألبوم المطابق."</string>
-    <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
     <string name="create_action">إنشاء</string>
     <string name="create_new_backup">إنشاء</string>
@@ -251,7 +249,6 @@
     <string name="light_theme_name">أبيض صافي</string>
     <string name="listeners_label">المستمعون</string>
     <string name="listing_files">قائمة الملفات</string>
-    <string name="loading_products">تحميل المنتجات...</string>
     <string name="login">تسجيل الدخول</string>
     <string name="lyrics">كلمات الاغنية</string>
     <string name="made_with_love">صنع ب❤️في الهند</string>
@@ -260,7 +257,6 @@
     <string name="md_storage_perm_error">خطأ في الصلاحيات</string>
     <string name="message_backup_create_success">تم إنشاء النسخة الاحتياطية بنجاح.</string>
     <string name="message_limit_tabs">ما لا يزيد على 5 عناصر</string>
-    <string name="message_pro_feature">%s هي ميزة محترفة.</string>
     <string name="message_restore_success">أكملت الاستعادة بنجاح.</string>
     <string name="message_updated">محدث</string>
     <string name="message_welcome"><![CDATA[مرحبا يا هذا! <br>مرحبا بك في %s]]></string>
@@ -280,7 +276,6 @@
     <string name="no_lyrics_found">لم يتم العثور على كلمات للاغنية</string>
     <string name="no_playing_queue">لا توجد أغاني تشتغل</string>
     <string name="no_playlists">لا يوجد قوائم تشغيل</string>
-    <string name="no_purchase_found">لم يتم العثور على عملية شراء.</string>
     <string name="no_results">لا يوجد نتائج</string>
     <string name="no_songs">لا يوجد أغاني</string>
     <string name="no_search_results">لم يتم العثور على نتائج للبحث</string>
@@ -431,10 +426,7 @@
     <string name="pref_title_toggle_volume">التحكم بالصوت</string>
     <string name="pref_title_wallpaper_accent">لون لكنة الخلفية</string>
     <string name="pref_title_whitelist">موسيقى القائمة البيضاء</string>
-    <string name="pro">الكامل</string>
-    <string name="pro_summary">السمة السوداء, تشغيل الآن السمات, تأثير التكدس وأكثر..</string>
     <string name="profile">الملف الشخصي</string>
-    <string name="purchase">شراء</string>
     <string name="queue">تسلسل</string>
     <string name="rate_app">تقييم التطبيق</string>
     <string name="rate_on_google_play_summary">أحببت هذا التطبيق؟ أخبرنا في متجر Google Play كيف يمكننا تحسينه</string>
@@ -456,12 +448,7 @@
     <string name="reset_artist_image">اعادة ضبط صور الالبومات</string>
     <string name="restore">استرجاع</string>
     <string name="restore_message">هل تريد استعادة النسخة الاحتياطية؟</string>
-    <string name="restored_previous_purchase_please_restart">تم استرداد عملية الشراء السابقة. الرجاء اعادة تشغيل التطبيق الاستمتاع بكافة المميزات.</string>
-    <string name="restored_previous_purchases">تم </string>
-    <string name="restoring_purchase">استرداد عملية الشراء...</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
-    <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
     <string name="ringtone_summary">يحتاج التطبيق إلى إذن للوصول إلى إعدادات جهازك من أجل تعيين الموسيقى كنغمة رنين</string>
     <string name="ringtone_title">نغمة الرنين (إختياري)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -546,7 +533,6 @@
     <string name="track_list">رقم المسار</string>
     <string name="translate">ترجمة</string>
     <string name="translate_community">ساعدها لترجمة التطبيق الى لغتك</string>
-    <string name="try_retro_music_premium">جرب ريترو الموسيقى الإصدار المميز</string>
     <string name="twitter_page">تويتر</string>
     <string name="twitter_page_summary">شارك تصميمك مع ريترو ميوزك</string>
     <string name="unlabeled">غير معنون</string>
@@ -582,4 +568,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">انتقل إلى الفنان</string>
 </resources>

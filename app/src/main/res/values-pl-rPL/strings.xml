@@ -113,7 +113,6 @@
     <string name="bug_report_success">Zgłoszenie błędu zakończone powodzeniem</string>
     <string name="bug_report_summary">Wystąpił nieoczekiwany błąd. Przepraszamy za wystąpienie tego problemu. Jeśli nie możesz korzystać z aplikacji – wyczyść dane aplikacji lub wyślij nam e-maila </string>
     <string name="bug_report_use_account">Wyślij używając konta serwisu GitHub</string>
-    <string name="buy_now">Kup teraz</string>
     <string name="cancel_current_timer">Anuluj</string>
     <string name="card">Karta</string>
     <string name="card_color_style">Kolorowa Karta</string>
@@ -139,7 +138,6 @@
     <string name="copied_device_info_to_clipboard">Skopiowano informacje o urządzeniu do schowka</string>
     <string name="could_not_create_playlist">Nie udało się utworzyć playlisty.</string>
     <string name="could_not_download_album_cover">"Nie udało się pobrać pasującej okładki albumu"</string>
-    <string name="could_not_restore_purchase">Nie udało się przywrócić zakupu.</string>
     <string name="could_not_scan_files">Nie udało się przeskanować %d plików.</string>
     <string name="create_action">Utwórz</string>
     <string name="create_new_backup">Utwórz</string>
@@ -244,7 +242,6 @@
     <string name="light_theme_name">Jasny</string>
     <string name="listeners_label">Słuchacze</string>
     <string name="listing_files">Wyświetlanie plików</string>
-    <string name="loading_products">Ładowanie...</string>
     <string name="login">Zaloguj się</string>
     <string name="lyrics">Tekst utworu</string>
     <string name="made_with_love">Stworzone z ❤️ w Indiach</string>
@@ -253,7 +250,6 @@
     <string name="md_storage_perm_error">Błąd uprawnień</string>
     <string name="message_backup_create_success">Kopia zapasowa utworzona pomyślnie.</string>
     <string name="message_limit_tabs">Nie więcej niż 5 elementów</string>
-    <string name="message_pro_feature">%s jest funkcją wersji Pro.</string>
     <string name="message_restore_success">Przywracanie zakończone pomyślnie.</string>
     <string name="message_updated">Zaktualizowano</string>
     <string name="message_welcome"><![CDATA[Witaj! <br>Zapraszamy do %s]]></string>
@@ -273,7 +269,6 @@
     <string name="no_lyrics_found">Nie znaleziono tekstu utworu</string>
     <string name="no_playing_queue">Brak odtwarzanych utworów</string>
     <string name="no_playlists">Brak playlist</string>
-    <string name="no_purchase_found">Nie znaleziono zakupu.</string>
     <string name="no_results">Brak wyników.</string>
     <string name="no_songs">Brak utworów</string>
     <string name="no_search_results">Nie znaleziono wyników</string>
@@ -424,10 +419,7 @@
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
     <string name="pref_title_wallpaper_accent">Kolor akcentu z tapety</string>
     <string name="pref_title_whitelist">Muzyka z listy dozwolonych</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Czarny motyw, motywy teraz odtwarzanych, efekt karuzeli i wiele więcej..</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Kup</string>
     <string name="queue">Kolejka odtwarzania</string>
     <string name="rate_app">Oceń aplikację</string>
     <string name="rate_on_google_play_summary">Uwielbiasz tą aplikację? Daj nam znać w sklepie Google Play co o niej sądzisz i co powinniśmy poprawić.</string>
@@ -449,12 +441,7 @@
     <string name="reset_artist_image">Zresetuj grafikę wykonawcy</string>
     <string name="restore">Przywróć</string>
     <string name="restore_message">Czy chcesz przywrócić kopię zapasową?</string>
-    <string name="restored_previous_purchase_please_restart">Przywrócono poprzedni zakup. Zrestartuj aplikacje aby korzystać z wszystkich funkcji.</string>
-    <string name="restored_previous_purchases">Przywrócono poprzednie zakupy.</string>
-    <string name="restoring_purchase">Przywracanie zakupu...</string>
-    <string name="billing_error">Wystąpił błąd podczas komunikacji z Google Play billing</string>
     <string name="retro_music_player">Odtwarzacz Retro Music</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Potrzebujemy uprawnień do ustawień Twojego urządzenia, aby ustawić utwór jako dzwonek</string>
     <string name="ringtone_title">Dzwonek (opcjonalny)</string>
     <string name="permission_alarm_summary">Aplikacja potrzebuje uprawnień do planowania alarmów, aby ustawiać wyłączniki czasowe</string>
@@ -539,7 +526,6 @@
     <string name="track_list">Numer utworu</string>
     <string name="translate">Przetłumacz</string>
     <string name="translate_community">Pomóż nam przetłumaczyć aplikację na swój język</string>
-    <string name="try_retro_music_premium">Wypróbuj Retro Music Premium</string>
     <string name="twitter_page">Strona na Twitterze</string>
     <string name="twitter_page_summary">Podziel się swoim designem z Retro Music</string>
     <string name="unlabeled">Niepodpisane</string>
@@ -575,4 +561,5 @@
     <string name="pref_save_last_directory_summary">Podczas przełączania na widok folderu przywróć ostatnio używany katalog</string>
     <string name="pref_save_last_directory_title">Zapisz ostatni katalog</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Przejdź do wykonawcy</string>
 </resources>

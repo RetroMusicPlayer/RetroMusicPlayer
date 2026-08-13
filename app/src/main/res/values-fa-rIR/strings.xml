@@ -109,7 +109,6 @@
     <string name="bug_report_success">گزارش اشکال موفقیت آمیز بود</string>
     <string name="bug_report_summary">یک مشکل پیش بینی نشده رخ داد. متأسفیم که شما این باگ را پیدا کردید، اگر برنامه به متوقف شدن ادامه داد لطفاً برنامه را کلیر دیتا کنید یا برای ما ایمیل بفرستید </string>
     <string name="bug_report_use_account">با استفاده از حساب GitHub ارسال کنید</string>
-    <string name="buy_now">اکنون بخرید</string>
     <string name="cancel_current_timer">انصراف</string>
     <string name="card">کارت</string>
     <string name="card_color_style">برگه ی رنگارنگ</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">اطلاعات دستگاه در کلیپ بورد کپی شد.</string>
     <string name="could_not_create_playlist">نمیتوان پلی لیست ساخت.</string>
     <string name="could_not_download_album_cover">"\"نتونستم عکسی برای این آلبوم پیدا کنم.\"."</string>
-    <string name="could_not_restore_purchase">خرید قابل بازیابی نیست.</string>
     <string name="could_not_scan_files">%d فایل را نمیتوان اسکن کرد.</string>
     <string name="create_action">ایجاد کردن</string>
     <string name="create_new_backup">ایجاد کردن</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">کاملا سفید</string>
     <string name="listeners_label">شنوندگان</string>
     <string name="listing_files">لیست کردن پوشه ها</string>
-    <string name="loading_products">در حال بارگیری محصولات…</string>
     <string name="login">ورود</string>
     <string name="lyrics">متن ترانه</string>
     <string name="made_with_love">ساخته شده با ❤️ در هند</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">خطای دسترسی</string>
     <string name="message_backup_create_success">پشتیبان گیری با موفقیت انجام شد.</string>
     <string name="message_limit_tabs">بیشتر از ۵ مورد نیست</string>
-    <string name="message_pro_feature">%s یک ویژگی نسخه حرفه‌ای برنامه است.</string>
     <string name="message_restore_success">بازیابی با موفقیت انجام شد.</string>
     <string name="message_updated">به روز شد</string>
     <string name="message_welcome"><![CDATA[سلام! <br> به %s خوش آمدید]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">متنی یافت نشد</string>
     <string name="no_playing_queue">آهنگی پخش نمی‌شود</string>
     <string name="no_playlists">شما هیچ صفحه پخشی ندارید</string>
-    <string name="no_purchase_found">خریدها یافت نشد</string>
     <string name="no_results">بدون نتیجه</string>
     <string name="no_songs">شما هیچ آهنگی ندارید</string>
     <string name="no_search_results">نتیجه جستجو یافت نشد</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">کنترل صدا</string>
     <string name="pref_title_wallpaper_accent">رنگ تاکیدی کاغذ دیواری</string>
     <string name="pref_title_whitelist">لیست سفید موسیقی</string>
-    <string name="pro">حرفه‌ای</string>
-    <string name="pro_summary">تم سیاه، تم های در حال پخش، جلوه چرخ فلک و موارد دیگر..</string>
     <string name="profile">نمایه</string>
-    <string name="purchase">خرید</string>
     <string name="queue">صف درحال پخش</string>
     <string name="rate_app">به برنامه امتیاز دهید</string>
     <string name="rate_on_google_play_summary">این برنامه را دوست دارید؟ در فروشگاه گوگل پلی به ما اطلاع دهید که چگونه می‌توانیم آن را بهتر کنیم</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">تنظیم مجدد تصویر هنرمند</string>
     <string name="restore">بازیابی</string>
     <string name="restore_message">آیا می خواهید نسخه پشتیبان را بازیابی کنید؟</string>
-    <string name="restored_previous_purchase_please_restart">خرید قبلی بازیابی شد، لطفا برای استفاده از تمام ویژگی ها ، برنامه را دوباره راه اندازی کنید.</string>
-    <string name="restored_previous_purchases">خریدهای قبلی بازیابی شد.</string>
-    <string name="restoring_purchase">در حال برگرداندن پول…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">پخش‌کننده موسیقی Retro</string>
-    <string name="retro_music_pro">پخش‌کننده موسیقی Retro نسخه ویژه</string>
     <string name="ringtone_summary">برنامه برای دسترسی به تنظیمات دستگاه شما برای تنظیم موسیقی به عنوان آهنگ زنگ نیاز به مجوز دارد</string>
     <string name="ringtone_title">آهنگ زنگ (اختیاری)</string>
     <string name="permission_alarm_summary">این برنامه برای تنظیم تایمر خواب نیازمند دسترسی به برنامه‌ریزی آلارم دارد</string>
@@ -535,7 +522,6 @@
     <string name="track_list">شماره  آهنگ</string>
     <string name="translate">ترجمه کردن</string>
     <string name="translate_community">به ما کمک کنید تا برنامه را به زبان شما ترجمه کنیم</string>
-    <string name="try_retro_music_premium">نسخه ویژه موزیک پلیر Retro را امتحان کنید</string>
     <string name="twitter_page">توییتر</string>
     <string name="twitter_page_summary">طرح خود را با موسیقی Retro به اشتراک بگذارید</string>
     <string name="unlabeled">بدون برچسب</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">هنگام تغییر به نمای پوشه، آخرین فهرست استفاده شده را بازیابی کنید</string>
     <string name="pref_save_last_directory_title">ذخیره آخرین فهرست</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">رفتن به صفحه هنرمند</string>
 </resources>

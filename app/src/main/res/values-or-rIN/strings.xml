@@ -109,7 +109,6 @@
     <string name="bug_report_success">ବଗ୍ ରିପୋର୍ଟ ସଫଳ</string>
     <string name="bug_report_summary">ଏକ ଅପ୍ରତ୍ୟାଶିତ ତ୍ରୁଟି ଘଟିଛି। ଆପଣ ଏହି ବଗ୍ ପାଇଥିବାରୁ ଦୁଃଖିତ, ଯଦି ଏହା କ୍ରାସ୍ ହେଉଛି \"ଆପ୍ ଡାଟା କ୍ଲିଅର୍ କରନ୍ତୁ\" କିମ୍ବା ଏକ ଇମେଲ୍ ପଠାନ୍ତୁ</string>
     <string name="bug_report_use_account">ଗିଟ୍‌ହବ୍ ଆକାଉଣ୍ଟ୍ ବ୍ୟବହାର କରି ପଠାନ୍ତୁ</string>
-    <string name="buy_now">ଏବେ କିଣନ୍ତୁ</string>
     <string name="cancel_current_timer">ବାତିଲ କରନ୍ତୁ</string>
     <string name="card">କାର୍ଡ</string>
     <string name="card_color_style">ରଙ୍ଗୀନ କାର୍ଡ</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">ଡିଭାଇସ୍ ସୂଚନା କ୍ଲିପବୋର୍ଡରେ କପି କରାଗଲା.</string>
     <string name="could_not_create_playlist">ଚାଳନାତାଲିକା ସୃଷ୍ଟି କରିହେଲାନାହିଁ।</string>
     <string name="could_not_download_album_cover">"ମେଳ ଖାଉଥିବା ଆଲବମ୍ କଭର ଡାଉନଲୋଡ୍ କରିହେଲାନାହିଁ."</string>
-    <string name="could_not_restore_purchase">କ୍ରୟ ରିଷ୍ଟୋର୍ କରିହେଲା ନାହିଁ।</string>
     <string name="could_not_scan_files">%d ଫାଇଲ୍ ସ୍କାନ୍ କରିହେଲା ନାହିଁ।</string>
     <string name="create_action">ସୃଷ୍ଟି କରନ୍ତୁ</string>
     <string name="create_new_backup">ସୃଷ୍ଟି କରନ୍ତୁ</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">ସ୍ପଷ୍ଟ ଭାବରେ ଧଳା</string>
     <string name="listeners_label">ଶ୍ରୋତାମାନେ</string>
     <string name="listing_files">ଫାଇଲ୍ ତାଲିକାଭୁକ୍ତ କରୁଛି</string>
-    <string name="loading_products">ଉତ୍ପାଦ ଲୋଡ୍ ହେଉଛି…</string>
     <string name="login">ଲଗ୍ ଇନ୍ କରନ୍ତୁ</string>
     <string name="lyrics">ଗୀତ</string>
     <string name="made_with_love">ଭାରତରେ ❤️ ସହିତ ନିର୍ମିତ</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">ଅନୁମତି ତ୍ରୁଟି</string>
     <string name="message_backup_create_success">ବ୍ୟାକଅପ୍ ସଫଳତାର ସହ ସୃଷ୍ଟି କରାଗଲା।</string>
     <string name="message_limit_tabs">୫ଟିରୁ ଅଧିକ ଆଇଟମ୍ ନୁହେଁ</string>
-    <string name="message_pro_feature">%s ଏକ ପ୍ରୋ ଫିଚର୍।</string>
     <string name="message_restore_success">ରିଷ୍ଟୋର୍ ସଫଳତାର ସହ ସମ୍ପୂର୍ଣ୍ଣ ହେଲା।</string>
     <string name="message_updated">ଅପଡେଟ୍ ହୋଇଛି</string>
     <string name="message_welcome"><![CDATA[ନମସ୍କାର! <br> %s କୁ ସ୍ୱାଗତ।]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">କୌଣସି ଗୀତ ମିଳିଲା ନାହିଁ</string>
     <string name="no_playing_queue">କୌଣସି ଗୀତ ବାଜୁନାହିଁ</string>
     <string name="no_playlists">ଆପଣଙ୍କର କୌଣସି ଚାଳନାତାଲିକା ନାହିଁ</string>
-    <string name="no_purchase_found">କୌଣସି କ୍ରୟ ମିଳିଲା ନାହିଁ।</string>
     <string name="no_results">କୌଣସି ଫଳାଫଳ ନାହିଁ</string>
     <string name="no_songs">ଆପଣଙ୍କର କୌଣସି ଗୀତ ନାହିଁ</string>
     <string name="no_search_results">କୌଣସି ସନ୍ଧାନ ଫଳାଫଳ ନାହିଁ</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">ଭଲ୍ୟୁମ୍ ନିୟନ୍ତ୍ରଣ</string>
     <string name="pref_title_wallpaper_accent">ୱାଲପେପର୍ ଆକ୍ସେଣ୍ଟ ରଙ୍ଗ</string>
     <string name="pref_title_whitelist">ମ୍ୟୁଜିକ୍ ହ୍ୱାଇଟଲିଷ୍ଟ୍ କରନ୍ତୁ</string>
-    <string name="pro">ପ୍ରୋ</string>
-    <string name="pro_summary">କଳା ଥିମ୍, ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ଥିମ୍, କାରୋସେଲ ଇଫେକ୍ଟ ଏବଂ ଅଧିକ..</string>
     <string name="profile">ପ୍ରୋଫାଇଲ୍</string>
-    <string name="purchase">କ୍ରୟ</string>
     <string name="queue">ପ୍ଲେ କ୍ୟୁ</string>
     <string name="rate_app">ଆପ୍‌କୁ ରେଟ୍ କରନ୍ତୁ</string>
     <string name="rate_on_google_play_summary">ଏହି ଆପ୍‌କୁ ଭଲ ପାଉଛନ୍ତି କି? ଗୁଗଲ୍ ପ୍ଲେ ଷ୍ଟୋର୍‌ରେ ଆମକୁ ଜଣାନ୍ତୁ ଆମେ ଏହାକୁ କିପରି ଆହୁରି ଭଲ କରିପାରିବୁ</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">କଳାକାର ଛବି ରିସେଟ୍ କରନ୍ତୁ</string>
     <string name="restore">ରିଷ୍ଟୋର୍</string>
     <string name="restore_message">ଆପଣ ବ୍ୟାକଅପ୍ ରିଷ୍ଟୋର୍ କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?</string>
-    <string name="restored_previous_purchase_please_restart">ପୂର୍ବ କ୍ରୟ ରିଷ୍ଟୋର୍ କରାଗଲା। ସମସ୍ତ ଫିଚର୍ ବ୍ୟବହାର କରିବାକୁ ଦୟାକରି ଆପ୍ ପୁନଃଆରମ୍ଭ କରନ୍ତୁ।</string>
-    <string name="restored_previous_purchases">ପୂର୍ବ କ୍ରୟଗୁଡ଼ିକ ରିଷ୍ଟୋର୍ କରାଗଲା।</string>
-    <string name="restoring_purchase">କ୍ରୟ ରିଷ୍ଟୋର୍ କରୁଛି…</string>
-    <string name="billing_error">ଗୁଗଲ୍ ପ୍ଲେ ବିଲିଂ ସହ ଯୋଗାଯୋଗ କରିବା ସମୟରେ ଏକ ତ୍ରୁଟି ଘଟିଲା</string>
     <string name="retro_music_player">ରେଟ୍ରୋ ମ୍ୟୁଜିକ୍ ପ୍ଲେୟାର୍</string>
-    <string name="retro_music_pro">ରେଟ୍ରୋ ମ୍ୟୁଜିକ୍ ପ୍ରୋ</string>
     <string name="ringtone_summary">ମ୍ୟୁଜିକ୍‌କୁ ରିଙ୍ଗଟୋନ୍ ଭାବରେ ସେଟ୍ କରିବା ପାଇଁ ଆପ୍‌କୁ ଆପଣଙ୍କ ଡିଭାଇସ୍ ସେଟିଂସମୂହ ଆକ୍ସେସ୍ କରିବାର ଅନୁମତି ଆବଶ୍ୟକ</string>
     <string name="ringtone_title">ରିଙ୍ଗଟୋନ୍ (ବୈକଳ୍ପିକ)</string>
     <string name="permission_alarm_summary">ସ୍ଲିପ୍ ଟାଇମର୍ ସେଟ୍ କରିବା ପାଇଁ ଆପ୍‌କୁ ସଠିକ୍ ଆଲାର୍ମ ସିଡ୍ୟୁଲ୍ କରିବାର ଅନୁମତି ଆବଶ୍ୟକ</string>
@@ -535,7 +522,6 @@
     <string name="track_list">ଟ୍ରାକ୍ ସଂଖ୍ୟା</string>
     <string name="translate">ଅନୁବାଦ କରନ୍ତୁ</string>
     <string name="translate_community">ଆପ୍‌କୁ ଆପଣଙ୍କ ଭାଷାରେ ଅନୁବାଦ କରିବାରେ ଆମକୁ ସାହାଯ୍ୟ କରନ୍ତୁ</string>
-    <string name="try_retro_music_premium">ରେଟ୍ରୋ ମ୍ୟୁଜିକ୍ ପ୍ରିମିୟମ୍ ଚେଷ୍ଟା କରନ୍ତୁ</string>
     <string name="twitter_page">ଟ୍ୱିଟର୍</string>
     <string name="twitter_page_summary">ଆପଣଙ୍କ ଡିଜାଇନ୍ ରେଟ୍ରୋ ମ୍ୟୁଜିକ୍ ସହ ସେୟାର କରନ୍ତୁ</string>
     <string name="unlabeled">ବିନା ଲେବଲ୍‌ରେ</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">ଫୋଲ୍ଡର୍ ଭ୍ୟୁକୁ ଯିବାବେଳେ, ଶେଷ ବ୍ୟବହୃତ ଡିରେକ୍ଟୋରୀ ରିଷ୍ଟୋର୍ କରନ୍ତୁ</string>
     <string name="pref_save_last_directory_title">ଶେଷ ଡିରେକ୍ଟୋରୀ ସଞ୍ଚୟ କରନ୍ତୁ</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">କଳାକାରଙ୍କ ନିକଟକୁ ଯାଆନ୍ତୁ</string>
 </resources>

@@ -111,7 +111,6 @@
     <string name="bug_report_success">Ziņošana par kļūdu vaikta veiksmīgi</string>
     <string name="bug_report_summary">Notika neparadzēta kļūda. Žēl, ka Jūs saskārāties ar šo problēmu, ja lietotne turpina avarēt, notīriet lietotnes datus vai sūtiet e-pasta vēstuli </string>
     <string name="bug_report_use_account">Sūtīt, izmantojot GitHub kontu</string>
-    <string name="buy_now">Pirkt tagad</string>
     <string name="cancel_current_timer">Atcelt</string>
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
@@ -137,7 +136,6 @@
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="could_not_create_playlist">Neizdevās izveidot atskaņošanas sarakstu.</string>
     <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
-    <string name="could_not_restore_purchase">Nevarēja atjaunot pirkumu.</string>
     <string name="could_not_scan_files">Could not scan %d files.</string>
     <string name="create_action">Izveidot</string>
     <string name="create_new_backup">Izveidot</string>
@@ -242,7 +240,6 @@
     <string name="light_theme_name">Acīmredzot balts</string>
     <string name="listeners_label">Klausītāji</string>
     <string name="listing_files">Listing files</string>
-    <string name="loading_products">Loading products…</string>
     <string name="login">Login</string>
     <string name="lyrics">Vārdi</string>
     <string name="made_with_love">Radīts Indijā ar ❤️</string>
@@ -251,7 +248,6 @@
     <string name="md_storage_perm_error">Atļauju kļūda</string>
     <string name="message_backup_create_success">Dublējums izveidots veiksmīgi.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s ir Pro funkcija.</string>
     <string name="message_restore_success">Atjaunošana veikta veiksmīgi.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
@@ -271,7 +267,6 @@
     <string name="no_lyrics_found">Dziesmas vārdi nav atrasti</string>
     <string name="no_playing_queue">Šobrīd nekas netiek atskaņots</string>
     <string name="no_playlists">You have no playlists</string>
-    <string name="no_purchase_found">No purchase found.</string>
     <string name="no_results">Nav rezultātu</string>
     <string name="no_songs">Jums nav mūzikas</string>
     <string name="no_search_results">No search results</string>
@@ -422,10 +417,7 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">Iegādāties</string>
     <string name="queue">Atskaņošanas rinda</string>
     <string name="rate_app">Novērtēt lietotni</string>
     <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
@@ -447,12 +439,7 @@
     <string name="reset_artist_image">Atiestatīt izpildītāja attēlu</string>
     <string name="restore">Atjaunot</string>
     <string name="restore_message">Vai vēlaties atjaunot no rezerves kopijas?</string>
-    <string name="restored_previous_purchase_please_restart">Iepriekšējais pirkums atjaunots. Lūdzu, restartējiet lietotni, lai varētu lietot visas funkcijas.</string>
-    <string name="restored_previous_purchases">Iepriekšējais pirkums atjaunots veiksmīgi.</string>
-    <string name="restoring_purchase">Pirkums tiek atjaunots…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -537,7 +524,6 @@
     <string name="track_list">Dziesmas numurs</string>
     <string name="translate">Tulkot</string>
     <string name="translate_community">Palīdziet mums pārtulkot lietotni Jūsu valodā</string>
-    <string name="try_retro_music_premium">Izmēģināt Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Kopīgot Jūsu dizainu ar Retro Music</string>
     <string name="unlabeled">Unlabeled</string>
@@ -573,4 +559,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Doties uz izpildītāju</string>
 </resources>

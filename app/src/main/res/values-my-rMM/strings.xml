@@ -107,7 +107,6 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">မသိထားတဲ့ Error တစ်ခုတက်ခဲ့တယ်ဆိုပါစို့။ ဆက်ပြီး Crash ဖြစ်နေတယ်ဆိုရင် \"Clear App Data\" လုပ်ပါ (ဒါမှမဟုတ်) အီးမေးလ်ပို့ပါ။</string>
     <string name="bug_report_use_account">GitHub အကောင့်ဖြင့်ပို့မည်</string>
-    <string name="buy_now">ယခုဝယ်မည်</string>
     <string name="cancel_current_timer">ပယ်ဖျက်မည်</string>
     <string name="card">ကတ်</string>
     <string name="card_color_style">အရောင်ပါသောကတ်</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">Device အချက်အလက်အား Clipboard သို့ ကော်ပီကူးခဲ့ပြီး</string>
     <string name="could_not_create_playlist">Playlist ဖန်တီး၍မရပါ</string>
     <string name="could_not_download_album_cover">"ကိုက်ညီသော Album Cover ကို Download မလုပ်နိုင်ပါ"</string>
-    <string name="could_not_restore_purchase">ဝယ်ယူမှုကိုပြန်မရယူနိုင်ပါ</string>
     <string name="could_not_scan_files">ဖိုင် %d ခုကိုစကန်မဖတ်နိုင်ပါ</string>
     <string name="create_action">ဖန်တီးမည်</string>
     <string name="create_new_backup">ဖန်တီးမည်</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">အဖြူရောင်သက်သက်</string>
     <string name="listeners_label">နားဆင်သူများ</string>
     <string name="listing_files">ဖိုင်ပြန်စီနေသည်...</string>
-    <string name="loading_products">ခဏစောင့်ပါ...</string>
     <string name="login">Login</string>
     <string name="lyrics">သီချင်းစာသား</string>
     <string name="made_with_love">အိန္ဒိယနိုင်ငံတွင် ❤️ များဖြင့် ဖန်တီးသည်</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">Storage ခွင့်ပြုချက် error</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">သီချင်းစာသားရှာမတွေ့ပါ</string>
     <string name="no_playing_queue">သီချင်းတစ်ပုဒ်မှ play မထားပါ</string>
     <string name="no_playlists">Playlist တစ်ခုမှမရှိပါ</string>
-    <string name="no_purchase_found">ဝယ်ယူထားမှုမရှိပါ</string>
     <string name="no_results">ရှာမတွေ့ပါ</string>
     <string name="no_songs">သီချင်းတစ်ပုဒ်မှမရှိပါ</string>
     <string name="no_search_results">No search results</string>
@@ -418,10 +413,7 @@
     <string name="pref_title_toggle_volume">အသံထိန်းချုပ်မှု</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">ဝယ်ယူမည်</string>
     <string name="queue">နားထောင်နေသည့်စာရင်း</string>
     <string name="rate_app">ဤ app ကို star ပေးမည်</string>
     <string name="rate_on_google_play_summary">App ကိုကြိုက်ပါသလား။ ယခုထက်ပိုကောင်းမွန်အောင်ဘယ်လိုလုပ်ရမလဲဆိုတာ ကျွန်တော်တို့ကို Google Play Store မှာပြောပြပေးပါ။</string>
@@ -443,12 +435,7 @@
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">ပြန်လည်ရယူမည်</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">ယခင်ဝယ်ယူမှုကို ပြန်လည်ရယူပြီးပါပြီ။ Feature အားလုံးအလုပ်လုပ်ရန် app မှထွက်ပြီးပြန်ဝင်ပါ။</string>
-    <string name="restored_previous_purchases">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူပြီးပါပြီ</string>
-    <string name="restoring_purchase">ယခင်ဝယ်ယူမှုအား ပြန်လည်ရယူနေသည်...</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">သီချင်းများကို Ringtone ထားရန် app အား System Settings များကိုပြင်ဆင်ခွင့်ပေးရန်လိုသည်။</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -533,7 +520,6 @@
     <string name="track_list">အပုဒ်နံပါတ်</string>
     <string name="translate">ဘာသာပြန်ခြင်း</string>
     <string name="translate_community">App ကိုသင့်ဘာသာစကားသို့ ကူပြန်ပေးပါ</string>
-    <string name="try_retro_music_premium">Retro Music Premium ကိုစမ်းကြည့်ပါ</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">သင့် Retro Music ဒီဇိုင်းများကိုမျှဝေပါ</string>
     <string name="unlabeled">Label မထိုးပါ</string>
@@ -569,4 +555,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">အဆိုတော်သို့သွားမည်</string>
 </resources>

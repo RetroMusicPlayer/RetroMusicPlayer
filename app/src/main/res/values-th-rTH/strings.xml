@@ -107,7 +107,6 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">เกิดข้อผิดพลาดบางประการ, ขออภัยในความผิดพลาด, ถ้ายังคงเกิดปัญหาอยู่กรุณา \"Clear app data\" หรือ ส่งอีเมลหาผู้พัฒนา</string>
     <string name="bug_report_use_account">ส่งโดยใช้บัญชี Github</string>
-    <string name="buy_now">ซื้อทันที</string>
     <string name="cancel_current_timer">ยกเลิก</string>
     <string name="card">Card</string>
     <string name="card_color_style">สีของ Card</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">คัดลอกข้อมูลเครื่อง</string>
     <string name="could_not_create_playlist">ไม่สามารถสร้างเพลย์ลิสได้</string>
     <string name="could_not_download_album_cover">"ไม่สามารถดาวน์โหลดรูปปกอัลบัมได้"</string>
-    <string name="could_not_restore_purchase">ไม่สามารถเรียกคืนการสั่งซื้อได้</string>
     <string name="could_not_scan_files">ไม่สามารถสแกน %d ไฟล์</string>
     <string name="create_action">สร้าง</string>
     <string name="create_new_backup">สร้าง</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">Clearly White</string>
     <string name="listeners_label">ผู้ฟัง</string>
     <string name="listing_files">ไฟล์ที่กำลังฟัง</string>
-    <string name="loading_products">กำลังโหลดสินค้า</string>
     <string name="login">เข้าสู่ระบบ</string>
     <string name="lyrics">เนื้อเพลง</string>
     <string name="made_with_love">ทำจาก ❤️ ในอินเดีย</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">ไม่มีสิทธิ์ในการเข้าถึง</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">ไม่พบเนื้อเพลง</string>
     <string name="no_playing_queue">ไม่มีเพลงที่กำลังเล่นอยู่</string>
     <string name="no_playlists">คุณยังไม่มีเพลย์ลิสต์</string>
-    <string name="no_purchase_found">ไม่พบการสั่งซื้อ</string>
     <string name="no_results">ไม่มีผลลัพธ์</string>
     <string name="no_songs">คุณยังไม่มีเพลง</string>
     <string name="no_search_results">No search results</string>
@@ -418,10 +413,7 @@
     <string name="pref_title_toggle_volume">ปุ่มควบคุมเสียง</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">โปร</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">โปรไฟล์</string>
-    <string name="purchase">สั่งซื้อ</string>
     <string name="queue">คิวเพลง</string>
     <string name="rate_app">ให้คะแนนแอป</string>
     <string name="rate_on_google_play_summary">ชอบแอปนี้ไหม? บอกพวกเราให้รู้ด้วยการรีวิวบน Google Play Store สิ</string>
@@ -443,12 +435,7 @@
     <string name="reset_artist_image">รีเซ็ทรูปศิลปิน</string>
     <string name="restore">กู้คืนการสั่งซื้อ</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">กู้คืนการสั่งซื้อสำเร็จ (กรุณารีสตาร์ทแอปเพื่อใช้งานฟีเจอร์ทั้งหมด)</string>
-    <string name="restored_previous_purchases">กู้คืนการสั่งซื้อสำเร็จ</string>
-    <string name="restoring_purchase">กำลังดำเนินการกู้คืนการสั่งซื้อ</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">ต้องการสิทธิ์เพื่อตั้งค่าริงโทน</string>
     <string name="ringtone_title">ริงโทน (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -533,7 +520,6 @@
     <string name="track_list">หมายเลขแทร็ก</string>
     <string name="translate">แปลภาษา</string>
     <string name="translate_community">ช่วยพวกเราแปลภาษาเป็นภาษาของคุณ</string>
-    <string name="try_retro_music_premium">ลอง Retro Music พรีเมียม</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">แชร์การออกแบบของคุณด้วย Retro Music</string>
     <string name="unlabeled">ไม่แสดงตัวหนังสือ</string>
@@ -569,4 +555,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">ไปยังศิลปิน</string>
 </resources>

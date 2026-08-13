@@ -109,7 +109,6 @@
     <string name="bug_report_success">L\'informe s\'ha enviat correctament</string>
     <string name="bug_report_summary">S\'ha produït un error inesperat. Sentim que hagis trobat aquest error, si continua succeint \"Esborra les dades de l\'aplicació\" o envia un correu electrònic </string>
     <string name="bug_report_use_account">Enviar utilitzant un compte de GitHub</string>
-    <string name="buy_now">Compra ara</string>
     <string name="cancel_current_timer">Cancel·lar</string>
     <string name="card">Targeta</string>
     <string name="card_color_style">Targeta acolorida</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">S\'ha copiat la informació del dispositiu al porta-retalls.</string>
     <string name="could_not_create_playlist">No s\u2019ha pogut crear la llista de reproducció.</string>
     <string name="could_not_download_album_cover">"No s\u2019ha pogut baixar una caràtula coincident per a l\u2019àlbum."</string>
-    <string name="could_not_restore_purchase">No s\'ha pogut restaurar la compra.</string>
     <string name="could_not_scan_files">No s\'han pogut escanejar %d fitxers.</string>
     <string name="create_action">Crear</string>
     <string name="create_new_backup">Crear</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Clarament blanc</string>
     <string name="listeners_label">Oients</string>
     <string name="listing_files">Llistant fitxers</string>
-    <string name="loading_products">Carregant productes…</string>
     <string name="login">Inicia la sessió</string>
     <string name="lyrics">Lletres</string>
     <string name="made_with_love">Fet amb ❤️ a Índia</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Error de permís</string>
     <string name="message_backup_create_success">Còpia de seguretat completada amb èxit.</string>
     <string name="message_limit_tabs">No més de 5 elements</string>
-    <string name="message_pro_feature">%s és una funció Pro.</string>
     <string name="message_restore_success">La restauració s\'ha completat correctament.</string>
     <string name="message_updated">Actualitzat</string>
     <string name="message_welcome"><![CDATA[Hola! <br>Benvingut a %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">No s\'ha trobat la lletra</string>
     <string name="no_playing_queue">No hi ha cap cançó reproduint-se</string>
     <string name="no_playlists">No tens llistes de reproducció</string>
-    <string name="no_purchase_found">No s\'ha trobat cap compra.</string>
     <string name="no_results">Sense resultats</string>
     <string name="no_songs">No tens cançons</string>
     <string name="no_search_results">No s\'han trobat resultats</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Controls de volum</string>
     <string name="pref_title_wallpaper_accent">Color d\'accent del fons de pantalla</string>
     <string name="pref_title_whitelist">Llista blanca</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Tema fosc, temes de la reproducció en curs, efecte carrusel i molt més...</string>
     <string name="profile">Perfil</string>
-    <string name="purchase">Comprar</string>
     <string name="queue">Cua de reproducció</string>
     <string name="rate_app">Valora l\'aplicació</string>
     <string name="rate_on_google_play_summary">T\'agrada aquesta aplicació? Feu-nos saber a Google Play Store com podem fer-ho encara millor</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Restableix la imatge de l\'artista</string>
     <string name="restore">Restaurar</string>
     <string name="restore_message">Voleu restaurar la còpia de seguretat?</string>
-    <string name="restored_previous_purchase_please_restart">Compra anterior restaurada. Reinicia l\'aplicació per fer ús de totes les funcions.</string>
-    <string name="restored_previous_purchases">Compres anteriors restaurades.</string>
-    <string name="restoring_purchase">S\'està restaurant la compra…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">L\'aplicació necessita permís per accedir a la configuració del dispositiu per configurar la música com a to de trucada</string>
     <string name="ringtone_title">To de trucada (Opcional)</string>
     <string name="permission_alarm_summary">Cal permís per posar alarmes exactes per configurar temporitzadors d\'aturada</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Número de pista</string>
     <string name="translate">Tradueix</string>
     <string name="translate_community">Ajuda\'ns a traduir l\'aplicació al teu idioma</string>
-    <string name="try_retro_music_premium">Prova Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Comparteix el teu disseny amb Retro Music</string>
     <string name="unlabeled">Sense etiqueta</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Vés a l\'artista</string>
 </resources>

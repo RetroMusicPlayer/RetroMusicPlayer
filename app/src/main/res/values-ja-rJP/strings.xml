@@ -107,7 +107,6 @@
     <string name="bug_report_success">バグ報告に成功しました</string>
     <string name="bug_report_summary">予期しないエラーが発生しました。申し訳ないですが、このバグが何度も発生する場合は、端末のアプリ設定より「アプリデータを削除」を実行するか、概要をメールで送信してください </string>
     <string name="bug_report_use_account">GitHubアカウントを使って送信</string>
-    <string name="buy_now">今すぐ購入</string>
     <string name="cancel_current_timer">キャンセル</string>
     <string name="card">カード</string>
     <string name="card_color_style">色付きのカード</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">端末情報をコピー</string>
     <string name="could_not_create_playlist">\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8\u306e\u4f5c\u6210\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002</string>
     <string name="could_not_download_album_cover">"\u9069\u5207\u306a\u30a2\u30eb\u30d0\u30e0\u30a2\u30fc\u30c8\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f"</string>
-    <string name="could_not_restore_purchase">購入の復元に失敗しました</string>
     <string name="could_not_scan_files">%d のファイルをスキャンできませんでした</string>
     <string name="create_action">作成</string>
     <string name="create_new_backup">作成</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">ライト</string>
     <string name="listeners_label">リスナー</string>
     <string name="listing_files">リスティングファイル</string>
-    <string name="loading_products">商品の読み込み中...</string>
     <string name="login">ログイン</string>
     <string name="lyrics">歌詞</string>
     <string name="made_with_love">インドにて、❤をこめて開発</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">権限が付与されていません</string>
     <string name="message_backup_create_success">バックアップは正常に作成されました。</string>
     <string name="message_limit_tabs">5 アイテムまで</string>
-    <string name="message_pro_feature">%s はプロ版の機能です。</string>
     <string name="message_restore_success">復元が正常に完了しました。</string>
     <string name="message_updated">更新しました</string>
     <string name="message_welcome"><![CDATA[こんにちは！ <br> %s へようこそ]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">歌詞が見つかりませんでした</string>
     <string name="no_playing_queue">再生中の曲がありません</string>
     <string name="no_playlists">プレイリストがありません</string>
-    <string name="no_purchase_found">購入が見つかりません。</string>
     <string name="no_results">結果なし</string>
     <string name="no_songs">曲がありません</string>
     <string name="no_search_results">検索結果が見つかりませんでした</string>
@@ -419,10 +414,7 @@
     <string name="pref_title_toggle_volume">ボリュームコントロール</string>
     <string name="pref_title_wallpaper_accent">壁紙の色を使用する</string>
     <string name="pref_title_whitelist">楽曲のホワイトリスト</string>
-    <string name="pro">プロ版</string>
-    <string name="pro_summary">ダークモード、「再生中」スキン、カルーセルエフェクトなど…</string>
     <string name="profile">プロフィール</string>
-    <string name="purchase">購入</string>
     <string name="queue">キュー</string>
     <string name="rate_app">アプリを評価する</string>
     <string name="rate_on_google_play_summary">このアプリを気に入っていただけましたか？ぜひGoogle Playストアで、もっと良くするためのご意見を聞かせてください</string>
@@ -444,12 +436,7 @@
     <string name="reset_artist_image">アーティスト画像をリセット</string>
     <string name="restore">復元</string>
     <string name="restore_message">バックアップを復元しますか？</string>
-    <string name="restored_previous_purchase_please_restart">購入を復元しました。アプリを再起動してフルバージョンをご堪能ください！</string>
-    <string name="restored_previous_purchases">購入を復元しました</string>
-    <string name="restoring_purchase">購入を復元しています...</string>
-    <string name="billing_error">Google Play 請求サービスとの通信中にエラーが発生しました</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">音楽を着信音に設定するには、端末の設定にアクセスする権限が必要です</string>
     <string name="ringtone_title">着信音（オプション）</string>
     <string name="permission_alarm_summary">スリープタイマーを設定するには、アプリに正確なアラームをスケジュールする許可が必要です</string>
@@ -534,7 +521,6 @@
     <string name="track_list">トラック番号</string>
     <string name="translate">翻訳</string>
     <string name="translate_community">翻訳を手伝ってください！</string>
-    <string name="try_retro_music_premium">Retro Music Premium を試す</string>
     <string name="twitter_page">ツイッター</string>
     <string name="twitter_page_summary">あなたのデザインを皆に共有しましょう</string>
     <string name="unlabeled">ラベルを表示しない</string>
@@ -570,4 +556,5 @@
     <string name="pref_save_last_directory_summary">フォルダビューに切り替えると、最後に使用したディレクトリが復元されます</string>
     <string name="pref_save_last_directory_title">最終ディレクトリを保存</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">アーティストに移動</string>
 </resources>

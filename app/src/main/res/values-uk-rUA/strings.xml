@@ -89,7 +89,8 @@
     <string name="audio_focus_denied">В отриманні аудіофокусу відмовлено.</string>
     <string name="audio_settings_summary">Змінити налаштування звуку та налаштувати параметри еквалайзера</string>
     <string name="auto">Автоматично</string>
-    <string name="backup_restore_settings_summary">Резервне копіювання та відновлення налаштувань, плейлистів</string>
+    <string name="backup_restore_settings_summary">Резервне копіювання та відновлення налаштувань, плейлистів
+</string>
     <string name="backup_restore_title"><![CDATA[Резервне копіювання та відновлення]]></string>
     <string name="backup_title">Резервні копії</string>
     <string name="biography">Життєпис</string>
@@ -113,7 +114,6 @@
     <string name="bug_report_success">Звіт про помилку надіслано</string>
     <string name="bug_report_summary">Сталася неочікувана помилка. Вибачте, що натрапили на цю помилку, якщо вона постійно повторюється, спробуйте «Очистити дані застосунку» або надішліть лист на пошту </string>
     <string name="bug_report_use_account">Надіслати через обліковий запис GitHub</string>
-    <string name="buy_now">Придбайте вже</string>
     <string name="cancel_current_timer">Відмінити</string>
     <string name="card">Картка</string>
     <string name="card_color_style">Кольорова картка</string>
@@ -139,14 +139,14 @@
     <string name="copied_device_info_to_clipboard">Скопійовано інформацію про пристрій у буфер обміну.</string>
     <string name="could_not_create_playlist">Не вдалося створити список відтворення.</string>
     <string name="could_not_download_album_cover">"Не вдалося завантажити відповідну обкладинку альбому."</string>
-    <string name="could_not_restore_purchase">Не вдалося відновити покупку.</string>
     <string name="could_not_scan_files">Не вдалося просканувати %d файлів.</string>
     <string name="create_action">Створити</string>
     <string name="create_new_backup">Створити</string>
     <string name="created_playlist_x">Створено список відтворення %1$s.</string>
     <string name="credit_title">Учасники та меценати </string>
     <string name="currently_listening_to_x_by_x">Зараз грає %1$s від %2$s.</string>
-    <string name="custom_artist_images">Індивідуальні зображення художників</string>
+    <string name="custom_artist_images">Індивідуальні зображення художників
+</string>
     <string name="customactivityoncrash_error_activity_error_details_share">Поділитися звітом про помилку</string>
     <string name="dark_theme_name">Майже темна</string>
     <string name="delete_playlist_title">Видалити список відтворення</string>
@@ -177,7 +177,8 @@
     <string name="edit_synced_lyrics">Редагувати синхронізовані тексти</string>
     <string name="empty">Порожньо</string>
     <string name="equalizer">Еквалайзер</string>
-    <string name="error_create_backup">Не вдалося створити резервну копію</string>
+    <string name="error_create_backup">Не вдалося створити резервну копію
+</string>
     <string name="error_delete_backup">Не можливо\u2019t видалити резервну копію</string>
     <string name="error_empty_name">Ваше ім\'я не може бути порожнім!</string>
     <string name="error_load_failed">Не вдалося завантажити</string>
@@ -244,7 +245,6 @@
     <string name="light_theme_name">Яскраво-білий</string>
     <string name="listeners_label">Слухачі</string>
     <string name="listing_files">Список файлів</string>
-    <string name="loading_products">Завантаження продуктів…</string>
     <string name="login">Логін</string>
     <string name="lyrics">Текст</string>
     <string name="made_with_love">Зроблено з ❤ в Індії</string>
@@ -253,7 +253,6 @@
     <string name="md_storage_perm_error">Помилка дозволу</string>
     <string name="message_backup_create_success">Резервну копію успішно створено.</string>
     <string name="message_limit_tabs">Не більше 5 елементів</string>
-    <string name="message_pro_feature">%s є Pro функцією.</string>
     <string name="message_restore_success">Відновлення успішно завершено.</string>
     <string name="message_updated">Оновлено</string>
     <string name="message_welcome"><![CDATA[Привіт! <br>Вітаємо в %s]]></string>
@@ -273,7 +272,6 @@
     <string name="no_lyrics_found">Текст не знайдено</string>
     <string name="no_playing_queue">Немає пісень, що відтворюються</string>
     <string name="no_playlists">У вас немає списків відтворення</string>
-    <string name="no_purchase_found">Покупки не знайдено.</string>
     <string name="no_results">Немає результатів</string>
     <string name="no_songs">У вас немає пісень</string>
     <string name="no_search_results">Нічого не знайдено</string>
@@ -342,7 +340,8 @@
     <string name="pref_summary_album_art_on_lockscreen">Використовувати обкладинку альбому пісні як шпалери екрана блокування</string>
     <string name="pref_summary_album_artists_only">Показувати виконавців альбому в категорії виконавця</string>
     <string name="pref_summary_audio_ducking">Зменшення гучності при відтворенні системного звуку або сповіщення</string>
-    <string name="pref_summary_audio_fade">Приглушити звуку під час паузи або відтворення пісні</string>
+    <string name="pref_summary_audio_fade">Приглушити звуку під час паузи або відтворення пісні
+</string>
     <string name="pref_summary_blacklist">Вміст тек чорного списку приховано з вашої бібліотеки.</string>
     <string name="pref_summary_bluetooth_playback">Почати відтворення відразу при під\'єднанні до Bluetooth пристрою</string>
     <string name="pref_summary_blurred_album_art">Розмивати обкладинку альбому на екрані блокування. Можуть виникнути проблеми зі сторонніми застосунками та віджетами</string>
@@ -424,10 +423,7 @@
     <string name="pref_title_toggle_volume">Регулювання гучності</string>
     <string name="pref_title_wallpaper_accent">Колір акцентів шпалер</string>
     <string name="pref_title_whitelist">Білий список музики</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Чорна тема, теми відтворення, ефект каруселі та інше..</string>
     <string name="profile">Профіль</string>
-    <string name="purchase">Придбати</string>
     <string name="queue">Черга</string>
     <string name="rate_app">Оцініть застосунок</string>
     <string name="rate_on_google_play_summary">Подобається цей застосунок? Напишіть відгук нам у Google Play Store, як ми можемо зробити його ще кращим</string>
@@ -449,12 +445,7 @@
     <string name="reset_artist_image">Скинути зображення виконавця</string>
     <string name="restore">Відновити</string>
     <string name="restore_message">Бажаєте відновити резервну копію?</string>
-    <string name="restored_previous_purchase_please_restart">Відновлено попередню покупку. Перезапустіть застосунок, щоб скористатися всіма функціями.</string>
-    <string name="restored_previous_purchases">Відновлені попередні покупки.</string>
-    <string name="restoring_purchase">Відновлення покупки…</string>
-    <string name="billing_error">Сталася помилка під час зв\'язку із системою оплати Google Play</string>
     <string name="retro_music_player">Retro Music плеєр</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Застосунку потрібен дозвіл на доступ до налаштувань вашого пристрою для того, щоб встановити музику як рингтон</string>
     <string name="ringtone_title">Мелодія (Необов\'язково)</string>
     <string name="permission_alarm_summary">Застосунку потрібен дозвіл на планування точних будильників для встановлення таймерів сну</string>
@@ -539,7 +530,6 @@
     <string name="track_list">Номер пісні</string>
     <string name="translate">Перекласти</string>
     <string name="translate_community">Допоможіть нам перекласти застосунок на вашу мову</string>
-    <string name="try_retro_music_premium">Спробуйте Retro Music Преміум</string>
     <string name="twitter_page">Твіттер</string>
     <string name="twitter_page_summary">Поділіться своїм дизайном із Retro Music</string>
     <string name="unlabeled">Без позначки</string>
@@ -575,4 +565,5 @@
     <string name="pref_save_last_directory_summary">При переході до перегляду тек відновлювати останній використаний каталог</string>
     <string name="pref_save_last_directory_title">Зберегти останній каталог</string>
     <string name="artist_separator_helper_text">Щоби додати декількох виконавців, розділіть їх таким символом: %1$s</string>
+    <string name="go_to_artist">Перейти до виконавця</string>
 </resources>

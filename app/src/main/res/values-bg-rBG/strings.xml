@@ -110,7 +110,6 @@
     <string name="bug_report_summary">Появи се неочаквана грешка. Извиняваме се за причиненото неудобство. Ако проблемите продължават, моля, изчистете данните на приложението или се свържете с нас по имейл
  </string>
     <string name="bug_report_use_account">Изпратете с акаунт в GitHub</string>
-    <string name="buy_now">Купи сега</string>
     <string name="cancel_current_timer">Отмяна</string>
     <string name="card">Карта</string>
     <string name="card_color_style">Цветна карта</string>
@@ -136,7 +135,6 @@
     <string name="copied_device_info_to_clipboard">Копирайте информацията за устройството в клипборда.</string>
     <string name="could_not_create_playlist">Неуспешно създаване на плейлист.</string>
     <string name="could_not_download_album_cover">"Неуспешно зареждане на подходяща обложка на албум."</string>
-    <string name="could_not_restore_purchase">Неуспешно възстановяване на покупката.</string>
     <string name="could_not_scan_files">Неуспешно сканиране на %d файла.</string>
     <string name="create_action">Създай</string>
     <string name="create_new_backup">Създайте</string>
@@ -241,7 +239,6 @@
     <string name="light_theme_name">Чисто бяло</string>
     <string name="listeners_label">Слушатели</string>
     <string name="listing_files">Списък с файлове</string>
-    <string name="loading_products">Зареждане на ресурс…</string>
     <string name="login">Вход</string>
     <string name="lyrics">Текстове на песни</string>
     <string name="made_with_love">Създадено с ❤️ в Индия</string>
@@ -250,7 +247,6 @@
     <string name="md_storage_perm_error">Грешка при достъп</string>
     <string name="message_backup_create_success">Архивирането е създадено успешно.</string>
     <string name="message_limit_tabs">Не трябва да има повече от 5 елемента</string>
-    <string name="message_pro_feature">%s е Pro функция.</string>
     <string name="message_restore_success">Възстановяването завърши успешно.</string>
     <string name="message_updated">Актуализиран</string>
     <string name="message_welcome"><![CDATA[Здравейте! <br>Добре дошли в %s]]></string>
@@ -270,7 +266,6 @@
     <string name="no_lyrics_found">Текста не е намерен</string>
     <string name="no_playing_queue">Не се възпроизвеждат песни</string>
     <string name="no_playlists">Нямате плейлисти</string>
-    <string name="no_purchase_found">Липсват покупки.</string>
     <string name="no_results">Няма резултати</string>
     <string name="no_songs">Нямате песни</string>
     <string name="no_search_results">No search results</string>
@@ -421,10 +416,7 @@
     <string name="pref_title_toggle_volume">Контрол на звука</string>
     <string name="pref_title_wallpaper_accent">Цвят на акцента на тапета</string>
     <string name="pref_title_whitelist">Музика от белия списък</string>
-    <string name="pro">Про</string>
-    <string name="pro_summary">Черна тема, повече стилове на екрана за игра, ефект на въртележка и други..</string>
     <string name="profile">Профил</string>
-    <string name="purchase">Купи</string>
     <string name="queue">Възпроизвеждане на опашка</string>
     <string name="rate_app">Оцени приложението</string>
     <string name="rate_on_google_play_summary">Хареса ли ви приложението? Пишете ни в Google Play Store за това как можем да го направим още по-добър</string>
@@ -446,12 +438,7 @@
     <string name="reset_artist_image">Нулирайте изображението на изпълнителя</string>
     <string name="restore">Възстанови</string>
     <string name="restore_message">Сигурни ли сте, че искате да възстановите архива?</string>
-    <string name="restored_previous_purchase_please_restart">Предишната покупка е възстановена. Рестартирайте приложението, за да се възползвате от всички функции.</string>
-    <string name="restored_previous_purchases">Възстановени са предишните покупки.</string>
-    <string name="restoring_purchase">Възстановяване на покупката…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Ретро Плеър на Музика</string>
-    <string name="retro_music_pro">Ретро Плеър на Музика Про</string>
     <string name="ringtone_summary">Приложението се нуждае от разрешение за достъп до настройките на вашето устройство, за да зададе музика като ваш тон на звънене</string>
     <string name="ringtone_title">Мелодия (по избор)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -536,7 +523,6 @@
     <string name="track_list">Номер на песента</string>
     <string name="translate">Помощ за превод</string>
     <string name="translate_community">Помогнете ни да преведем приложението на вашия език</string>
-    <string name="try_retro_music_premium">Изпробвайте Retro Music Premium</string>
     <string name="twitter_page">Туитър</string>
     <string name="twitter_page_summary">Споделете своя дизайн за Retro Music</string>
     <string name="unlabeled">Не показвай</string>
@@ -572,4 +558,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Отидете на артиста</string>
 </resources>

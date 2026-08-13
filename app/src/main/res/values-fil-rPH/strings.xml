@@ -109,7 +109,6 @@
     <string name="bug_report_success">Bug report successful</string>
     <string name="bug_report_summary">May naganap na hindi inaasahang error. Paumanhin, nakikita mo ang bug na ito, kung patuloy itong nagka-crash \"Burahin ang data ng app\" o magpadala ng Email </string>
     <string name="bug_report_use_account">Ipadala gamit ang GitHub account</string>
-    <string name="buy_now">Bumili na ngayon</string>
     <string name="cancel_current_timer">Kanselahin</string>
     <string name="card">Kard</string>
     <string name="card_color_style">May kulay na kard</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Kinopya ang impormasyon ng device sa clipboard.</string>
     <string name="could_not_create_playlist">Hindi makagawa ng playlist.</string>
     <string name="could_not_download_album_cover">"Hindi makapag-download ng katugmang cover ng album."</string>
-    <string name="could_not_restore_purchase">Hindi naibalik ang binili.</string>
     <string name="could_not_scan_files">Hindi ma-scan ang %d files.</string>
     <string name="create_action">Lumikha</string>
     <string name="create_new_backup">Lumikha</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Malinaw na Puti</string>
     <string name="listeners_label">Mga tagapakinig</string>
     <string name="listing_files">Listahan ng mga payl</string>
-    <string name="loading_products">Naglo-load ng mga produkto…</string>
     <string name="login">Mag-login</string>
     <string name="lyrics">Mga liriko</string>
     <string name="made_with_love">Ginawa gamit ang ❤️ sa India</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Maling permiso</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Not more than 5 items</string>
-    <string name="message_pro_feature">%s is a Pro feature.</string>
     <string name="message_restore_success">Restore completed successfully.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hello there! <br>Welcome to %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Walang nakitang mga liriko</string>
     <string name="no_playing_queue">Walang mga kantang tumutugtog</string>
     <string name="no_playlists">Wala kang mga playlist</string>
-    <string name="no_purchase_found">Walang nakitang binili.</string>
     <string name="no_results">Walang mga nakita</string>
     <string name="no_songs">Wala kang mga kanta</string>
     <string name="no_search_results">No search results</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Mga kontrol sa volume</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">Bumili</string>
     <string name="queue">Playing Queue</string>
     <string name="rate_app">Mag rate sa app</string>
     <string name="rate_on_google_play_summary">Gustung-gusto ang app na ito? Ipaalam sa amin sa Google Play Store kung paano namin ito mapapahusay</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">I-reset ang larawan ng artista</string>
     <string name="restore">I-restore</string>
     <string name="restore_message">Gusto mo bang ibalik ang backup?</string>
-    <string name="restored_previous_purchase_please_restart">Ibinalik ang nakaraang pagbili. Mangyaring i-restart ang app upang magamit ang lahat ng mga tampok.</string>
-    <string name="restored_previous_purchases">Ibinalik ang mga nakaraang pagbili.</string>
-    <string name="restoring_purchase">Ibinabalik ang pagbili…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ang app ay nangangailangan ng permiso upang ma-access ang mga setting ng iyong device upang maitakda ang musika bilang Ringtone</string>
     <string name="ringtone_title">Ringtone (Opsyonal)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Numero ng track</string>
     <string name="translate">Isalin</string>
     <string name="translate_community">Tulungan kaming isalin ang app sa iyong wika</string>
-    <string name="try_retro_music_premium">Subukan ang Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Ibahagi ang iyong disenyo sa Retro Music</string>
     <string name="unlabeled">Walang label</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Pumunta sa artist</string>
 </resources>

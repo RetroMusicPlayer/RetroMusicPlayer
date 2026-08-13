@@ -107,7 +107,6 @@
     <string name="bug_report_success">成功回報錯誤</string>
     <string name="bug_report_summary">發生意外錯誤。很抱歉讓您遇到這項錯誤，若應用程式仍處在當機狀態，請「清除應用程式儲存空間」或透過電子郵件與我們聯繫 </string>
     <string name="bug_report_use_account">透過 GitHub 帳戶傳送</string>
-    <string name="buy_now">立即購買</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡片</string>
     <string name="card_color_style">彩色卡片</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">已複製裝置資訊至剪貼簿。</string>
     <string name="could_not_create_playlist">無法建立播放清單。</string>
     <string name="could_not_download_album_cover">"無法下載相應的專輯封面。"</string>
-    <string name="could_not_restore_purchase">無法復原購買。</string>
     <string name="could_not_scan_files">無法掃描 %d。</string>
     <string name="create_action">建立</string>
     <string name="create_new_backup">建立</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">淺色</string>
     <string name="listeners_label">全球聽眾</string>
     <string name="listing_files">清單文件</string>
-    <string name="loading_products">正在載入…</string>
     <string name="login">登入</string>
     <string name="lyrics">歌詞</string>
     <string name="made_with_love">來自印度，用❤️製造</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">權限錯誤</string>
     <string name="message_backup_create_success">已成功建立備份。</string>
     <string name="message_limit_tabs">不得多於 5 個項目</string>
-    <string name="message_pro_feature">%s 為 Pro 版功能。</string>
     <string name="message_restore_success">已成功完成復原。</string>
     <string name="message_updated">已更新</string>
     <string name="message_welcome"><![CDATA[嗨！<br> 歡迎使用 %s]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">找不到歌詞</string>
     <string name="no_playing_queue">沒有現正播放的歌曲</string>
     <string name="no_playlists">沒有播放清單</string>
-    <string name="no_purchase_found">找不到購買記錄。</string>
     <string name="no_results">沒有搜尋結果</string>
     <string name="no_songs">沒有歌曲</string>
     <string name="no_search_results">無搜尋結果</string>
@@ -418,10 +413,7 @@
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_wallpaper_accent">桌布強調色</string>
     <string name="pref_title_whitelist">白名單音樂</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">暗色主題、現正播放主題、輪播效果以及更多...</string>
     <string name="profile">個人資料</string>
-    <string name="purchase">購買</string>
     <string name="queue">播放佇列</string>
     <string name="rate_app">評分</string>
     <string name="rate_on_google_play_summary">您還喜歡 Retro Music 嗎？歡迎在 Play 商店上評論，使我們能日臻完善</string>
@@ -443,12 +435,7 @@
     <string name="reset_artist_image">重設藝人圖片</string>
     <string name="restore">復原</string>
     <string name="restore_message">確定要復原備份嗎？</string>
-    <string name="restored_previous_purchase_please_restart">已復原先前的購買。請重新開啟應用程式以啟用全數功能。</string>
-    <string name="restored_previous_purchases">已復原先前購買。</string>
-    <string name="restoring_purchase">正在復原購買…</string>
-    <string name="billing_error">與 Google Play 結帳系統通訊時發生錯誤</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">應用程式需要取得權限以存取您的裝置設定，並將歌曲設為鈴聲</string>
     <string name="ringtone_title">鈴聲 (可選)</string>
     <string name="permission_alarm_summary">此應用程式需要鬧鐘權限以啟用睡眠計時器</string>
@@ -533,7 +520,6 @@
     <string name="track_list">曲目編號</string>
     <string name="translate">翻譯</string>
     <string name="translate_community">協助我們將應用程式本地化成您的語言</string>
-    <string name="try_retro_music_premium">立即嘗試 Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">分享您為 Retro Music 的設計</string>
     <string name="unlabeled">隱藏標籤</string>
@@ -569,4 +555,5 @@
     <string name="pref_save_last_directory_summary">切換到資料夾檢視時，還原上次使用的資料夾</string>
     <string name="pref_save_last_directory_title">儲存上次使用的資料夾</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">前往藝人頁面</string>
 </resources>

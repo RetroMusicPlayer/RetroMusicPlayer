@@ -113,7 +113,6 @@
     <string name="bug_report_success">Hlášení chyb bylo úspěšné</string>
     <string name="bug_report_summary">Došlo k neočekávané chybě. Je nám líto, že jste našli tuto chybu, pokud aplikace bude stále padat, použijte funkci \"Vymazat data aplikace\" nebo nám pošlete e-mail </string>
     <string name="bug_report_use_account">Odeslat pomocí účtu GitHub</string>
-    <string name="buy_now">Zakoupit</string>
     <string name="cancel_current_timer">Zrušit aktuální časovač</string>
     <string name="card">Karta</string>
     <string name="card_color_style">Obarvená karta</string>
@@ -139,7 +138,6 @@
     <string name="copied_device_info_to_clipboard">Informace o zařízení zkopírovány do schránky.</string>
     <string name="could_not_create_playlist">Nelze vytvořit seznam skladeb.</string>
     <string name="could_not_download_album_cover">"Nelze stáhnout odpovídající obrázek alba."</string>
-    <string name="could_not_restore_purchase">Nepodařilo se obnovit nákup.</string>
     <string name="could_not_scan_files">Nelze skenovat %d soubory.</string>
     <string name="create_action">Vytvořit</string>
     <string name="create_new_backup">Vytvořit</string>
@@ -244,7 +242,6 @@
     <string name="light_theme_name">Velmi bílá</string>
     <string name="listeners_label">Posluchači</string>
     <string name="listing_files">Výpis souborů</string>
-    <string name="loading_products">Načítání produktů…</string>
     <string name="login">Přihlásit se</string>
     <string name="lyrics">Texty</string>
     <string name="made_with_love">Vyrobeno s ❤️ v Indii</string>
@@ -253,7 +250,6 @@
     <string name="md_storage_perm_error">Chyba oprávnění</string>
     <string name="message_backup_create_success">Záloha byla úspěšně vytvořena.</string>
     <string name="message_limit_tabs">Ne více než 5 položek</string>
-    <string name="message_pro_feature">%s je funkce Pro.</string>
     <string name="message_restore_success">Obnovení úspěšně dokončeno.</string>
     <string name="message_updated">Aktualizováno</string>
     <string name="message_welcome"><![CDATA[Ahoj! <br>Vítejte v %s]]></string>
@@ -273,7 +269,6 @@
     <string name="no_lyrics_found">Texty nenalezeny</string>
     <string name="no_playing_queue">Žádná skladba se nepřehrává</string>
     <string name="no_playlists">Nemáte žádné playlisty</string>
-    <string name="no_purchase_found">Žádný nákup nenalezen.</string>
     <string name="no_results">Žádné výsledky</string>
     <string name="no_songs">Nemáte žádné skladby</string>
     <string name="no_search_results">Nenalezeny žádné výsledky</string>
@@ -424,10 +419,7 @@
     <string name="pref_title_toggle_volume">Ovládání hlasitosti</string>
     <string name="pref_title_wallpaper_accent">Barva zvýraznění tapety</string>
     <string name="pref_title_whitelist">Vložit hudbu na bílou listinu</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Černý motiv, Motivy stránky přehrávání, Efekt kolotoče a další..</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Koupit</string>
     <string name="queue">Fronta</string>
     <string name="rate_app">Ohodnoťte aplikaci</string>
     <string name="rate_on_google_play_summary">Zanechte pozitivní hodnocení na Google Play pokud máte rádi Retro music.</string>
@@ -449,12 +441,7 @@
     <string name="reset_artist_image">Obnovit obrázek interpreta</string>
     <string name="restore">Obnovit</string>
     <string name="restore_message">Přejete si obnovit zálohu?</string>
-    <string name="restored_previous_purchase_please_restart">Předchozí nákup byl obnoven. Restartujte aplikaci pro využití všech funkcí.</string>
-    <string name="restored_previous_purchases">Předchozí nákupy byly obnoveny.</string>
-    <string name="restoring_purchase">Obnovuji nákup…</string>
-    <string name="billing_error">Při komunikaci s účtem Google Play došlo k chybě</string>
     <string name="retro_music_player">Retro Music Přehrávač</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Aplikace potřebuje přístup k nastavení zařízení pro nastavení hudby jako vyzvánění</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">Aplikace potřebuje oprávnění aby mohla naplánovat konkrétní budíky pro nastavení časovačů spánku</string>
@@ -539,7 +526,6 @@
     <string name="track_list">Číslo skladby</string>
     <string name="translate">Překlad</string>
     <string name="translate_community">Pomožte nám přeložit tuto aplikaci do vašeho jazyka</string>
-    <string name="try_retro_music_premium">Vyzkoušejte Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Sdílejte svůj design s Retro Music</string>
     <string name="unlabeled">Bez štítku</string>
@@ -575,4 +561,5 @@
     <string name="pref_save_last_directory_summary">Při přepnutí do zobrazení složek, obnovit poslední použitý adresář</string>
     <string name="pref_save_last_directory_title">Uložit poslední složku</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Přejít na interpreta</string>
 </resources>

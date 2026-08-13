@@ -109,7 +109,6 @@
     <string name="bug_report_success">ಬಗ್ ವರದಿ ಯಶಸ್ವಿಯಾಗಿದೆ</string>
     <string name="bug_report_summary">ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ. ಅಪ್ಲಿಕೇಶನ್ ಕ್ರ್ಯಾಶ್ ಆಗುತ್ತಿದ್ದರೆ \"ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾವನ್ನು ತೆರವುಗೊಳಿಸಿ\" ಅಥವಾ ಇಮೇಲ್ ಕಳುಹಿಸಿ. ನಿಮ್ಮ ಅನಾನುಕೂಲತೆಗಾಗಿ ಕ್ಷಮಿಸಿ </string>
     <string name="bug_report_use_account">GitHub ಖಾತೆಯನ್ನು ಬಳಸಿ ಕಳುಹಿಸಿ</string>
-    <string name="buy_now">ಈಗ ಖರೀದಿಸಿ</string>
     <string name="cancel_current_timer">ರದ್ದುಮಾಡಿ</string>
     <string name="card">ಕಾರ್ಡ್</string>
     <string name="card_color_style">ಕಲರ್ಡ್ ಕಾರ್ಡ್</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ಸಾಧನದ ಮಾಹಿತಿಯನ್ನು ನಕಲಿಸಲಾಗಿದೆ.</string>
     <string name="could_not_create_playlist">ಪ್ಲೇಲಿಸ್ಟ್ ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</string>
     <string name="could_not_download_album_cover">"ಹೊಂದಾಣಿಕೆಯ ಆಲ್ಬಮ್ ಕವರ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
-    <string name="could_not_restore_purchase">ಖರೀದಿಯನ್ನು ಮರುಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</string>
     <string name="could_not_scan_files">%d ಫೈಲ್ಗಳನ್ನು ಹುಡುಕಲಾಗಿಲ್ಲ.</string>
     <string name="create_action">ರಚಿಸಿ</string>
     <string name="create_new_backup">ರಚಿಸಿ</string>
@@ -241,7 +239,6 @@
     <string name="light_theme_name">ಸ್ಪಷ್ಟವಾಗಿ ಬಿಳಿ</string>
     <string name="listeners_label">ಕೇಳುಗರು</string>
     <string name="listing_files">ಕಡತಗಳ ಪಟ್ಟಿಮಾಡಲಾಗುತ್ತಿದೆ</string>
-    <string name="loading_products">ಉತ್ಪನ್ನಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…</string>
     <string name="login">ಲಾಗಿನ್</string>
     <string name="lyrics">ಸಾಹಿತ್ಯ</string>
     <string name="made_with_love">ಭಾರತದಲ್ಲಿ ❤️ ನೊಂದಿಗೆ ತಯಾರಿಸಲಾಗುತ್ತಿದೆ</string>
@@ -250,7 +247,6 @@
     <string name="md_storage_perm_error">ಅನುಮತಿ ದೋಷ</string>
     <string name="message_backup_create_success">ಬ್ಯಾಕಪ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.</string>
     <string name="message_limit_tabs">5 ಐಟಂಗಳಿಗಿಂತ ಹೆಚ್ಚಿಲ್ಲ</string>
-    <string name="message_pro_feature">%s ಪ್ರೊ ವೈಶಿಷ್ಟ್ಯವಾಗಿದೆ.</string>
     <string name="message_restore_success">ಮರುಸ್ಥಾಪನೆ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ.</string>
     <string name="message_updated">ನವೀಕರಿಸಲಾಗಿದೆ</string>
     <string name="message_welcome"><![CDATA[ನಮಸ್ಕಾರ! <br>%s ಗೆ ಸುಸ್ವಾಗತ]]></string>
@@ -270,7 +266,6 @@
     <string name="no_lyrics_found">ಯಾವುದೇ ಸಾಹಿತ್ಯ ಕಂಡುಬಂದಿಲ್ಲ</string>
     <string name="no_playing_queue">ಯಾವುದೇ ಹಾಡು ಪ್ಲೇ ಆಗುತ್ತಿಲ್ಲ</string>
     <string name="no_playlists">ನೀವು ಯಾವುದೇ ಪ್ಲೇಲಿಸ್ಟ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ</string>
-    <string name="no_purchase_found">ಯಾವುದೇ ಖರೀದಿ ಕಂಡುಬಂದಿಲ್ಲ.</string>
     <string name="no_results">ಯಾವುದೇ ಫಲಿತಾಂಶಗಳಿಲ್ಲ</string>
     <string name="no_songs">ನಿಮ್ಮ ಬಳಿ ಯಾವುದೇ ಹಾಡುಗಳಿಲ್ಲ</string>
     <string name="no_search_results">No search results</string>
@@ -421,10 +416,7 @@
     <string name="pref_title_toggle_volume">ಧ್ವನಿ ನಿಯಂತ್ರಣ</string>
     <string name="pref_title_wallpaper_accent">ವಾಲ್ಪೇಪರ್ನ ಪ್ರಧಾನ ಬಣ್ಣ</string>
     <string name="pref_title_whitelist">ಶ್ವೇತಪಟ್ಟಿ ಸಂಗೀತ</string>
-    <string name="pro">ಪ್ರೊ</string>
-    <string name="pro_summary">ಕಪ್ಪು ಥೀಮ್, ನೌ ಪ್ಲೇಯಿಂಗ್ ಥೀಮ್‌ಗಳು, ಏರಿಳಿಕೆ ಪರಿಣಾಮ ಮತ್ತು ಇನ್ನಷ್ಟು..</string>
     <string name="profile">ಪ್ರೊಫೈಲ್</string>
-    <string name="purchase">ಖರೀದಿ</string>
     <string name="queue">ಪ್ಲೇ ಮಾಡಲಾಗುತ್ತಿರುವ ಪಟ್ಟಿ</string>
     <string name="rate_app">ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ರೇಟ್ ಮಾಡಿ</string>
     <string name="rate_on_google_play_summary">ಈ ಅಪ್ಲಿಕೇಶನ್ ಇಷ್ಟಪಡುತ್ತೀರಾ? ನಾವು ಅದನ್ನು ಇನ್ನಷ್ಟು ಉತ್ತಮಗೊಳಿಸುವುದು ಹೇಗೆ ಎಂಬುದನ್ನು Google Play Store ನಲ್ಲಿ ನಮಗೆ ತಿಳಿಸಿ</string>
@@ -446,12 +438,7 @@
     <string name="reset_artist_image">ಕಲಾವಿದರ ಚಿತ್ರವನ್ನು ಮರುಹೊಂದಿಸಿ</string>
     <string name="restore">ಪುನಸ್ಥಾಪಿಸಿ</string>
     <string name="restore_message">ನೀವು ಬ್ಯಾಕಪ್ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸಲು ಬಯಸುವಿರಾ?</string>
-    <string name="restored_previous_purchase_please_restart">ಹಿಂದಿನ ಖರೀದಿಯನ್ನು ಮರುಸ್ಥಾಪಿಸಲಾಗಿದೆ. ಎಲ್ಲಾ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಬಳಸಲು ದಯವಿಟ್ಟು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮರುಪ್ರಾರಂಭಿಸಿ.</string>
-    <string name="restored_previous_purchases">ಹಿಂದಿನ ಖರೀದಿಗಳನ್ನು ಮರುಸ್ಥಾಪಿಸಲಾಗಿದೆ.</string>
-    <string name="restoring_purchase">ಖರೀದಿಯನ್ನು ಮರುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">ಸಂಗೀತವನ್ನು ರಿಂಗ್‌ಟೋನ್‌ನಂತೆ ಹೊಂದಿಸಲು ನಿಮ್ಮ ಸಾಧನದ ಸಂಯೋಜನೆಗಳನ್ನು ಪ್ರವೇಶಿಸಲು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿಯ ಅಗತ್ಯವಿದೆ</string>
     <string name="ringtone_title">ರಿಂಗ್‌ಟೋನ್‌ (ಐಚ್ಛಿಕ)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -536,7 +523,6 @@
     <string name="track_list">ಸುರುಳಿ ಸಂಖ್ಯೆ</string>
     <string name="translate">ಅನುವಾದಿಸಿ</string>
     <string name="translate_community">ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಮ್ಮ ಭಾಷೆಗೆ ಭಾಷಾಂತರಿಸಲು ನಮಗೆ ಸಹಾಯ ಮಾಡಿ</string>
-    <string name="try_retro_music_premium">Retro Music ಪ್ರೀಮಿಯಂ ಅನ್ನು ಪ್ರಯತ್ನಿಸಿ</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Retro Music ನೊಂದಿಗೆ ನಿಮ್ಮ ವಿನ್ಯಾಸವನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</string>
     <string name="unlabeled">ಲೇಬಲ್ ಮಾಡಲಾಗಿಲ್ಲ</string>
@@ -572,4 +558,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">ಈ ಕಲಾವಿದರಿಗೆ ಹೋಗಿ</string>
 </resources>

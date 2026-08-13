@@ -108,7 +108,6 @@
     <string name="bug_report_summary">Đã xảy ra lỗi không mong muốn. Xin lỗi bạn vì lỗi này, nếu nó
 tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="bug_report_use_account">Gửi bằng tài khoản GitHub </string>
-    <string name="buy_now">Mua ngay</string>
     <string name="cancel_current_timer">Hủy</string>
     <string name="card">Thẻ</string>
     <string name="card_color_style">Thẻ màu</string>
@@ -134,7 +133,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="copied_device_info_to_clipboard">Đã sao chép thông tin thiết bị vào clipboard.</string>
     <string name="could_not_create_playlist">Kh\u00f4ng th\u1ec3 t\u1ea1o danh s\u00e1ch ph\u00e1t</string>
     <string name="could_not_download_album_cover">"Kh\u00f4ng th\u1ec3 t\u1ea3i xu\u1ed1ng \u1ea3nh b\u00eca album ph\u00f9 h\u1ee3p."</string>
-    <string name="could_not_restore_purchase">Không thể khôi phục mua hàng.</string>
     <string name="could_not_scan_files">Không thể quét %d tập tin.</string>
     <string name="create_action">Tạo</string>
     <string name="create_new_backup">Tạo</string>
@@ -239,7 +237,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="light_theme_name">Hoàn toàn trắng</string>
     <string name="listeners_label">Người nghe</string>
     <string name="listing_files">Danh sách tập tin</string>
-    <string name="loading_products">Đang tải sản phẩm...</string>
     <string name="login">Đăng nhập</string>
     <string name="lyrics">Lời bài hát</string>
     <string name="made_with_love">Được làm bằng ❤️ ở Ấn Độ</string>
@@ -248,7 +245,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="md_storage_perm_error">Lỗi quyền truy cập</string>
     <string name="message_backup_create_success">Đã tạo thành công bản sao lưu.</string>
     <string name="message_limit_tabs">Không nhiều hơn 5 tùy chọn</string>
-    <string name="message_pro_feature">%s là một tính năng Pro.</string>
     <string name="message_restore_success">Khôi phục thành công.</string>
     <string name="message_updated">Đã cập nhật</string>
     <string name="message_welcome"><![CDATA[Xin chào! <br>Chào mừng bạn đến với %s]]></string>
@@ -268,7 +264,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="no_lyrics_found">Không tìm thấy lời bài hát</string>
     <string name="no_playing_queue">Không có bài hát nào đang phát</string>
     <string name="no_playlists">Không có danh sách phát</string>
-    <string name="no_purchase_found">Không tìm thấy giao dịch mua.</string>
     <string name="no_results">Không có kết quả</string>
     <string name="no_songs">Không có bài hát</string>
     <string name="no_search_results">Không có kết quả tìm kiếm</string>
@@ -419,10 +414,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_wallpaper_accent">Màu chủ đạo của hình nền</string>
     <string name="pref_title_whitelist">Nhạc danh sách trắng</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Giao diện đen, giao diện đang phát, hiệu ứng quay vòng và hơn nữa..</string>
     <string name="profile">Hồ sơ</string>
-    <string name="purchase">Mua</string>
     <string name="queue">Danh sách chờ phát</string>
     <string name="rate_app">Đánh giá ứng dụng</string>
     <string name="rate_on_google_play_summary">Bạn thích ứng dụng này chứ? Hãy cho chúng tôi biết cảm nhận của bạn trên Cửa hàng Google Play để chúng tôi có thể hoàn thiện sản phẩm tốt hơn nữa nhé</string>
@@ -444,12 +436,7 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="reset_artist_image">Đặt lại ảnh nghệ sĩ</string>
     <string name="restore">Khôi phục</string>
     <string name="restore_message">Bạn có muốn khôi phục sao lưu không?</string>
-    <string name="restored_previous_purchase_please_restart">Khôi phục mua trước đó. Vui lòng khởi động lại ứng dụng để sử dụng tất cả các tính năng.</string>
-    <string name="restored_previous_purchases">Đã khôi phục lần mua trước.</string>
-    <string name="restoring_purchase">Đang khôi phục mua hàng...</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Ứng dụng cần quyền truy cập cài đặt thiết bị của bạn để đặt nhạc làm Nhạc chuông</string>
     <string name="ringtone_title">Nhạc chuông (Tùy chọn)</string>
     <string name="permission_alarm_summary">Ứng dụng cần được cấp quyền để lên lịch báo thức chính xác để hẹn giờ ngừng phát</string>
@@ -534,7 +521,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="track_list">Số rãnh</string>
     <string name="translate">Dịch</string>
     <string name="translate_community">Hãy giúp chúng tôi dịch ứng dụng sang ngôn ngữ của bạn nhé</string>
-    <string name="try_retro_music_premium">Thử Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Chia sẻ thiết kế của bạn với Retro Music</string>
     <string name="unlabeled">Chưa gắn nhãn</string>
@@ -570,4 +556,5 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Đi đến nghệ sĩ</string>
 </resources>

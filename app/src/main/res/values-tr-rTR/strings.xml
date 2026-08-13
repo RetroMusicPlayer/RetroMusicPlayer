@@ -109,7 +109,6 @@
     <string name="bug_report_success">Hata raporlama başarılı</string>
     <string name="bug_report_summary">Beklenmedik bir hata oluştu. Bu hatayı bulduğunuz için üzgünüz, eğer durmadan hata veriyorsa \"Verileri Temizleyin\" ya da bir E-posta yollayın </string>
     <string name="bug_report_use_account">GitHub hesabını kullanarak gönder</string>
-    <string name="buy_now">Şimdi satın alın</string>
     <string name="cancel_current_timer">İptal et</string>
     <string name="card">Kart</string>
     <string name="card_color_style">Renkli Kart</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Cihaz bilgileri panoya kopyalandı.</string>
     <string name="could_not_create_playlist">Oynatma listesi oluşturulamadı\u2019.</string>
     <string name="could_not_download_album_cover">"Eşleşen albüm kapağı indirilemedi\u2019."</string>
-    <string name="could_not_restore_purchase">Satın alma bulunamadı.</string>
     <string name="could_not_scan_files">%d dosyası taranamadı.</string>
     <string name="create_action">Oluştur</string>
     <string name="create_new_backup">Oluştur</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Açık Beyaz</string>
     <string name="listeners_label">Dinleyiciler</string>
     <string name="listing_files">Dosyalar listeleniyor</string>
-    <string name="loading_products">Ürünler yükleniyor ...</string>
     <string name="login">Giriş</string>
     <string name="lyrics">Şarkı sözleri</string>
     <string name="made_with_love">Hindistan\'da ❤️ ile yapıldı</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">İzin hatası</string>
     <string name="message_backup_create_success">Yedekleme başarılı bir şekilde oluşturuldu.</string>
     <string name="message_limit_tabs">En fazla 5 öğe</string>
-    <string name="message_pro_feature">%s bir Pro özelliğidir.</string>
     <string name="message_restore_success">Geri yükleme başarıyla tamamlandı.</string>
     <string name="message_updated">Güncellendi</string>
     <string name="message_welcome"><![CDATA[Merhaba! <br>%s\'e<br> hoşgeldin]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Şarkı sözleri bulunamadı</string>
     <string name="no_playing_queue">Hiç çalan şarkı yok</string>
     <string name="no_playlists">Hiç oynatma listeniz bulunmuyor</string>
-    <string name="no_purchase_found">Satın alma bulunamadı.</string>
     <string name="no_results">Sonuç yok</string>
     <string name="no_songs">Hiç şarkınız bulunmuyor</string>
     <string name="no_search_results">Aramanızdan sonuç çıkmadı</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_wallpaper_accent">Duvar kağıdı vurgu rengi</string>
     <string name="pref_title_whitelist">Beyaz liste müziği</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Siyah tema, Şimdi çalınan temalar, Atlıkarınca efekti ve daha fazlası..</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Satın al</string>
     <string name="queue">Kuyruk</string>
     <string name="rate_app">Uygulamayı değerlendirin</string>
     <string name="rate_on_google_play_summary">Bu uygulamayı beğendiniz mi? Nasıl daha iyi yapabileceğimiz konusunda lütfen Google Play Store\'da bize bildirin</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Sanatçı resmini sıfırla</string>
     <string name="restore">Geri yükle</string>
     <string name="restore_message">Yedeklemeyi geri yüklemek istiyor musunuz?</string>
-    <string name="restored_previous_purchase_please_restart">Önceki satın alma işlemi geri yüklendi. Tüm özelliklerden yararlanmak için lütfen uygulamayı yeniden başlatın.</string>
-    <string name="restored_previous_purchases">Önceki satın almalar geri yüklendi.</string>
-    <string name="restoring_purchase">Satın alım geri yükleniyor ...</string>
-    <string name="billing_error">Google Play Faturalar ile iletişim kurulurken bir hata oluştu</string>
     <string name="retro_music_player">Retro Müzik Çalar</string>
-    <string name="retro_music_pro">Retro Müzik Pro</string>
     <string name="ringtone_summary">Müziği zil sesi yapmak için uygulamanın cihaz ayarlarına erişim yetkisi gereklidir</string>
     <string name="ringtone_title">Zil sesi (İsteğe Bağlı)</string>
     <string name="permission_alarm_summary">Uygulamanın alarm ve uyku zamanlayıcısı ayarlamak için özel izinlere ihtiyacı var</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Parça numarası</string>
     <string name="translate">Çevir</string>
     <string name="translate_community">Uygulamayı diline çevirmek için bize yardımcı ol.</string>
-    <string name="try_retro_music_premium">Retro Müzik Premium\'u deneyin</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Tasarımınızı Retro Müzik\'le paylaşın</string>
     <string name="unlabeled">Etiketsiz</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">Klasör görünümüne geçerken son kullanılan dizini geri getir</string>
     <string name="pref_save_last_directory_title">Son Dizini Kaydet</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Sanatçıya git</string>
 </resources>

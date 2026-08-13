@@ -107,7 +107,6 @@
     <string name="bug_report_success">Lapor bug sukses</string>
     <string name="bug_report_summary">Terjadi kesalahan tak terduga. Maaf jika Anda menemukan bug ini, jika terus terjadi maka \"Hapus data aplikasi\" atau kirim Email </string>
     <string name="bug_report_use_account">Kirim dengan menggunakan akun Github</string>
-    <string name="buy_now">Beli sekarang</string>
     <string name="cancel_current_timer">Batal</string>
     <string name="card">Kartu</string>
     <string name="card_color_style">Kartu Berwarna</string>
@@ -133,7 +132,6 @@
     <string name="copied_device_info_to_clipboard">Info perangkat tersalin ke papan klip.</string>
     <string name="could_not_create_playlist">Tidak dapat membuat daftar putar.</string>
     <string name="could_not_download_album_cover">"Tidak dapat mengunduh sampul album yang cocok."</string>
-    <string name="could_not_restore_purchase">Tidak dapat mengembalikan pembelian.</string>
     <string name="could_not_scan_files">Tidak dapat memindai %d berkas.</string>
     <string name="create_action">Buat</string>
     <string name="create_new_backup">Buat</string>
@@ -238,7 +236,6 @@
     <string name="light_theme_name">Putih Terang</string>
     <string name="listeners_label">Pendengar</string>
     <string name="listing_files">Daftar berkas</string>
-    <string name="loading_products">Memuat produk…</string>
     <string name="login">Masuk</string>
     <string name="lyrics">Lirik</string>
     <string name="made_with_love">Dibuat dengan ❤️ di India</string>
@@ -247,7 +244,6 @@
     <string name="md_storage_perm_error">Kesalahan izin</string>
     <string name="message_backup_create_success">Cadangan berhasil dibuat.</string>
     <string name="message_limit_tabs">Tidak lebih dari 5 item</string>
-    <string name="message_pro_feature">%s adalah fitur Pro.</string>
     <string name="message_restore_success">Restorasi sukses.</string>
     <string name="message_updated">Diperbarui</string>
     <string name="message_welcome"><![CDATA[Halo! <br> Selamat datang ke %s]]></string>
@@ -267,7 +263,6 @@
     <string name="no_lyrics_found">Lirik tidak ditemukan</string>
     <string name="no_playing_queue">Tidak ada lagu yang diputar</string>
     <string name="no_playlists">Tidak ada daftar putar</string>
-    <string name="no_purchase_found">Tidak ada pembelian yang ditemukan.</string>
     <string name="no_results">Tidak ada hasil</string>
     <string name="no_songs">Tidak ada lagu</string>
     <string name="no_search_results">No search results</string>
@@ -418,10 +413,7 @@
     <string name="pref_title_toggle_volume">Kontrol volume</string>
     <string name="pref_title_wallpaper_accent">Warna aksen wallpaper</string>
     <string name="pref_title_whitelist">Musik daftar putih</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Tema hitam, tema yang sedang diputar, efek korsel, dan lainnya...</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Pembelian</string>
     <string name="queue">Antrean Putar</string>
     <string name="rate_app">Beri nilai aplikasi</string>
     <string name="rate_on_google_play_summary">Suka aplikasi ini? Beritahu kami di Google Play Store agar kami bisa membuatnya lebih baik</string>
@@ -443,12 +435,7 @@
     <string name="reset_artist_image">Muat ulang gambar artis</string>
     <string name="restore">Pulihkan</string>
     <string name="restore_message">Apakah Anda ingin memulihkan cadangan?</string>
-    <string name="restored_previous_purchase_please_restart">Memulihkan pembelian sebelumnya. Silakan mulai ulang aplikasi untuk menggunakan semua fitur.</string>
-    <string name="restored_previous_purchases">Memulihkan pembelian sebelumnya.</string>
-    <string name="restoring_purchase">Memulihkan pembelian…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">Aplikasi memerlukan izin untuk mengakses setelan perangkat Anda untuk mengatur musik sebagai Nada Dering</string>
     <string name="ringtone_title">Nada Dering (Opsional)</string>
     <string name="permission_alarm_summary">Aplikasi membutuhkan izin untuk menjadwalkan alarm yang tepat untuk mengatur waktu tidur</string>
@@ -533,7 +520,6 @@
     <string name="track_list">Nomor trek</string>
     <string name="translate">Terjemahan</string>
     <string name="translate_community">Bantu kami terjemahkan aplikasi ke dalam bahasa Anda</string>
-    <string name="try_retro_music_premium">Coba Retro Musik Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Bagikan desain Anda dengan Musik Retro</string>
     <string name="unlabeled">Tidak berlabel</string>
@@ -569,4 +555,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Pergi ke artis</string>
 </resources>

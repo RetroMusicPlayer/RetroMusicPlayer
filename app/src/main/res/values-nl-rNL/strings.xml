@@ -109,7 +109,6 @@
     <string name="bug_report_success">Fout rapporteren succesvol</string>
     <string name="bug_report_summary">Een onverwachte fout is opgetreden. Het spijt me dat je deze bug tegengekomen bent. Als het blijft crashen, kies dan \"Clear app data\" of verstuur een email </string>
     <string name="bug_report_use_account">Verstuur door middel van je GitHub-account</string>
-    <string name="buy_now">Kopen</string>
     <string name="cancel_current_timer">Annuleer huidige timer</string>
     <string name="card">Kaart</string>
     <string name="card_color_style">Gekleurde Kaart</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">Apparaatinfo is naar klembord gekopiëerd.</string>
     <string name="could_not_create_playlist">Kon geen afspeellijst maken.</string>
     <string name="could_not_download_album_cover">"Kon geen matchende album cover downloaden."</string>
-    <string name="could_not_restore_purchase">Kon aankoop niet herstellen.</string>
     <string name="could_not_scan_files">Kon %d files niet scannen.</string>
     <string name="create_action">Aanmaken</string>
     <string name="create_new_backup">Aanmaken</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">Clearly wit</string>
     <string name="listeners_label">Luisteraars</string>
     <string name="listing_files">Luister bestanden</string>
-    <string name="loading_products">Podcasts laden...</string>
     <string name="login">Inloggen</string>
     <string name="lyrics">Tekst/Lyrics</string>
     <string name="made_with_love">Gemaakt met ❤️ in India</string>
@@ -249,7 +246,6 @@
     <string name="md_storage_perm_error">Toegangsfout</string>
     <string name="message_backup_create_success">Backup created successfully.</string>
     <string name="message_limit_tabs">Niet meer dan 5 items</string>
-    <string name="message_pro_feature">%s is een Pro-functie.</string>
     <string name="message_restore_success">Herstellen succesvol voltooid.</string>
     <string name="message_updated">Updated</string>
     <string name="message_welcome"><![CDATA[Hallo! <br>Welkom bij %s]]></string>
@@ -269,7 +265,6 @@
     <string name="no_lyrics_found">Geen lyrics gevonden</string>
     <string name="no_playing_queue">Geen nummer draaiend</string>
     <string name="no_playlists">Geen afspeellijsten</string>
-    <string name="no_purchase_found">Geen aankoop gevonden.</string>
     <string name="no_results">Geen resultaten</string>
     <string name="no_songs">Geen liedjes</string>
     <string name="no_search_results">No search results</string>
@@ -420,10 +415,7 @@
     <string name="pref_title_toggle_volume">Volume knoppen</string>
     <string name="pref_title_wallpaper_accent">Achtergrond accentkleur</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Donker thema, \"speelt nu\" thema\'s, Carrousel-effect en nog veel meer..</string>
     <string name="profile">Profiel</string>
-    <string name="purchase">Kopen</string>
     <string name="queue">Wachtrij</string>
     <string name="rate_app">App beoordelen</string>
     <string name="rate_on_google_play_summary">Vind je deze app leuk? Laat het ons weten in de Google Play Store om de ervaring te verbeteren</string>
@@ -445,12 +437,7 @@
     <string name="reset_artist_image">Reset artiest afbeelding</string>
     <string name="restore">Herstellen</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">Vorige aankoop hersteld. Gelieve de app te herstarten om alle functies te benutten.</string>
-    <string name="restored_previous_purchases">Teruggezette aankopen</string>
-    <string name="restoring_purchase">Aankoop herstellen…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Beltoon (Optioneel)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +522,6 @@
     <string name="track_list">Track nummer</string>
     <string name="translate">Vertalen</string>
     <string name="translate_community">Help us translate the app to your language</string>
-    <string name="try_retro_music_premium">Probeer Retro Muziek Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Deel jouw ontwerp met Retro Muziek</string>
     <string name="unlabeled">Niet gelabeld</string>
@@ -571,4 +557,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Ga naar artiest</string>
 </resources>

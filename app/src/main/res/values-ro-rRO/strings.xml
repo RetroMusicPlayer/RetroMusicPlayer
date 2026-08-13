@@ -111,7 +111,6 @@
     <string name="bug_report_success">Raportul de erori s-a încheiat cu succes</string>
     <string name="bug_report_summary">A apărut o eroare neașteptată. Ne pare rău că ai întâmpinat această problemă. Dacă aplicația continuă să se închidă, șterge datele acesteia din setări sau trimite-ne un email </string>
     <string name="bug_report_use_account">Trimiteți utilizând contul GitHub</string>
-    <string name="buy_now">Cumpărați acum</string>
     <string name="cancel_current_timer">Anulează cronometrul curent</string>
     <string name="card">Card</string>
     <string name="card_color_style">Card colorat</string>
@@ -137,7 +136,6 @@
     <string name="copied_device_info_to_clipboard">Informațiile dispozitivului au fost copiate în clipboard.</string>
     <string name="could_not_create_playlist">Nu s-a putut crea playlist.</string>
     <string name="could_not_download_album_cover">"Nu s-a putut desc\u0103rca o copert\u0103 de album corespunz\u0103toare."</string>
-    <string name="could_not_restore_purchase">Nu a putut fi restabilită achiziția.</string>
     <string name="could_not_scan_files">Nu s-au putut scana %d fișiere</string>
     <string name="create_action">Crează</string>
     <string name="create_new_backup">Crează</string>
@@ -242,7 +240,6 @@
     <string name="light_theme_name">Alb</string>
     <string name="listeners_label">Ascultători</string>
     <string name="listing_files">Listarea fișierelor</string>
-    <string name="loading_products">Se încarcă produsele...</string>
     <string name="login">Autentificare</string>
     <string name="lyrics">Versuri</string>
     <string name="made_with_love">Creat cu ❤️ în India</string>
@@ -251,7 +248,6 @@
     <string name="md_storage_perm_error">Eroare de permisiune</string>
     <string name="message_backup_create_success">Copie de rezervă creată cu succes.</string>
     <string name="message_limit_tabs">Cel mult 5 elemente</string>
-    <string name="message_pro_feature">%s este o caracteristică Pro.</string>
     <string name="message_restore_success">Restaurare finalizată cu succes.</string>
     <string name="message_updated">Actualizat</string>
     <string name="message_welcome"><![CDATA[Salut! <br>Bun venit la %s]]></string>
@@ -271,7 +267,6 @@
     <string name="no_lyrics_found">Nu a fost găsite versuri.</string>
     <string name="no_playing_queue">Nicio melodie redată</string>
     <string name="no_playlists">Niciun playlist</string>
-    <string name="no_purchase_found">Nu s-a găsit nicio achiziție.</string>
     <string name="no_results">Niciun rezultat</string>
     <string name="no_songs">Niciun cântec</string>
     <string name="no_search_results">Niciun rezultat găsit</string>
@@ -422,10 +417,7 @@
     <string name="pref_title_toggle_volume">Controale volum</string>
     <string name="pref_title_wallpaper_accent">Culoare de accent fundal</string>
     <string name="pref_title_whitelist">Lista albă de muzică</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Temă neagră, teme pentru ecranul de redare, efectul Carusel și multe altele..</string>
     <string name="profile">Profil</string>
-    <string name="purchase">Procurare</string>
     <string name="queue">Coadă</string>
     <string name="rate_app">Evaluaţi aplicaţia</string>
     <string name="rate_on_google_play_summary">Dacă vă place această aplicație, anunțați-ne în magazinul Google Play pentru a oferi o experiență mai bună</string>
@@ -447,12 +439,7 @@
     <string name="reset_artist_image">Reseteţi imaginea artistului</string>
     <string name="restore">Restabilire</string>
     <string name="restore_message">Doriți să restaurați copia de rezervă?</string>
-    <string name="restored_previous_purchase_please_restart">A fost restaurată achiziția anterioară. Reporniți aplicația pentru a utiliza toate funcțiile.</string>
-    <string name="restored_previous_purchases">Au fost restabilite achizițiile anterioare.</string>
-    <string name="restoring_purchase">Se restabilește achiziția...</string>
-    <string name="billing_error">A apărut o eroare la comunicarea cu Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Cumpărați RetroMusic Pro</string>
     <string name="ringtone_summary">Aplicația are nevoie de permisiunea de a accesa setările dispozitivului pentru a seta muzica ca ton de apel</string>
     <string name="ringtone_title">Ton sonerie (opțional)</string>
     <string name="permission_alarm_summary">Aplicația are nevoie de permisiunea de a programa alarmele exacte pentru a seta temporizatoarele de somn</string>
@@ -537,7 +524,6 @@
     <string name="track_list">Numărul piesei</string>
     <string name="translate">Traducere</string>
     <string name="translate_community">Ajută-ne să traducem aplicația</string>
-    <string name="try_retro_music_premium">Încearcă Retro Muzică Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Împărtășește design-ul tău cu Retro Music</string>
     <string name="unlabeled">Neetichetat</string>
@@ -573,4 +559,5 @@
     <string name="pref_save_last_directory_summary">Când se trece la vizualizarea folderului, se restabilește ultimul director folosit</string>
     <string name="pref_save_last_directory_title">Salvează ultimul director</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">Pagină artist</string>
 </resources>

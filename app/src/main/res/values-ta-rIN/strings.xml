@@ -109,7 +109,6 @@
     <string name="bug_report_success">பிரச்சனை வெற்றிகரமாகத் தெரிவிக்கப்பட்டது</string>
     <string name="bug_report_summary">தெரியாத தவறு ஏற்ப்பட்டுள்ளது. இடையூறுக்கு மன்னிக்கவும், இவ்வாறு மீண்டும் ஏற்பட்டால் \"தகவல்களை அழிக்கவும்\" அல்லது வடிவமைப்பாளரிடம் தெரிவிக்கலாம் </string>
     <string name="bug_report_use_account">கிட்கப்பை பயன்படுத்தி அனுப்பவும்</string>
-    <string name="buy_now">இப்போது வாங்கு</string>
     <string name="cancel_current_timer">இரத்து செய்</string>
     <string name="card">அட்டை</string>
     <string name="card_color_style">வண்ண அட்டை</string>
@@ -135,7 +134,6 @@
     <string name="copied_device_info_to_clipboard">சாதனத்தின் விவரங்கள் நகல் எடுக்கப்பட்டுள்ளது.</string>
     <string name="could_not_create_playlist">இசைப் பட்டியலை உருவாக்க முடியவில்லை.</string>
     <string name="could_not_download_album_cover">"சரியான படத்தைப் பதிவேற்ற முடியவில்லை."</string>
-    <string name="could_not_restore_purchase">மீட்டெடுத்தல் தோல்வி.</string>
     <string name="could_not_scan_files">கோப்பு %d\'யைத் தேட இயலவில்லை.</string>
     <string name="create_action">உருவாக்கு</string>
     <string name="create_new_backup">உருவாக்கு</string>
@@ -240,7 +238,6 @@
     <string name="light_theme_name">முழுமையான வெள்ளை</string>
     <string name="listeners_label">கேட்பவர்கள்</string>
     <string name="listing_files">கேட்கும் கோப்புகள்</string>
-    <string name="loading_products">Loading product…</string>
     <string name="login">உள்நுழை</string>
     <string name="lyrics">பாடல் வரிகள்</string>
     <string name="made_with_love">அன்புடன் இந்தியாவில் உருவாக்கப்பட்டது</string>
@@ -249,10 +246,10 @@
     <string name="md_storage_perm_error">அனுமதி பிழை</string>
     <string name="message_backup_create_success">செயலிகள் மறுபிரதிஎடுத்தல் வெற்றி.</string>
     <string name="message_limit_tabs">5 பொருட்கள் மட்டும்</string>
-    <string name="message_pro_feature">%s ஒரு ப்ரோ அம்சமாகும்.</string>
     <string name="message_restore_success">மீட்டெடுப்பு வெற்றிகரமாக முடிந்தது.</string>
     <string name="message_updated">புதுப்பிக்கப்பட்டது</string>
-    <string name="message_welcome"><![CDATA[வணக்கம்! <br>, %sக்கு வரவேற்கிறோம்]]></string>
+    <string name="message_welcome"><![CDATA[வணக்கம்! <br>, %sக்கு வரவேற்கிறோம்
+]]></string>
     <string name="my_name">பெயர்</string>
     <string name="my_top_tracks">அதிகம் விளையாடியது</string>
     <string name="never">ஒருபோதும்</string>
@@ -269,7 +266,6 @@
     <string name="no_lyrics_found">பாடல் வரிகள் எதுவும் கிடைக்கவில்லை</string>
     <string name="no_playing_queue">பாடல்கள் எதுவும் ஒலிக்கவில்லை</string>
     <string name="no_playlists">உங்களிடம் பாட்டுதொகுப்பு எதும் இல்லை</string>
-    <string name="no_purchase_found">வாங்கி பெற்றதாக எதுவும் இல்லை.</string>
     <string name="no_results">முடிவுகள் இல்லை</string>
     <string name="no_songs">உங்களிடம் பாடல்கள் இல்லை</string>
     <string name="no_search_results">No search results</string>
@@ -420,10 +416,7 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_wallpaper_accent">Wallpaper accent color</string>
     <string name="pref_title_whitelist">Whitelist music</string>
-    <string name="pro">Pro</string>
-    <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
     <string name="profile">Profile</string>
-    <string name="purchase">Purchase</string>
     <string name="queue">Playing Queue</string>
     <string name="rate_app">Rate the app</string>
     <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
@@ -445,12 +438,7 @@
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">Restore</string>
     <string name="restore_message">Do you want to restore backup?</string>
-    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
-    <string name="restored_previous_purchases">Restored previous purchases.</string>
-    <string name="restoring_purchase">Restoring purchase…</string>
-    <string name="billing_error">An error occurred while communicating with Google Play Billing</string>
     <string name="retro_music_player">Retro Music Player</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -535,7 +523,6 @@
     <string name="track_list">Track number</string>
     <string name="translate">Translate</string>
     <string name="translate_community">Help us translate the app to your language</string>
-    <string name="try_retro_music_premium">Try Retro Music Premium</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Share your design with Retro Music</string>
     <string name="unlabeled">Unlabeled</string>
@@ -571,4 +558,5 @@
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
     <string name="pref_save_last_directory_title">Save Last Directory</string>
     <string name="artist_separator_helper_text">To add multiple artists, separate them with: %1$s</string>
+    <string name="go_to_artist">கலைஞரை காணவும்</string>
 </resources>
