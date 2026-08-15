@@ -231,7 +231,22 @@ class LibraryViewModel(
     }
 
     fun albumById(id: Long) = repository.albumById(id)
+
     suspend fun artistById(id: Long) = repository.artistById(id)
+
+    /**
+     * Gets an artist by name instead of ID.
+     *
+     * This is useful for navigating to artists from multi-artist songs where
+     * we only have the artist name, not their ID.
+     *
+     * @param name The artist name to search for
+     * @return Artist object with matching songs, or empty artist if not found
+     */
+    fun artistByName(name: String): LiveData<Artist> = liveData(IO) {
+        emit(repository.artistByName(name))
+    }
+
     suspend fun favoritePlaylist() = repository.favoritePlaylist()
     suspend fun isFavoriteSong(song: SongEntity) = repository.isFavoriteSong(song)
     suspend fun isSongFavorite(songId: Long) = repository.isSongFavorite(songId)
