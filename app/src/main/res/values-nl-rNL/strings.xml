@@ -2,8 +2,8 @@
 <resources>
     <string name="about_album_label">Over %s</string>
     <string name="about_settings_summary">Team, sociale linkjes</string>
-    <string name="accent_color">Accent kleur</string>
-    <string name="accent_color_desc">De accent kleur, standaard naar groen</string>
+    <string name="accent_color">Accentkleur</string>
+    <string name="accent_color_desc">De accentkleur, standaard paars</string>
     <string name="action_about">Over</string>
     <string name="action_add_to_blacklist">Voeg toe aan zwarte lijst</string>
     <string name="action_add_to_favorites">Toevoegen aan favorieten</string>
