@@ -71,7 +71,13 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     }
 
     override fun onPlayingMetaChanged() {
-        viewPager.currentItem = MusicPlayerRemote.position
+        val adapter = viewPager.adapter
+        val queueSize = MusicPlayerRemote.playingQueue.size
+        if (adapter == null || adapter.count != queueSize) {
+            updatePlayingQueue()
+            return
+        }
+        viewPager.currentItem = MusicPlayerRemote.position.coerceIn(0, queueSize - 1)
     }
 
     override fun onQueueChanged() {
