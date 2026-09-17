@@ -312,7 +312,7 @@
     <string name="pref_summary_colored_app_shortcuts">Koloruje skróty aplikacji w kolorze wiodącym. Za każdym razem, gdy zmieniasz kolor, włącz tę opcję, aby zmiany odniosły skutek.</string>
     <string name="pref_summary_cross_fade">Czas płynnego przejścia między utworami</string>
     <string name="pref_summary_desaturated_color">Podążaj za zaleceniami Material Design; w trybie ciemnym kolory powinny być mniej nasycone</string>
-    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
+    <string name="pref_summary_disable_speaker">Wyłącz odtwarzanie z zewnętrznego głośnika</string>
     <string name="pref_summary_expand_now_playing_panel">Kliknięcie powiadomienia pokaże odtwarzacz zamiast ekranu głównego</string>
     <string name="pref_summary_extra_controls">Dodaj dodatkowe przyciski do miniodtwarzacza</string>
     <string name="pref_summary_extra_song_info">Pokaż dodatkowe informacje o utworze, takie jak format pliku, próbkowanie i jakość</string>
@@ -347,7 +347,7 @@
     <string name="pref_title_cross_fade">Płynne przejście (Beta)</string>
     <string name="pref_title_custom_font">Użyj czcionki Manrope</string>
     <string name="pref_title_desaturated_color">Mniej nasycony kolor</string>
-    <string name="pref_title_disable_speaker">Disable internal speaker</string>
+    <string name="pref_title_disable_speaker">Wyłącz zewnętrzny głośnik</string>
     <string name="pref_title_expand_now_playing_panel">Wyświetl teraz odtwarzane</string>
     <string name="pref_title_extra_controls">Dodatkowe przyciski kontroli</string>
     <string name="pref_title_extra_song_info">Informacje o utworze</string>
@@ -454,7 +454,7 @@
     <string name="sort_order_year_asc"></string>
     <string name="sort_order_year_desc">Rok malejąco</string>
     <string name="sort_order_z_a">Malejąco</string>
-    <string name="speaker_disabled">Internal speaker playback is disabled</string>
+    <string name="speaker_disabled">Odtwarzanie na wewnętrznym głośniku jest wyłączone</string>
     <string name="speech_not_supported">Twoje urządzenie nie obsługuje wprowadzania głosowego</string>
     <string name="speech_prompt">Przeszukaj swoją bibliotekę</string>
     <string name="stack">Stos</string>
