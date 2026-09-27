@@ -425,7 +425,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     override fun onResume() {
         super.onResume()
-        checkForMargins()
+        // Not checkForMargins() here: it only knows about the bottom nav bar,
+        // and re-running it on every resume would stomp the mini-player-aware
+        // margin the libraryViewModel.fabMargin observer above already keeps
+        // live on binding.recyclerView, bringing back #1478 as soon as the
+        // fragment resumes while a song is playing.
     }
 
     private fun checkForMargins() {
