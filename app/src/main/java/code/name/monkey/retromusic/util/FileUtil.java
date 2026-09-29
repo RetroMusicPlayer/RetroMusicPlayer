@@ -37,9 +37,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import code.name.monkey.retromusic.Constants;
@@ -49,6 +51,15 @@ import code.name.monkey.retromusic.repository.RealSongRepository;
 import code.name.monkey.retromusic.repository.SortedCursor;
 
 public final class FileUtil {
+
+  // android.webkit.MimeTypeMap lacks entries for these audio extensions on many
+  // Android versions/OEM builds, so fileIsMimeType() falls back to this table.
+  private static final Map<String, String> EXTENSION_MIME_FALLBACK = new HashMap<>();
+
+  static {
+    EXTENSION_MIME_FALLBACK.put("opus", "audio/opus");
+    EXTENSION_MIME_FALLBACK.put("oga", "audio/ogg");
+  }
 
   private FileUtil() {}
 
@@ -181,6 +192,13 @@ public final class FileUtil {
       }
       String fileExtension = filename.substring(dotPos + 1).toLowerCase(Locale.ROOT);
       String fileType = mimeTypeMap.getMimeTypeFromExtension(fileExtension);
+      if (fileType == null) {
+        // android.webkit.MimeTypeMap does not know about some audio extensions
+        // (e.g. "opus") on many Android versions/OEM builds, even though the
+        // platform's media stack can decode them. Fall back to a manual map so
+        // those files aren't silently excluded from audio filters.
+        fileType = EXTENSION_MIME_FALLBACK.get(fileExtension);
+      }
       if (fileType == null) {
         return false;
       }
