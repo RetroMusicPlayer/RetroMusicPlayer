@@ -121,6 +121,16 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
         setUpBreadCrumbs()
         checkForMargins()
+        // The static bottom-nav margin above only accounts for the bottom
+        // nav bar. When a song is playing, the mini player sits on top of
+        // it, which otherwise hides the last file in the list (#1478).
+        // libraryViewModel.fabMargin already tracks that combined height —
+        // AbsRecyclerViewFragment observes it for its shuffle FAB the same way.
+        libraryViewModel.getFabMargin().observe(viewLifecycleOwner) {
+            binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = it
+            }
+        }
         setUpRecyclerView()
         setUpAdapter()
         setUpTitle()
@@ -415,7 +425,11 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     override fun onResume() {
         super.onResume()
-        checkForMargins()
+        // Not checkForMargins() here: it only knows about the bottom nav bar,
+        // and re-running it on every resume would stomp the mini-player-aware
+        // margin the libraryViewModel.fabMargin observer above already keeps
+        // live on binding.recyclerView, bringing back #1478 as soon as the
+        // fragment resumes while a song is playing.
     }
 
     private fun checkForMargins() {
