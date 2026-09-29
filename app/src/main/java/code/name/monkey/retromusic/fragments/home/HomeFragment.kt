@@ -67,7 +67,10 @@ class HomeFragment :
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
-        binding.titleWelcome.text = String.format("%s", userName)
+        val name = userName?.trim().orEmpty()
+        val hasCustomName = name.isNotEmpty() && name != getString(R.string.user_name)
+        binding.titleWelcome.isVisible = hasCustomName
+        binding.titleWelcome.text = name
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
