@@ -19,7 +19,9 @@ import code.name.monkey.retromusic.ALBUM_ARTIST
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.util.ArtistSeparator
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.logD
 import java.text.Collator
 
 interface ArtistRepository {
@@ -36,6 +38,8 @@ interface ArtistRepository {
     fun artist(artistId: Long): Artist
 
     fun albumArtist(artistName: String): Artist
+
+    fun artistByName(name: String): Artist
 }
 
 class RealArtistRepository(
@@ -97,6 +101,60 @@ class RealArtistRepository(
             )
         )
         return Artist(artistName, albumRepository.splitIntoAlbums(songs), true)
+    }
+
+    /**
+     * Finds an artist by name, searching across all songs and handling multi-artist metadata.
+     *
+     * This method uses ArtistSeparator to split artist names and find songs where the
+     * specified artist appears (even if they're one of multiple artists on a song).
+     *
+     * @param name The artist name to search for (case-insensitive)
+     * @return Artist object with all matching songs grouped into albums,
+     *         or empty Artist if no songs found
+     */
+    override fun artistByName(name: String): Artist {
+        logD("artistByName: Searching for artist '$name'")
+
+        // Handle special case for Various Artists
+        if (name.equals(Artist.VARIOUS_ARTISTS_DISPLAY_NAME, ignoreCase = true)) {
+            logD("artistByName: Detected Various Artists")
+            return artist(Artist.VARIOUS_ARTISTS_ID)
+        }
+
+        // Get all songs from the media store
+        val allSongs = songRepository.songs(
+            songRepository.makeSongCursor(
+                null,
+                null,
+                getSongLoaderSortOrder()
+            )
+        )
+
+        // Filter songs where the artist name appears
+        // Uses ArtistSeparator to handle multi-artist metadata like "Artist1 / Artist2"
+        val songsForArtist = allSongs.filter { song ->
+            val artistNames = ArtistSeparator.split(song.artistName)
+            artistNames.any { it.equals(name, ignoreCase = true) }
+        }
+
+        logD("artistByName: Found ${songsForArtist.size} songs for '$name'")
+
+        // If no songs found, return empty artist
+        if (songsForArtist.isEmpty()) {
+            logD("artistByName: No songs found for '$name', returning empty artist")
+            return Artist.empty
+        }
+
+        // Group songs into albums
+        val albums = albumRepository.splitIntoAlbums(songsForArtist)
+        logD("artistByName: Grouped into ${albums.size} albums")
+
+        // Generate a stable ID from the artist name
+        // Using hashCode ensures the same name always gets the same ID
+        val artistId = name.hashCode().toLong()
+
+        return Artist(artistId, albums)
     }
 
     override fun artists(): List<Artist> {
