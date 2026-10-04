@@ -87,7 +87,7 @@
     <string name="backup_restore_title"><![CDATA[Copia de seguridad y restauración]]></string>
     <string name="backup_title">Copias de seguridad</string>
     <string name="biography">Biografías</string>
-    <string name="black_theme_name">Sólo negro</string>
+    <string name="black_theme_name">Solo negro</string>
     <string name="blacklist">Lista negra</string>
     <string name="bluetooth_summary">La aplicación necesita el permiso de los dispositivos cercanos para buscar dispositivos bluetooth</string>
     <string name="bluetooth_title">Dispositivos cercanos</string>
