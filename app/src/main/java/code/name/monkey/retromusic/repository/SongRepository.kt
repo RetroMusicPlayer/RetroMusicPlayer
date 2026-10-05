@@ -35,6 +35,18 @@ import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
+import java.text.Normalizer
+
+/**
+ * Strips diacritics and lowercases, so accent-insensitive search can compare
+ * "paris" against "París" with a plain [String.contains].
+ */
+private fun String.normalizeForSearch(): String =
+    Normalizer.normalize(this, Normalizer.Form.NFD)
+        .replace(DIACRITICS_REGEX, "")
+        .lowercase()
+
+private val DIACRITICS_REGEX = Regex("\\p{Mn}+")
 
 /**
  * Created by hemanths on 10/08/17.
@@ -110,7 +122,11 @@ class RealSongRepository(private val context: Context) : SongRepository {
     }
 
     override fun songs(query: String): List<Song> {
-        return songs(makeSongCursor(AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%")))
+        // SQLite's LIKE isn't accent-aware, so "paris" won't match "París" via a
+        // MediaStore query. Normalize both sides and filter in memory instead.
+        // See https://github.com/RetroMusicPlayer/RetroMusicPlayer/issues/645.
+        val normalizedQuery = query.normalizeForSearch()
+        return songs().filter { it.title.normalizeForSearch().contains(normalizedQuery) }
     }
 
     override fun song(songId: Long): Song {
