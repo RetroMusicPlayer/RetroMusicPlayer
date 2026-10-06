@@ -16,13 +16,19 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import android.database.Cursor
+import android.os.Build
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
+import androidx.annotation.RequiresApi
 import code.name.monkey.retromusic.Constants.BASE_SELECTION
 import code.name.monkey.retromusic.Constants.baseProjection
+import code.name.monkey.retromusic.helper.SortOrder.SongSortOrder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.attribute.BasicFileAttributes
 import java.util.*
 
 /**
@@ -35,8 +41,37 @@ object SongLoader {
     fun getAllSongs(
         context: Context
     ): ArrayList<Song> {
-        val cursor = makeSongCursor(context, null, null)
-        return getSongs(cursor)
+        val requestedSortOrder = PreferenceUtil.getInstance(context).songSortOrder
+        val wantsRealDateCreated = requestedSortOrder == SongSortOrder.SONG_DATE_CREATED
+
+        // the sentinel isn't valid SQL — query with a safe order and resort after.
+        val cursor = makeSongCursor(
+            context, null, null,
+            if (wantsRealDateCreated) SongSortOrder.SONG_A_Z else requestedSortOrder
+        )
+        val songs = getSongs(cursor)
+        return if (wantsRealDateCreated) sortByFileCreationDate(songs) else songs
+    }
+
+    private fun sortByFileCreationDate(songs: ArrayList<Song>): ArrayList<Song> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            // java.nio.file.Files needs API 26+; older devices fall back to date modified
+            // rather than crash — not what was asked for, but better than breaking sort.
+            return ArrayList(songs.sortedByDescending { it.dateModified })
+        }
+        return ArrayList(songs.sortedByDescending { fileTimestampMillis(it) })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun fileTimestampMillis(song: Song): Long {
+        return try {
+            Files.readAttributes(Paths.get(song.data), BasicFileAttributes::class.java)
+                .creationTime().toMillis()
+        } catch (e: Exception) {
+            // creation time unsupported on this filesystem, or the file's gone missing —
+            // fall back to date modified (converted to millis to stay comparable).
+            song.dateModified * 1000L
+        }
     }
 
     fun getSongs(

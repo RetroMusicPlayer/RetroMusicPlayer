@@ -94,6 +94,18 @@ class SortOrder {
             /* Song sort modified date */
             const val SONG_DATE_MODIFIED = MediaStore.Audio.Media.DATE_MODIFIED + " DESC"
 
+            /*
+             * Song sort order: real file creation date.
+             *
+             * MediaStore has no column for actual filesystem creation time — DATE_ADDED is
+             * just when the media scanner indexed the file, which goes stale the moment you
+             * move or re-copy a folder of songs. This is a sentinel, not a SQL fragment: it
+             * must never be passed straight to ContentResolver.query as a sort order. Callers
+             * query with a safe fallback order instead and sort the resulting list in Kotlin
+             * using the real creation time read from each file (see SongLoader).
+             */
+            const val SONG_DATE_CREATED = "song_date_created_clientside"
+
             /* Song sort order composer*/
             const val COMPOSER = MediaStore.Audio.Media.COMPOSER
         }
