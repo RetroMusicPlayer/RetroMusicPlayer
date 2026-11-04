@@ -47,8 +47,6 @@ class LockScreenActivity : AbsMusicServiceActivity() {
     private lateinit var binding: ActivityLockScreenBinding
     private var fragment: LockScreenControlsFragment? = null
 
-    // The player is shown over the lock screen, so it has to go away once the user unlocks the
-    // phone, by fingerprint or any other way, instead of waiting for a swipe (#2055).
     private val userPresentReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             finish()
