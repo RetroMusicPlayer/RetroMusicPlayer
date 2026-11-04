@@ -934,7 +934,9 @@ class MusicService : MediaBrowserServiceCompat(),
 
     fun removeSongs(songs: List<Song>) {
         for (song in songs) {
-            removeSongImpl(song)
+            while (playingQueue.contains(song) || originalPlayingQueue.contains(song)) {
+                removeSongImpl(song)
+            }
         }
         notifyChange(QUEUE_CHANGED)
     }

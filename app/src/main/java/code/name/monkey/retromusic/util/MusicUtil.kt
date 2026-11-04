@@ -429,7 +429,7 @@ object MusicUtil : KoinComponent {
                     while (!cursor.isAfterLast) {
                         val id = cursor.getLong(BaseColumns._ID)
                         val song: Song = songRepository.song(id)
-                        removeFromQueue(song)
+                        removeFromQueue(listOf(song))
                         cursor.moveToNext()
                     }
 
