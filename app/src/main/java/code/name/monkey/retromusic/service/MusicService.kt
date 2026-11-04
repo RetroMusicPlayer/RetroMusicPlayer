@@ -932,10 +932,6 @@ class MusicService : MediaBrowserServiceCompat(),
         notifyChange(QUEUE_CHANGED)
     }
 
-    /**
-     * Removes the songs from the queue entirely. A song can be queued more than once,
-     * and removing deleted files has to take out every copy, not just the first (#2066).
-     */
     fun removeSongs(songs: List<Song>) {
         for (song in songs) {
             while (playingQueue.contains(song) || originalPlayingQueue.contains(song)) {
