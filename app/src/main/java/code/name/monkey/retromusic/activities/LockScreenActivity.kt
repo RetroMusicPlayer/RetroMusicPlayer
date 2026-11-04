@@ -15,8 +15,13 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.KeyguardManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -41,6 +46,12 @@ import com.r0adkll.slidr.model.SlidrPosition
 class LockScreenActivity : AbsMusicServiceActivity() {
     private lateinit var binding: ActivityLockScreenBinding
     private var fragment: LockScreenControlsFragment? = null
+
+    private val userPresentReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            finish()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +104,21 @@ class LockScreenActivity : AbsMusicServiceActivity() {
                 //          or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
             )
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        ContextCompat.registerReceiver(
+            this,
+            userPresentReceiver,
+            IntentFilter(Intent.ACTION_USER_PRESENT),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(userPresentReceiver)
     }
 
     override fun onPlayingMetaChanged() {
