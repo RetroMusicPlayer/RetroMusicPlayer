@@ -347,7 +347,7 @@
     <string name="pref_title_cross_fade">Плавное затухание (бета-версия)</string>
     <string name="pref_title_custom_font">Использовать шрифт Manrope</string>
     <string name="pref_title_desaturated_color">Тусклый цвет</string>
-    <string name="pref_title_disable_speaker">Disable internal speaker</string>
+    <string name="pref_title_disable_speaker">Отключить динамик</string>
     <string name="pref_title_expand_now_playing_panel">Показывать экран воспроизведения</string>
     <string name="pref_title_extra_controls">Дополнительные элементы управления</string>
     <string name="pref_title_extra_song_info">Информация о треке</string>
@@ -504,10 +504,10 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
     <string name="could_not_write_tags_to_file">Не удалось записать теги в музыкальный файл!</string>
     <string name="sleep_timer_no_permission">Нет расписание на установку будильников, пожалуйста, представьте разрешение.</string>
-    <string name="scanning_folders_files">Scanning folders and files…</string>
+    <string name="scanning_folders_files">…*Сканирование папок и файлов*…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_title">Сохранить последний каталог</string>
     <string name="go_to_artist">Перейти к исполнителю</string>
     <!-- The following strings are unused but kept as non-translatable to resolve ExtraTranslation lint errors in 45+ languages without bulk-editing them. -->
 </resources>
