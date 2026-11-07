@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension.asBitmapPalette
 import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
@@ -114,6 +115,9 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             IntentFilter(Intent.ACTION_USER_PRESENT),
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
+        if (!PreferenceUtil.isLockScreen) {
+            finish()
+        }
     }
 
     override fun onStop() {
