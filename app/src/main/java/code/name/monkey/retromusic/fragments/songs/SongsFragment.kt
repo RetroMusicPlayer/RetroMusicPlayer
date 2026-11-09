@@ -72,7 +72,9 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
 
         adapter.notifyItemChanged(currentPosition)
 
-        recyclerView.scrollToPosition(currentPosition)
+        if (currentPosition != previousPlayingPosition && PreferenceUtil.scrollToPlayingSong) {
+            recyclerView.scrollToPosition(currentPosition)
+        }
 
         previousPlayingPosition = currentPosition
     }
