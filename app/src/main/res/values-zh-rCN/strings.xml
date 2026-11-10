@@ -127,7 +127,7 @@
     <string name="delete_playlist_x"><![CDATA[确定删除播放列表 <b>%1$s</b> 吗？]]></string>
     <string name="delete_playlists_title">删除播放列表</string>
     <string name="delete_song_title">删除歌曲</string>
-    <string name="delete_song_x"><![CDATA[是否删除歌曲 <b>％1$s</b>？]]></string>
+    <string name="delete_song_x"><![CDATA[是否删除歌曲 <b>%1$s</b>？]]></string>
     <string name="delete_songs_title">删除歌曲</string>
     <string name="delete_x_playlists"><![CDATA[是否删除 <b>%1$d</b> 个播放列表？]]></string>
     <string name="delete_x_songs"><![CDATA[是否删除 <b>%1$d</b> 首歌曲？]]></string>
