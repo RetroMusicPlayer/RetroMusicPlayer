@@ -12,8 +12,10 @@ object ArtistSeparator {
      */
     val SEPARATORS: Array<String> = arrayOf("/", ";", ",", "feat.", "ft.")
 
-    private val regex = SEPARATORS.joinToString("|") { 
-        Regex.escape(it) 
+    // A "/" only separates artists when it has whitespace around it ("A / B").
+    // Without spaces it is usually part of a name, like "AC/DC" or "K/DA".
+    private val regex = SEPARATORS.joinToString("|") {
+        if (it == "/") "\\s+/\\s+" else Regex.escape(it)
     }.toRegex(RegexOption.IGNORE_CASE)
 
     /**
@@ -21,6 +23,7 @@ object ArtistSeparator {
      * 
      * Examples:
      * - `"Artist1 / Artist2"` → `["Artist1", "Artist2"]`
+     * - `"AC/DC"` → `["AC/DC"]`
      * - `"Artist1 feat. Artist2"` → `["Artist1", "Artist2"]`
      * - `"Artist1, Artist2, Artist3"` → `["Artist1", "Artist2", "Artist3"]`
      * 
