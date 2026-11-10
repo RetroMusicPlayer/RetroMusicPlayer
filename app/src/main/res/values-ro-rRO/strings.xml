@@ -323,6 +323,7 @@
     <string name="pref_summary_pause_history">Când este activată, melodiile noi recent redate, nu vor apărea în istoric</string>
     <string name="pref_summary_remember_tab">Navigați la ultima filă folosită la pornire</string>
     <string name="pref_summary_enable_search_playlist">Afișează un câmp de căutare în playlist</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Arată Noul Mix de Muzică pe ecranul principal</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Activează schimbarea melodiei prin glisare oriunde pe ecranul cu melodia redată actuală</string>
     <string name="pref_summary_swipe_to_dismiss">Glisează în jos pentru a închide mini player-ul</string>
@@ -364,6 +365,7 @@
     <string name="pref_title_pause_history">Istoric de pauze</string>
     <string name="pref_title_remember_tab">Reține ultima filă</string>
     <string name="pref_title_enable_search_playlist">Permite căutarea în playlist</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Arată sugestiile</string>
     <string name="pref_title_swipe_anywhere_now_playing">Glisează oriunde pentru a schimba melodia</string>
     <string name="pref_title_swipe_to_dismiss">Respinge prin glisare în jos</string>
