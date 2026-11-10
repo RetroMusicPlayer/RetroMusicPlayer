@@ -325,6 +325,7 @@
     <string name="pref_summary_pause_history">Pokud povoleno, nově přehrané skladby se nezobrazí v historii</string>
     <string name="pref_summary_remember_tab">Při spuštění přejít na poslední použitou záložku</string>
     <string name="pref_summary_enable_search_playlist">Zobrazit pole vyhledávání v seznamu skladeb</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Zobrazit Mix Nové Hudby na domovské obrazovce</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Umožňuje změnu skladby přejetím kdekoliv na obrazovce přehrávání</string>
     <string name="pref_summary_swipe_to_dismiss">Přejetím dolů zavřete mini přehrávač</string>
@@ -366,6 +367,7 @@
     <string name="pref_title_pause_history">Pozastavit historii</string>
     <string name="pref_title_remember_tab">Zapamatovat si poslední záložku</string>
     <string name="pref_title_enable_search_playlist">Povolit vyhledávání v seznamu skladeb</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Zobrazit návrhy</string>
     <string name="pref_title_swipe_anywhere_now_playing">Přejeďte kdekoliv pro změnu skladby</string>
     <string name="pref_title_swipe_to_dismiss">Zavřít přejetím dolů</string>
