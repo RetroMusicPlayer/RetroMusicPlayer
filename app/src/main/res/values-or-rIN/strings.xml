@@ -321,6 +321,7 @@
     <string name="pref_summary_pause_history">ସକ୍ଷମ ହେଲେ, ନୂଆ ପ୍ଲେ ହୋଇଥିବା ଗୀତ ଇତିହାସରେ ଦେଖାଯିବ ନାହିଁ</string>
     <string name="pref_summary_remember_tab">ଆପ୍ ଆରମ୍ଭରେ ଗତ ବ୍ୟବହୃତ ଟ୍ୟାବ୍କୁ ଯାଆନ୍ତୁ</string>
     <string name="pref_summary_enable_search_playlist">ଏକ ପ୍ଲେଲିଷ୍ଟରେ ସନ୍ଧାନ ଫିଲ୍ଡ ଦେଖାନ୍ତୁ</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">ହୋମସ୍କ୍ରିନ୍‌ରେ ନୂଆ ମ୍ୟୁଜିକ୍ ମିକ୍ସ ଦେଖାନ୍ତୁ</string>
     <string name="pref_summary_swipe_anywhere_now_playing">ବର୍ତ୍ତମାନ ଚାଲୁଥିବା ସ୍କ୍ରିନ୍‌ରେ ଯେକୌଣସି ସ୍ଥାନରେ ସ୍ୱାଇପ୍ କରି ଗୀତ ବଦଳାଇବାକୁ ସକ୍ଷମ କରେ</string>
     <string name="pref_summary_swipe_to_dismiss">ମିନି ପ୍ଲେୟାର୍ ବନ୍ଦ କରିବା ପାଇଁ ତଳକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ</string>
@@ -362,6 +363,7 @@
     <string name="pref_title_pause_history">ଇତିହାସ ପଜ୍ କରନ୍ତୁ</string>
     <string name="pref_title_remember_tab">ଶେଷ ଟ୍ୟାବ୍ ମନେରଖନ୍ତୁ</string>
     <string name="pref_title_enable_search_playlist">ପ୍ଲେଲିଷ୍ଟରେ ସନ୍ଧାନ ସକ୍ଷମ କରନ୍ତୁ</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">ପରାମର୍ଶ ଦେଖାନ୍ତୁ</string>
     <string name="pref_title_swipe_anywhere_now_playing">ଗୀତ ବଦଳାଇବା ପାଇଁ ଯେକୌଣସି ସ୍ଥାନରେ ସ୍ୱାଇପ୍ କରନ୍ତୁ</string>
     <string name="pref_title_swipe_to_dismiss">ତଳକୁ ସ୍ୱାଇପ୍ କରି ବନ୍ଦ କରନ୍ତୁ</string>
