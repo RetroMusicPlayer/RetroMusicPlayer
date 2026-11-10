@@ -332,6 +332,7 @@
     <string name="pref_summary_pause_history">عند التمكين، لن تظهر الأغاني المشغلة حديثا في المحفوظات</string>
     <string name="pref_summary_remember_tab">الانتقال إلى آخر علامة تبويب مستخدمة عند البدء</string>
     <string name="pref_summary_enable_search_playlist">إظهار حقل البحث في قائمة التشغيل</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">إظهار خليط موسيقي جديد على الشاشة الرئيسية</string>
     <string name="pref_summary_swipe_anywhere_now_playing">تمكين تغيير الأغنية بالسحب في أي مكان على الشاشة المشغلة الآن</string>
     <string name="pref_summary_swipe_to_dismiss">اسحب للأسفل لإلغاء المشغل الصغير</string>
@@ -373,6 +374,7 @@
     <string name="pref_title_pause_history">إيقاف السجل المؤقت</string>
     <string name="pref_title_remember_tab">تذكر التبويب الأخير</string>
     <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">عرض الاقتراحات</string>
     <string name="pref_title_swipe_anywhere_now_playing">اسحب في أي مكان لتغيير الأغنية</string>
     <string name="pref_title_swipe_to_dismiss">تجاهل مع السحب لأسفل</string>
