@@ -321,6 +321,7 @@
     <string name="pref_summary_pause_history">Quando ativado, as músicas tocadas recentemente não serão exibidas no histórico</string>
     <string name="pref_summary_remember_tab">Navegar para a última guia usada ao iniciar</string>
     <string name="pref_summary_enable_search_playlist">Exibir um campo de busca na playlist</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Mostrar \"Mix de Novas Músicas\" na tela inicial</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permite mudar a música deslizando em qualquer lugar na tela em reprodução</string>
     <string name="pref_summary_swipe_to_dismiss">Deslize para baixo para fechar o mini reprodutor</string>
@@ -362,6 +363,7 @@
     <string name="pref_title_pause_history">Pausar histórico</string>
     <string name="pref_title_remember_tab">Lembrar a última guia</string>
     <string name="pref_title_enable_search_playlist">Habilitar busca na playlist</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Mostrar sugestões</string>
     <string name="pref_title_swipe_anywhere_now_playing">Deslize em qualquer lugar para mudar a música</string>
     <string name="pref_title_swipe_to_dismiss">Fechar com deslize para baixo</string>
