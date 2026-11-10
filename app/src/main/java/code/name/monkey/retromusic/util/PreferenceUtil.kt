@@ -82,6 +82,7 @@ import code.name.monkey.retromusic.REMEMBER_LAST_TAB
 import code.name.monkey.retromusic.SAF_SDCARD_URI
 import code.name.monkey.retromusic.SAVE_LAST_DIRECTORY
 import code.name.monkey.retromusic.SCREEN_ON_LYRICS
+import code.name.monkey.retromusic.SCROLL_TO_PLAYING_SONG
 import code.name.monkey.retromusic.SHOW_LYRICS
 import code.name.monkey.retromusic.SHOW_WHEN_LOCKED
 import code.name.monkey.retromusic.SLEEP_TIMER_FINISH_SONG
@@ -790,6 +791,9 @@ object PreferenceUtil {
 
     val enableSearchPlaylist: Boolean
         get() = sharedPreferences.getBoolean(ENABLE_SEARCH_PLAYLIST, true)
+
+    val scrollToPlayingSong: Boolean
+        get() = sharedPreferences.getBoolean(SCROLL_TO_PLAYING_SONG, true)
 
     var lastTab: Int
         get() = sharedPreferences
