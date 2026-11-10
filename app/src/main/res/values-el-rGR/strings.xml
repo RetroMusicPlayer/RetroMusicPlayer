@@ -321,6 +321,7 @@
     <string name="pref_summary_pause_history">Όταν είναι ενεργοποιημένο, τα τραγούδια που αναπαράχθηκαν πρόσφατα δε θα εμφανίζονται στο ιστορικό</string>
     <string name="pref_summary_remember_tab">Μεταβείτε στην τελευταία χρησιμοποιημένη καρτέλα κατά την έναρξη</string>
     <string name="pref_summary_enable_search_playlist">Εμφάνιση πεδίου αναζήτησης σε μια λίστα αναπαραγωγής</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Εμφάνιση Νέας Μίξης στην αρχική οθόνη</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Επιτρέπει την αλλαγή τραγουδιού σύροντας οπουδήποτε στην οθόνη αναπαραγωγής</string>
     <string name="pref_summary_swipe_to_dismiss">Σύρετε προς τα κάτω για να κλείσετε τον μίνι αναπαραγωγέα</string>
@@ -362,6 +363,7 @@
     <string name="pref_title_pause_history">Παύση ιστορικού</string>
     <string name="pref_title_remember_tab">Απομνημόνευση τελευταίας καρτέλας</string>
     <string name="pref_title_enable_search_playlist">Ενεργοποίηση αναζήτησης σε λίστα αναπαραγωγής</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Εμφάνιση προτάσεων</string>
     <string name="pref_title_swipe_anywhere_now_playing">Σύρετε οπουδήποτε για να αλλάξετε τραγούδι</string>
     <string name="pref_title_swipe_to_dismiss">Κλείσιμο με σάρωση προς τα κάτω</string>
