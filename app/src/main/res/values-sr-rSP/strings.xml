@@ -323,6 +323,7 @@
     <string name="pref_summary_pause_history">Када је укључено, нове песме се неће чувати у историји</string>
     <string name="pref_summary_remember_tab">При покретању отвори последњу коришћену картицу</string>
     <string name="pref_summary_enable_search_playlist">Омогући претрагу песaма унутар плејлисте</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Прикажи „New Music Mix“ на почетном екрану</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Омогући промену песме превлачењем прста преко целог екрана плејера</string>
     <string name="pref_summary_swipe_to_dismiss">Спусти мини плејер покретом на доле</string>
@@ -364,6 +365,7 @@
     <string name="pref_title_pause_history">Паузирај историју</string>
     <string name="pref_title_remember_tab">Запамти последњу отворену картицу</string>
     <string name="pref_title_enable_search_playlist">Омогући претрагу у плејлисти</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Прикажи предлоге</string>
     <string name="pref_title_swipe_anywhere_now_playing">Превуци било где да промениш песму</string>
     <string name="pref_title_swipe_to_dismiss">Затвори превлачењем надоле</string>
