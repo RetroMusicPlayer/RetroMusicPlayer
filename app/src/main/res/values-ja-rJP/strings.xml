@@ -320,6 +320,7 @@
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
     <string name="pref_summary_remember_tab">開始時に最後に表示したタブに移動します</string>
     <string name="pref_summary_enable_search_playlist">プレイリストに検索フィールドを表示する</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">新曲ミックスをホーム画面に表示する</string>
     <string name="pref_summary_swipe_anywhere_now_playing">再生中画面のどこかをスワイプして、楽曲の変更を行います</string>
     <string name="pref_summary_swipe_to_dismiss">下にスワイプしてミニプレイヤーを閉じます</string>
@@ -361,6 +362,7 @@
     <string name="pref_title_pause_history">視聴履歴を一時停止</string>
     <string name="pref_title_remember_tab">最後に開いたタブを記憶する</string>
     <string name="pref_title_enable_search_playlist">プレイリスト内の検索を有効にする</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">候補を表示する</string>
     <string name="pref_title_swipe_anywhere_now_playing">画面のどこかをスワイプして曲変更する</string>
     <string name="pref_title_swipe_to_dismiss">下スワイプで閉じる</string>
