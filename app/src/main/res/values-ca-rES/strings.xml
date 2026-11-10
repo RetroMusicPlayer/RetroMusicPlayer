@@ -321,6 +321,7 @@
     <string name="pref_summary_pause_history">Quan està activat, les cançons recentment reproduïdes no es mostraran a l\'historial</string>
     <string name="pref_summary_remember_tab">Navega a l\'última pestanya utilitzada quan s\'obre l\'aplicació</string>
     <string name="pref_summary_enable_search_playlist">Mostra una barra de cerca a la llista</string>
+    <string name="pref_summary_scroll_to_playing_song">Scroll the Songs list to the song that starts playing</string>
     <string name="pref_summary_suggestions">Mostra un Mix de Música recentment afegit a la pantalla d\'inici</string>
     <string name="pref_summary_swipe_anywhere_now_playing">Permet canviar la cançó fent lliscar el dit a qualsevol lloc de la pantalla de la reproducció en curs</string>
     <string name="pref_summary_swipe_to_dismiss">Llisqueu cap avall per tancar el reproductor mini</string>
@@ -362,6 +363,7 @@
     <string name="pref_title_pause_history">Fes una pausa a l\'historial</string>
     <string name="pref_title_remember_tab">Recorda la darrera pestanya</string>
     <string name="pref_title_enable_search_playlist">Activa la cerca a la llista</string>
+    <string name="pref_title_scroll_to_playing_song">Scroll to the playing song</string>
     <string name="pref_title_suggestions">Mostra els suggeriments</string>
     <string name="pref_title_swipe_anywhere_now_playing">Llisqueu a qualsevol lloc per canviar la cançó</string>
     <string name="pref_title_swipe_to_dismiss">Ignora amb lliscar cap avall</string>
