@@ -48,7 +48,6 @@ import code.name.monkey.retromusic.databinding.FragmentFolderBinding
 import code.name.monkey.retromusic.extensions.dip
 
 import code.name.monkey.retromusic.extensions.showToast
-import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.openQueueKeepShuffleMode
@@ -521,7 +520,7 @@ class FoldersFragment : AbsMainActivityFragment(R.layout.fragment_folder),
 
     private fun setUpBreadCrumbs() {
         binding.breadCrumbs.setActivatedContentColor(
-            textColorPrimary()
+            accentColor(requireContext())
         )
         binding.breadCrumbs.setDeactivatedContentColor(
             textColorSecondary()

@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.views;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -316,6 +317,7 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
     LinearLayout child = (LinearLayout) view;
     TextView tv = (TextView) child.getChildAt(0);
     tv.setTextColor(contentColor);
+    tv.setTypeface(null, isActive ? Typeface.BOLD : Typeface.NORMAL);
     ImageView iv = (ImageView) child.getChildAt(1);
     iv.setColorFilter(contentColor, PorterDuff.Mode.SRC_IN);
     if (noArrowIfAlone && getChildCount() == 1) {
