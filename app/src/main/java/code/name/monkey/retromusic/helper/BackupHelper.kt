@@ -4,7 +4,12 @@ import android.content.Context
 import android.os.Environment
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.db.HistoryEntity
+import code.name.monkey.retromusic.db.PlayCountEntity
 import code.name.monkey.retromusic.db.PlaylistEntity
+import code.name.monkey.retromusic.db.RetroDatabase
+import code.name.monkey.retromusic.db.toHistoryEntity
+import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.db.toSongEntity
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.zipOutputStream
@@ -15,6 +20,8 @@ import code.name.monkey.retromusic.repository.SongRepository
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -27,6 +34,7 @@ import java.util.zip.ZipInputStream
 object BackupHelper : KoinComponent {
     private val repository by inject<Repository>()
     private val songRepository by inject<SongRepository>()
+    private val database by inject<RetroDatabase>()
 
     suspend fun createBackup(context: Context, name: String) {
         val backupFile =
@@ -39,9 +47,11 @@ object BackupHelper : KoinComponent {
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         zipItems.addAll(getCustomArtistZipItems(context))
+        zipItems.addAll(getListeningDataZipItems(context))
         zipAll(context, zipItems, backupFile)
         // Clean Cache Playlist Directory
         File(context.filesDir, PLAYLISTS_PATH).deleteRecursively()
+        File(context.filesDir, LISTENING_PATH).deleteRecursively()
     }
 
     private suspend fun zipAll(context: Context, zipItems: List<ZipItem>, backupFile: File) =
@@ -66,6 +76,98 @@ object BackupHelper : KoinComponent {
                 }
             }
         }
+
+    private suspend fun getListeningDataZipItems(context: Context): List<ZipItem> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val folder = File(context.filesDir, LISTENING_PATH)
+                if (!folder.exists()) folder.mkdirs()
+                val root = JSONObject()
+                root.put("version", 1)
+                root.put("history", JSONArray().also { arr ->
+                    database.historyDao().allHistory().forEach { arr.put(it.toJson()) }
+                })
+                root.put("playCounts", JSONArray().also { arr ->
+                    database.playCountDao().playCountSongs().forEach { arr.put(it.toJson()) }
+                })
+                val file = File(folder, LISTENING_FILE)
+                file.writeText(root.toString(), Charsets.UTF_8)
+                listOf(ZipItem(file.absolutePath, LISTENING_PATH.child(LISTENING_FILE)))
+            }.getOrDefault(emptyList())
+        }
+
+    // Songs are matched by title/artist/album/duration, not by MediaStore id or file path,
+    // because both change when the library moves to another device.
+    private suspend fun restoreListeningData(zipIn: ZipInputStream) {
+        val text = zipIn.readBytes().toString(Charsets.UTF_8)
+        val root = JSONObject(text)
+        val songs = songRepository.songs()
+        val byFullKey = songs.groupBy { songKey(it.title, it.artistName, it.albumName) }
+        val byShortKey = songs.groupBy { songKey(it.title, it.artistName, null) }
+
+        fun findSong(o: JSONObject): Song? {
+            val title = o.optString("title")
+            val artist = o.optString("artist_name")
+            val album = o.optString("album_name")
+            val duration = o.optLong("duration")
+            val candidates = byFullKey[songKey(title, artist, album)]
+                ?: byShortKey[songKey(title, artist, null)]
+                ?: return null
+            return candidates.firstOrNull { kotlin.math.abs(it.duration - duration) <= 2000 }
+                ?: candidates.first()
+        }
+
+        val historyDao = database.historyDao()
+        val playCountDao = database.playCountDao()
+        root.optJSONArray("history")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                val song = findSong(o) ?: continue
+                historyDao.upsertSongInHistory(song.toHistoryEntity(o.optLong("time_played")))
+            }
+        }
+        root.optJSONArray("playCounts")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                val song = findSong(o) ?: continue
+                val existing = playCountDao.findSongExistInPlayCount(song.id)
+                val count = maxOf(o.optInt("play_count"), existing?.playCount ?: 0)
+                val timePlayed = maxOf(o.optLong("time_played"), existing?.timePlayed ?: 0L)
+                playCountDao.upsertSongInPlayCount(
+                    song.toPlayCount().let {
+                        PlayCountEntity(
+                            id = it.id, title = it.title, trackNumber = it.trackNumber,
+                            year = it.year, duration = it.duration, data = it.data,
+                            dateModified = it.dateModified, albumId = it.albumId,
+                            albumName = it.albumName, artistId = it.artistId,
+                            artistName = it.artistName, composer = it.composer,
+                            albumArtist = it.albumArtist, timePlayed = timePlayed,
+                            playCount = count
+                        )
+                    }
+                )
+            }
+        }
+    }
+
+    private fun songKey(title: String, artist: String, album: String?): String {
+        fun n(s: String) = s.trim().lowercase(Locale.ROOT)
+        return if (album == null) "${n(title)}|${n(artist)}" else "${n(title)}|${n(artist)}|${n(album)}"
+    }
+
+    private fun HistoryEntity.toJson() = JSONObject().apply {
+        put("title", title); put("artist_name", artistName); put("album_name", albumName)
+        put("duration", duration); put("track_number", trackNumber); put("year", year)
+        put("composer", composer ?: JSONObject.NULL); put("album_artist", albumArtist ?: JSONObject.NULL)
+        put("time_played", timePlayed)
+    }
+
+    private fun PlayCountEntity.toJson() = JSONObject().apply {
+        put("title", title); put("artist_name", artistName); put("album_name", albumName)
+        put("duration", duration); put("track_number", trackNumber); put("year", year)
+        put("composer", composer ?: JSONObject.NULL); put("album_artist", albumArtist ?: JSONObject.NULL)
+        put("time_played", timePlayed); put("play_count", playCount)
+    }
 
     private suspend fun getPlaylistZipItems(context: Context): List<ZipItem> {
         val playlistZipItems = mutableListOf<ZipItem>()
@@ -150,6 +252,8 @@ object BackupHelper : KoinComponent {
                         restorePreferences(context, it, entry)
                     } else if (entry.isImageEntry() && contents.contains(USER_IMAGES)) {
                         restoreImages(context, it, entry)
+                    } else if (entry.isListeningEntry() && contents.contains(LISTENING_DATA)) {
+                        restoreListeningData(it)
                     } else if (entry.isCustomArtistEntry() && contents.contains(CUSTOM_ARTIST_IMAGES)) {
                         if (entry.isCustomArtistPrefEntry()) {
                             restoreCustomArtistPrefs(context, it, entry)
@@ -261,6 +365,8 @@ object BackupHelper : KoinComponent {
     private const val PLAYLISTS_PATH = "Playlists"
     private const val SETTINGS_PATH = "prefs"
     private const val IMAGES_PATH = "userImages"
+    private const val LISTENING_PATH = "listening"
+    private const val LISTENING_FILE = "listening.json"
     private const val CUSTOM_ARTISTS_PATH = "artistImages"
     private const val THEME_PREFS_KEY_DEFAULT = "[[kabouzeid_app-theme-helper]]"
 
@@ -270,6 +376,10 @@ object BackupHelper : KoinComponent {
 
     private fun ZipEntry.isPreferenceEntry(): Boolean {
         return name.startsWith(SETTINGS_PATH)
+    }
+
+    private fun ZipEntry.isListeningEntry(): Boolean {
+        return name.startsWith(LISTENING_PATH)
     }
 
     private fun ZipEntry.isImageEntry(): Boolean {
@@ -320,5 +430,6 @@ enum class BackupContent {
     SETTINGS,
     USER_IMAGES,
     CUSTOM_ARTIST_IMAGES,
-    PLAYLISTS
+    PLAYLISTS,
+    LISTENING_DATA
 }

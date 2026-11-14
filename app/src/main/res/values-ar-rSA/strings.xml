@@ -519,4 +519,5 @@
     <string name="pref_summary_scroll_to_playing_song">تمرير قائمة الأغاني إلى الأغنية التي بدأ تشغيلها</string>
     <string name="pref_title_scroll_to_playing_song">التمرير إلى الأغنية الجاري تشغيلها</string>
     <string name="go_to_artist">الانتقال إلى الفنان</string>
+    <string name="listening_data">سجل الاستماع وعدد مرات التشغيل</string>
 </resources>

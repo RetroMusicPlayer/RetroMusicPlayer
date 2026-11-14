@@ -528,4 +528,5 @@
     <string name="try_retro_music_premium" translatable="false" />
     <string name="listing_files" translatable="false" />
 
+    <string name="listening_data">Listening history and play counts</string>
 </resources>
