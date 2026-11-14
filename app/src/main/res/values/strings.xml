@@ -550,4 +550,6 @@
     <string name="pref_title_home_covers_angle">Tilt angle</string>
     <string name="pref_title_home_covers_darkness">Darkness</string>
     <string name="pref_title_home_covers_count">Number of covers</string>
+    <string name="cover_seek_forward">+10s</string>
+    <string name="cover_seek_back">−10s</string>
 </resources>

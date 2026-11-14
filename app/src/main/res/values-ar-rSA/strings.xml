@@ -541,4 +541,6 @@
     <string name="pref_title_home_covers_angle">زاوية الميل</string>
     <string name="pref_title_home_covers_darkness">درجة التعتيم</string>
     <string name="pref_title_home_covers_count">عدد الأغلفة</string>
+    <string name="cover_seek_forward">+10 ث</string>
+    <string name="cover_seek_back">−10 ث</string>
 </resources>

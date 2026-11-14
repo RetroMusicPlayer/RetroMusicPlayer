@@ -23,6 +23,8 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
   - Strings in values and values-ar-rSA.
   - Revision (user feedback, 2026-11-14): the wall is now full screen (height = visible area, set in `HomeFragment.sizeCoverHeader()`), sits at the very top; the user image and lists start below it and appear when scrolling up. Tapping any cover plays that song right away (`MusicPlayerRemote.openQueue` with the wall's songs, starting at the tapped one; hit-testing in `TiltedCoverGridView.hitTest`). Tiles are sized from the short side of the view; default 24 covers (12/24/36/48). Fade to background over the last 30%. Not done: wall behind the toolbar/status bar (toolbar still sits above it).
 
+- Player cover gestures (written 2026-11-14, not built/tested): `views/CoverGestureLayout` is now the root of `fragment_player_album_cover.xml`. Drag up/down on the cover = music volume with a small bar (`volumeOverlay`); double tap right/left half = +/-10 s (`seekFeedback`). Plain taps are held back for the double-tap timeout and then replayed so the cover's own click (lyrics dialog) still works. The player panel can no longer be collapsed by dragging the cover itself (disallowIntercept on DOWN). Horizontal swipes still change songs through the ViewPager.
+
 ## Next, in order
 4. Merge artists (dropdown of existing artists) and album rename that regroups songs, written into the MP3 tags (existing tag editor in activities/tageditor).
 5. Synced lyrics from LRCLIB (no key, no limit); LrcView already exists; tap a line to seek.

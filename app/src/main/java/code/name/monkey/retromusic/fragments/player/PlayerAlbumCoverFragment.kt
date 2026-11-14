@@ -51,6 +51,8 @@ import code.name.monkey.retromusic.util.CoverLyricsType
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import code.name.monkey.retromusic.views.CoverGestureLayout
+import kotlin.math.roundToInt
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -118,6 +120,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPlayerAlbumCoverBinding.bind(view)
         setupViewPager()
+        setupGestures()
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this, 500, 1000)
         maybeInitLyrics()
         lrcView.apply {
@@ -129,6 +132,43 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
             setOnClickListener {
                 goToLyrics(requireActivity())
             }
+        }
+    }
+
+    private val hideVolume = Runnable { _binding?.volumeOverlay?.isVisible = false }
+    private val hideSeekFeedback = Runnable { _binding?.seekFeedback?.isVisible = false }
+
+    /** Drag up/down on the cover = volume, double tap right/left = +/-10 seconds. */
+    private fun setupGestures() {
+        (binding.root as CoverGestureLayout).apply {
+            onVolumeChanged = { fraction ->
+                _binding?.let {
+                    it.volumeOverlay.removeCallbacks(hideVolume)
+                    it.volumeOverlay.isVisible = true
+                    it.volumeBar.setProgressCompat((fraction * 100).roundToInt(), false)
+                }
+            }
+            onVolumeGestureEnd = {
+                _binding?.volumeOverlay?.postDelayed(hideVolume, 800)
+            }
+            onDoubleTap = { forward -> skipSeconds(if (forward) 10 else -10) }
+        }
+    }
+
+    private fun skipSeconds(seconds: Int) {
+        val duration = MusicPlayerRemote.songDurationMillis
+        val position = MusicPlayerRemote.songProgressMillis
+        if (duration <= 0 || position < 0) return
+        MusicPlayerRemote.seekTo((position + seconds * 1000).coerceIn(0, duration))
+        _binding?.seekFeedback?.let {
+            it.removeCallbacks(hideSeekFeedback)
+            it.setText(if (seconds > 0) R.string.cover_seek_forward else R.string.cover_seek_back)
+            (it.layoutParams as android.widget.FrameLayout.LayoutParams).gravity =
+                android.view.Gravity.CENTER_VERTICAL or
+                        (if (seconds > 0) android.view.Gravity.END else android.view.Gravity.START)
+            it.requestLayout()
+            it.isVisible = true
+            it.postDelayed(hideSeekFeedback, 600)
         }
     }
 
@@ -172,6 +212,8 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(R.layout.fragment_playe
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .unregisterOnSharedPreferenceChangeListener(this)
         binding.viewPager.removeOnPageChangeListener(this)
+        binding.volumeOverlay.removeCallbacks(hideVolume)
+        binding.seekFeedback.removeCallbacks(hideSeekFeedback)
         progressViewUpdateHelper?.stop()
         _binding = null
     }
