@@ -91,6 +91,11 @@ class HomeFragment :
         libraryViewModel.getHomeCovers().observe(viewLifecycleOwner) {
             binding.coverGrid.setCovers(it)
         }
+        // The wall fills the whole visible area; the lists start below it.
+        binding.container.doOnLayout { sizeCoverHeader() }
+        binding.coverGrid.onSongClick = { songs, index ->
+            MusicPlayerRemote.openQueue(songs, index, true)
+        }
 
         loadProfile()
         setupTitle()
@@ -198,6 +203,15 @@ class HomeFragment :
         binding.lastAdded.elevatedAccentColor()
         binding.topPlayed.elevatedAccentColor()
         binding.actionShuffle.elevatedAccentColor()
+    }
+
+    private fun sizeCoverHeader() {
+        val height = binding.container.height
+        if (height > 0) {
+            binding.coverHeader.updateLayoutParams<ViewGroup.LayoutParams> {
+                this.height = height
+            }
+        }
     }
 
     private fun setupCovers() {

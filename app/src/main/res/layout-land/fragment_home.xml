@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/coverHeader" />
 
             <FrameLayout
                 android:id="@+id/coverHeader"
@@ -55,7 +55,7 @@
                 android:clipChildren="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageLayout">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <code.name.monkey.retromusic.views.TiltedCoverGridView
                     android:id="@+id/coverGrid"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/coverHeader" />
+                app:layout_constraintTop_toBottomOf="@id/imageLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

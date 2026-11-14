@@ -25,6 +25,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.model.Song
@@ -34,6 +36,9 @@ import com.bumptech.glide.request.transition.Transition
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.hypot
+import kotlin.math.min
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
  * A wall of album covers drawn at an angle, darkened, slowly scrolling sideways.
@@ -48,6 +53,25 @@ class TiltedCoverGridView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private var covers: List<Bitmap> = emptyList()
+    private var coverSongs: List<Song> = emptyList()
+
+    /** Called with the songs on the wall and the index of the one that was tapped. */
+    var onSongClick: ((songs: List<Song>, index: Int) -> Unit)? = null
+
+    private val tapDetector = GestureDetector(
+        context,
+        object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDown(e: MotionEvent): Boolean = covers.isNotEmpty()
+
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
+                val index = hitTest(e.x, e.y)
+                if (index < 0) return false
+                playSoundEffect(android.view.SoundEffectConstants.CLICK)
+                onSongClick?.invoke(coverSongs, index)
+                return true
+            }
+        }
+    )
     private val targets = ArrayList<CustomTarget<Bitmap>>()
     private var loadedKey: List<Long> = emptyList()
     private var loading = false
@@ -85,18 +109,21 @@ class TiltedCoverGridView @JvmOverloads constructor(
         if (songs.isEmpty()) {
             loading = false
             covers = emptyList()
+            coverSongs = emptyList()
             invalidate()
             return
         }
         loading = true
-        val size = (140 * density).toInt()
+        val size = (120 * density).toInt()
         val loaded = arrayOfNulls<Bitmap>(songs.size)
         var finished = 0
         fun onOneFinished() {
             finished++
             if (finished == songs.size) {
                 loading = false
-                covers = loaded.filterNotNull()
+                val keep = loaded.indices.filter { loaded[it] != null }
+                covers = keep.map { loaded[it]!! }
+                coverSongs = keep.map { songs[it] }
                 invalidate()
             }
         }
@@ -138,7 +165,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
             Color.BLACK
         }
         fadePaint.shader = LinearGradient(
-            0f, h * 0.55f, 0f, h.toFloat(),
+            0f, h * 0.7f, 0f, h.toFloat(),
             Color.TRANSPARENT, surface, Shader.TileMode.CLAMP
         )
     }
@@ -151,7 +178,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
             drawGrid(canvas, list, w, h)
         }
         canvas.drawRect(0f, 0f, w, h, shadePaint)
-        canvas.drawRect(0f, h * 0.55f, w, h, fadePaint)
+        canvas.drawRect(0f, h * 0.7f, w, h, fadePaint)
 
         if (shouldAnimate(list)) {
             val now = System.nanoTime()
@@ -166,32 +193,82 @@ class TiltedCoverGridView @JvmOverloads constructor(
         }
     }
 
-    private fun drawGrid(canvas: Canvas, list: List<Bitmap>, w: Float, h: Float) {
-        val tile = h / 2.3f
-        val gap = 6f * density
-        val step = tile + gap
-        val diagonal = hypot(w, h)
-        val cells = ceil(diagonal / step).toInt() + 2
-        val startX = w / 2f - diagonal / 2f
-        val startY = h / 2f - diagonal / 2f
+    /** Layout numbers shared by drawing and tap detection. */
+    private class Grid(
+        val tile: Float,
+        val step: Float,
+        val cells: Int,
+        val startX: Float,
+        val startY: Float
+    )
 
+    private fun gridFor(w: Float, h: Float): Grid {
+        // Tiles are sized from the short side so the wall looks the same in portrait and landscape.
+        val tile = min(w, h) / 3.2f
+        val step = tile + 6f * density
+        val diagonal = hypot(w, h)
+        return Grid(
+            tile = tile,
+            step = step,
+            cells = ceil(diagonal / step).toInt() + 2,
+            startX = w / 2f - diagonal / 2f,
+            startY = h / 2f - diagonal / 2f
+        )
+    }
+
+    private fun rowShiftAndFrac(row: Int, step: Float): Pair<Int, Float> {
+        val total = offsetPx * (if (row % 2 == 0) 1f else -1f)
+        val shift = floor(total / step).toInt()
+        return shift to (total - shift * step)
+    }
+
+    private fun drawGrid(canvas: Canvas, list: List<Bitmap>, w: Float, h: Float) {
+        val g = gridFor(w, h)
         val saved = canvas.save()
         canvas.rotate(-angleDeg, w / 2f, h / 2f)
-        for (row in 0 until cells) {
-            val direction = if (row % 2 == 0) 1f else -1f
-            val total = offsetPx * direction
-            val shift = floor(total / step).toInt()
-            val frac = total - shift * step
-            val y = startY + row * step
-            for (col in 0 until cells) {
-                val x = startX + (col - 1) * step + frac
+        for (row in 0 until g.cells) {
+            val (shift, frac) = rowShiftAndFrac(row, g.step)
+            val y = g.startY + row * g.step
+            for (col in 0 until g.cells) {
+                val x = g.startX + (col - 1) * g.step + frac
                 val bitmap = list[Math.floorMod(col - shift + row * 3, list.size)]
                 src.set(0, 0, bitmap.width, bitmap.height)
-                dst.set(x, y, x + tile, y + tile)
+                dst.set(x, y, x + g.tile, y + g.tile)
                 canvas.drawBitmap(bitmap, src, dst, tilePaint)
             }
         }
         canvas.restoreToCount(saved)
+    }
+
+    /** Index in [coverSongs] of the cover under the touch point, or -1 for a gap / nothing. */
+    private fun hitTest(touchX: Float, touchY: Float): Int {
+        val list = covers
+        if (list.isEmpty()) return -1
+        val w = width.toFloat()
+        val h = height.toFloat()
+        val g = gridFor(w, h)
+        // Undo the canvas rotation: rotate the touch point back around the centre.
+        val rad = Math.toRadians(angleDeg.toDouble())
+        val dx = touchX - w / 2f
+        val dy = touchY - h / 2f
+        val px = (w / 2f + dx * cos(rad) - dy * sin(rad)).toFloat()
+        val py = (h / 2f + dx * sin(rad) + dy * cos(rad)).toFloat()
+
+        val rowF = (py - g.startY) / g.step
+        val row = floor(rowF).toInt()
+        if (row < 0 || row >= g.cells) return -1
+        if ((rowF - row) * g.step > g.tile) return -1
+        val (shift, frac) = rowShiftAndFrac(row, g.step)
+        val colF = (px - g.startX - frac) / g.step
+        val colMinus1 = floor(colF).toInt()
+        if ((colF - colMinus1) * g.step > g.tile) return -1
+        val col = colMinus1 + 1
+        if (col < 0 || col >= g.cells) return -1
+        return Math.floorMod(col - shift + row * 3, list.size)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        return tapDetector.onTouchEvent(event) || super.onTouchEvent(event)
     }
 
     private fun shouldAnimate(list: List<Bitmap>): Boolean {

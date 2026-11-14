@@ -797,8 +797,8 @@ object PreferenceUtil {
         get() = sharedPreferences.getStringOrDefault(HOME_COVERS_DARKNESS, "50").toIntOrNull() ?: 50
 
     val homeCoversCount: Int
-        get() = (sharedPreferences.getStringOrDefault(HOME_COVERS_COUNT, "12").toIntOrNull()
-            ?: 12).coerceIn(4, 48)
+        get() = (sharedPreferences.getStringOrDefault(HOME_COVERS_COUNT, "24").toIntOrNull()
+            ?: 24).coerceIn(4, 48)
 
     val pauseHistory: Boolean
         get() = sharedPreferences.getBoolean(

@@ -275,16 +275,16 @@
     </string-array>
 
     <string-array name="pref_home_covers_count_titles" translatable="false">
-        <item>6</item>
         <item>12</item>
-        <item>18</item>
         <item>24</item>
+        <item>36</item>
+        <item>48</item>
     </string-array>
 
     <string-array name="pref_home_covers_count_values" translatable="false">
-        <item>6</item>
         <item>12</item>
-        <item>18</item>
         <item>24</item>
+        <item>36</item>
+        <item>48</item>
     </string-array>
 </resources>
