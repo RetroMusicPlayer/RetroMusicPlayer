@@ -19,4 +19,7 @@ class HomeBinding(
     val recyclerView = homeBinding.homeContent.recyclerView
     val titleWelcome = homeBinding.imageLayout.titleWelcome
     val suggestions = homeBinding.homeContent.suggestions
+    val coverHeader = homeBinding.coverHeader
+    val coverGrid = homeBinding.coverGrid
+    val coverLogo = homeBinding.coverLogo
 }

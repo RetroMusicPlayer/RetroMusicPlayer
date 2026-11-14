@@ -48,6 +48,7 @@ class LibraryViewModel(
     private val _paletteColor = MutableLiveData<Int>()
     private val home = MutableLiveData<List<Home>>()
     private val suggestions = MutableLiveData<List<Song>>()
+    private val homeCovers = MutableLiveData<List<Song>>()
     private val albums = MutableLiveData<List<Album>>()
     private val songs = MutableLiveData<List<Song>>()
     private val artists = MutableLiveData<List<Artist>>()
@@ -105,6 +106,28 @@ class LibraryViewModel(
     fun getHome(): LiveData<List<Home>> = home
 
     fun getSuggestions(): LiveData<List<Song>> = suggestions
+
+    fun getHomeCovers(): LiveData<List<Song>> = homeCovers
+
+    /**
+     * Picks the songs whose covers go on the home cover wall: one per album, from the last played
+     * songs (source 0) or the most played ones (source 1). A fresh install with no history falls
+     * back to a random pick from the library so the wall is never empty.
+     */
+    fun loadHomeCovers(source: Int, count: Int) {
+        viewModelScope.launch(IO) {
+            val primary = if (source == 1) {
+                repository.topPlayedSongs()
+            } else {
+                repository.historySong().map { it.toSong() }
+            }
+            var picked = primary.distinctBy { it.albumId }.take(count)
+            if (picked.isEmpty()) {
+                picked = repository.allSongs().distinctBy { it.albumId }.shuffled().take(count)
+            }
+            homeCovers.postValue(picked)
+        }
+    }
 
     fun getFabMargin(): LiveData<Int> = fabMargin
 

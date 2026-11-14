@@ -100,6 +100,12 @@ import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
 import code.name.monkey.retromusic.TOGGLE_HEADSET
 import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
 import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
+import code.name.monkey.retromusic.HOME_COVERS_ANGLE
+import code.name.monkey.retromusic.HOME_COVERS_COUNT
+import code.name.monkey.retromusic.HOME_COVERS_DARKNESS
+import code.name.monkey.retromusic.HOME_COVERS_ENABLED
+import code.name.monkey.retromusic.HOME_COVERS_SOURCE
+import code.name.monkey.retromusic.HOME_COVERS_SPEED
 import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.USER_NAME
 import code.name.monkey.retromusic.WALLPAPER_ACCENT
@@ -770,6 +776,29 @@ object PreferenceUtil {
             TOGGLE_SUGGESTIONS,
             true
         )
+
+    val homeCoversEnabled: Boolean
+        get() = sharedPreferences.getBoolean(HOME_COVERS_ENABLED, true)
+
+    /** 0 = last played, 1 = most played. */
+    val homeCoversSource: Int
+        get() = sharedPreferences.getStringOrDefault(HOME_COVERS_SOURCE, "0").toIntOrNull() ?: 0
+
+    /** Scroll speed in dp per second, 0 = static. */
+    val homeCoversSpeed: Int
+        get() = sharedPreferences.getStringOrDefault(HOME_COVERS_SPEED, "20").toIntOrNull() ?: 20
+
+    /** Tilt in degrees. */
+    val homeCoversAngle: Int
+        get() = sharedPreferences.getStringOrDefault(HOME_COVERS_ANGLE, "15").toIntOrNull() ?: 15
+
+    /** Dark overlay strength in percent. */
+    val homeCoversDarkness: Int
+        get() = sharedPreferences.getStringOrDefault(HOME_COVERS_DARKNESS, "50").toIntOrNull() ?: 50
+
+    val homeCoversCount: Int
+        get() = (sharedPreferences.getStringOrDefault(HOME_COVERS_COUNT, "12").toIntOrNull()
+            ?: 12).coerceIn(4, 48)
 
     val pauseHistory: Boolean
         get() = sharedPreferences.getBoolean(

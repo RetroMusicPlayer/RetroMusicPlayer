@@ -88,6 +88,9 @@ class HomeFragment :
         libraryViewModel.getHome().observe(viewLifecycleOwner) {
             homeAdapter.swapData(it)
         }
+        libraryViewModel.getHomeCovers().observe(viewLifecycleOwner) {
+            binding.coverGrid.setCovers(it)
+        }
 
         loadProfile()
         setupTitle()
@@ -118,6 +121,11 @@ class HomeFragment :
                 )
             )
             reenterTransition = null
+        }
+
+        // Tapping the logo on the cover wall opens the listening stats.
+        binding.coverLogo.setOnClickListener {
+            findNavController().navigate(R.id.listening_stats_fragment, null, navOptions)
         }
 
         binding.lastAdded.setOnClickListener {
@@ -192,6 +200,21 @@ class HomeFragment :
         binding.actionShuffle.elevatedAccentColor()
     }
 
+    private fun setupCovers() {
+        val enabled = PreferenceUtil.homeCoversEnabled
+        binding.coverHeader.isVisible = enabled
+        if (!enabled) return
+        binding.coverGrid.configure(
+            PreferenceUtil.homeCoversAngle,
+            PreferenceUtil.homeCoversDarkness,
+            PreferenceUtil.homeCoversSpeed
+        )
+        libraryViewModel.loadHomeCovers(
+            PreferenceUtil.homeCoversSource,
+            PreferenceUtil.homeCoversCount
+        )
+    }
+
     private fun checkForMargins() {
         if (mainActivity.isBottomNavVisible) {
             binding.recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
@@ -206,8 +229,11 @@ class HomeFragment :
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
         menu.findItem(R.id.action_settings).setShowAsAction(SHOW_AS_ACTION_IF_ROOM)
-        // The nav destination id doubles as the menu item id.
-        menu.add(Menu.NONE, R.id.listening_stats_fragment, 9, R.string.listening_stats)
+        // The nav destination id doubles as the menu item id. With the cover wall on, the logo
+        // opens the stats instead, so the menu entry is only needed when the wall is off.
+        if (!PreferenceUtil.homeCoversEnabled) {
+            menu.add(Menu.NONE, R.id.listening_stats_fragment, 9, R.string.listening_stats)
+        }
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
             binding.toolbar,
@@ -325,6 +351,9 @@ class HomeFragment :
         super.onResume()
         checkForMargins()
         libraryViewModel.forceReload(ReloadType.HomeSections)
+        setupCovers()
+        // The stats menu entry depends on whether the cover wall is on.
+        requireActivity().invalidateMenu()
         exitTransition = null
     }
 

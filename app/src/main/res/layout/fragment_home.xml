@@ -47,6 +47,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <FrameLayout
+                android:id="@+id/coverHeader"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:clipChildren="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageLayout">
+
+                <code.name.monkey.retromusic.views.TiltedCoverGridView
+                    android:id="@+id/coverGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:importantForAccessibility="no" />
+
+                <ImageView
+                    android:id="@+id/coverLogo"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/home_logo_description"
+                    android:src="@drawable/ic_launcher_foreground" />
+            </FrameLayout>
+
             <include
                 android:id="@+id/home_content"
                 layout="@layout/home_content"
@@ -54,7 +79,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageLayout" />
+                app:layout_constraintTop_toBottomOf="@id/coverHeader" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

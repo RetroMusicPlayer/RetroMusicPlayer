@@ -527,4 +527,18 @@
     <string name="listening_last_7_days">آخر 7 أيام: %1$s</string>
     <string name="listening_duration_format">%1$d س %2$d د</string>
     <string name="listening_empty">لا يوجد شيء مسجل بعد. شغّل بعض الأغاني ثم عد إلى هنا.</string>
+    <string name="home_logo_description">شعار R Music، يفتح إحصائيات الاستماع</string>
+    <string name="pref_title_home_covers">جدار الأغلفة في الرئيسية</string>
+    <string name="pref_summary_home_covers">أغلفة ألبومات مائلة في أعلى الشاشة الرئيسية</string>
+    <string name="pref_title_home_covers_source">مصدر الأغلفة</string>
+    <string name="home_covers_last_played">آخر ما تم تشغيله</string>
+    <string name="home_covers_most_played">الأكثر تشغيلاً</string>
+    <string name="pref_title_home_covers_speed">سرعة الحركة</string>
+    <string name="home_covers_speed_off">بدون حركة</string>
+    <string name="home_covers_speed_slow">بطيئة</string>
+    <string name="home_covers_speed_medium">متوسطة</string>
+    <string name="home_covers_speed_fast">سريعة</string>
+    <string name="pref_title_home_covers_angle">زاوية الميل</string>
+    <string name="pref_title_home_covers_darkness">درجة التعتيم</string>
+    <string name="pref_title_home_covers_count">عدد الأغلفة</string>
 </resources>

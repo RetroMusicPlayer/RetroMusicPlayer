@@ -221,4 +221,70 @@
         <item>@string/choose_image</item>
         <item>@string/remove_image</item>
     </string-array>
+
+    <string-array name="pref_home_covers_source_titles">
+        <item>@string/home_covers_last_played</item>
+        <item>@string/home_covers_most_played</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_source_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_speed_titles">
+        <item>@string/home_covers_speed_off</item>
+        <item>@string/home_covers_speed_slow</item>
+        <item>@string/home_covers_speed_medium</item>
+        <item>@string/home_covers_speed_fast</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_speed_values" translatable="false">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_angle_titles" translatable="false">
+        <item>10°</item>
+        <item>15°</item>
+        <item>20°</item>
+        <item>30°</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_angle_values" translatable="false">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_darkness_titles" translatable="false">
+        <item>30%</item>
+        <item>50%</item>
+        <item>70%</item>
+        <item>85%</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_darkness_values" translatable="false">
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>85</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_count_titles" translatable="false">
+        <item>6</item>
+        <item>12</item>
+        <item>18</item>
+        <item>24</item>
+    </string-array>
+
+    <string-array name="pref_home_covers_count_values" translatable="false">
+        <item>6</item>
+        <item>12</item>
+        <item>18</item>
+        <item>24</item>
+    </string-array>
 </resources>

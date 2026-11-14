@@ -15,8 +15,14 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
   - Backup: listening.json is now version 2 with an `events` array; restore skips duplicates (same played_at + title + artist) and still imports events for songs missing from the library.
   - Known limit: if the app is killed while a song is playing/paused, that last session is lost (flush only happens on song change and service destroy).
 
+- Step 3 (written 2026-11-14, not yet confirmed by CI): home cover wall.
+  - `views/TiltedCoverGridView` draws a tilted, darkened grid of album covers (rows alternate direction, seamless scroll, stops when hidden / speed 0 / system animations off). Covers loaded with Glide as small bitmaps.
+  - `fragment_home.xml` (+ `layout-land`): `coverHeader` FrameLayout under the user image, holds the grid and `coverLogo` (launcher foreground). Tapping the logo opens `listening_stats_fragment`. The Home overflow "Listening stats" entry now only shows when the wall is turned off.
+  - `LibraryViewModel.loadHomeCovers(source, count)`: one song per album from history (0) or top played (1); falls back to a random library pick when empty.
+  - Settings in pref_ui.xml (Home category): switch + source / speed / angle / darkness / count as list prefs. Keys in Constants.kt (`HOME_COVERS_*`), accessors in PreferenceUtil.
+  - Strings in values and values-ar-rSA.
+
 ## Next, in order
-3. Home screen: tilted dark cover grid (last played / most played), optional animation, settings for speed/angle/darkness/count/source; tapping the logo opens stats. Own design, do not copy DroidDeck or Retro Music logo art.
 4. Merge artists (dropdown of existing artists) and album rename that regroups songs, written into the MP3 tags (existing tag editor in activities/tageditor).
 5. Synced lyrics from LRCLIB (no key, no limit); LrcView already exists; tap a line to seek.
 6. Artist info button (MusicBrainz + TheAudioDB + Wikipedia, cached for offline).

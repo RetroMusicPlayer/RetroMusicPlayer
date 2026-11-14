@@ -536,4 +536,18 @@
     <string name="listening_last_7_days">Last 7 days: %1$s</string>
     <string name="listening_duration_format">%1$d h %2$d min</string>
     <string name="listening_empty">Nothing recorded yet. Play some songs and come back.</string>
+    <string name="home_logo_description">R Music logo, opens listening stats</string>
+    <string name="pref_title_home_covers">Home cover wall</string>
+    <string name="pref_summary_home_covers">Tilted album covers at the top of the home screen</string>
+    <string name="pref_title_home_covers_source">Cover source</string>
+    <string name="home_covers_last_played">Last played</string>
+    <string name="home_covers_most_played">Most played</string>
+    <string name="pref_title_home_covers_speed">Animation speed</string>
+    <string name="home_covers_speed_off">Off</string>
+    <string name="home_covers_speed_slow">Slow</string>
+    <string name="home_covers_speed_medium">Medium</string>
+    <string name="home_covers_speed_fast">Fast</string>
+    <string name="pref_title_home_covers_angle">Tilt angle</string>
+    <string name="pref_title_home_covers_darkness">Darkness</string>
+    <string name="pref_title_home_covers_count">Number of covers</string>
 </resources>
