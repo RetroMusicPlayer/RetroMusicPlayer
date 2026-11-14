@@ -319,7 +319,7 @@
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_cross_fade">مدة التقاطع بين الأغاني</string>
     <string name="pref_summary_desaturated_color">حسب إرشادات التصميم المادي في الوضع المظلم الألوان يجب أن تكون غير مشبعه</string>
-    <string name="pref_summary_disable_speaker">Disable playback from the internal speaker</string>
+    <string name="pref_summary_disable_speaker">تعطيل التشغيل من السماعة الداخلية</string>
     <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
     <string name="pref_summary_extra_song_info">إظهار معلومات الأغنية الإضافية، مثل تنسيق الملف، معدل البت، والتواتر</string>
@@ -354,7 +354,7 @@
     <string name="pref_title_cross_fade">التلاشي (تجريبي)</string>
     <string name="pref_title_custom_font">استخدام خط مانروب</string>
     <string name="pref_title_desaturated_color">لون مفصّل</string>
-    <string name="pref_title_disable_speaker">Disable internal speaker</string>
+    <string name="pref_title_disable_speaker">تعطيل السماعة الداخلية</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
     <string name="pref_title_extra_controls">المزيد من أزرار التحكم</string>
     <string name="pref_title_extra_song_info">معلومات الأغنية</string>
@@ -372,7 +372,7 @@
     <string name="pref_title_open_source_licences">التراخيص مفتوحة المصدر</string>
     <string name="pref_title_pause_history">إيقاف السجل المؤقت</string>
     <string name="pref_title_remember_tab">تذكر التبويب الأخير</string>
-    <string name="pref_title_enable_search_playlist">Enable search in playlist</string>
+    <string name="pref_title_enable_search_playlist">تفعيل البحث داخل قائمة التشغيل</string>
     <string name="pref_title_suggestions">عرض الاقتراحات</string>
     <string name="pref_title_swipe_anywhere_now_playing">اسحب في أي مكان لتغيير الأغنية</string>
     <string name="pref_title_swipe_to_dismiss">تجاهل مع السحب لأسفل</string>
@@ -408,8 +408,8 @@
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
     <string name="ringtone_summary">يحتاج التطبيق إلى إذن للوصول إلى إعدادات جهازك من أجل تعيين الموسيقى كنغمة رنين</string>
     <string name="ringtone_title">نغمة الرنين (إختياري)</string>
-    <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
-    <string name="permission_alarm_title">Alarm (Optional)</string>
+    <string name="permission_alarm_summary">يحتاج التطبيق إلى إذن لجدولة المنبّهات الدقيقة لضبط مؤقّت النوم</string>
+    <string name="permission_alarm_title">المنبّه (اختياري)</string>
     <string name="saf_delete_failed">فشل حذف الملف: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">لا يمكن الحصول على URI SAF</string>
@@ -459,10 +459,10 @@
     <string name="sort_order_num_songs">عدد الأغاني</string>
     <string name="sort_order_num_songs_desc">العد التنازلي للاغنية</string>
     <string name="sort_order_year">السنة</string>
-    <string name="sort_order_year_asc">Year ascending</string>
-    <string name="sort_order_year_desc">Year descending</string>
+    <string name="sort_order_year_asc">السنة تصاعدياً</string>
+    <string name="sort_order_year_desc">السنة تنازلياً</string>
     <string name="sort_order_z_a">تنازلي</string>
-    <string name="speaker_disabled">Internal speaker playback is disabled</string>
+    <string name="speaker_disabled">تم تعطيل التشغيل من السماعة الداخلية</string>
     <string name="speech_not_supported">عذرا! جهازك لايدعم الادخال الصوتي</string>
     <string name="speech_prompt">أبحث في مكتبتك</string>
     <string name="stack">التكدس</string>
@@ -514,6 +514,9 @@
     <string name="sleep_timer_no_permission">لا يوجد إذن لجدولة التنبيهات، يرجى السماح لـ Retro Music.</string>
     <string name="scanning_folders_files">جارٍ فحص المجلدات والملفات…</string>
     <string name="scan_complete">اكتمل المسح: %1$d تم العثور على وسائط صوتية.</string>
-    <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>
-    <string name="pref_save_last_directory_title">Save Last Directory</string>
+    <string name="pref_save_last_directory_summary">عند التبديل إلى عرض المجلدات، استعادة آخر مجلد تم استخدامه</string>
+    <string name="pref_save_last_directory_title">حفظ آخر مجلد</string>
+    <string name="pref_summary_scroll_to_playing_song">تمرير قائمة الأغاني إلى الأغنية التي بدأ تشغيلها</string>
+    <string name="pref_title_scroll_to_playing_song">التمرير إلى الأغنية الجاري تشغيلها</string>
+    <string name="go_to_artist">الانتقال إلى الفنان</string>
 </resources>
