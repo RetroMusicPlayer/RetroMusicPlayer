@@ -22,7 +22,9 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
 6. Artist info button (MusicBrainz + TheAudioDB + Wikipedia, cached for offline).
 7. English translation (ML Kit offline) and romanization (Korean etc.) of lyrics.
 8. Progress bar styles (wavy etc.).
-9. Rename app to "R Music" + new package id, signing key (keep it safe), launcher icon from the user's green cobra logo (needs simplified small-size version, adaptive icon, transparent background), accent color = the logo green.
+9. Rename app to "R Music" + new package id, signing key (keep it safe).
+   - DONE (2026-11-14): launcher icon from the user's green cobra (dark #282828 background, green #1BE7A4): adaptive foreground + monochrome PNGs in `drawable-*dpi/`, legacy `mipmap-*` PNGs for API 24-25, Play Store/README PNGs, `ic_launcher_background` = #282828. Default accent = `R.color.logo_green` (App.kt, theme version bumped 3 -> 4 so existing installs get it once).
+   - Not done: the status-bar `ic_notification` still has the old art (needs a simplified single-color cobra silhouette; note `ic_notification.xml` in drawable/ and PNGs in drawable-*dpi/ both exist, check which one wins before replacing). On Android 12+ with Material You on (default), the accent comes from the wallpaper, not from logo_green.
 
 ## Constraints
 - GPL-3: fork must stay public if APK is shared.

@@ -38,10 +38,11 @@ class App : Application() {
             androidContext(this@App)
             modules(appModules)
         }
-        // default theme
-        if (!ThemeStore.isConfigured(this, 3)) {
+        // default theme; the version was bumped from 3 to 4 so existing installs also get the
+        // R Music logo green once (the accent can still be changed in settings afterwards)
+        if (!ThemeStore.isConfigured(this, 4)) {
             ThemeStore.editTheme(this)
-                .accentColorRes(code.name.monkey.appthemehelper.R.color.md_deep_purple_A200)
+                .accentColorRes(R.color.logo_green)
                 .coloredNavigationBar(true)
                 .commit()
         }

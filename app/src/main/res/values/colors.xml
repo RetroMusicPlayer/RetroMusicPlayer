@@ -22,4 +22,7 @@
     <color name="card_shadow_2">#dddddd</color>
 
     <color name="widget_md3_button_bg_color">@color/lighterColorSurface</color>
+
+    <!-- R Music logo green, sampled from the cobra artwork; default accent color -->
+    <color name="logo_green">#1BE7A4</color>
 </resources>
