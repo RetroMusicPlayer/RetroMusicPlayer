@@ -126,4 +126,9 @@
     <fragment
         android:id="@+id/lyrics_fragment"
         android:name="code.name.monkey.retromusic.fragments.lyrics.LyricsFragment" />
+
+    <fragment
+        android:id="@+id/listening_stats_fragment"
+        android:name="code.name.monkey.retromusic.fragments.stats.ListeningStatsFragment"
+        android:label="ListeningStatsFragment" />
 </navigation>

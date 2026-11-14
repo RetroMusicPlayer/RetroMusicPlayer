@@ -529,4 +529,11 @@
     <string name="listing_files" translatable="false" />
 
     <string name="listening_data">Listening history and play counts</string>
+
+    <string name="listening_stats">Listening stats</string>
+    <string name="listening_time">Total listening time</string>
+    <string name="listening_plays_songs">%1$d plays · %2$d songs</string>
+    <string name="listening_last_7_days">Last 7 days: %1$s</string>
+    <string name="listening_duration_format">%1$d h %2$d min</string>
+    <string name="listening_empty">Nothing recorded yet. Play some songs and come back.</string>
 </resources>

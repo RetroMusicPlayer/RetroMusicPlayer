@@ -206,6 +206,8 @@ class HomeFragment :
         menu.removeItem(R.id.action_layout_type)
         menu.removeItem(R.id.action_sort_order)
         menu.findItem(R.id.action_settings).setShowAsAction(SHOW_AS_ACTION_IF_ROOM)
+        // The nav destination id doubles as the menu item id.
+        menu.add(Menu.NONE, R.id.listening_stats_fragment, 9, R.string.listening_stats)
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(
             requireContext(),
             binding.toolbar,
@@ -291,6 +293,12 @@ class HomeFragment :
         when (item.itemId) {
             R.id.action_settings -> findNavController().navigate(
                 R.id.settings_fragment,
+                null,
+                navOptions
+            )
+
+            R.id.listening_stats_fragment -> findNavController().navigate(
+                R.id.listening_stats_fragment,
                 null,
                 navOptions
             )

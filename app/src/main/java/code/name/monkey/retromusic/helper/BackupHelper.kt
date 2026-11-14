@@ -5,6 +5,7 @@ import android.os.Environment
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.HistoryEntity
+import code.name.monkey.retromusic.db.ListeningEventEntity
 import code.name.monkey.retromusic.db.PlayCountEntity
 import code.name.monkey.retromusic.db.PlaylistEntity
 import code.name.monkey.retromusic.db.RetroDatabase
@@ -83,12 +84,16 @@ object BackupHelper : KoinComponent {
                 val folder = File(context.filesDir, LISTENING_PATH)
                 if (!folder.exists()) folder.mkdirs()
                 val root = JSONObject()
-                root.put("version", 1)
+                root.put("version", 2)
                 root.put("history", JSONArray().also { arr ->
                     database.historyDao().allHistory().forEach { arr.put(it.toJson()) }
                 })
                 root.put("playCounts", JSONArray().also { arr ->
                     database.playCountDao().playCountSongs().forEach { arr.put(it.toJson()) }
+                })
+                // Added in version 2; older backups simply don't have this key.
+                root.put("events", JSONArray().also { arr ->
+                    database.listeningEventDao().allEvents().forEach { arr.put(it.toJson()) }
                 })
                 val file = File(folder, LISTENING_FILE)
                 file.writeText(root.toString(), Charsets.UTF_8)
@@ -148,6 +153,29 @@ object BackupHelper : KoinComponent {
                 )
             }
         }
+        // Events keep their own title/artist/album, so they are restored even when the song
+        // is no longer in the library; songId is only filled in when a match is found.
+        val eventDao = database.listeningEventDao()
+        root.optJSONArray("events")?.let { arr ->
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                val title = o.optString("title")
+                val artist = o.optString("artist_name")
+                val playedAt = o.optLong("played_at")
+                if (eventDao.countSameEvent(playedAt, title, artist) > 0) continue
+                eventDao.insert(
+                    ListeningEventEntity(
+                        songId = findSong(o)?.id ?: -1L,
+                        title = title,
+                        artistName = artist,
+                        albumName = o.optString("album_name"),
+                        duration = o.optLong("duration"),
+                        playedAt = playedAt,
+                        listenedMs = o.optLong("listened_ms")
+                    )
+                )
+            }
+        }
     }
 
     private fun songKey(title: String, artist: String, album: String?): String {
@@ -160,6 +188,11 @@ object BackupHelper : KoinComponent {
         put("duration", duration); put("track_number", trackNumber); put("year", year)
         put("composer", composer ?: JSONObject.NULL); put("album_artist", albumArtist ?: JSONObject.NULL)
         put("time_played", timePlayed)
+    }
+
+    private fun ListeningEventEntity.toJson() = JSONObject().apply {
+        put("title", title); put("artist_name", artistName); put("album_name", albumName)
+        put("duration", duration); put("played_at", playedAt); put("listened_ms", listenedMs)
     }
 
     private fun PlayCountEntity.toJson() = JSONObject().apply {

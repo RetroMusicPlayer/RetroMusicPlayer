@@ -520,4 +520,11 @@
     <string name="pref_title_scroll_to_playing_song">التمرير إلى الأغنية الجاري تشغيلها</string>
     <string name="go_to_artist">الانتقال إلى الفنان</string>
     <string name="listening_data">سجل الاستماع وعدد مرات التشغيل</string>
+
+    <string name="listening_stats">إحصائيات الاستماع</string>
+    <string name="listening_time">إجمالي وقت الاستماع</string>
+    <string name="listening_plays_songs">%1$d مرة تشغيل · %2$d أغنية</string>
+    <string name="listening_last_7_days">آخر 7 أيام: %1$s</string>
+    <string name="listening_duration_format">%1$d س %2$d د</string>
+    <string name="listening_empty">لا يوجد شيء مسجل بعد. شغّل بعض الأغاني ثم عد إلى هنا.</string>
 </resources>

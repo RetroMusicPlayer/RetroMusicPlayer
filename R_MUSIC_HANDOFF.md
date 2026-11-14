@@ -7,10 +7,15 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
 ## Done
 - Arabic strings completed (values-ar-rSA).
 - Backup/restore of listening history + play counts (BackupHelper, BackupContent.LISTENING_DATA, checkbox in activity_restore.xml). Matching on restore is by title/artist/album/duration.
+- Step 1: CI build of the backup branch passed (2026-11-14).
+- Step 2 (written 2026-11-14, not yet confirmed by CI): listening events.
+  - Room: `ListeningEventEntity` / `ListeningEventDao` (db/), DB version 25, `MIGRATION_24_25` in RoomMigrations.kt, DAO registered in MainModule.
+  - Logging: `service/ListeningTracker` measures real play time per song (sessions under 5 s are skipped); `MusicService` closes a session on META_CHANGED and on onDestroy, inserts off the main thread.
+  - Stats page: `fragments/stats/` (fragment, ViewModel, adapter), layouts `fragment_listening_stats` / `item_listening_event`, destination `listening_stats_fragment` in main_graph.xml. Temporary entry point: Home toolbar overflow menu ("Listening stats"); step 3 moves it to tapping the logo.
+  - Backup: listening.json is now version 2 with an `events` array; restore skips duplicates (same played_at + title + artist) and still imports events for songs missing from the library.
+  - Known limit: if the app is killed while a song is playing/paused, that last session is lost (flush only happens on song change and service destroy).
 
 ## Next, in order
-1. Verify CI build passes; fix compile errors if any (ask user to paste the error).
-2. New Room table for listening events (song key, played_at, listened_ms) + migration 24->25 in RoomMigrations.kt; log from the playback service; stats page (hours, song count, history); include in backup JSON.
 3. Home screen: tilted dark cover grid (last played / most played), optional animation, settings for speed/angle/darkness/count/source; tapping the logo opens stats. Own design, do not copy DroidDeck or Retro Music logo art.
 4. Merge artists (dropdown of existing artists) and album rename that regroups songs, written into the MP3 tags (existing tag editor in activities/tageditor).
 5. Synced lyrics from LRCLIB (no key, no limit); LrcView already exists; tap a line to seek.

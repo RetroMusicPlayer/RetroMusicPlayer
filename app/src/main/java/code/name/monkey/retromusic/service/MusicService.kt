@@ -121,6 +121,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent.get
+import code.name.monkey.retromusic.db.ListeningEventDao
 import java.util.Objects
 import java.util.Random
 
@@ -263,6 +264,10 @@ class MusicService : MediaBrowserServiceCompat(),
     @JvmField
     var shuffleMode = 0
     private val songPlayCountHelper = SongPlayCountHelper()
+    private val listeningTracker = ListeningTracker()
+    private val listeningEventDao by lazy {
+        get<ListeningEventDao>(ListeningEventDao::class.java)
+    }
 
     private val bluetoothReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -377,6 +382,10 @@ class MusicService : MediaBrowserServiceCompat(),
             getSystemService<AudioManager>()?.unregisterAudioDeviceCallback(audioDeviceCallback!!)
         }
         mediaSession?.isActive = false
+        // serviceScope is cancelled below, so this one-off save uses its own short-lived scope.
+        listeningTracker.flush()?.let { event ->
+            CoroutineScope(Job() + IO).launch { listeningEventDao.insert(event) }
+        }
         quit()
         releaseResources()
         serviceScope.cancel()
@@ -1139,6 +1148,7 @@ class MusicService : MediaBrowserServiceCompat(),
                     savePositionInTrack()
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying)
+                listeningTracker.onPlayStateChanged(isPlaying)
                 playingNotification?.setPlaying(isPlaying)
                 startForegroundOrNotify()
             }
@@ -1163,7 +1173,10 @@ class MusicService : MediaBrowserServiceCompat(),
                 }
                 savePosition()
                 savePositionInTrack()
+                // Closed here, on the calling thread, so the timing is not skewed by IO latency.
+                val finishedListening = listeningTracker.onSongChanged(currentSong, isPlaying)
                 serviceScope.launch(IO) {
+                    finishedListening?.let { listeningEventDao.insert(it) }
                     val currentSong = currentSong
                     HistoryStore.getInstance(this@MusicService).addSongId(currentSong.id)
                     if (songPlayCountHelper.shouldBumpPlayCount()) {
