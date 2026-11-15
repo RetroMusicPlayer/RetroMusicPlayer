@@ -50,6 +50,7 @@ object BackupHelper : KoinComponent {
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         zipItems.addAll(getCustomArtistZipItems(context))
         zipItems.addAll(getListeningDataZipItems(context))
+        zipItems.addAll(getLyricsZipItems(context))
         val done = zipAll(zipItems, tempFile) && deliver(context, tempFile, name)
         withContext(Dispatchers.Main) {
             context.showToast(
@@ -122,6 +123,22 @@ object BackupHelper : KoinComponent {
         return getBackupRoot().listFiles { _, fileName ->
             fileName.endsWith(BACKUP_EXTENSION)
         }?.map { BackupEntry(it.nameWithoutExtension, it.toUri(), it) } ?: emptyList()
+    }
+
+    /** Lyrics fetched from LRCLIB or synced by hand, kept in the app's own storage. */
+    private fun getLyricsZipItems(context: Context): List<ZipItem> {
+        return File(context.filesDir, LYRICS_PATH).listFiles()?.filter { it.isFile }?.map {
+            ZipItem(it.absolutePath, LYRICS_PATH.child(it.name))
+        } ?: emptyList()
+    }
+
+    private fun restoreLyrics(context: Context, zipIn: ZipInputStream, zipEntry: ZipEntry) {
+        val folder = File(context.filesDir, LYRICS_PATH)
+        folder.mkdirs()
+        // Only the file name is used, so an entry can never write outside the lyrics folder.
+        File(folder, zipEntry.getFileName()).outputStream().buffered().use { out ->
+            zipIn.copyTo(out)
+        }
     }
 
     private suspend fun getListeningDataZipItems(context: Context): List<ZipItem> =
@@ -333,6 +350,8 @@ object BackupHelper : KoinComponent {
                         restoreImages(context, it, entry)
                     } else if (entry.isListeningEntry() && contents.contains(LISTENING_DATA)) {
                         restoreListeningData(it)
+                    } else if (entry.isLyricsEntry() && contents.contains(LYRICS)) {
+                        restoreLyrics(context, it, entry)
                     } else if (entry.isCustomArtistEntry() && contents.contains(CUSTOM_ARTIST_IMAGES)) {
                         if (entry.isCustomArtistPrefEntry()) {
                             restoreCustomArtistPrefs(context, it, entry)
@@ -445,6 +464,7 @@ object BackupHelper : KoinComponent {
     private const val SETTINGS_PATH = "prefs"
     private const val IMAGES_PATH = "userImages"
     private const val LISTENING_PATH = "listening"
+    private const val LYRICS_PATH = "lyrics"
     private const val LISTENING_FILE = "listening.json"
     private const val CUSTOM_ARTISTS_PATH = "artistImages"
     private const val THEME_PREFS_KEY_DEFAULT = "[[kabouzeid_app-theme-helper]]"
@@ -455,6 +475,10 @@ object BackupHelper : KoinComponent {
 
     private fun ZipEntry.isPreferenceEntry(): Boolean {
         return name.startsWith(SETTINGS_PATH)
+    }
+
+    private fun ZipEntry.isLyricsEntry(): Boolean {
+        return name.startsWith(LYRICS_PATH + File.separator)
     }
 
     private fun ZipEntry.isListeningEntry(): Boolean {
@@ -510,5 +534,6 @@ enum class BackupContent {
     USER_IMAGES,
     CUSTOM_ARTIST_IMAGES,
     PLAYLISTS,
-    LISTENING_DATA
+    LISTENING_DATA,
+    LYRICS
 }

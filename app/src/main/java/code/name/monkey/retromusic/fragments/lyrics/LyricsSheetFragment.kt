@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.FragmentLyricsSheetBinding
 import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.lyrics.LrcLibClient
 import code.name.monkey.retromusic.lyrics.LrcView
@@ -36,6 +37,12 @@ class LyricsSheetFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private var shownSongId: Long = -1
     private var loadJob: kotlinx.coroutines.Job? = null
+
+    // Hand syncing: the user taps "Mark" when each line of plain lyrics starts.
+    private var currentSong: Song? = null
+    private var currentPlain: String? = null
+    private var syncLines: List<String> = emptyList()
+    private val syncStamps = ArrayList<Long>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -67,6 +74,12 @@ class LyricsSheetFragment : BottomSheetDialogFragment() {
             })
         }
         binding.lyricsSheetGet.setOnClickListener { load(MusicPlayerRemote.currentSong, true) }
+        binding.lyricsSheetSyncStart.setOnClickListener { startSync() }
+        binding.lyricsSyncMark.setOnClickListener { markLine() }
+        binding.lyricsSyncUndo.setOnClickListener { undoMark() }
+        binding.lyricsSyncCancel.setOnClickListener {
+            currentPlain?.let { showPlain(it) }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -88,7 +101,16 @@ class LyricsSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
+    private fun hideSync() {
+        syncLines = emptyList()
+        syncStamps.clear()
+        binding.lyricsSheetSyncHolder.isVisible = false
+        binding.lyricsSheetSyncStart.isVisible = false
+    }
+
     private fun showStatus(text: String, showButton: Boolean) {
+        hideSync()
+        currentPlain = null
         binding.lyricsSheetLrc.isVisible = false
         binding.lyricsSheetPlainScroll.isVisible = false
         binding.lyricsSheetStatusHolder.isVisible = true
@@ -97,6 +119,7 @@ class LyricsSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun showSynced(text: String) {
+        hideSync()
         binding.lyricsSheetStatusHolder.isVisible = false
         binding.lyricsSheetPlainScroll.isVisible = false
         binding.lyricsSheetLrc.isVisible = true
@@ -104,15 +127,72 @@ class LyricsSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun showPlain(text: String) {
+        hideSync()
+        currentPlain = text
         binding.lyricsSheetStatusHolder.isVisible = false
         binding.lyricsSheetLrc.isVisible = false
         binding.lyricsSheetPlainScroll.isVisible = true
         binding.lyricsSheetPlain.text = text
+        binding.lyricsSheetSyncStart.isVisible = true
+    }
+
+    private fun startSync() {
+        val lines = currentPlain.orEmpty().lines().map { it.trim() }.filter { it.isNotEmpty() }
+        if (lines.isEmpty()) return
+        syncLines = lines
+        syncStamps.clear()
+        binding.lyricsSheetPlainScroll.isVisible = false
+        binding.lyricsSheetSyncStart.isVisible = false
+        binding.lyricsSheetSyncHolder.isVisible = true
+        // Start from the beginning so the first mark is the first line.
+        MusicPlayerRemote.seekTo(0)
+        MusicPlayerRemote.resumePlaying()
+        renderSync()
+    }
+
+    private fun renderSync() {
+        val index = syncStamps.size
+        binding.lyricsSyncPrev.text = syncLines.getOrNull(index - 1).orEmpty()
+        binding.lyricsSyncCurrent.text = syncLines.getOrNull(index).orEmpty()
+        binding.lyricsSyncNext.text = syncLines.getOrNull(index + 1).orEmpty()
+        binding.lyricsSyncCounter.text = "${index + 1} / ${syncLines.size}"
+    }
+
+    private fun markLine() {
+        if (syncLines.isEmpty()) return
+        // People press a moment after they hear the line start, so go back a little.
+        val position = (MusicPlayerRemote.songProgressMillis - 300L)
+            .coerceAtLeast(syncStamps.lastOrNull() ?: 0L)
+        syncStamps.add(position)
+        if (syncStamps.size == syncLines.size) finishSync() else renderSync()
+    }
+
+    private fun undoMark() {
+        if (syncStamps.isEmpty()) return
+        val removed = syncStamps.removeAt(syncStamps.lastIndex)
+        // Jump back to where that line started so it can be marked again.
+        MusicPlayerRemote.seekTo(removed.toInt())
+        renderSync()
+    }
+
+    private fun finishSync() {
+        val song = currentSong ?: return
+        val lrc = syncLines.indices.joinToString("\n") { i ->
+            val ms = syncStamps[i]
+            "[%02d:%02d.%02d]%s".format(ms / 60000, (ms % 60000) / 1000, (ms % 1000) / 10, syncLines[i])
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            withContext(Dispatchers.IO) { LyricUtil.storeFetchedLyrics(song, lrc, null) }
+            context?.showToast(R.string.lyrics_sync_saved)
+            if (_binding != null) showSynced(lrc)
+        }
     }
 
     /** Shows local lyrics if there are any, otherwise (or when [forceOnline]) asks LRCLIB. */
     private fun load(song: Song, forceOnline: Boolean) {
         shownSongId = song.id
+        currentSong = song
+        hideSync()
         binding.lyricsSheetTitle.text = song.title
         loadJob?.cancel()
         loadJob = viewLifecycleOwner.lifecycleScope.launch {

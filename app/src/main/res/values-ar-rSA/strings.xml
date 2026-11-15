@@ -559,4 +559,9 @@
     <string name="lyrics_instrumental">مقطوعة موسيقية بدون كلمات</string>
     <string name="pref_title_lyrics_panel">لوحة الكلمات</string>
     <string name="pref_summary_lyrics_panel">زر الكلمات يفتح لوحة من الأسفل بدل عرض الكلمات فوق الغلاف</string>
+    <string name="lyrics_sync_start">مزامنة الكلمات</string>
+    <string name="lyrics_sync_hint">ستبدأ الأغنية من جديد. اضغط «تحديد» في اللحظة التي يبدأ فيها غناء كل سطر.</string>
+    <string name="lyrics_sync_mark">تحديد</string>
+    <string name="lyrics_sync_undo">تراجع</string>
+    <string name="lyrics_sync_saved">تم حفظ الكلمات المتزامنة</string>
 </resources>

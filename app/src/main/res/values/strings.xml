@@ -568,4 +568,9 @@
     <string name="lyrics_instrumental">Instrumental, no lyrics</string>
     <string name="pref_title_lyrics_panel">Lyrics panel</string>
     <string name="pref_summary_lyrics_panel">The lyrics button opens a panel from the bottom instead of showing lyrics over the cover</string>
+    <string name="lyrics_sync_start">Sync lyrics</string>
+    <string name="lyrics_sync_hint">The song restarts. Press Mark right when each line starts being sung.</string>
+    <string name="lyrics_sync_mark">Mark</string>
+    <string name="lyrics_sync_undo">Undo</string>
+    <string name="lyrics_sync_saved">Synced lyrics saved</string>
 </resources>

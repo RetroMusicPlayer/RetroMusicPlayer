@@ -35,7 +35,8 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
   - `fragments/lyrics/LyricsSheetFragment` (BottomSheetDialogFragment, 60% height, tap a line to seek). Opened by the existing toolbar lyrics button when pref `lyrics_panel` is on (default on; switch in Now Playing settings; off = old overlay behaviour). With no local lyrics it searches LRCLIB automatically, shows plain lyrics if there is no synced version, and has a retry button.
   - `lyrics/LrcLibClient` (HttpURLConnection, /api/get then /api/search). Fetched lyrics are saved in filesDir/lyrics (`LyricUtil.storeFetchedLyrics`, `getStoredSyncedFile`, `getStoredPlainLyrics`); `getSyncedLyricsFile` also looks there. NOT yet in the backup zip (add filesDir/lyrics to BackupHelper).
   - Fixed `LrcView.getTappedLine` (hit test was half a line off from what onDraw draws).
-  - Not done: "Sync" tap-to-stamp mode, setting for auto-fetch / Wi-Fi only, step 3(c) cover colours on every theme.
+  - Also WRITTEN (same day): lyrics are in the backup zip (`lyrics/` folder, `BackupContent.LYRICS`, "Lyrics" checkbox in the restore dialog) and the panel has a hand "Sync" mode for plain lyrics: the song restarts, the user presses Mark when each line starts (300 ms reaction compensation, Undo jumps back), the result is saved as an .lrc in filesDir/lyrics.
+  - Not done: setting for auto-fetch / Wi-Fi only (today the panel always searches when opened without lyrics), step 3(c) cover colours on every theme.
 
 ## Next, in order (updated 2026-11-15; the user wants steps done in this order and ONLY when he says go)
 

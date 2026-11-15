@@ -46,6 +46,7 @@ class RestoreActivity : AppCompatActivity() {
         binding.checkPlaylists.addAccentColor()
         binding.checkSettings.addAccentColor()
         binding.checkListeningData.addAccentColor()
+        binding.checkLyrics.addAccentColor()
         binding.checkUserImages.addAccentColor()
         binding.restoreButton.setOnClickListener {
             val backupContents = mutableListOf<BackupContent>()
@@ -53,6 +54,7 @@ class RestoreActivity : AppCompatActivity() {
             if (binding.checkArtistImages.isChecked) backupContents.add(CUSTOM_ARTIST_IMAGES)
             if (binding.checkSettings.isChecked) backupContents.add(SETTINGS)
             if (binding.checkListeningData.isChecked) backupContents.add(LISTENING_DATA)
+            if (binding.checkLyrics.isChecked) backupContents.add(LYRICS)
             if (binding.checkUserImages.isChecked) backupContents.add(USER_IMAGES)
             lifecycleScope.launch(Dispatchers.IO) {
                 if (backupUri != null) {

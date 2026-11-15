@@ -49,6 +49,14 @@
         android:text="@string/listening_data" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/check_lyrics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:minHeight="48dp"
+        android:text="@string/lyrics" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/check_user_images"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
