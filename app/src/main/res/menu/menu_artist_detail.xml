@@ -17,6 +17,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_merge_artist"
+        android:title="@string/merge_artist"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_set_artist_image"
         android:title="@string/set_artist_image"
         app:showAsAction="never" />

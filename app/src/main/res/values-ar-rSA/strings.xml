@@ -590,4 +590,9 @@
     <string name="ring_cover">الغلاف الدائري</string>
     <string name="ring_playing_from">التشغيل من</string>
     <string name="ring_no_lyrics">مفيش كلمات للأغنية دي</string>
+    <string name="merge_artist">دمج في فنان تاني</string>
+    <string name="merge_artist_message">كل أغاني "%1$s" هتاخد اسم الفنان اللي هتختاره هنا. ده بيغيّر التاجات جوه ملفات الموسيقى.</string>
+    <string name="merge_artist_hint">اسم الفنان</string>
+    <string name="merge_artist_action">دمج</string>
+    <string name="merge_artist_done">اتحدّث الفنان</string>
 </resources>
