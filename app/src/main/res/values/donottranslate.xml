@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name" translatable="false">R Music</string>
+    <!-- Name under the launcher icon: "R" on the first line, "Music" below it. -->
+    <string name="launcher_name" translatable="false">R\nMusic</string>
     <string name="git_hub" translatable="false">GitHub</string>
 
     <string name="app_shortcut_last_added_long" translatable="false">@string/last_added</string>

@@ -65,6 +65,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
+            android:label="@string/launcher_name"
             android:launchMode="singleTop"
             android:theme="@style/Theme.RetroMusic.SplashScreen">
             <intent-filter>
