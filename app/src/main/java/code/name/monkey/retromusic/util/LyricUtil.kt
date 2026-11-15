@@ -14,6 +14,7 @@
 package code.name.monkey.retromusic.util
 
 import android.util.Log
+import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import org.jaudiotagger.audio.AudioFileIO
@@ -147,6 +148,26 @@ object LyricUtil {
         return ""
     }
 
+    /** Folder inside the app's own storage; always writable, unlike the music folders. */
+    private fun storeDir(): File =
+        File(code.name.monkey.retromusic.App.getContext().filesDir, "lyrics").also { it.mkdirs() }
+
+    private fun storeName(song: Song): String =
+        "${song.title} - ${song.artistName}".sanitize()
+
+    fun getStoredSyncedFile(song: Song): File? =
+        File(storeDir(), storeName(song) + ".lrc").takeIf { it.exists() }
+
+    fun getStoredPlainLyrics(song: Song): String? =
+        File(storeDir(), storeName(song) + ".txt").takeIf { it.exists() }?.readText()
+
+    /** Keeps lyrics fetched from the internet so they work offline next time. */
+    fun storeFetchedLyrics(song: Song, synced: String?, plain: String?) {
+        val dir = storeDir()
+        synced?.let { File(dir, storeName(song) + ".lrc").writeText(it) }
+        plain?.let { File(dir, storeName(song) + ".txt").writeText(it) }
+    }
+
     fun getSyncedLyricsFile(song: Song): File? {
         return when {
             isLrcOriginalFileExist(song.data) -> {
@@ -156,7 +177,7 @@ object LyricUtil {
                 getLocalLyricFile(song.title, song.artistName)
             }
             else -> {
-                null
+                getStoredSyncedFile(song)
             }
         }
     }

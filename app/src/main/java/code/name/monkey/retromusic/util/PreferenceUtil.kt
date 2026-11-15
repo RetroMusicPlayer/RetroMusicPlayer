@@ -63,6 +63,7 @@ import code.name.monkey.retromusic.LIBRARY_CATEGORIES
 import code.name.monkey.retromusic.LOCALE_AUTO_STORE_ENABLED
 import code.name.monkey.retromusic.LOCK_SCREEN
 import code.name.monkey.retromusic.LYRICS_OPTIONS
+import code.name.monkey.retromusic.LYRICS_PANEL
 import code.name.monkey.retromusic.LYRICS_TYPE
 import code.name.monkey.retromusic.MANAGE_AUDIO_FOCUS
 import code.name.monkey.retromusic.MATERIAL_YOU
@@ -889,6 +890,10 @@ object PreferenceUtil {
             WALLPAPER_ACCENT,
             VersionUtils.hasOreoMR1() && !VersionUtils.hasS()
         )
+
+    /** Lyrics button opens a panel from the bottom instead of drawing lyrics over the cover. */
+    val lyricsPanel: Boolean
+        get() = sharedPreferences.getBoolean(LYRICS_PANEL, true)
 
     val lyricsScreenOn
         get() = sharedPreferences.getBoolean(SCREEN_ON_LYRICS, false)

@@ -552,4 +552,11 @@
     <string name="backup_folder_choose">اختيار</string>
     <string name="backup_folder_not_set">غير محدد. تُحفظ النسخ في Documents/RetroMusic/Backups وقد تضيع عند حذف التطبيق. اختر مجلداً لحفظها بأمان.</string>
     <string name="backup_folder_lost">لا يوجد وصول إلى المجلد المختار. اختره مرة أخرى.</string>
+    <string name="lyrics_get">جلب الكلمات</string>
+    <string name="lyrics_searching">جارٍ البحث عن الكلمات…</string>
+    <string name="lyrics_not_found_online">لم يتم العثور على كلمات على الإنترنت</string>
+    <string name="lyrics_network_error">تعذّر الاتصال بخدمة الكلمات. تحقق من اتصالك بالإنترنت.</string>
+    <string name="lyrics_instrumental">مقطوعة موسيقية بدون كلمات</string>
+    <string name="pref_title_lyrics_panel">لوحة الكلمات</string>
+    <string name="pref_summary_lyrics_panel">زر الكلمات يفتح لوحة من الأسفل بدل عرض الكلمات فوق الغلاف</string>
 </resources>

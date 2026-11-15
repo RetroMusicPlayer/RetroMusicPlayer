@@ -31,6 +31,12 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
   - Wall long press now opens a small popup menu BESIDE the pressed cover (PopupWindow, `popup_wall_menu.xml`, `HomeFragment.showWallMenu`) instead of a dialog; the wall freezes while it is open (`TiltedCoverGridView.setFrozen`, `WallHit` gives the tile centre).
   - Backup folder (part of step 6): Backup screen has a "Backup folder" row; the user picks a folder with the system picker (SAF tree URI, persisted permission, pref `backup_folder_uri`). Backups are written there and listed from there, so after uninstalling the app he picks the same folder again and sees them. `BackupEntry(name, uri, file?)` replaces `File` in the adapter; default folder Documents/RetroMusic/Backups is still used when no folder is chosen. New dependency androidx.documentfile. NOT done yet from step 6: scheduled automatic backups (WorkManager).
 
+- Update 2026-11-15 (third session, WRITTEN): lyrics panel + LRCLIB (steps 3b and the fetch part of 10).
+  - `fragments/lyrics/LyricsSheetFragment` (BottomSheetDialogFragment, 60% height, tap a line to seek). Opened by the existing toolbar lyrics button when pref `lyrics_panel` is on (default on; switch in Now Playing settings; off = old overlay behaviour). With no local lyrics it searches LRCLIB automatically, shows plain lyrics if there is no synced version, and has a retry button.
+  - `lyrics/LrcLibClient` (HttpURLConnection, /api/get then /api/search). Fetched lyrics are saved in filesDir/lyrics (`LyricUtil.storeFetchedLyrics`, `getStoredSyncedFile`, `getStoredPlainLyrics`); `getSyncedLyricsFile` also looks there. NOT yet in the backup zip (add filesDir/lyrics to BackupHelper).
+  - Fixed `LrcView.getTappedLine` (hit test was half a line off from what onDraw draws).
+  - Not done: "Sync" tap-to-stamp mode, setting for auto-fetch / Wi-Fi only, step 3(c) cover colours on every theme.
+
 ## Next, in order (updated 2026-11-15; the user wants steps done in this order and ONLY when he says go)
 
 Status legend: WRITTEN = code exists on the branch but was never compiled/tested on a device; check the CI build first.

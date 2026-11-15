@@ -161,17 +161,19 @@ public class LrcView extends View {
                 }
             };
 
+    // Uses the same line centres as onDraw, so a tap lands on the line that was drawn there.
     private int getTappedLine(float y) {
-        float cumulativeHeight = 0;
+        float center = 0;
         for (int i = 0; i < mLrcEntryList.size(); i++) {
-            LrcEntry entry = mLrcEntryList.get(i);
-            float lineHeight = entry.getHeight();
-            float lineCenter = cumulativeHeight + (lineHeight / 2);
-
-            if (Math.abs(y - lineCenter) < lineHeight / 2) {
+            if (i > 0) {
+                center +=
+                        ((mLrcEntryList.get(i - 1).getHeight() + mLrcEntryList.get(i).getHeight()) >> 1)
+                                + mDividerHeight;
+            }
+            float half = (mLrcEntryList.get(i).getHeight() + mDividerHeight) / 2f;
+            if (Math.abs(y - center) <= half) {
                 return i;
             }
-            cumulativeHeight += lineHeight + mDividerHeight;
         }
         return -1;
     }

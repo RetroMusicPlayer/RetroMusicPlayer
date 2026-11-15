@@ -561,4 +561,11 @@
     <string name="backup_folder_choose">Choose</string>
     <string name="backup_folder_not_set">Not set. Backups go to Documents/RetroMusic/Backups and can be lost when the app is uninstalled. Choose a folder to keep them safe.</string>
     <string name="backup_folder_lost">No access to the chosen folder. Choose it again.</string>
+    <string name="lyrics_get">Get lyrics</string>
+    <string name="lyrics_searching">Searching for lyrics…</string>
+    <string name="lyrics_not_found_online">No lyrics found online</string>
+    <string name="lyrics_network_error">Couldn\'t reach the lyrics service. Check your internet connection.</string>
+    <string name="lyrics_instrumental">Instrumental, no lyrics</string>
+    <string name="pref_title_lyrics_panel">Lyrics panel</string>
+    <string name="pref_summary_lyrics_panel">The lyrics button opens a panel from the bottom instead of showing lyrics over the cover</string>
 </resources>

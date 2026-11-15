@@ -59,6 +59,7 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.keepScreenOn
 import code.name.monkey.retromusic.extensions.showToast
 import code.name.monkey.retromusic.extensions.whichFragment
+import code.name.monkey.retromusic.fragments.lyrics.LyricsSheetFragment
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -101,6 +102,11 @@ abstract class AbsPlayerFragment(@LayoutRes layout: Int) : AbsMusicServiceFragme
             }
 
             R.id.action_toggle_lyrics -> {
+                if (PreferenceUtil.lyricsPanel) {
+                    // Panel mode: the button opens the lyrics panel and never touches the cover.
+                    LyricsSheetFragment().show(childFragmentManager, LyricsSheetFragment.TAG)
+                    return true
+                }
                 PreferenceUtil.showLyrics = !PreferenceUtil.showLyrics
                 showLyricsIcon(item)
                 if (PreferenceUtil.lyricsScreenOn && PreferenceUtil.showLyrics) {

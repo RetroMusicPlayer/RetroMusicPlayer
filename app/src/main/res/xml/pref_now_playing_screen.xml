@@ -21,6 +21,13 @@
         android:layout="@layout/list_item_view_switch_no_title"
         android:title="@string/pref_snow_fall_title" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="true"
+        android:key="lyrics_panel"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_lyrics_panel"
+        android:title="@string/pref_title_lyrics_panel" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
         android:defaultValue="0"
         android:entries="@array/pref_lyrics_type_entries"
