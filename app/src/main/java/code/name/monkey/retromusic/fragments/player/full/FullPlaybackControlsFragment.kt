@@ -136,7 +136,7 @@ class FullPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
     }
 
     override fun onServiceConnected() {

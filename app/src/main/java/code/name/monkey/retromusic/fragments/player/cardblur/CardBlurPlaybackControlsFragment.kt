@@ -75,7 +75,7 @@ class CardBlurPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
         updateProgressTextColor()
 
         volumeFragment?.tintWhiteColor()

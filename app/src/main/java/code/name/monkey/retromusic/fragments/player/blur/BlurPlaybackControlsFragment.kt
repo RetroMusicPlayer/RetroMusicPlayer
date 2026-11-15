@@ -157,7 +157,7 @@ class BlurPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
 
         binding.text.setTextColor(lastPlaybackControlsColor)
         binding.songInfo.setTextColor(lastDisabledPlaybackControlsColor)

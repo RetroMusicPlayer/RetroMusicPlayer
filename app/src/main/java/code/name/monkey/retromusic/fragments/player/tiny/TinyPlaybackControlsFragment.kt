@@ -44,6 +44,7 @@ class TinyPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
+        updatePrevNextColor(color)
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {

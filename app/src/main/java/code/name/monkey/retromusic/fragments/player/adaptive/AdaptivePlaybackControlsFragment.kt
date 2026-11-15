@@ -117,7 +117,7 @@ class AdaptivePlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
         updatePlayPauseColor()
 
         val colorFinal = if (PreferenceUtil.isAdaptiveColor) {

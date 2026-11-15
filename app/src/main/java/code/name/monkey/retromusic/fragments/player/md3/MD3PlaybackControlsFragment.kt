@@ -140,7 +140,7 @@ class MD3PlaybackControlsFragment :
         volumeFragment?.setTintable(colorFinal)
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
         updatePlayPauseDrawableState()
     }
 

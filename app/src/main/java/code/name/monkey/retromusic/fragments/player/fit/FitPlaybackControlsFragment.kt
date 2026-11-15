@@ -135,7 +135,7 @@ class FitPlaybackControlsFragment :
         setFabColor(colorFinal)
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
     }
 
     private fun setFabColor(i: Int) {

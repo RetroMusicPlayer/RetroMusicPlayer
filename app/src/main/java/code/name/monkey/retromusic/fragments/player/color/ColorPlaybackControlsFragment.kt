@@ -136,7 +136,7 @@ class ColorPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
     }
 
     private fun setUpPlayPauseFab() {

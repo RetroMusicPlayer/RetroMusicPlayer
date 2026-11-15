@@ -35,6 +35,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.whichFragment
 import code.name.monkey.retromusic.fragments.MusicSeekSkipTouchListener
 import code.name.monkey.retromusic.fragments.other.VolumeFragment
@@ -219,7 +220,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
 
     /** Gives the previous / next buttons a thin outline with a transparent fill. */
     private fun updatePrevNextBorder() {
-        val color = lastPlaybackControlsColor
+        val color = if (prevNextColor != 0) prevNextColor else lastPlaybackControlsColor
         val density = resources.displayMetrics.density
         listOf(nextButton, previousButton).forEach { button ->
             button ?: return@forEach
@@ -243,9 +244,18 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
         repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
     }
 
+    /** Colour of the previous / next buttons: the cover colour in adaptive mode, else the accent. */
+    private var prevNextColor = 0
+
+    fun updatePrevNextColor(cover: MediaNotificationProcessor) {
+        prevNextColor = if (PreferenceUtil.isAdaptiveColor) cover.primaryTextColor else accentColor()
+        updatePrevNextColor()
+    }
+
     fun updatePrevNextColor() {
-        nextButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        val color = if (prevNextColor != 0) prevNextColor else lastPlaybackControlsColor
+        nextButton?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        previousButton?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         updatePrevNextBorder()
     }
 

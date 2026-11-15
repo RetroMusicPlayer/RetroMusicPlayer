@@ -132,7 +132,7 @@ class CardPlaybackControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
         updatePlayPauseColor()
         updateProgressTextColor()
 

@@ -129,7 +129,7 @@ class LockScreenControlsFragment :
 
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
 
         val isDark = ColorUtil.isColorLight(colorFinal)
         binding.text.setTextColor(colorFinal)

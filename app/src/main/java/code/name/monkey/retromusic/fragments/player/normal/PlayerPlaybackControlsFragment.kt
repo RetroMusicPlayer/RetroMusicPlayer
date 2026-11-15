@@ -109,7 +109,7 @@ class PlayerPlaybackControlsFragment :
         volumeFragment?.setTintable(colorFinal)
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
     }
 
     private fun updateSong() {

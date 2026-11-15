@@ -150,7 +150,7 @@ class MaterialControlsFragment :
         updateRepeatState()
         updateShuffleState()
         updatePlayPauseColor()
-        updatePrevNextColor()
+        updatePrevNextColor(color)
     }
 
     private fun updatePlayPauseColor() {
