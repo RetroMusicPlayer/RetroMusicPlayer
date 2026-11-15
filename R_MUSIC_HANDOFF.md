@@ -25,15 +25,31 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
 
 - Player cover gestures (written 2026-11-14, not built/tested): `views/CoverGestureLayout` is now the root of `fragment_player_album_cover.xml`. Drag up/down on the cover = music volume with a small bar (`volumeOverlay`); double tap right/left half = +/-10 s (`seekFeedback`). Plain taps are held back for the double-tap timeout and then replayed so the cover's own click (lyrics dialog) still works. The player panel can no longer be collapsed by dragging the cover itself (disallowIntercept on DOWN). Horizontal swipes still change songs through the ViewPager.
 
-## Next, in order
-4. Merge artists (dropdown of existing artists) and album rename that regroups songs, written into the MP3 tags (existing tag editor in activities/tageditor).
-5. Synced lyrics from LRCLIB (no key, no limit); LrcView already exists; tap a line to seek.
-6. Artist info button (MusicBrainz + TheAudioDB + Wikipedia, cached for offline).
-7. English translation (ML Kit offline) and romanization (Korean etc.) of lyrics.
-8. Progress bar styles (wavy etc.).
-9. Rename app to "R Music" + new package id, signing key (keep it safe).
+## Next, in order (updated 2026-11-15; the user wants steps done in this order and ONLY when he says go)
+
+Status legend: WRITTEN = code exists on the branch but was never compiled/tested on a device; check the CI build first.
+
+1. Check the CI build of the latest push (Actions). Steps 2-3 below and the player gestures are WRITTEN only. Fix any compile errors before anything else.
+2. Home cover wall like the DroidDeck reference video the user shared (look at DroidDeck only for layout and motion, never copy its logo or art): the wall is the full-screen BACKGROUND of the home screen, also behind the status bar; tall tilted COLUMNS (about 12-15 degrees) drifting slowly downwards along the tilt; rounded tile corners, small gaps; uneven darkness (darker on the left, edges and bottom, brighter on the right); the logo and the main buttons are overlaid at the bottom; scrolling up reveals the lists. Tapping a cover plays that song. Current code (`TiltedCoverGridView`, `HomeFragment`) uses square tiles in horizontal rows and a block header, so it must be reworked.
+3. Now Playing screen: (a) reverse the previous/next arrows (they currently point inwards, they must point outwards: next arrow points right, previous points left, regardless of RTL), (b) give the prev/next buttons a border with a transparent background, (c) the screen takes its colours from the current song cover (some themes already do; find which ones do not), (d) volume drag and double-tap seek on the cover are WRITTEN (`CoverGestureLayout`), test them.
+4. Mini player: replace the rectangular bar at the bottom with a floating OVAL at the TOP-LEFT of the screen inside the app. It must stay at the physical top-left and must NOT flip with the language direction (RTL). Settings for its size, shape and background (cover colour / transparent / fixed colour).
+5. Bug: on an artist page the songs list shows only titles and no cover images. Fix.
+6. Backup settings: let the user pick a folder for backups (Storage Access Framework, persisted URI permission) and schedule automatic backups every N hours (6 or 7 as options; WorkManager). Reuse BackupHelper.
+7. App icon picker: Settings lets the user choose between several app icons (activity-alias per icon). Offer the existing green cobra plus a few alternatives; ask the user whether he has own artwork before designing.
+8. Rename to "R Music": README and repo description first, then app name, new package id, signing key (keep it safe). The user renames the GitHub repo himself in Settings.
    - DONE (2026-11-14): launcher icon from the user's green cobra (dark #282828 background, green #1BE7A4): adaptive foreground + monochrome PNGs in `drawable-*dpi/`, legacy `mipmap-*` PNGs for API 24-25, Play Store/README PNGs, `ic_launcher_background` = #282828. Default accent = `R.color.logo_green` (App.kt, theme version bumped 3 -> 4 so existing installs get it once).
    - Not done: the status-bar `ic_notification` still has the old art (needs a simplified single-color cobra silhouette; note `ic_notification.xml` in drawable/ and PNGs in drawable-*dpi/ both exist, check which one wins before replacing). On Android 12+ with Material You on (default), the accent comes from the wallpaper, not from logo_green.
+9. Merge artists (dropdown of existing artists) and album rename that regroups songs, written into the MP3 tags (existing tag editor in activities/tageditor).
+10. Synced lyrics from LRCLIB (no key, no limit), fetched automatically when a song has none and saved; LrcView already exists; tap a line to seek. The user explicitly wants lyrics to be added on their own.
+11. Artist info button (MusicBrainz + TheAudioDB + Wikipedia, cached for offline).
+12. English translation of lyrics (ML Kit offline) and romanization (Korean etc.).
+13. Progress bar styles (wavy etc.).
+14. Status-bar notification icon: simplified single-colour cobra silhouette (see the note under Rename).
+
+## How to work with this user
+- He writes Egyptian Arabic by dictation, wants short mobile-friendly replies, and says "do not start working" when he is only collecting requirements; wait for his go.
+- Claude Code can not push without a token; he sends a classic token (repo scope, 7 days) and deletes it afterwards. Never store a token in git config or files; use a one-off `git -c http.extraheader=...` push. Fine-grained tokens failed with 403 twice (no Contents write), classic worked.
+- He tests only by installing the debug APK from the Actions run (Artifacts). Say clearly what was not built or tested.
 
 ## Constraints
 - GPL-3: fork must stay public if APK is shared.
