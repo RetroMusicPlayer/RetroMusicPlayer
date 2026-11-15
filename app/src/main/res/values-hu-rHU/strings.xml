@@ -136,7 +136,7 @@
     <string name="deleted_x_songs">Törölte a %1$d zenét.</string>
     <string name="depth">Mélység</string>
     <string name="device_info">Eszköz információ</string>
-    <string name="dialog_message_set_ringtone">Engedélyezed, hogy a Retro Music módosítsa az audiobeállításokat</string>
+    <string name="dialog_message_set_ringtone">Engedélyezed, hogy a R Music módosítsa az audiobeállításokat</string>
     <string name="dialog_title_set_ringtone">Csengőhang beállítás</string>
     <string name="disc_hint">Lemez száma</string>
     <string name="do_you_want_to_clear_the_blacklist">Szeretné kiüríteni a feketelistát?</string>
@@ -265,7 +265,7 @@
     <string name="personalize_settings_summary">Szabd személyre a jelenleg játszott felületet és a kezelőfelületet</string>
     <string name="pick_from_local_storage">Válasszon a helyi tárolóból</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Kövesse a Pinterest oldalt a Retro Music design ötletekért</string>
+    <string name="pinterest_page_summary">Kövesse a Pinterest oldalt a R Music design ötletekért</string>
     <string name="plain">Letisztult</string>
     <string name="playback_pitch">Hangmagasság</string>
     <string name="playback_settings">Visszajátszás beállításai</string>
@@ -315,7 +315,7 @@
     <string name="pref_summary_home_banner">Kezdőlap banner mutatása/elrejtése</string>
     <string name="pref_summary_ignore_media_store_artwork">Növelheti az albumborító minőségét, de lassabb kép betöltési időt eredményez. Csak akkor engedélyezze ezt, ha problémái vannak az alacsony felbontású borítókkal kapcsolatban.</string>
     <string name="pref_summary_library_categories">A könyvtári kategóriák sorrendjének és láthatóságának beállítása.</string>
-    <string name="pref_summary_lock_screen">Retro Music egyéni vezérlőinek a használata zárolási képernyőn.</string>
+    <string name="pref_summary_lock_screen">R Music egyéni vezérlőinek a használata zárolási képernyőn.</string>
     <string name="pref_summary_manage_audio_focus">Mindig játssza le a hangot a háttérben, függetlenül attól, hogy bármi más megy a háttérben</string>
     <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
     <string name="pref_summary_pause_history">Ha engedélyezve van, akkor az újonnan lejátszott dalok nem jelennek meg az előzményekben</string>
@@ -394,7 +394,7 @@
     <string name="reset_action">Visszaállítás</string>
     <string name="reset_artist_image">Az előadó képének visszaállítása</string>
     <string name="restore">Visszaállítás</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">Az alkalmazásnak engedélyre van szüksége a készülék beállításaihoz a zeneszám csengőhangként való beállításához</string>
     <string name="ringtone_title">Csengőhang (Opcionális)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -476,7 +476,7 @@
     <string name="translate">Fordítás</string>
     <string name="translate_community">Segítsen lefordítani az alkalmazást az Ön nyelvére</string>
     <string name="twitter_page">Twitter oldal</string>
-    <string name="twitter_page_summary">Osszd meg kinézeted a Retro Music App segítségével</string>
+    <string name="twitter_page_summary">Osszd meg kinézeted a R Music App segítségével</string>
     <string name="unlabeled">Címkézetlen</string>
     <string name="unplayable_file">Nem lehetett lejátszani ezt a dalt.</string>
     <string name="up_next">A következő</string>
@@ -500,7 +500,7 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="could_not_write_tags_to_file">Nem tudott címkéket írni a zenefájlba!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow R Music.</string>
     <string name="scanning_folders_files">Mappák és fájlok szkennelése…</string>
     <string name="scan_complete">Szkennelés kész: %1$d média észlelve.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>

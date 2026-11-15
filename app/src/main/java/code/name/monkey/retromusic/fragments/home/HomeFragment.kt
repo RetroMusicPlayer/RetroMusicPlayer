@@ -181,7 +181,7 @@ class HomeFragment :
             findNavController().navigate(R.id.action_search, null, navOptions)
         }
         val hexColor = String.format("#%06X", 0xFFFFFF and accentColor())
-        val appName = "Retro <font color=$hexColor>Music</font>".parseAsHtml()
+        val appName = "R <font color=$hexColor>Music</font>".parseAsHtml()
         binding.appBarLayout.title = appName
     }
 

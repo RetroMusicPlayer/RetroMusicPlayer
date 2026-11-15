@@ -138,7 +138,7 @@
     <string name="deleted_x_songs">Au fost șterse %1$d cântece.</string>
     <string name="depth">Profunzime</string>
     <string name="device_info">Informații dispozitiv</string>
-    <string name="dialog_message_set_ringtone">Permite aplicației Retro Music să modifice setările audio</string>
+    <string name="dialog_message_set_ringtone">Permite aplicației R Music să modifice setările audio</string>
     <string name="dialog_title_set_ringtone">Setare ton apel</string>
     <string name="disc_hint">Număr disc</string>
     <string name="do_you_want_to_clear_the_blacklist">Doriți să ștergeți lista neagră?</string>
@@ -267,7 +267,7 @@
     <string name="personalize_settings_summary">Personalizează UI si pagina de redare</string>
     <string name="pick_from_local_storage">Alegeți din spațiul de stocare local</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Urmărește pagina Pinterest pentru inspirație de design Retro Music</string>
+    <string name="pinterest_page_summary">Urmărește pagina Pinterest pentru inspirație de design R Music</string>
     <string name="plain">Simplu</string>
     <string name="playback_pitch">Pas</string>
     <string name="playback_settings">Setări de redare</string>
@@ -317,7 +317,7 @@
     <string name="pref_summary_home_banner">Arată sau ascunde banner-ul acasă</string>
     <string name="pref_summary_ignore_media_store_artwork">Poate mări calitatea copertei de album, dar cauzează încărcarea mai lentă a imaginilor. Activați această opțiune doar dacă aveți probleme cu coperta de album cu rezoluție mică.</string>
     <string name="pref_summary_library_categories">Configurează vizibilitatea și ordinea categoriilor de librării.</string>
-    <string name="pref_summary_lock_screen">Comenzi pe ecranul de blocare pentru Retro music.</string>
+    <string name="pref_summary_lock_screen">Comenzi pe ecranul de blocare pentru R Music.</string>
     <string name="pref_summary_manage_audio_focus">Redă mereu audio în fundal, indiferent dacă altceva este redat</string>
     <string name="pref_summary_open_source_licences">Detalii privind licența pentru software open source</string>
     <string name="pref_summary_pause_history">Când este activată, melodiile noi recent redate, nu vor apărea în istoric</string>
@@ -396,7 +396,7 @@
     <string name="reset_action">Resetare</string>
     <string name="reset_artist_image">Reseteţi imaginea artistului</string>
     <string name="restore">Restabilire</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">Aplicația are nevoie de permisiunea de a accesa setările dispozitivului pentru a seta muzica ca ton de apel</string>
     <string name="ringtone_title">Ton sonerie (opțional)</string>
     <string name="permission_alarm_summary">Aplicația are nevoie de permisiunea de a programa alarmele exacte pentru a seta temporizatoarele de somn</string>
@@ -478,7 +478,7 @@
     <string name="translate">Traducere</string>
     <string name="translate_community">Ajută-ne să traducem aplicația</string>
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">Împărtășește design-ul tău cu Retro Music</string>
+    <string name="twitter_page_summary">Împărtășește design-ul tău cu R Music</string>
     <string name="unlabeled">Neetichetat</string>
     <string name="unplayable_file">Nu s-a putut reda aceast\u0103 melodie.</string>
     <string name="up_next">Urmează</string>
@@ -502,7 +502,7 @@
     <string name="you_have_to_select_at_least_one_category">Trebuie să selectezi cel puțin o categorie.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">O să fii redirecționat spre un site pentru monitorizarea erorilor.</string>
     <string name="could_not_write_tags_to_file">Nu s-au putut scrie etichetele în fișierul muzical!</string>
-    <string name="sleep_timer_no_permission">Fără permisiunea de a programa alarme, te rugăm să permiți Retro Music.</string>
+    <string name="sleep_timer_no_permission">Fără permisiunea de a programa alarme, te rugăm să permiți R Music.</string>
     <string name="scanning_folders_files">Se scanează dosarele și fișierele…</string>
     <string name="scan_complete">Scanare completă: s-au găsit %1$d elemente media.</string>
     <string name="pref_save_last_directory_summary">Când se trece la vizualizarea folderului, se restabilește ultimul director folosit</string>

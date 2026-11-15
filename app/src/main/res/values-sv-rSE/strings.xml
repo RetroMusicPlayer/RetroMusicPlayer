@@ -136,7 +136,7 @@
     <string name="deleted_x_songs">%1$d låtar har raderats.</string>
     <string name="depth">Djup</string>
     <string name="device_info">Enhetsinformation</string>
-    <string name="dialog_message_set_ringtone">Låt Retro Music ändra ljudinställningar</string>
+    <string name="dialog_message_set_ringtone">Låt R Music ändra ljudinställningar</string>
     <string name="dialog_title_set_ringtone">Ställ in ringsignal</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Vill du rensa svartlistan?</string>
@@ -265,7 +265,7 @@
     <string name="personalize_settings_summary">Anpassa appens UI till din smak</string>
     <string name="pick_from_local_storage">Välj från lokal lagring</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Följ vår Pinterestsida för lite designinspiration till Retro Music</string>
+    <string name="pinterest_page_summary">Följ vår Pinterestsida för lite designinspiration till R Music</string>
     <string name="plain">Enkel</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
@@ -315,7 +315,7 @@
     <string name="pref_summary_home_banner">Visar en banner på hemfliken</string>
     <string name="pref_summary_ignore_media_store_artwork">Kan öka albumomslagens kvalitet, men orsakar långsammare laddningstider för bilder. Aktivera endast om du har problem med lågupplösta bilder</string>
     <string name="pref_summary_library_categories">Konfigurera synlighet och ordning för bibliotekskategorier.</string>
-    <string name="pref_summary_lock_screen">Använd Retro Music:s anpassade låsskärmskontroller</string>
+    <string name="pref_summary_lock_screen">Använd R Music:s anpassade låsskärmskontroller</string>
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Licensinformation för programvara med öppen källkod</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
@@ -394,7 +394,7 @@
     <string name="reset_action">Återställ</string>
     <string name="reset_artist_image">Återställ artistbild</string>
     <string name="restore">Restore</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -476,7 +476,7 @@
     <string name="translate">Översätt</string>
     <string name="translate_community">Hjälp oss att översätta appen till ditt språk</string>
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">Dela din design med Retro Music</string>
+    <string name="twitter_page_summary">Dela din design med R Music</string>
     <string name="unlabeled">Omärkt</string>
     <string name="unplayable_file">Kunde inte spela den här låten.</string>
     <string name="up_next">Spelas härnäst</string>
@@ -500,7 +500,7 @@
     <string name="you_have_to_select_at_least_one_category">Du måste välja minst en kategori.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow R Music.</string>
     <string name="scanning_folders_files">Scanning folders and files…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>

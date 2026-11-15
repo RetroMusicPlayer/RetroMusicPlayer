@@ -82,10 +82,10 @@
     <string name="app_shortcut_shuffle_all_short">عشوائي</string>
     <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
     <string name="app_widget_big_name">صورة كاملة</string>
-    <string name="app_widget_card_name">ريترو ميوزك - بطاقة</string>
-    <string name="app_widget_classic_name">ريترو ميوزك - تقليدي</string>
+    <string name="app_widget_card_name">R Music - بطاقة</string>
+    <string name="app_widget_classic_name">R Music - تقليدي</string>
     <string name="app_widget_md3_name">تصميم ماتريال يو</string>
-    <string name="app_widget_small_name">ريترو ميوزك - صغير</string>
+    <string name="app_widget_small_name">R Music - صغير</string>
     <string name="app_widget_text_name">الحد الأدنى للنص</string>
     <string name="artist">فنان</string>
     <string name="artists">فنانين</string>
@@ -146,7 +146,7 @@
     <string name="deleted_x_songs">تم حذف %1$d الأغاني.</string>
     <string name="depth">العمق</string>
     <string name="device_info">معلومات الجهاز</string>
-    <string name="dialog_message_set_ringtone">السمات لتطبيق ريترو ميوزك بتعديل اعدادات الصوت</string>
+    <string name="dialog_message_set_ringtone">السمات لتطبيق R Music بتعديل اعدادات الصوت</string>
     <string name="dialog_title_set_ringtone">ك نغمة رنين</string>
     <string name="disc_hint">رقم القرص</string>
     <string name="do_you_want_to_clear_the_blacklist">هل تريد إزالة القائمة السوداء؟</string>
@@ -326,7 +326,7 @@
     <string name="pref_summary_home_banner">تفعيل وضع البانر في الشاشة الرئيسية</string>
     <string name="pref_summary_ignore_media_store_artwork">يمكنك أن تزيد من جودة غلاف الألبوم ، لكنه يسبب بطئ في التحميل للصور. قم بتمكين هذا فقط إذا كنت تواجه مشاكل مع صور ألبومات منخفضة الدقة</string>
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
-    <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من ريترو ميوزك لتحكم بالتشغيل</string>
+    <string name="pref_summary_lock_screen">استخدم شاشة القفل المخصصة من R Music لتحكم بالتشغيل</string>
     <string name="pref_summary_manage_audio_focus">تشغيل الصوت دائما في الخلفية بغض النظر عن أي شيء آخر يتم تشغيله</string>
     <string name="pref_summary_open_source_licences">الرخصة والتفاصيل للبرمجيات مفتوحة المصدر</string>
     <string name="pref_summary_pause_history">عند التمكين، لن تظهر الأغاني المشغلة حديثا في المحفوظات</string>
@@ -487,7 +487,7 @@
     <string name="translate">ترجمة</string>
     <string name="translate_community">ساعدها لترجمة التطبيق الى لغتك</string>
     <string name="twitter_page">تويتر</string>
-    <string name="twitter_page_summary">شارك تصميمك مع ريترو ميوزك</string>
+    <string name="twitter_page_summary">شارك تصميمك مع R Music</string>
     <string name="unlabeled">غير معنون</string>
     <string name="unplayable_file">تعذّر تشغيل\u2019t هذه الأغنية.</string>
     <string name="up_next">التالي</string>
@@ -511,7 +511,7 @@
     <string name="you_have_to_select_at_least_one_category">عليك اختيار فئة واحدة على الأقل.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">سيتم تحويلك الى صفحة سجل الاخطاء</string>
     <string name="could_not_write_tags_to_file">تعذر كتابة العلامات إلى ملف الموسيقى!</string>
-    <string name="sleep_timer_no_permission">لا يوجد إذن لجدولة التنبيهات، يرجى السماح لـ Retro Music.</string>
+    <string name="sleep_timer_no_permission">لا يوجد إذن لجدولة التنبيهات، يرجى السماح لـ R Music.</string>
     <string name="scanning_folders_files">جارٍ فحص المجلدات والملفات…</string>
     <string name="scan_complete">اكتمل المسح: %1$d تم العثور على وسائط صوتية.</string>
     <string name="pref_save_last_directory_summary">عند التبديل إلى عرض المجلدات، استعادة آخر مجلد تم استخدامه</string>

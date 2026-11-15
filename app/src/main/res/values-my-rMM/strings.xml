@@ -134,7 +134,7 @@
     <string name="deleted_x_songs">သီချင်း %1$d ပုဒ်ကိုဖျက်ပစ်ခဲ့သည်</string>
     <string name="depth">Depth</string>
     <string name="device_info">Device အချက်အလက်</string>
-    <string name="dialog_message_set_ringtone">အသံ Settings ပြုပြင်ရန် Retro Music ကိုခွင့်ပြုချက်ပေးပါ</string>
+    <string name="dialog_message_set_ringtone">အသံ Settings ပြုပြင်ရန် R Music ကိုခွင့်ပြုချက်ပေးပါ</string>
     <string name="dialog_title_set_ringtone">Ringtone ထားခြင်း</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Blacklist ကိုရှင်းလင်းလိုပါသလား</string>
@@ -263,7 +263,7 @@
     <string name="personalize_settings_summary">Now Playing နှင့် UI controls များကိုစိတ်ကြိုက်ပြင်ဆင်မည်</string>
     <string name="pick_from_local_storage">Local Storage မှ ရွေးမည်</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Retro Music ဒီဇိုင်းအကြံဉာဏ်ကောင်းများအတွက် Pinterest page ကို follow ပါ</string>
+    <string name="pinterest_page_summary">R Music ဒီဇိုင်းအကြံဉာဏ်ကောင်းများအတွက် Pinterest page ကို follow ပါ</string>
     <string name="plain">ရှင်းရှင်းလင်းလင်းပုံစံ</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
@@ -313,7 +313,7 @@
     <string name="pref_summary_home_banner">Home banner အား ပြသခြင်း၊ ဖျောက်ထားခြင်း</string>
     <string name="pref_summary_ignore_media_store_artwork">Album cover အရည်အသွေးပိုမိုကောင်းမွန်လာနိုင်သော်လည်း Loading time ပိုကြာနိုင်သည်။ အရည်အသွေးနိမ့်သောပုံများနှင့်အဆင်မပြေမှသာလျှင် ဤခလုတ်ကိုဖွင့်ပါ။</string>
     <string name="pref_summary_library_categories">Library category များ ဖော်ခြင်း၊ ဖျောက်ခြင်းနှင့် အထားအသိုများ ချိန်ညှိမည်</string>
-    <string name="pref_summary_lock_screen">Retro Music ၏ ပြင်ဆင်ထားသော Lockscreen controls များကိုသုံးမည်</string>
+    <string name="pref_summary_lock_screen">R Music ၏ ပြင်ဆင်ထားသော Lockscreen controls များကိုသုံးမည်</string>
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">Open Source software အတွက် လိုင်စင်အချက်အလက်များ</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
@@ -392,7 +392,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">ပြန်လည်ရယူမည်</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">သီချင်းများကို Ringtone ထားရန် app အား System Settings များကိုပြင်ဆင်ခွင့်ပေးရန်လိုသည်။</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -474,7 +474,7 @@
     <string name="translate">ဘာသာပြန်ခြင်း</string>
     <string name="translate_community">App ကိုသင့်ဘာသာစကားသို့ ကူပြန်ပေးပါ</string>
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">သင့် Retro Music ဒီဇိုင်းများကိုမျှဝေပါ</string>
+    <string name="twitter_page_summary">သင့် R Music ဒီဇိုင်းများကိုမျှဝေပါ</string>
     <string name="unlabeled">Label မထိုးပါ</string>
     <string name="unplayable_file">ဤသီချင်းကို မ play နိုင်ပါ</string>
     <string name="up_next">လာမည့်အပုဒ်</string>
@@ -498,7 +498,7 @@
     <string name="you_have_to_select_at_least_one_category">အနည်းဆုံး category တစ်ခုရွေးချယ်ရန်လိုအပ်သည်</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Issue tracker website သို့ခေါ်ဆောင်သွားပါမည်</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow R Music.</string>
     <string name="scanning_folders_files">Scanning folders and files…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>

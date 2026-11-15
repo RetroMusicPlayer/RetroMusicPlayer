@@ -35,7 +35,21 @@ android {
             keyPassword = getProperty(signingProperties, "keyPassword")
         }
     } else {
-        signingConfigs.getByName("debug")
+        // Without retro.properties (CI, fresh clones) use one fixed, committed DEBUG key. The default
+        // debug key is generated per machine, so every CI build got a new signature and Android
+        // refused to install it over the previous one. This key is public on purpose and must
+        // never be used for a release.
+        val sharedDebugKeystore = file("shared-debug.keystore")
+        if (sharedDebugKeystore.exists()) {
+            signingConfigs.getByName("debug") {
+                storeFile = sharedDebugKeystore
+                storePassword = "android"
+                keyAlias = "androiddebugkey"
+                keyPassword = "android"
+            }
+        } else {
+            signingConfigs.getByName("debug")
+        }
     }
 
     buildTypes {

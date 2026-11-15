@@ -138,7 +138,7 @@
     <string name="deleted_x_songs">Deleted %1$d songs.</string>
     <string name="depth">Depth</string>
     <string name="device_info">Informacije o uređaju</string>
-    <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
+    <string name="dialog_message_set_ringtone">Allow R Music to modify audio settings</string>
     <string name="dialog_title_set_ringtone">Postavi zvuk zvona</string>
     <string name="disc_hint">Disc Number</string>
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
@@ -267,7 +267,7 @@
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
     <string name="pick_from_local_storage">Pick from local storage</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
+    <string name="pinterest_page_summary">Follow Pinterest page for R Music design inspiration</string>
     <string name="plain">Plain</string>
     <string name="playback_pitch">Pitch</string>
     <string name="playback_settings">Playback Settings</string>
@@ -317,7 +317,7 @@
     <string name="pref_summary_home_banner">Show or hide the home banner</string>
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
-    <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
+    <string name="pref_summary_lock_screen">Use R Music\'s custom lockscreen controls</string>
     <string name="pref_summary_manage_audio_focus">Always play audio in background regardless of anything else being played</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
     <string name="pref_summary_pause_history">When enabled, newly played songs won\'t show in history</string>
@@ -396,7 +396,7 @@
     <string name="reset_action">Reset</string>
     <string name="reset_artist_image">Reset artist image</string>
     <string name="restore">Restore</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">The app needs permission to access your device settings in order to set music as Ringtone</string>
     <string name="ringtone_title">Ringtone (Optional)</string>
     <string name="permission_alarm_summary">The app needs permission to schedule exact alarms to set sleep timers</string>
@@ -478,7 +478,7 @@
     <string name="translate">Prevedite</string>
     <string name="translate_community">Help us translate the app to your language</string>
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">Share your design with Retro Music</string>
+    <string name="twitter_page_summary">Share your design with R Music</string>
     <string name="unlabeled">Unlabeled</string>
     <string name="unplayable_file">Couldn\u2019t play this song.</string>
     <string name="up_next">Up next</string>
@@ -502,7 +502,7 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
     <string name="could_not_write_tags_to_file">Could not write tags to the music file!</string>
-    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow Retro Music.</string>
+    <string name="sleep_timer_no_permission">No permission to schedule alarms, please allow R Music.</string>
     <string name="scanning_folders_files">Scanning folders and files…</string>
     <string name="scan_complete">Scan complete: %1$d media items found.</string>
     <string name="pref_save_last_directory_summary">When switching to folder view, restore last used directory</string>

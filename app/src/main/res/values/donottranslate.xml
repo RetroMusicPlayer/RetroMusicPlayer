@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Retro Music</string>
+    <string name="app_name" translatable="false">R Music</string>
     <string name="git_hub" translatable="false">GitHub</string>
 
     <string name="app_shortcut_last_added_long" translatable="false">@string/last_added</string>

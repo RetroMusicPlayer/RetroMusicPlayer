@@ -134,7 +134,7 @@
     <string name="deleted_x_songs">%1$d 曲を削除しました</string>
     <string name="depth">深さ</string>
     <string name="device_info">端末の情報</string>
-    <string name="dialog_message_set_ringtone">Retro Musicにオーディオ設定の変更を許可する</string>
+    <string name="dialog_message_set_ringtone">R Musicにオーディオ設定の変更を許可する</string>
     <string name="dialog_title_set_ringtone">着信音に設定</string>
     <string name="disc_hint">ディスクナンバー</string>
     <string name="do_you_want_to_clear_the_blacklist">ブラックリストを削除しますか?</string>
@@ -263,7 +263,7 @@
     <string name="personalize_settings_summary">再生中のUI画面をカスタマイズ</string>
     <string name="pick_from_local_storage">ローカルストレージから選択</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">PintrestでRetro Musicのデザインのインスピレーションを感じましょう！</string>
+    <string name="pinterest_page_summary">PintrestでR Musicのデザインのインスピレーションを感じましょう！</string>
     <string name="plain">プレーン</string>
     <string name="playback_pitch">音程</string>
     <string name="playback_settings">再生設定</string>
@@ -314,7 +314,7 @@
     <string name="pref_summary_home_banner">ホーム画面を切り替える</string>
     <string name="pref_summary_ignore_media_store_artwork">アルバムジャケットのクオリティを上げますが、読み込みに時間がかかる場合があります。低解像度の画像で問題がある場合に有効です。</string>
     <string name="pref_summary_library_categories">ライブラリに表示される項目と、順番を変更する</string>
-    <string name="pref_summary_lock_screen">Retro Musicのカスタムされたロック画面を使用する</string>
+    <string name="pref_summary_lock_screen">R Musicのカスタムされたロック画面を使用する</string>
     <string name="pref_summary_manage_audio_focus">ほかのアプリでの再生に関わらず再生し続けます</string>
     <string name="pref_summary_open_source_licences">オープンソースライセンスの詳細</string>
     <string name="pref_summary_pause_history">有効にすると、新たに再生された曲は履歴に表示されません</string>
@@ -393,7 +393,7 @@
     <string name="reset_action">リセット</string>
     <string name="reset_artist_image">アーティスト画像をリセット</string>
     <string name="restore">復元</string>
-    <string name="retro_music_player">Retro Music Player</string>
+    <string name="retro_music_player">R Music</string>
     <string name="ringtone_summary">音楽を着信音に設定するには、端末の設定にアクセスする権限が必要です</string>
     <string name="ringtone_title">着信音（オプション）</string>
     <string name="permission_alarm_summary">スリープタイマーを設定するには、アプリに正確なアラームをスケジュールする許可が必要です</string>
@@ -499,7 +499,7 @@
     <string name="you_have_to_select_at_least_one_category">少なくとも 1 つのカテゴリを選択する必要があります。</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">不具合報告用のウェブサイトに移動します。</string>
     <string name="could_not_write_tags_to_file">音楽ファイルにタグを書き込めませんでした</string>
-    <string name="sleep_timer_no_permission">アラームをスケジュールする権限がありません。設定からRetro Musicを許可してください。</string>
+    <string name="sleep_timer_no_permission">アラームをスケジュールする権限がありません。設定からR Musicを許可してください。</string>
     <string name="scanning_folders_files">フォルダとファイルをスキャンしています…</string>
     <string name="scan_complete">スキャン完了: %1$d 件のメディアアイテムが見つかりました。</string>
     <string name="pref_save_last_directory_summary">フォルダビューに切り替えると、最後に使用したディレクトリが復元されます</string>

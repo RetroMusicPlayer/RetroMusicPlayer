@@ -500,7 +500,7 @@
     <string name="you_have_to_select_at_least_one_category">En az bir kategori seçmek zorundasınız.</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sorun izleyici web sitesine yönlendirileceksiniz.</string>
     <string name="could_not_write_tags_to_file">Etiketler müzik dosyasına yazılamadı!</string>
-    <string name="sleep_timer_no_permission">Uygulamanın alarm ayarlaması için izni yok, lütfen Retro Music\'e izin verin.</string>
+    <string name="sleep_timer_no_permission">Uygulamanın alarm ayarlaması için izni yok, lütfen R Music\'e izin verin.</string>
     <string name="scanning_folders_files">Dosyalar ve klasörler taranıyor…</string>
     <string name="scan_complete">Tarama tamamlandı: %1$d medya öğesi bulundu.</string>
     <string name="pref_save_last_directory_summary">Klasör görünümüne geçerken son kullanılan dizini geri getir</string>
