@@ -29,7 +29,11 @@ jobs:
       - name: Build the fast (optimised) APK
         continue-on-error: true
         run: |
-          ./gradlew :app:assembleNormalFast
+          set -o pipefail
+          ./gradlew :app:assembleNormalFast 2>&1 | tee fast.log || {
+            grep -E "^e: |What went wrong|error:|Execution failed|Caused by|^> |R8|Missing class" fast.log | head -9 | while IFS= read -r l; do echo "::error::${l:0:300}"; done
+            exit 1
+          }
           mkdir -p out-fast
           cp app/build/outputs/apk/normal/fast/*.apk "out-fast/R-Music-fast-${GITHUB_RUN_NUMBER}.apk"
       - uses: actions/upload-artifact@v4
