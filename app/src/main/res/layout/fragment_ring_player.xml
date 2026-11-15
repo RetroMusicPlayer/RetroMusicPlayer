@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_black_1000"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/ringBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#B3000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include layout="@layout/status_bar" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playerToolbar"
+        style="@style/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_bar"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ring_playing_from"
+                android:textColor="#B3FFFFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/playingFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/md_white_1000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Album name" />
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- Progress ring (full circle) with the round cover inside -->
+    <me.tankery.lib.circularseekbar.CircularSeekBar
+        android:id="@+id/progressRing"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        app:cs_circle_color="#33FFFFFF"
+        app:cs_circle_progress_color="@color/md_white_1000"
+        app:cs_circle_stroke_width="3dp"
+        app:cs_end_angle="270"
+        app:cs_move_outside_circle="true"
+        app:cs_pointer_color="@color/md_white_1000"
+        app:cs_pointer_halo_width="0dp"
+        app:cs_pointer_stroke_width="14dp"
+        app:cs_start_angle="270"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerToolbar"
+        tools:progress="40" />
+
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:id="@+id/ringCover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="18dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/progressRing"
+        app:layout_constraintEnd_toEndOf="@id/progressRing"
+        app:layout_constraintStart_toStartOf="@id/progressRing"
+        app:layout_constraintTop_toTopOf="@id/progressRing"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Circle"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
+
+    <code.name.monkey.retromusic.lyrics.CoverLrcView
+        android:id="@+id/ringLyrics"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/progressRing"
+        app:layout_constraintEnd_toEndOf="@id/progressRing"
+        app:layout_constraintStart_toStartOf="@id/progressRing"
+        app:layout_constraintTop_toTopOf="@id/progressRing"
+        app:lrcLabel="@string/no_lyrics_found"
+        app:lrcNormalTextSize="20sp"
+        app:lrcPadding="20dp"
+        app:lrcTextGravity="center"
+        app:lrcTextSize="24sp"
+        app:lrcTimelineColor="@color/transparent" />
+
+    <ImageButton
+        android:id="@+id/queueButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/roundSelector"
+        android:contentDescription="@string/queue"
+        android:src="@drawable/ic_queue_music"
+        app:layout_constraintBottom_toBottomOf="@id/ringTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ringTitle"
+        android:layout_marginStart="16dp"
+        app:tint="@color/md_white_1000" />
+
+    <ImageButton
+        android:id="@+id/favoriteButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/roundSelector"
+        android:contentDescription="@string/action_add_to_favorites"
+        android:src="@drawable/ic_favorite_border"
+        app:layout_constraintBottom_toBottomOf="@id/ringTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ringTitle"
+        app:tint="@color/md_white_1000" />
+
+    <TextView
+        android:id="@+id/ringTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/md_white_1000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/favoriteButton"
+        app:layout_constraintStart_toEndOf="@id/queueButton"
+        app:layout_constraintTop_toBottomOf="@id/progressRing"
+        tools:text="Song title" />
+
+    <LinearLayout
+        android:id="@+id/artistRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ringTitle">
+
+        <TextView
+            android:id="@+id/ringArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#CCFFFFFF"
+            android:textSize="15sp"
+            tools:text="Artist" />
+
+        <TextView
+            android:id="@+id/lyricsChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_ring_chip"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2dp"
+            android:text="@string/lyrics"
+            android:textColor="@color/md_white_1000"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/controlsRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistRow">
+
+        <ImageButton
+            android:id="@+id/shuffleButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/roundSelector"
+            android:contentDescription="@string/action_shuffle_all"
+            android:src="@drawable/ic_shuffle"
+            app:tint="@color/md_white_1000" />
+
+        <ImageButton
+            android:id="@+id/previousButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="12dp"
+            android:background="?attr/roundSelector"
+            android:contentDescription="@string/action_previous"
+            android:src="@drawable/ic_skip_previous"
+            app:tint="@color/md_white_1000" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/playPauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_play_arrow"
+            app:backgroundTint="@color/md_white_1000"
+            app:tint="@color/md_black_1000" />
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/roundSelector"
+            android:contentDescription="@string/action_next"
+            android:src="@drawable/ic_skip_next"
+            app:tint="@color/md_white_1000" />
+
+        <ImageButton
+            android:id="@+id/repeatButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/roundSelector"
+            android:contentDescription="@string/action_cycle_repeat"
+            android:src="@drawable/ic_repeat"
+            app:tint="@color/md_white_1000" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/shareButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/roundSelector"
+        android:contentDescription="@string/action_share"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/md_white_1000" />
+
+    <TextView
+        android:id="@+id/artistCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CCFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/shareButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shareButton"
+        tools:text="6/155" />
+
+    <ImageButton
+        android:id="@+id/equalizerButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="?attr/roundSelector"
+        android:contentDescription="@string/equalizer"
+        android:src="@drawable/ic_equalizer"
+        app:layout_constraintBottom_toBottomOf="@id/shareButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shareButton"
+        app:tint="@color/md_white_1000" />
+</androidx.constraintlayout.widget.ConstraintLayout>

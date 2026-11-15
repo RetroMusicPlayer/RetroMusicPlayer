@@ -88,6 +88,7 @@ import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
 import code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment
+import code.name.monkey.retromusic.fragments.player.ring.RingPlayerFragment
 import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
@@ -687,6 +688,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             Tiny -> TinyPlayerFragment()
             Peek -> PeekPlayerFragment()
             Circle -> CirclePlayerFragment()
+            Ring -> RingPlayerFragment()
             Classic -> ClassicPlayerFragment()
             MD3 -> MD3PlayerFragment()
             else -> PlayerFragment()

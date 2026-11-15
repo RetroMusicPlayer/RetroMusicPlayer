@@ -596,4 +596,7 @@
     <string name="auto_backup_every_hours">%1$d hours</string>
     <string name="auto_backup_keep_title">Automatic backups to keep</string>
     <string name="auto_backup_keep_count">Last %1$d</string>
+    <string name="ring_cover">Ring cover</string>
+    <string name="ring_playing_from">Playing from</string>
+    <string name="ring_no_lyrics">No lyrics for this song</string>
 </resources>

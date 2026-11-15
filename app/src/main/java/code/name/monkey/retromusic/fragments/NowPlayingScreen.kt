@@ -42,6 +42,7 @@ enum class NowPlayingScreen constructor(
     MD3(R.string.md3, R.drawable.np_normal, 18, AlbumCoverStyle.Normal),
     Normal(R.string.normal, R.drawable.np_normal, 0, AlbumCoverStyle.Normal),
     Peek(R.string.peek, R.drawable.np_peek, 14, AlbumCoverStyle.Normal),
+    Ring(R.string.ring_cover, R.drawable.np_minimalistic_circle, 19, null),
     Plain(R.string.plain, R.drawable.np_plain, 3, AlbumCoverStyle.Normal),
     Simple(R.string.simple, R.drawable.np_simple, 8, AlbumCoverStyle.Normal),
     Tiny(R.string.tiny, R.drawable.np_tiny, 7, null),

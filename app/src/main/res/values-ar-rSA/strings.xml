@@ -587,4 +587,7 @@
     <string name="auto_backup_every_hours">%1$d ساعة</string>
     <string name="auto_backup_keep_title">عدد النسخ التلقائية المحفوظة</string>
     <string name="auto_backup_keep_count">آخر %1$d</string>
+    <string name="ring_cover">الغلاف الدائري</string>
+    <string name="ring_playing_from">التشغيل من</string>
+    <string name="ring_no_lyrics">مفيش كلمات للأغنية دي</string>
 </resources>
