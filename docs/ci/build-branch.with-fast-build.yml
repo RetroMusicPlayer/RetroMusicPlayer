@@ -31,7 +31,7 @@ jobs:
         run: |
           set -o pipefail
           ./gradlew :app:assembleNormalFast 2>&1 | tee fast.log || {
-            grep -E "^e: |What went wrong|error:|Execution failed|Caused by|^> |R8|Missing class" fast.log | head -9 | while IFS= read -r l; do echo "::error::${l:0:300}"; done
+            { sed -n '/What went wrong/,/Try:/p' fast.log | head -10; grep -E "^e: |R8: |Missing class" fast.log | head -6; } | while IFS= read -r l; do echo "::error::${l:0:300}"; done
             exit 1
           }
           mkdir -p out-fast
