@@ -10,6 +10,10 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.view.HapticFeedbackConstants
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isGone
@@ -43,26 +47,120 @@ class MiniPlayerOvalController(
     private var coverColors: MediaNotificationProcessor? = null
     private var shape = 0
 
+    // Position: the default spot is below the toolbar at the physical left; the user can move
+    // the oval with a long press + drag and the offset from the default spot is remembered.
+    private var baseLeft = 0
+    private var baseTop = 0
+    private val fling = MiniPlayerFragment.FlingPlayBackController(binding.root.context)
+    private val touchSlop = ViewConfiguration.get(binding.root.context).scaledTouchSlop
+    private var dragging = false
+    private var moved = false
+    private var downRawX = 0f
+    private var downRawY = 0f
+    private var startLeft = 0
+    private var startTop = 0
+    private val startDrag = Runnable {
+        dragging = true
+        moved = false
+        binding.root.isPressed = false
+        binding.root.parent?.requestDisallowInterceptTouchEvent(true)
+        binding.root.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+        binding.root.animate().scaleX(1.1f).scaleY(1.1f).setDuration(120).start()
+    }
+
     init {
         binding.root.setOnClickListener { onOpen() }
-        // In the circle shape there is no play/pause button, so a long press does it.
-        binding.root.setOnLongClickListener {
-            if (shape == SHAPE_CIRCLE) {
-                PlayPauseButtonOnClickHandler().onClick(binding.root)
-                true
-            } else {
-                false
-            }
-        }
-        setUpSwipe()
+        setUpTouch()
         binding.ovalPlayPause.setOnClickListener(PlayPauseButtonOnClickHandler())
         applySettings()
     }
 
+    /**
+     * Tap = open the player (view click), swipe left / right = next / previous (same as the old
+     * bar), long press + drag = move the oval. In the circle shape (no play/pause button) a long
+     * press without moving toggles play/pause.
+     */
     @SuppressLint("ClickableViewAccessibility")
-    private fun setUpSwipe() {
-        // Swipe left / right on the oval = next / previous song (same as the old bar).
-        binding.root.setOnTouchListener(MiniPlayerFragment.FlingPlayBackController(context))
+    private fun setUpTouch() {
+        binding.root.setOnTouchListener { v, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    val lp = v.layoutParams as ViewGroup.MarginLayoutParams
+                    downRawX = event.rawX
+                    downRawY = event.rawY
+                    startLeft = lp.leftMargin
+                    startTop = lp.topMargin
+                    dragging = false
+                    moved = false
+                    v.postDelayed(startDrag, ViewConfiguration.getLongPressTimeout().toLong())
+                    fling.onTouch(v, event)
+                    false
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    val dx = event.rawX - downRawX
+                    val dy = event.rawY - downRawY
+                    if (dragging) {
+                        if (!moved && (kotlin.math.abs(dx) > touchSlop || kotlin.math.abs(dy) > touchSlop)) {
+                            moved = true
+                        }
+                        if (moved) {
+                            moveTo(startLeft + dx.toInt(), startTop + dy.toInt())
+                        }
+                        true
+                    } else {
+                        if (kotlin.math.abs(dx) > touchSlop || kotlin.math.abs(dy) > touchSlop) {
+                            v.removeCallbacks(startDrag)
+                        }
+                        fling.onTouch(v, event)
+                    }
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.removeCallbacks(startDrag)
+                    if (dragging) {
+                        dragging = false
+                        v.isPressed = false
+                        v.animate().scaleX(1f).scaleY(1f).setDuration(120).start()
+                        if (moved) {
+                            savePosition()
+                        } else if (shape == SHAPE_CIRCLE && event.actionMasked == MotionEvent.ACTION_UP) {
+                            PlayPauseButtonOnClickHandler().onClick(v)
+                        }
+                        true
+                    } else {
+                        fling.onTouch(v, event)
+                    }
+                }
+
+                else -> fling.onTouch(v, event)
+            }
+        }
+    }
+
+    private fun defaultLeft() = baseLeft + dp(12)
+
+    // Below the toolbar so the toolbar menu (the three dots, on the left in RTL) stays reachable.
+    private fun defaultTop() = baseTop + dp(8 + 56)
+
+    private fun moveTo(left: Int, top: Int) {
+        val parent = binding.root.parent as? View
+        var l = left
+        var t = top
+        if (parent != null && parent.width > 0 && binding.root.width > 0) {
+            l = l.coerceIn(0, (parent.width - binding.root.width).coerceAtLeast(0))
+            t = t.coerceIn(0, (parent.height - binding.root.height).coerceAtLeast(0))
+        }
+        binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            leftMargin = l
+            topMargin = t
+        }
+    }
+
+    private fun savePosition() {
+        val lp = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+        PreferenceUtil.miniPlayerOffsetX = lp.leftMargin - defaultLeft()
+        PreferenceUtil.miniPlayerOffsetY = lp.topMargin - defaultTop()
     }
 
     private fun dp(value: Int) = (value * context.resources.displayMetrics.density).toInt()
@@ -179,10 +277,12 @@ class MiniPlayerOvalController(
 
     /** Move the oval: [left] and [top] are extra offsets (status bar, navigation rail). */
     fun setPosition(left: Int, top: Int) {
-        binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-            leftMargin = left + dp(12)
-            topMargin = top + dp(8)
-        }
+        baseLeft = left
+        baseTop = top
+        moveTo(
+            defaultLeft() + PreferenceUtil.miniPlayerOffsetX,
+            defaultTop() + PreferenceUtil.miniPlayerOffsetY
+        )
     }
 
     /** [visible] = oval mode is on and there is something in the queue. */

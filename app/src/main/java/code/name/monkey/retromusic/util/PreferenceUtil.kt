@@ -110,6 +110,8 @@ import code.name.monkey.retromusic.HOME_COVERS_ENABLED
 import code.name.monkey.retromusic.HOME_COVERS_SOURCE
 import code.name.monkey.retromusic.HOME_COVERS_SPEED
 import code.name.monkey.retromusic.MINI_PLAYER_BACKGROUND
+import code.name.monkey.retromusic.MINI_PLAYER_OFFSET_X
+import code.name.monkey.retromusic.MINI_PLAYER_OFFSET_Y
 import code.name.monkey.retromusic.MINI_PLAYER_SHAPE
 import code.name.monkey.retromusic.MINI_PLAYER_SIZE
 import code.name.monkey.retromusic.MINI_PLAYER_STYLE
@@ -825,6 +827,16 @@ object PreferenceUtil {
     val miniPlayerBackground: Int
         get() = (sharedPreferences.getStringOrDefault(MINI_PLAYER_BACKGROUND, "0").toIntOrNull()
             ?: 0).coerceIn(0, 3)
+
+    /** How far (px) the user dragged the oval away from its default spot, horizontally. */
+    var miniPlayerOffsetX: Int
+        get() = sharedPreferences.getInt(MINI_PLAYER_OFFSET_X, 0)
+        set(value) = sharedPreferences.edit { putInt(MINI_PLAYER_OFFSET_X, value) }
+
+    /** Same, vertically. */
+    var miniPlayerOffsetY: Int
+        get() = sharedPreferences.getInt(MINI_PLAYER_OFFSET_Y, 0)
+        set(value) = sharedPreferences.edit { putInt(MINI_PLAYER_OFFSET_Y, value) }
 
     /** Song ids pinned to the cover wall, in the order they were pinned. */
     var homeCoversPinned: List<Long>
