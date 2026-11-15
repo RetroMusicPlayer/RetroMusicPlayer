@@ -23,6 +23,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
+import android.util.LruCache
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -35,6 +36,7 @@ import code.name.monkey.retromusic.model.Song
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import java.util.concurrent.Executors
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.hypot
@@ -100,6 +102,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
     private val targets = ArrayList<CustomTarget<Bitmap>>()
     private var loadedKey: List<Long> = emptyList()
     private var loading = false
+    private var generation = 0
 
     private val tilePaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
     private val shadePaint = Paint()
@@ -140,6 +143,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
         }
         loading = true
         val size = (120 * density).toInt()
+        val myGeneration = ++generation
         val loaded = arrayOfNulls<Bitmap>(songs.size)
         var finished = 0
         fun onOneFinished() {
@@ -153,11 +157,32 @@ class TiltedCoverGridView @JvmOverloads constructor(
             }
         }
         songs.forEachIndexed { index, song ->
+            val cached = roundedCache.get(song.id)
+            if (cached != null) {
+                loaded[index] = cached
+                onOneFinished()
+                return@forEachIndexed
+            }
             val target = object : CustomTarget<Bitmap>(size, size) {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    // Glide may recycle its own bitmap later, so keep our own rounded copy.
-                    loaded[index] = roundedCopy(resource)
-                    onOneFinished()
+                    // Glide may reuse its own bitmap, so take a quick copy here and do the
+                    // slower rounding on a background thread, not on the main thread.
+                    val copy = resource.copy(Bitmap.Config.ARGB_8888, false)
+                    if (copy == null) {
+                        onOneFinished()
+                        return
+                    }
+                    roundExecutor.execute {
+                        val rounded = roundedCopy(copy)
+                        copy.recycle()
+                        roundedCache.put(song.id, rounded)
+                        post {
+                            if (myGeneration == generation) {
+                                loaded[index] = rounded
+                                onOneFinished()
+                            }
+                        }
+                    }
                 }
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
@@ -367,5 +392,13 @@ class TiltedCoverGridView @JvmOverloads constructor(
             loading = false
             loadedKey = emptyList()
         }
+    }
+
+    private companion object {
+        /** Rounded covers survive leaving and re-entering the home screen (about 24 MB at most). */
+        val roundedCache = object : LruCache<Long, Bitmap>(24 * 1024 * 1024) {
+            override fun sizeOf(key: Long, value: Bitmap): Int = value.byteCount
+        }
+        val roundExecutor = Executors.newSingleThreadExecutor()
     }
 }

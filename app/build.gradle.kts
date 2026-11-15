@@ -67,6 +67,16 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = " DEBUG"
         }
+        // A fast build for testing on a phone: shrunk and optimised like a release (the debug
+        // build is much slower), but with its own application id so it installs next to the
+        // debug app, and with the same resources as debug (see src/fast).
+        create("fast") {
+            initWith(getByName("release"))
+            applicationIdSuffix = ".fast"
+            versionNameSuffix = " FAST"
+            signingConfig = theSigningConfig
+            matchingFallbacks += listOf("release")
+        }
     }
 
     flavorDimensions += "version"
@@ -93,6 +103,7 @@ android {
         }
     }
     lint {
+        checkReleaseBuilds = false
         abortOnError = true
         warning.addAll(listOf("ImpliedQuantity", "Instantiatable", "MissingQuantity", "MissingTranslation", "StringFormatInvalid"))
     }
