@@ -552,4 +552,9 @@
     <string name="pref_title_home_covers_count">Number of covers</string>
     <string name="cover_seek_forward">+10s</string>
     <string name="cover_seek_back">−10s</string>
+
+    <string name="wall_cover_menu_title">Cover</string>
+    <string name="wall_pin">Pin to the wall</string>
+    <string name="wall_unpin">Unpin from the wall</string>
+    <string name="wall_go_to_song">Go to song</string>
 </resources>

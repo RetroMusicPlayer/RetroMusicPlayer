@@ -27,6 +27,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.GestureDetector
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -60,6 +61,9 @@ class TiltedCoverGridView @JvmOverloads constructor(
     /** Called with the songs on the wall and the index of the one that was tapped. */
     var onSongClick: ((songs: List<Song>, index: Int) -> Unit)? = null
 
+    /** Called with the songs on the wall and the index of the one that was long-pressed. */
+    var onSongLongClick: ((songs: List<Song>, index: Int) -> Unit)? = null
+
     private val tapDetector = GestureDetector(
         context,
         object : GestureDetector.SimpleOnGestureListener() {
@@ -71,6 +75,13 @@ class TiltedCoverGridView @JvmOverloads constructor(
                 playSoundEffect(android.view.SoundEffectConstants.CLICK)
                 onSongClick?.invoke(coverSongs, index)
                 return true
+            }
+
+            override fun onLongPress(e: MotionEvent) {
+                val index = hitTest(e.x, e.y)
+                if (index < 0) return
+                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                onSongLongClick?.invoke(coverSongs, index)
             }
         }
     )

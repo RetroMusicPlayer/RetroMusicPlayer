@@ -121,7 +121,17 @@ class LibraryViewModel(
             } else {
                 repository.historySong().map { it.toSong() }
             }
-            var picked = primary.distinctBy { it.albumId }.take(count)
+            // Pinned songs always keep their cover on the wall, before the last / most played ones.
+            val pinnedIds = PreferenceUtil.homeCoversPinned
+            val pinned: List<Song> = if (pinnedIds.isEmpty()) {
+                emptyList()
+            } else {
+                val byId = repository.allSongs().associateBy { it.id }
+                pinnedIds.mapNotNull { byId[it] }
+            }
+            val pinnedAlbums = pinned.map { it.albumId }.toSet()
+            val rest = primary.filter { it.albumId !in pinnedAlbums }.distinctBy { it.albumId }
+            var picked = pinned + rest.take((count - pinned.size).coerceAtLeast(0))
             if (picked.isEmpty()) {
                 picked = repository.allSongs().distinctBy { it.albumId }.shuffled().take(count)
             }

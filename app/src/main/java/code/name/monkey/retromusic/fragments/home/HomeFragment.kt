@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.elevatedAccentColor
+import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -113,9 +114,11 @@ class HomeFragment :
                 updateToolbarForScroll()
             }
         )
+        // A tap only plays the song (the mini player shows it); it does not open Now Playing.
         binding.coverGrid.onSongClick = { songs, index ->
             MusicPlayerRemote.openQueue(songs, index, true)
         }
+        binding.coverGrid.onSongLongClick = { songs, index -> showWallMenu(songs, index) }
 
         loadProfile()
         setupTitle()
@@ -328,10 +331,43 @@ class HomeFragment :
             PreferenceUtil.homeCoversDarkness,
             PreferenceUtil.homeCoversSpeed
         )
+        reloadWallCovers()
+    }
+
+    private fun reloadWallCovers() {
         libraryViewModel.loadHomeCovers(
             PreferenceUtil.homeCoversSource,
             PreferenceUtil.homeCoversCount
         )
+    }
+
+    /** Long press on a cover: pin / unpin it on the wall, or open it in Now Playing. */
+    private fun showWallMenu(songs: List<Song>, index: Int) {
+        val song = songs.getOrNull(index) ?: return
+        val pinned = PreferenceUtil.homeCoversPinned
+        val isPinned = song.id in pinned
+        materialDialog(R.string.wall_cover_menu_title)
+            .setTitle(song.title)
+            .setItems(
+                arrayOf(
+                    getString(if (isPinned) R.string.wall_unpin else R.string.wall_pin),
+                    getString(R.string.wall_go_to_song)
+                )
+            ) { _, which ->
+                when (which) {
+                    0 -> {
+                        PreferenceUtil.homeCoversPinned =
+                            if (isPinned) pinned - song.id else pinned + song.id
+                        reloadWallCovers()
+                    }
+
+                    1 -> {
+                        MusicPlayerRemote.openQueue(songs, index, true)
+                        mainActivity.expandPanel()
+                    }
+                }
+            }
+            .show()
     }
 
     private fun checkForMargins() {

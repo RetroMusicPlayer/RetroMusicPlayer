@@ -102,6 +102,7 @@ import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
 import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
 import code.name.monkey.retromusic.HOME_COVERS_ANGLE
 import code.name.monkey.retromusic.HOME_COVERS_COUNT
+import code.name.monkey.retromusic.HOME_COVERS_PINNED
 import code.name.monkey.retromusic.HOME_COVERS_DARKNESS
 import code.name.monkey.retromusic.HOME_COVERS_ENABLED
 import code.name.monkey.retromusic.HOME_COVERS_SOURCE
@@ -799,6 +800,12 @@ object PreferenceUtil {
     val homeCoversCount: Int
         get() = (sharedPreferences.getStringOrDefault(HOME_COVERS_COUNT, "24").toIntOrNull()
             ?: 24).coerceIn(4, 48)
+
+    /** Song ids pinned to the cover wall, in the order they were pinned. */
+    var homeCoversPinned: List<Long>
+        get() = sharedPreferences.getString(HOME_COVERS_PINNED, "").orEmpty()
+            .split(',').mapNotNull { it.trim().toLongOrNull() }
+        set(value) = sharedPreferences.edit { putString(HOME_COVERS_PINNED, value.joinToString(",")) }
 
     val pauseHistory: Boolean
         get() = sharedPreferences.getBoolean(

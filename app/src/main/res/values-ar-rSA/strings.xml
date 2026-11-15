@@ -543,4 +543,9 @@
     <string name="pref_title_home_covers_count">عدد الأغلفة</string>
     <string name="cover_seek_forward">+10 ث</string>
     <string name="cover_seek_back">−10 ث</string>
+
+    <string name="wall_cover_menu_title">الغلاف</string>
+    <string name="wall_pin">تثبيت على الحيطة</string>
+    <string name="wall_unpin">إلغاء التثبيت من الحيطة</string>
+    <string name="wall_go_to_song">الذهاب إلى الأغنية</string>
 </resources>
