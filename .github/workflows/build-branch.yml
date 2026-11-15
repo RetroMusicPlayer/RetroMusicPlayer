@@ -1,4 +1,4 @@
-name: Build debug APK (feature branches)
+name: Build APKs (feature branches)
 
 on:
   push:
@@ -26,3 +26,14 @@ jobs:
         with:
           name: R-Music-debug-apk
           path: out/*.apk
+      - name: Build the fast (optimised) APK
+        continue-on-error: true
+        run: |
+          ./gradlew :app:assembleNormalFast
+          mkdir -p out-fast
+          cp app/build/outputs/apk/normal/fast/*.apk "out-fast/R-Music-fast-${GITHUB_RUN_NUMBER}.apk"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R-Music-fast-apk
+          path: out-fast/*.apk
+          if-no-files-found: ignore
