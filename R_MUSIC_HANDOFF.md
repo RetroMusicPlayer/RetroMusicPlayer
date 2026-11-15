@@ -76,6 +76,18 @@ Status legend: WRITTEN = code exists on the branch but was never compiled/tested
 13. Progress bar styles (wavy etc.).
 14. Status-bar notification icon: simplified single-colour cobra silhouette (see the note under Rename).
 
+## Requests added by the user at the end of session 4 (2026-11-15, NOT started, nothing coded)
+
+The user said the account limit was almost gone, so these were only written down. Do them after step 5 (or earlier if he asks); ask him before the big one.
+
+A. Now Playing, prev/next buttons: give them a COLOUR instead of plain white (the user's wording: "they have a colour instead of white"). Related to step 3(a)(b) (see `AbsPlayerControlsFragment.updatePrevNextColor` / `updatePrevNextBorder`); use the accent colour or a colour taken from the cover. Ask which if unclear.
+
+B. Now Playing page takes the colours of the current cover on every theme (this is step 3(c): find the themes that do not do it yet; the player fragments under `fragments/player/*`, palette via `RetroMusicColoredTarget` / `MediaNotificationProcessor`).
+
+C. Collapse arrow under prev/next: the tools row under the prev/next buttons (shuffle, repeat, queue, lyrics and so on in the controls fragment) gets a small arrow. Tap it and the whole row is hidden, tap again and it comes back. Remember the state in a preference. Layout work in `AbsPlayerControlsFragment` and the per-theme control layouts (`fragment_*_player_playback_controls.xml`); animate the arrow (rotate 180 degrees).
+
+D. NEW BIG FEATURE, "separate the music from the singer's voice" (karaoke / vocal removal, plus an instrumental-only and a vocals-only option). The user's words: it should work offline, or online the FIRST time and then become offline over time. Interpretation to confirm with him before building: (1) a stem-separation model (Spleeter / Demucs style, TFLite or ONNX Runtime) is downloaded ONCE, then separation runs on the phone with no internet; (2) separated stems are cached per song (app-private storage, e.g. filesDir/stems/<songId>/vocals + accompaniment) so the second play is instant and the cache grows over time. Points to check: model size and the download source/licence (GPL-3 app, the user must not be asked to share anything), CPU time per song (run in the background with a progress notification, never on the main thread, follow AGENTS.md), how the player switches between original / instrumental / vocals (a second `ExoPlayer`/MediaPlayer source or a mixer with two volume sliders: vocals volume + music volume is the nicest UI), storage use and a "clear stems" button, a settings switch, Wi-Fi only for the model download, strings in values and values-ar-rSA. Do NOT start this before asking him which interpretation he meant; it is a large piece of work and should get its own branch/commit series and a CI check after each step.
+
 ## How to work with this user
 - He writes Egyptian Arabic by dictation, wants short mobile-friendly replies, and says "do not start working" when he is only collecting requirements; wait for his go.
 - Claude Code can not push without a token; he sends a classic token (repo scope, 7 days) and deletes it afterwards. Never store a token in git config or files; use a one-off `git -c http.extraheader=...` push. Fine-grained tokens failed with 403 twice (no Contents write), classic worked.
