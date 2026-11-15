@@ -16,7 +16,11 @@ package code.name.monkey.retromusic.fragments.base
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -26,6 +30,7 @@ import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -40,6 +45,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.slider.Slider
+import kotlin.math.roundToInt
 
 /**
  * Created by hemanths on 24/09/17.
@@ -202,6 +208,31 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
     private fun setUpPrevNext() {
         nextButton?.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), true))
         previousButton?.setOnTouchListener(MusicSeekSkipTouchListener(requireActivity(), false))
+        // In right-to-left layouts the two buttons swap sides, so their arrows would point at each
+        // other. Mirror them there so the arrows always point outwards.
+        val mirror =
+            if (resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL) -1f else 1f
+        nextButton?.scaleX = mirror
+        previousButton?.scaleX = mirror
+        updatePrevNextBorder()
+    }
+
+    /** Gives the previous / next buttons a thin outline with a transparent fill. */
+    private fun updatePrevNextBorder() {
+        val color = lastPlaybackControlsColor
+        val density = resources.displayMetrics.density
+        listOf(nextButton, previousButton).forEach { button ->
+            button ?: return@forEach
+            val outline = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadius = 24 * density
+                setColor(Color.TRANSPARENT)
+                setStroke((1.5f * density).roundToInt(), color)
+            }
+            button.background = RippleDrawable(
+                ColorStateList.valueOf(ColorUtils.setAlphaComponent(color, 48)), outline, null
+            )
+        }
     }
 
     private fun setUpShuffleButton() {
@@ -215,6 +246,7 @@ abstract class AbsPlayerControlsFragment(@LayoutRes layout: Int) : AbsMusicServi
     fun updatePrevNextColor() {
         nextButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         previousButton?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        updatePrevNextBorder()
     }
 
     fun updateShuffleState() {

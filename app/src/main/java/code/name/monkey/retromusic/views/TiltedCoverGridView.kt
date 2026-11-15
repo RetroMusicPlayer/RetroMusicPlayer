@@ -14,6 +14,7 @@ package code.name.monkey.retromusic.views
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.LinearGradient
@@ -41,8 +42,9 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- * A wall of album covers drawn at an angle, darkened, slowly scrolling sideways.
- * Rows alternate direction. Everything is drawn in [onDraw] from a few small bitmaps, so it
+ * A wall of album covers drawn at an angle, darkened, slowly scrolling.
+ * The covers sit in tilted columns that drift downwards, with rounded corners and a vignette
+ * that is darker on the left. Everything is drawn in [onDraw] from a few small bitmaps, so it
  * stays cheap; the animation stops when the view is hidden, detached, or when the speed is 0
  * or the system has animations turned off.
  */
@@ -95,7 +97,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
         angleDeg = angleDegrees.coerceIn(0, 45).toFloat()
         darkness = (darknessPercent.coerceIn(0, 90)) / 100f
         speedDpPerSec = speedDpPerSecond.coerceAtLeast(0).toFloat()
-        shadePaint.color = Color.argb((darkness * 255).toInt(), 0, 0, 0)
+        applyShade(width.toFloat())
         lastFrameNanos = 0L
         invalidate()
     }
@@ -130,8 +132,8 @@ class TiltedCoverGridView @JvmOverloads constructor(
         songs.forEachIndexed { index, song ->
             val target = object : CustomTarget<Bitmap>(size, size) {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    // Glide may recycle its own bitmap later, so keep a copy.
-                    loaded[index] = resource.copy(Bitmap.Config.ARGB_8888, false)
+                    // Glide may recycle its own bitmap later, so keep our own rounded copy.
+                    loaded[index] = roundedCopy(resource)
                     onOneFinished()
                 }
 
@@ -150,10 +152,30 @@ class TiltedCoverGridView @JvmOverloads constructor(
         }
     }
 
+    private fun roundedCopy(source: Bitmap): Bitmap {
+        val out = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(out)
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        val radius = min(source.width, source.height) * 0.1f
+        canvas.drawRoundRect(
+            RectF(0f, 0f, source.width.toFloat(), source.height.toFloat()), radius, radius, paint
+        )
+        return out
+    }
+
     private fun clearTargets() {
         val glide = Glide.with(context.applicationContext)
         targets.forEach { glide.clear(it) }
         targets.clear()
+    }
+
+    /** Darker on the left, lighter on the right, like a soft vignette. */
+    private fun applyShade(w: Float) {
+        if (w <= 0f) return
+        val left = Color.argb((darkness.coerceAtMost(1f) * 255).toInt(), 0, 0, 0)
+        val right = Color.argb((darkness * 0.45f * 255).toInt(), 0, 0, 0)
+        shadePaint.shader = LinearGradient(0f, 0f, w, 0f, left, right, Shader.TileMode.CLAMP)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -164,6 +186,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
         } else {
             Color.BLACK
         }
+        applyShade(w.toFloat())
         fadePaint.shader = LinearGradient(
             0f, h * 0.7f, 0f, h.toFloat(),
             Color.TRANSPARENT, surface, Shader.TileMode.CLAMP
@@ -216,22 +239,22 @@ class TiltedCoverGridView @JvmOverloads constructor(
         )
     }
 
-    private fun rowShiftAndFrac(row: Int, step: Float): Pair<Int, Float> {
-        val total = offsetPx * (if (row % 2 == 0) 1f else -1f)
-        val shift = floor(total / step).toInt()
-        return shift to (total - shift * step)
+    /** Every column drifts down; [col] only changes where its covers start. */
+    private fun columnShiftAndFrac(step: Float): Pair<Int, Float> {
+        val shift = floor(offsetPx / step).toInt()
+        return shift to (offsetPx - shift * step)
     }
 
     private fun drawGrid(canvas: Canvas, list: List<Bitmap>, w: Float, h: Float) {
         val g = gridFor(w, h)
+        val (shift, frac) = columnShiftAndFrac(g.step)
         val saved = canvas.save()
         canvas.rotate(-angleDeg, w / 2f, h / 2f)
-        for (row in 0 until g.cells) {
-            val (shift, frac) = rowShiftAndFrac(row, g.step)
-            val y = g.startY + row * g.step
-            for (col in 0 until g.cells) {
-                val x = g.startX + (col - 1) * g.step + frac
-                val bitmap = list[Math.floorMod(col - shift + row * 3, list.size)]
+        for (col in 0 until g.cells) {
+            val x = g.startX + col * g.step
+            for (row in 0 until g.cells) {
+                val y = g.startY + (row - 1) * g.step + frac
+                val bitmap = list[Math.floorMod(row - shift + col * 3, list.size)]
                 src.set(0, 0, bitmap.width, bitmap.height)
                 dst.set(x, y, x + g.tile, y + g.tile)
                 canvas.drawBitmap(bitmap, src, dst, tilePaint)
@@ -254,17 +277,27 @@ class TiltedCoverGridView @JvmOverloads constructor(
         val px = (w / 2f + dx * cos(rad) - dy * sin(rad)).toFloat()
         val py = (h / 2f + dx * sin(rad) + dy * cos(rad)).toFloat()
 
-        val rowF = (py - g.startY) / g.step
-        val row = floor(rowF).toInt()
-        if (row < 0 || row >= g.cells) return -1
-        if ((rowF - row) * g.step > g.tile) return -1
-        val (shift, frac) = rowShiftAndFrac(row, g.step)
-        val colF = (px - g.startX - frac) / g.step
-        val colMinus1 = floor(colF).toInt()
-        if ((colF - colMinus1) * g.step > g.tile) return -1
-        val col = colMinus1 + 1
+        val colF = (px - g.startX) / g.step
+        val col = floor(colF).toInt()
         if (col < 0 || col >= g.cells) return -1
-        return Math.floorMod(col - shift + row * 3, list.size)
+        if ((colF - col) * g.step > g.tile) return -1
+        val (shift, frac) = columnShiftAndFrac(g.step)
+        val rowF = (py - g.startY - frac) / g.step
+        val rowMinus1 = floor(rowF).toInt()
+        if ((rowF - rowMinus1) * g.step > g.tile) return -1
+        val row = rowMinus1 + 1
+        if (row < 0 || row >= g.cells) return -1
+        return Math.floorMod(row - shift + col * 3, list.size)
+    }
+
+    /** For taps that land on the empty hero area above this view's scrolling content. */
+    fun tapAtScreen(rawX: Float, rawY: Float): Boolean {
+        val loc = IntArray(2)
+        getLocationOnScreen(loc)
+        val index = hitTest(rawX - loc[0], rawY - loc[1])
+        if (index < 0) return false
+        onSongClick?.invoke(coverSongs, index)
+        return true
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
