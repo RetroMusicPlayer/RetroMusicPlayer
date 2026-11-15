@@ -101,6 +101,7 @@ import code.name.monkey.retromusic.TOGGLE_HEADSET
 import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
 import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
 import code.name.monkey.retromusic.HOME_COVERS_ANGLE
+import code.name.monkey.retromusic.BACKUP_FOLDER_URI
 import code.name.monkey.retromusic.HOME_COVERS_COUNT
 import code.name.monkey.retromusic.HOME_COVERS_PINNED
 import code.name.monkey.retromusic.HOME_COVERS_DARKNESS
@@ -806,6 +807,11 @@ object PreferenceUtil {
         get() = sharedPreferences.getString(HOME_COVERS_PINNED, "").orEmpty()
             .split(',').mapNotNull { it.trim().toLongOrNull() }
         set(value) = sharedPreferences.edit { putString(HOME_COVERS_PINNED, value.joinToString(",")) }
+
+    /** Folder (Storage Access Framework tree URI) where backups are written and listed from. */
+    var backupFolderUri: String?
+        get() = sharedPreferences.getString(BACKUP_FOLDER_URI, null)
+        set(value) = sharedPreferences.edit { putString(BACKUP_FOLDER_URI, value) }
 
     val pauseHistory: Boolean
         get() = sharedPreferences.getBoolean(

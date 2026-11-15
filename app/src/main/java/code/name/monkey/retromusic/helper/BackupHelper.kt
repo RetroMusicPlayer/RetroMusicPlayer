@@ -1,7 +1,10 @@
 package code.name.monkey.retromusic.helper
 
 import android.content.Context
+import android.net.Uri
 import android.os.Environment
+import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.db.HistoryEntity
@@ -18,6 +21,7 @@ import code.name.monkey.retromusic.helper.BackupContent.*
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.repository.Repository
 import code.name.monkey.retromusic.repository.SongRepository
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -38,24 +42,27 @@ object BackupHelper : KoinComponent {
     private val database by inject<RetroDatabase>()
 
     suspend fun createBackup(context: Context, name: String) {
-        val backupFile =
-            File(getBackupRoot(), name + APPEND_EXTENSION)
-        if (backupFile.parentFile?.exists() != true) {
-            backupFile.parentFile?.mkdirs()
-        }
+        // Build the zip in the cache first, then copy it to the chosen folder.
+        val tempFile = File(context.cacheDir, name + APPEND_EXTENSION)
         val zipItems = mutableListOf<ZipItem>()
         zipItems.addAll(getPlaylistZipItems(context))
         zipItems.addAll(getSettingsZipItems(context))
         getUserImageZipItems(context)?.let { zipItems.addAll(it) }
         zipItems.addAll(getCustomArtistZipItems(context))
         zipItems.addAll(getListeningDataZipItems(context))
-        zipAll(context, zipItems, backupFile)
+        val done = zipAll(zipItems, tempFile) && deliver(context, tempFile, name)
+        withContext(Dispatchers.Main) {
+            context.showToast(
+                if (done) R.string.message_backup_create_success else R.string.error_create_backup
+            )
+        }
+        tempFile.delete()
         // Clean Cache Playlist Directory
         File(context.filesDir, PLAYLISTS_PATH).deleteRecursively()
         File(context.filesDir, LISTENING_PATH).deleteRecursively()
     }
 
-    private suspend fun zipAll(context: Context, zipItems: List<ZipItem>, backupFile: File) =
+    private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File): Boolean =
         withContext(Dispatchers.IO) {
             runCatching {
                 backupFile.outputStream().buffered().zipOutputStream().use { out ->
@@ -67,16 +74,55 @@ object BackupHelper : KoinComponent {
                         }
                     }
                 }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    context.showToast(R.string.error_create_backup)
-                }
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    context.showToast(R.string.message_backup_create_success)
-                }
-            }
+            }.isSuccess
         }
+
+    /** Copies the finished zip to the folder the user picked, or the old default folder. */
+    private suspend fun deliver(context: Context, tempFile: File, name: String): Boolean =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val fileName = name + APPEND_EXTENSION
+                val treeUri = PreferenceUtil.backupFolderUri
+                if (treeUri != null) {
+                    val tree = DocumentFile.fromTreeUri(context, Uri.parse(treeUri))
+                    check(tree != null && tree.canWrite()) { "backup folder is not writable" }
+                    tree.findFile(fileName)?.delete()
+                    val target = tree.createFile("application/octet-stream", fileName)
+                        ?: error("could not create $fileName")
+                    context.contentResolver.openOutputStream(target.uri, "w")!!.use { out ->
+                        tempFile.inputStream().use { it.copyTo(out) }
+                    }
+                } else {
+                    val target = File(getBackupRoot(), fileName)
+                    target.parentFile?.mkdirs()
+                    tempFile.copyTo(target, overwrite = true)
+                }
+            }.isSuccess
+        }
+
+    /** The chosen backup folder, or null when none is set or it can no longer be used. */
+    fun backupFolder(context: Context): DocumentFile? {
+        val treeUri = PreferenceUtil.backupFolderUri ?: return null
+        return runCatching {
+            DocumentFile.fromTreeUri(context, Uri.parse(treeUri))?.takeIf { it.canWrite() }
+        }.getOrNull()
+    }
+
+    /** Backups in the chosen folder, or in the old default folder when none was chosen. */
+    fun listBackups(context: Context): List<BackupEntry> {
+        if (PreferenceUtil.backupFolderUri != null) {
+            val tree = backupFolder(context) ?: return emptyList()
+            return runCatching {
+                tree.listFiles()
+                    .filter { it.isFile && it.name?.endsWith(APPEND_EXTENSION) == true }
+                    .sortedByDescending { it.lastModified() }
+                    .map { BackupEntry(it.name!!.removeSuffix(APPEND_EXTENSION), it.uri, null) }
+            }.getOrDefault(emptyList())
+        }
+        return getBackupRoot().listFiles { _, fileName ->
+            fileName.endsWith(BACKUP_EXTENSION)
+        }?.map { BackupEntry(it.nameWithoutExtension, it.toUri(), it) } ?: emptyList()
+    }
 
     private suspend fun getListeningDataZipItems(context: Context): List<ZipItem> =
         withContext(Dispatchers.IO) {

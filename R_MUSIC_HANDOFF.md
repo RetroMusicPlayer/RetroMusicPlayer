@@ -27,6 +27,10 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
 
 - App name outside the app (2026-11-15): the CI builds the DEBUG variant, and `app/src/debug/res/values/donottranslate.xml` overrides `app_name` (it still said "Retro Music-Debug"). Now "R Music Debug". CI artifact is now `R-Music-debug-apk` with the file `R-Music-debug-<run number>.apk` (renamed in build-branch.yml; Gradle's own output name is unchanged so release workflows are untouched). The package id is still `code.name.monkey.retromusic` (+ `.debug`); that is the package rename step further down.
 
+- Update 2026-11-15 (second session, WRITTEN, check CI then test on a device):
+  - Wall long press now opens a small popup menu BESIDE the pressed cover (PopupWindow, `popup_wall_menu.xml`, `HomeFragment.showWallMenu`) instead of a dialog; the wall freezes while it is open (`TiltedCoverGridView.setFrozen`, `WallHit` gives the tile centre).
+  - Backup folder (part of step 6): Backup screen has a "Backup folder" row; the user picks a folder with the system picker (SAF tree URI, persisted permission, pref `backup_folder_uri`). Backups are written there and listed from there, so after uninstalling the app he picks the same folder again and sees them. `BackupEntry(name, uri, file?)` replaces `File` in the adapter; default folder Documents/RetroMusic/Backups is still used when no folder is chosen. New dependency androidx.documentfile. NOT done yet from step 6: scheduled automatic backups (WorkManager).
+
 ## Next, in order (updated 2026-11-15; the user wants steps done in this order and ONLY when he says go)
 
 Status legend: WRITTEN = code exists on the branch but was never compiled/tested on a device; check the CI build first.

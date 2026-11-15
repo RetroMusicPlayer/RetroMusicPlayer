@@ -1,12 +1,15 @@
 package code.name.monkey.retromusic.fragments.backup
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
+import androidx.documentfile.provider.DocumentFile
+import android.provider.DocumentsContract
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,13 +23,14 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.helper.BackupEntry
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.Share
 import com.afollestad.materialdialogs.input.input
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.File
 
 class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupClickedListener {
 
@@ -35,6 +39,20 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
 
     private var _binding: FragmentBackupBinding? = null
     private val binding get() = _binding!!
+
+    private val pickBackupFolder =
+        registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
+            if (uri != null) {
+                // Keep access after the app restarts or is reinstalled and the folder is picked again.
+                requireContext().contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
+                PreferenceUtil.backupFolderUri = uri.toString()
+                updateFolderRow()
+                backupViewModel.loadBackups(requireContext())
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +65,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             else
                 backupAdapter?.swapDataset(listOf())
         }
-        backupViewModel.loadBackups()
+        backupViewModel.loadBackups(requireContext())
         val openFilePicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             lifecycleScope.launch(Dispatchers.IO) {
                 it?.let {
@@ -57,6 +75,10 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 }
             }
         }
+        binding.chooseBackupFolder.setOnClickListener {
+            pickBackupFolder.launch(null)
+        }
+        updateFolderRow()
         binding.createBackup.accentOutlineColor()
         binding.restoreBackup.accentColor()
         binding.createBackup.setOnClickListener {
@@ -64,6 +86,15 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         }
         binding.restoreBackup.setOnClickListener {
             openFilePicker.launch(arrayOf("application/octet-stream"))
+        }
+    }
+
+    private fun updateFolderRow() {
+        val folder = BackupHelper.backupFolder(requireContext())
+        binding.backupFolderPath.text = when {
+            PreferenceUtil.backupFolderUri == null -> getString(R.string.backup_folder_not_set)
+            folder == null -> getString(R.string.backup_folder_lost)
+            else -> folder.name ?: PreferenceUtil.backupFolderUri
         }
     }
 
@@ -98,7 +129,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
                 // Text submitted with the action button
                 lifecycleScope.launch {
                     BackupHelper.createBackup(requireContext(), text.sanitize())
-                    backupViewModel.loadBackups()
+                    backupViewModel.loadBackups(requireContext())
                 }
             }
             positiveButton(android.R.string.ok)
@@ -107,42 +138,65 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         }
     }
 
-    override fun onBackupClicked(file: File) {
-        lifecycleScope.launch {
-            startActivity(Intent(context, RestoreActivity::class.java).apply {
-                data = file.toUri()
-            })
-        }
+    override fun onBackupClicked(entry: BackupEntry) {
+        startActivity(Intent(context, RestoreActivity::class.java).apply {
+            data = entry.uri
+        })
     }
 
     @SuppressLint("CheckResult")
-    override fun onBackupMenuClicked(file: File, menuItem: MenuItem): Boolean {
+    override fun onBackupMenuClicked(entry: BackupEntry, menuItem: MenuItem): Boolean {
+        val context = requireContext()
         when (menuItem.itemId) {
             R.id.action_delete -> {
                 try {
-                    file.delete()
+                    if (entry.file != null) {
+                        entry.file.delete()
+                    } else {
+                        DocumentFile.fromSingleUri(context, entry.uri)?.delete()
+                    }
                 } catch (exception: SecurityException) {
                     showToast(R.string.error_delete_backup)
                 }
-                backupViewModel.loadBackups()
+                backupViewModel.loadBackups(context)
                 return true
             }
             R.id.action_share -> {
-                Share.shareFile(requireContext(), file, "*/*")
+                if (entry.file != null) {
+                    Share.shareFile(context, entry.file, "*/*")
+                } else {
+                    val send = Intent(Intent.ACTION_SEND).apply {
+                        type = "*/*"
+                        putExtra(Intent.EXTRA_STREAM, entry.uri)
+                        clipData = ClipData.newRawUri("", entry.uri)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    startActivity(Intent.createChooser(send, null))
+                }
                 return true
             }
             R.id.action_rename -> {
                 materialDialog().show {
                     title(res = R.string.action_rename)
-                    input(prefill = file.nameWithoutExtension) { _, text ->
+                    input(prefill = entry.name) { _, text ->
                         // Text submitted with the action button
-                        val renamedFile =
-                            File(file.parent, "$text${BackupHelper.APPEND_EXTENSION}")
-                        if (!renamedFile.exists()) {
-                            file.renameTo(renamedFile)
-                            backupViewModel.loadBackups()
+                        val newName = "$text${BackupHelper.APPEND_EXTENSION}"
+                        if (entry.file != null) {
+                            val renamedFile = java.io.File(entry.file.parent, newName)
+                            if (!renamedFile.exists()) {
+                                entry.file.renameTo(renamedFile)
+                                backupViewModel.loadBackups(context)
+                            } else {
+                                showToast(R.string.file_already_exists)
+                            }
                         } else {
-                            showToast(R.string.file_already_exists)
+                            val renamed = runCatching {
+                                DocumentsContract.renameDocument(
+                                    context.contentResolver, entry.uri, newName
+                                )
+                            }.getOrNull()
+                            if (renamed == null) showToast(R.string.file_already_exists)
+                            backupViewModel.loadBackups(context)
                         }
                     }
                     positiveButton(android.R.string.ok)

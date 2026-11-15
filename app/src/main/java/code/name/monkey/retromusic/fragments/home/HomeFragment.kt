@@ -16,6 +16,10 @@ package code.name.monkey.retromusic.fragments.home
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.annotation.SuppressLint
+import android.graphics.drawable.ColorDrawable
+import android.widget.PopupWindow
+import android.widget.TextView
 import android.os.Bundle
 import android.view.*
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
@@ -42,7 +46,6 @@ import code.name.monkey.retromusic.dialogs.ImportPlaylistDialog
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.elevatedAccentColor
-import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
@@ -55,6 +58,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.views.TiltedCoverGridView
 import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialFadeThrough
@@ -118,7 +122,7 @@ class HomeFragment :
         binding.coverGrid.onSongClick = { songs, index ->
             MusicPlayerRemote.openQueue(songs, index, true)
         }
-        binding.coverGrid.onSongLongClick = { songs, index -> showWallMenu(songs, index) }
+        binding.coverGrid.onSongLongClick = { songs, hit -> showWallMenu(songs, hit) }
 
         loadProfile()
         setupTitle()
@@ -341,33 +345,69 @@ class HomeFragment :
         )
     }
 
-    /** Long press on a cover: pin / unpin it on the wall, or open it in Now Playing. */
-    private fun showWallMenu(songs: List<Song>, index: Int) {
-        val song = songs.getOrNull(index) ?: return
+    private var wallMenu: PopupWindow? = null
+
+    /**
+     * Long press on a cover: a small menu next to that cover (not a full-screen dialog) with
+     * pin / unpin and go-to-song. The wall stops drifting while it is open.
+     */
+    @SuppressLint("RtlHardcoded")
+    private fun showWallMenu(songs: List<Song>, hit: TiltedCoverGridView.WallHit) {
+        val song = songs.getOrNull(hit.index) ?: return
         val pinned = PreferenceUtil.homeCoversPinned
         val isPinned = song.id in pinned
-        materialDialog(R.string.wall_cover_menu_title)
-            .setTitle(song.title)
-            .setItems(
-                arrayOf(
-                    getString(if (isPinned) R.string.wall_unpin else R.string.wall_pin),
-                    getString(R.string.wall_go_to_song)
-                )
-            ) { _, which ->
-                when (which) {
-                    0 -> {
-                        PreferenceUtil.homeCoversPinned =
-                            if (isPinned) pinned - song.id else pinned + song.id
-                        reloadWallCovers()
-                    }
+        wallMenu?.dismiss()
 
-                    1 -> {
-                        MusicPlayerRemote.openQueue(songs, index, true)
-                        mainActivity.expandPanel()
-                    }
-                }
+        val content = layoutInflater.inflate(R.layout.popup_wall_menu, null)
+        val pinItem = content.findViewById<TextView>(R.id.wall_pin_item)
+        val goItem = content.findViewById<TextView>(R.id.wall_go_item)
+        pinItem.setText(if (isPinned) R.string.wall_unpin else R.string.wall_pin)
+
+        val popup = PopupWindow(
+            content, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true
+        ).apply {
+            isOutsideTouchable = true
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setOnDismissListener {
+                _binding?.coverGrid?.setFrozen(false)
+                wallMenu = null
             }
-            .show()
+        }
+        pinItem.setOnClickListener {
+            popup.dismiss()
+            PreferenceUtil.homeCoversPinned = if (isPinned) pinned - song.id else pinned + song.id
+            reloadWallCovers()
+        }
+        goItem.setOnClickListener {
+            popup.dismiss()
+            MusicPlayerRemote.openQueue(songs, hit.index, true)
+            mainActivity.expandPanel()
+        }
+
+        // Put the menu beside the cover: on its right if there is room, otherwise on its left.
+        content.measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        val menuW = content.measuredWidth
+        val menuH = content.measuredHeight
+        val metrics = resources.displayMetrics
+        val margin = (8 * metrics.density).toInt()
+        val loc = IntArray(2)
+        binding.coverGrid.getLocationOnScreen(loc)
+        val centerX = loc[0] + hit.centerX
+        val centerY = loc[1] + hit.centerY
+        var x = (centerX + hit.half).toInt()
+        if (x + menuW > metrics.widthPixels - margin) {
+            x = (centerX - hit.half).toInt() - menuW
+        }
+        x = x.coerceIn(0, maxOf(0, metrics.widthPixels - menuW))
+        val y = (centerY - menuH / 2f).toInt()
+            .coerceIn(margin, maxOf(margin, metrics.heightPixels - menuH - margin))
+
+        wallMenu = popup
+        binding.coverGrid.setFrozen(true)
+        popup.showAtLocation(binding.coverGrid, Gravity.TOP or Gravity.LEFT, x, y)
     }
 
     private fun checkForMargins() {
@@ -516,12 +556,14 @@ class HomeFragment :
 
     override fun onPause() {
         super.onPause()
+        wallMenu?.dismiss()
         // Other screens have a normal toolbar, so give the status bar icons back.
         restoreStatusBarIcons()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        wallMenu?.dismiss()
         restoreStatusBarIcons()
         _binding = null
     }

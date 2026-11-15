@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.databinding.ItemListBackupBinding
-import java.io.File
+import code.name.monkey.retromusic.helper.BackupEntry
 
 
 class BackupAdapter(
     val activity: FragmentActivity,
-    var dataSet: MutableList<File>,
+    var dataSet: MutableList<BackupEntry>,
     val backupClickedListener: BackupClickedListener
 ) : RecyclerView.Adapter<BackupAdapter.ViewHolder>() {
 
@@ -25,13 +25,13 @@ class BackupAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.title.text = dataSet[position].nameWithoutExtension
+        holder.binding.title.text = dataSet[position].name
     }
 
     override fun getItemCount(): Int = dataSet.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun swapDataset(dataSet: List<File>) {
+    fun swapDataset(dataSet: List<BackupEntry>) {
         this.dataSet = ArrayList(dataSet)
         notifyDataSetChanged()
     }
@@ -58,8 +58,8 @@ class BackupAdapter(
     }
 
     interface BackupClickedListener {
-        fun onBackupClicked(file: File)
+        fun onBackupClicked(entry: BackupEntry)
 
-        fun onBackupMenuClicked(file: File, menuItem: MenuItem): Boolean
+        fun onBackupMenuClicked(entry: BackupEntry, menuItem: MenuItem): Boolean
     }
 }

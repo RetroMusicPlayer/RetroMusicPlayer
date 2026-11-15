@@ -62,7 +62,20 @@ class TiltedCoverGridView @JvmOverloads constructor(
     var onSongClick: ((songs: List<Song>, index: Int) -> Unit)? = null
 
     /** Called with the songs on the wall and the index of the one that was long-pressed. */
-    var onSongLongClick: ((songs: List<Song>, index: Int) -> Unit)? = null
+    var onSongLongClick: ((songs: List<Song>, hit: WallHit) -> Unit)? = null
+
+    /** A cover under the finger: its index and where it is drawn, in this view's coordinates. */
+    class WallHit(val index: Int, val centerX: Float, val centerY: Float, val half: Float)
+
+    private var frozen = false
+
+    /** Stops the drift while a menu is open, so the cover stays under the menu. */
+    fun setFrozen(value: Boolean) {
+        if (frozen == value) return
+        frozen = value
+        lastFrameNanos = 0L
+        invalidate()
+    }
 
     private val tapDetector = GestureDetector(
         context,
@@ -78,10 +91,9 @@ class TiltedCoverGridView @JvmOverloads constructor(
             }
 
             override fun onLongPress(e: MotionEvent) {
-                val index = hitTest(e.x, e.y)
-                if (index < 0) return
+                val hit = findHit(e.x, e.y) ?: return
                 performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                onSongLongClick?.invoke(coverSongs, index)
+                onSongLongClick?.invoke(coverSongs, hit)
             }
         }
     )
@@ -275,9 +287,11 @@ class TiltedCoverGridView @JvmOverloads constructor(
     }
 
     /** Index in [coverSongs] of the cover under the touch point, or -1 for a gap / nothing. */
-    private fun hitTest(touchX: Float, touchY: Float): Int {
+    private fun hitTest(touchX: Float, touchY: Float): Int = findHit(touchX, touchY)?.index ?: -1
+
+    private fun findHit(touchX: Float, touchY: Float): WallHit? {
         val list = covers
-        if (list.isEmpty()) return -1
+        if (list.isEmpty()) return null
         val w = width.toFloat()
         val h = height.toFloat()
         val g = gridFor(w, h)
@@ -290,15 +304,24 @@ class TiltedCoverGridView @JvmOverloads constructor(
 
         val colF = (px - g.startX) / g.step
         val col = floor(colF).toInt()
-        if (col < 0 || col >= g.cells) return -1
-        if ((colF - col) * g.step > g.tile) return -1
+        if (col < 0 || col >= g.cells) return null
+        if ((colF - col) * g.step > g.tile) return null
         val (shift, frac) = columnShiftAndFrac(g.step)
         val rowF = (py - g.startY - frac) / g.step
         val rowMinus1 = floor(rowF).toInt()
-        if ((rowF - rowMinus1) * g.step > g.tile) return -1
+        if ((rowF - rowMinus1) * g.step > g.tile) return null
         val row = rowMinus1 + 1
-        if (row < 0 || row >= g.cells) return -1
-        return Math.floorMod(row - shift + col * 3, list.size)
+        if (row < 0 || row >= g.cells) return null
+        val index = Math.floorMod(row - shift + col * 3, list.size)
+
+        // Centre of that tile, rotated forward again so it matches where it is drawn.
+        val tileCx = g.startX + col * g.step + g.tile / 2f
+        val tileCy = g.startY + rowMinus1 * g.step + frac + g.tile / 2f
+        val ox = tileCx - w / 2f
+        val oy = tileCy - h / 2f
+        val cx = (w / 2f + ox * cos(rad) + oy * sin(rad)).toFloat()
+        val cy = (h / 2f - ox * sin(rad) + oy * cos(rad)).toFloat()
+        return WallHit(index, cx, cy, g.tile / 2f)
     }
 
     /** For taps that land on the empty hero area above this view's scrolling content. */
@@ -316,7 +339,7 @@ class TiltedCoverGridView @JvmOverloads constructor(
     }
 
     private fun shouldAnimate(list: List<Bitmap>): Boolean {
-        if (speedDpPerSec <= 0f || list.isEmpty() || !isShown) return false
+        if (frozen || speedDpPerSec <= 0f || list.isEmpty() || !isShown) return false
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled()
     }
 

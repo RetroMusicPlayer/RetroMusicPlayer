@@ -557,4 +557,8 @@
     <string name="wall_pin">Pin to the wall</string>
     <string name="wall_unpin">Unpin from the wall</string>
     <string name="wall_go_to_song">Go to song</string>
+    <string name="backup_folder_title">Backup folder</string>
+    <string name="backup_folder_choose">Choose</string>
+    <string name="backup_folder_not_set">Not set. Backups go to Documents/RetroMusic/Backups and can be lost when the app is uninstalled. Choose a folder to keep them safe.</string>
+    <string name="backup_folder_lost">No access to the chosen folder. Choose it again.</string>
 </resources>

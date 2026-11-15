@@ -116,6 +116,7 @@ androidx-annotation = { group = "androidx.annotation", name = "annotation", vers
 androidx-constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.1" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version = "1.4.0" }
 androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference_version" }
+androidx-documentfile = { group = "androidx.documentfile", name = "documentfile", version = "1.0.1" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core_version" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version = "1.0.0" }

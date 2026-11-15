@@ -548,4 +548,8 @@
     <string name="wall_pin">تثبيت على الحيطة</string>
     <string name="wall_unpin">إلغاء التثبيت من الحيطة</string>
     <string name="wall_go_to_song">الذهاب إلى الأغنية</string>
+    <string name="backup_folder_title">مجلد النسخ الاحتياطي</string>
+    <string name="backup_folder_choose">اختيار</string>
+    <string name="backup_folder_not_set">غير محدد. تُحفظ النسخ في Documents/RetroMusic/Backups وقد تضيع عند حذف التطبيق. اختر مجلداً لحفظها بأمان.</string>
+    <string name="backup_folder_lost">لا يوجد وصول إلى المجلد المختار. اختره مرة أخرى.</string>
 </resources>
