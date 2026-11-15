@@ -23,7 +23,9 @@ import code.name.monkey.retromusic.util.MusicUtil
 class SimpleSongAdapter(
     context: FragmentActivity,
     songs: ArrayList<Song>,
-    layoutRes: Int
+    layoutRes: Int,
+    /** On an artist page every row has the same artist, so the album is more useful there. */
+    private val showAlbumAsSubtitle: Boolean = false
 ) : SongAdapter(context, songs, layoutRes) {
 
     override fun swapDataSet(dataSet: List<Song>) {
@@ -41,6 +43,9 @@ class SimpleSongAdapter(
 
         holder.imageText?.text = if (fixedTrackNumber > 0) fixedTrackNumber.toString() else "-"
         holder.time?.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
+        if (showAlbumAsSubtitle) {
+            holder.text?.text = dataSet[position].albumName
+        }
     }
 
     override fun getItemCount(): Int {

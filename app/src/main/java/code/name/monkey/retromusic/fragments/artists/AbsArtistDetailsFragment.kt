@@ -121,7 +121,11 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
             adapter = albumAdapter
         }
-        songAdapter = SimpleSongAdapter(requireActivity(), ArrayList(), R.layout.item_song)
+        // item_list shows the cover of every song; item_song only shows the track number, which
+        // makes no sense across several albums.
+        songAdapter = SimpleSongAdapter(
+            requireActivity(), ArrayList(), R.layout.item_list, showAlbumAsSubtitle = true
+        )
         binding.fragmentArtistContent.recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this.context)
