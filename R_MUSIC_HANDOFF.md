@@ -25,6 +25,8 @@ Work lives on branch `claude/backup-listening-data` (includes `claude/arabic-com
 
 - Player cover gestures (written 2026-11-14, not built/tested): `views/CoverGestureLayout` is now the root of `fragment_player_album_cover.xml`. Drag up/down on the cover = music volume with a small bar (`volumeOverlay`); double tap right/left half = +/-10 s (`seekFeedback`). Plain taps are held back for the double-tap timeout and then replayed so the cover's own click (lyrics dialog) still works. The player panel can no longer be collapsed by dragging the cover itself (disallowIntercept on DOWN). Horizontal swipes still change songs through the ViewPager.
 
+- App name outside the app (2026-11-15): the CI builds the DEBUG variant, and `app/src/debug/res/values/donottranslate.xml` overrides `app_name` (it still said "Retro Music-Debug"). Now "R Music Debug". CI artifact is now `R-Music-debug-apk` with the file `R-Music-debug-<run number>.apk` (renamed in build-branch.yml; Gradle's own output name is unchanged so release workflows are untouched). The package id is still `code.name.monkey.retromusic` (+ `.debug`); that is the package rename step further down.
+
 ## Next, in order (updated 2026-11-15; the user wants steps done in this order and ONLY when he says go)
 
 Status legend: WRITTEN = code exists on the branch but was never compiled/tested on a device; check the CI build first.

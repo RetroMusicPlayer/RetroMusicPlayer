@@ -18,7 +18,11 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Build debug APK
         run: ./gradlew :app:assembleNormalDebug
+      - name: Name the APK after the app
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/normal/debug/*.apk "out/R-Music-debug-${GITHUB_RUN_NUMBER}.apk"
       - uses: actions/upload-artifact@v4
         with:
-          name: debug-apk
-          path: app/build/outputs/apk/normal/debug/*.apk
+          name: R-Music-debug-apk
+          path: out/*.apk
