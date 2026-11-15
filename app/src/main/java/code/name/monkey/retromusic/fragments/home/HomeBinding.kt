@@ -12,14 +12,17 @@ class HomeBinding(
     val toolbar = homeBinding.appBarLayout.toolbar
     val bannerImage = homeBinding.imageLayout.bannerImage
     val userImage = homeBinding.imageLayout.userImage
-    val lastAdded = homeBinding.homeContent.absPlaylists.lastAdded
-    val topPlayed = homeBinding.homeContent.absPlaylists.topPlayed
-    val actionShuffle = homeBinding.homeContent.absPlaylists.actionShuffle
-    val history = homeBinding.homeContent.absPlaylists.history
+    val lastAdded = homeBinding.absPlaylists.lastAdded
+    val topPlayed = homeBinding.absPlaylists.topPlayed
+    val actionShuffle = homeBinding.absPlaylists.actionShuffle
+    val history = homeBinding.absPlaylists.history
     val recyclerView = homeBinding.homeContent.recyclerView
     val titleWelcome = homeBinding.imageLayout.titleWelcome
     val suggestions = homeBinding.homeContent.suggestions
     val coverHeader = homeBinding.coverHeader
     val coverGrid = homeBinding.coverGrid
     val coverLogo = homeBinding.coverLogo
+    val coverOverlay = homeBinding.coverOverlay
+    val playlistsHolder = homeBinding.playlistsHolder
+    val absPlaylistsView = homeBinding.absPlaylists.root
 }

@@ -17,21 +17,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <code.name.monkey.retromusic.views.TopAppBarLayout
-        android:id="@+id/appBarLayout"
-        style="?appBarLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true" />
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:overScrollMode="@integer/overScrollMode"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:overScrollMode="@integer/overScrollMode">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentContainer"
@@ -62,15 +54,37 @@
                     android:layout_height="match_parent"
                     android:importantForAccessibility="no" />
 
-                <ImageView
-                    android:id="@+id/coverLogo"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_gravity="center"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/home_logo_description"
-                    android:src="@drawable/ic_launcher_foreground" />
+                <LinearLayout
+                    android:id="@+id/coverOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/coverLogo"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/home_logo_description"
+                        android:src="@drawable/ic_launcher_foreground" />
+
+                    <include
+                        android:id="@+id/abs_playlists"
+                        layout="@layout/abs_playlists"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/playlistsHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageLayout" />
 
             <include
                 android:id="@+id/home_content"
@@ -79,8 +93,15 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageLayout" />
+                app:layout_constraintTop_toBottomOf="@id/playlistsHolder" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <code.name.monkey.retromusic.views.TopAppBarLayout
+        android:id="@+id/appBarLayout"
+        style="?appBarLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -14,6 +14,8 @@
  */
 package code.name.monkey.retromusic.fragments.home
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import android.view.MenuItem.SHOW_AS_ACTION_IF_ROOM
@@ -22,7 +24,9 @@ import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.core.view.updateLayoutParams
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -39,6 +43,7 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.extensions.elevatedAccentColor
 import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -60,12 +65,19 @@ class HomeFragment :
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
 
+    // Toolbar over the cover wall: transparent at the top, fades to the normal toolbar while the
+    // lists scroll up. null = not applied yet (or the wall is off).
+    private var defaultAppBarBackground: Drawable? = null
+    private var wallToolbarLight: Boolean? = null
+    private var savedLightStatusBars: Boolean? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val homeBinding = FragmentHomeBinding.bind(view)
         _binding = HomeBinding(homeBinding)
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
+        defaultAppBarBackground = binding.appBarLayout.background?.constantState?.newDrawable()?.mutate()
         setupListeners()
         val name = userName?.trim().orEmpty()
         val hasCustomName = name.isNotEmpty() && name != getString(R.string.user_name)
@@ -92,7 +104,15 @@ class HomeFragment :
             binding.coverGrid.setCovers(it)
         }
         // The wall fills the whole visible area; the lists start below it.
-        binding.container.doOnLayout { sizeCoverHeader() }
+        binding.container.doOnLayout {
+            sizeCoverHeader()
+            updateToolbarForScroll()
+        }
+        binding.container.setOnScrollChangeListener(
+            androidx.core.widget.NestedScrollView.OnScrollChangeListener { _, _, _, _, _ ->
+                updateToolbarForScroll()
+            }
+        )
         binding.coverGrid.onSongClick = { songs, index ->
             MusicPlayerRemote.openQueue(songs, index, true)
         }
@@ -206,18 +226,103 @@ class HomeFragment :
     }
 
     private fun sizeCoverHeader() {
+        // The scroll view fills the screen, also behind the status bar and the toolbar.
         val height = binding.container.height
         if (height > 0) {
             binding.coverHeader.updateLayoutParams<ViewGroup.LayoutParams> {
                 this.height = height
             }
         }
+        // Keep the logo and the buttons clear of the bottom navigation and the mini player.
+        val bottomInset =
+            (if (mainActivity.isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0) +
+                    dip(R.dimen.mini_player_height)
+        binding.coverOverlay.updatePadding(bottom = bottomInset)
+    }
+
+    /** The four main buttons sit on the wall when it is on, otherwise in the normal flow. */
+    private fun placePlaylistButtons(onWall: Boolean) {
+        val view = binding.absPlaylistsView
+        val target: ViewGroup = if (onWall) binding.coverOverlay else binding.playlistsHolder
+        if (view.parent === target) return
+        (view.parent as? ViewGroup)?.removeView(view)
+        target.addView(
+            view,
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
+    }
+
+    /**
+     * With the wall on, the toolbar is transparent over it (white icons) and turns into the normal
+     * toolbar when the lists reach it.
+     */
+    private fun updateToolbarForScroll() {
+        val b = _binding ?: return
+        if (!PreferenceUtil.homeCoversEnabled) {
+            restoreToolbar()
+            return
+        }
+        val appBarHeight = b.appBarLayout.height
+        val hero = b.coverHeader.height
+        if (appBarHeight <= 0 || hero <= 0) return
+        val end = (hero - appBarHeight).toFloat()
+        val start = end - appBarHeight * 2f
+        val progress = ((b.container.scrollY - start) / (end - start)).coerceIn(0f, 1f)
+        b.appBarLayout.setBackgroundColor(ColorUtil.withAlpha(surfaceColor(), progress))
+        setToolbarContentLight(progress < 0.5f)
+    }
+
+    private fun setToolbarContentLight(light: Boolean) {
+        val b = _binding ?: return
+        if (wallToolbarLight != light) {
+            wallToolbarLight = light
+            ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(
+                requireContext(), b.toolbar, b.toolbar.menu, if (light) Color.BLACK else surfaceColor()
+            )
+        }
+        // Not guarded by the check above: onPause gives the icons back and they must return on resume.
+        setStatusBarIconsLight(light)
+    }
+
+    /** White status bar icons while the toolbar sits on the dark wall. */
+    private fun setStatusBarIconsLight(light: Boolean) {
+        val window = activity?.window ?: return
+        val controller = WindowCompat.getInsetsController(window, window.decorView)
+        if (savedLightStatusBars == null) savedLightStatusBars = controller.isAppearanceLightStatusBars
+        val target = if (light) false else savedLightStatusBars!!
+        if (controller.isAppearanceLightStatusBars != target) {
+            controller.isAppearanceLightStatusBars = target
+        }
+    }
+
+    private fun restoreStatusBarIcons() {
+        val saved = savedLightStatusBars ?: return
+        val window = activity?.window ?: return
+        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = saved
+    }
+
+    private fun restoreToolbar() {
+        val b = _binding ?: return
+        if (wallToolbarLight == null) return
+        wallToolbarLight = null
+        defaultAppBarBackground?.let { b.appBarLayout.background = it }
+        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(
+            requireContext(), b.toolbar, b.toolbar.menu, surfaceColor()
+        )
+        restoreStatusBarIcons()
     }
 
     private fun setupCovers() {
         val enabled = PreferenceUtil.homeCoversEnabled
         binding.coverHeader.isVisible = enabled
-        if (!enabled) return
+        placePlaylistButtons(enabled)
+        if (!enabled) {
+            restoreToolbar()
+            return
+        }
         binding.coverGrid.configure(
             PreferenceUtil.homeCoversAngle,
             PreferenceUtil.homeCoversDarkness,
@@ -252,7 +357,8 @@ class HomeFragment :
             requireContext(),
             binding.toolbar,
             menu,
-            ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
+            if (wallToolbarLight == true) Color.BLACK
+            else ATHToolbarActivity.getToolbarBackgroundColor(binding.toolbar)
         )
         //Setting up cast button
         requireContext().setUpMediaRouteButton(menu)
@@ -366,13 +472,21 @@ class HomeFragment :
         checkForMargins()
         libraryViewModel.forceReload(ReloadType.HomeSections)
         setupCovers()
+        view?.post { updateToolbarForScroll() }
         // The stats menu entry depends on whether the cover wall is on.
         requireActivity().invalidateMenu()
         exitTransition = null
     }
 
+    override fun onPause() {
+        super.onPause()
+        // Other screens have a normal toolbar, so give the status bar icons back.
+        restoreStatusBarIcons()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        restoreStatusBarIcons()
         _binding = null
     }
 }
