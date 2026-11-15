@@ -109,6 +109,10 @@ import code.name.monkey.retromusic.HOME_COVERS_DARKNESS
 import code.name.monkey.retromusic.HOME_COVERS_ENABLED
 import code.name.monkey.retromusic.HOME_COVERS_SOURCE
 import code.name.monkey.retromusic.HOME_COVERS_SPEED
+import code.name.monkey.retromusic.MINI_PLAYER_BACKGROUND
+import code.name.monkey.retromusic.MINI_PLAYER_SHAPE
+import code.name.monkey.retromusic.MINI_PLAYER_SIZE
+import code.name.monkey.retromusic.MINI_PLAYER_STYLE
 import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.USER_NAME
 import code.name.monkey.retromusic.WALLPAPER_ACCENT
@@ -802,6 +806,25 @@ object PreferenceUtil {
     val homeCoversCount: Int
         get() = (sharedPreferences.getStringOrDefault(HOME_COVERS_COUNT, "24").toIntOrNull()
             ?: 24).coerceIn(4, 48)
+
+    /** True = floating oval at the top left, false = classic bar at the bottom. */
+    val isMiniPlayerOval: Boolean
+        get() = sharedPreferences.getStringOrDefault(MINI_PLAYER_STYLE, "1") == "1"
+
+    /** 0 = oval, 1 = oval with the song title, 2 = circle with the cover only. */
+    val miniPlayerShape: Int
+        get() = (sharedPreferences.getStringOrDefault(MINI_PLAYER_SHAPE, "0").toIntOrNull()
+            ?: 0).coerceIn(0, 2)
+
+    /** 0 = small, 1 = medium, 2 = large. */
+    val miniPlayerSize: Int
+        get() = (sharedPreferences.getStringOrDefault(MINI_PLAYER_SIZE, "1").toIntOrNull()
+            ?: 1).coerceIn(0, 2)
+
+    /** 0 = cover colour, 1 = transparent, 2 = dark, 3 = accent colour. */
+    val miniPlayerBackground: Int
+        get() = (sharedPreferences.getStringOrDefault(MINI_PLAYER_BACKGROUND, "0").toIntOrNull()
+            ?: 0).coerceIn(0, 3)
 
     /** Song ids pinned to the cover wall, in the order they were pinned. */
     var homeCoversPinned: List<Long>

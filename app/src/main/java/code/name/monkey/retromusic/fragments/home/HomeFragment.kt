@@ -240,10 +240,11 @@ class HomeFragment :
                 this.height = height
             }
         }
-        // Keep the logo and the buttons clear of the bottom navigation and the mini player.
+        // Keep the logo and the buttons clear of the bottom navigation and the mini player bar
+        // (the floating oval takes no room at the bottom).
         val bottomInset =
             (if (mainActivity.isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0) +
-                    dip(R.dimen.mini_player_height)
+                    (if (PreferenceUtil.isMiniPlayerOval) 0 else dip(R.dimen.mini_player_height))
         binding.coverOverlay.updatePadding(bottom = bottomInset)
     }
 

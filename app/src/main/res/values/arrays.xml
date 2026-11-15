@@ -287,4 +287,52 @@
         <item>36</item>
         <item>48</item>
     </string-array>
+
+    <string-array name="pref_mini_player_style_titles">
+        <item>@string/mini_player_style_bar</item>
+        <item>@string/mini_player_style_oval</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_shape_titles">
+        <item>@string/mini_player_shape_oval</item>
+        <item>@string/mini_player_shape_pill</item>
+        <item>@string/mini_player_shape_circle</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_shape_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_size_titles">
+        <item>@string/mini_player_size_small</item>
+        <item>@string/mini_player_size_medium</item>
+        <item>@string/mini_player_size_large</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_size_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_background_titles">
+        <item>@string/mini_player_bg_cover</item>
+        <item>@string/mini_player_bg_transparent</item>
+        <item>@string/mini_player_bg_dark</item>
+        <item>@string/mini_player_bg_accent</item>
+    </string-array>
+
+    <string-array name="pref_mini_player_background_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

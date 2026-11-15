@@ -541,6 +541,23 @@
     <string name="pref_title_home_covers_angle">زاوية الميل</string>
     <string name="pref_title_home_covers_darkness">درجة التعتيم</string>
     <string name="pref_title_home_covers_count">عدد الأغلفة</string>
+    <string name="pref_header_mini_player">المشغّل المصغّر</string>
+    <string name="pref_title_mini_player_style">النمط</string>
+    <string name="mini_player_style_bar">شريط في الأسفل</string>
+    <string name="mini_player_style_oval">بيضاوي عائم (أعلى اليسار)</string>
+    <string name="pref_title_mini_player_shape">شكل البيضاوي</string>
+    <string name="mini_player_shape_oval">بيضاوي</string>
+    <string name="mini_player_shape_pill">بيضاوي مع اسم الأغنية</string>
+    <string name="mini_player_shape_circle">دائرة (الغلاف فقط)</string>
+    <string name="pref_title_mini_player_size">حجم البيضاوي</string>
+    <string name="mini_player_size_small">صغير</string>
+    <string name="mini_player_size_medium">متوسط</string>
+    <string name="mini_player_size_large">كبير</string>
+    <string name="pref_title_mini_player_background">خلفية البيضاوي</string>
+    <string name="mini_player_bg_cover">لون الغلاف</string>
+    <string name="mini_player_bg_transparent">شفاف</string>
+    <string name="mini_player_bg_dark">داكن</string>
+    <string name="mini_player_bg_accent">اللون الأساسي للتطبيق</string>
     <string name="cover_seek_forward">+10 ث</string>
     <string name="cover_seek_back">−10 ث</string>
 

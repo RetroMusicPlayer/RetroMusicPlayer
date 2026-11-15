@@ -550,6 +550,23 @@
     <string name="pref_title_home_covers_angle">Tilt angle</string>
     <string name="pref_title_home_covers_darkness">Darkness</string>
     <string name="pref_title_home_covers_count">Number of covers</string>
+    <string name="pref_header_mini_player">Mini player</string>
+    <string name="pref_title_mini_player_style">Style</string>
+    <string name="mini_player_style_bar">Bar at the bottom</string>
+    <string name="mini_player_style_oval">Floating oval (top left)</string>
+    <string name="pref_title_mini_player_shape">Oval shape</string>
+    <string name="mini_player_shape_oval">Oval</string>
+    <string name="mini_player_shape_pill">Oval with song title</string>
+    <string name="mini_player_shape_circle">Circle (cover only)</string>
+    <string name="pref_title_mini_player_size">Oval size</string>
+    <string name="mini_player_size_small">Small</string>
+    <string name="mini_player_size_medium">Medium</string>
+    <string name="mini_player_size_large">Large</string>
+    <string name="pref_title_mini_player_background">Oval background</string>
+    <string name="mini_player_bg_cover">Cover colour</string>
+    <string name="mini_player_bg_transparent">Transparent</string>
+    <string name="mini_player_bg_dark">Dark</string>
+    <string name="mini_player_bg_accent">Accent colour</string>
     <string name="cover_seek_forward">+10s</string>
     <string name="cover_seek_back">−10s</string>
 

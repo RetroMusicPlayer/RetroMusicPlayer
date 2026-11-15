@@ -43,6 +43,10 @@ import code.name.monkey.retromusic.CIRCLE_PLAY_BUTTON
 import code.name.monkey.retromusic.EXTRA_SONG_INFO
 import code.name.monkey.retromusic.KEEP_SCREEN_ON
 import code.name.monkey.retromusic.LIBRARY_CATEGORIES
+import code.name.monkey.retromusic.MINI_PLAYER_BACKGROUND
+import code.name.monkey.retromusic.MINI_PLAYER_SHAPE
+import code.name.monkey.retromusic.MINI_PLAYER_SIZE
+import code.name.monkey.retromusic.MINI_PLAYER_STYLE
 import code.name.monkey.retromusic.NOW_PLAYING_SCREEN_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.SCREEN_ON_LYRICS
@@ -54,6 +58,7 @@ import code.name.monkey.retromusic.TOGGLE_FULL_SCREEN
 import code.name.monkey.retromusic.TOGGLE_VOLUME
 import code.name.monkey.retromusic.activities.PermissionActivity
 import code.name.monkey.retromusic.databinding.SlidingMusicPanelLayoutBinding
+import code.name.monkey.retromusic.databinding.ViewMiniPlayerOvalBinding
 import code.name.monkey.retromusic.extensions.currentFragment
 import code.name.monkey.retromusic.extensions.darkAccentColor
 import code.name.monkey.retromusic.extensions.dip
@@ -102,6 +107,7 @@ import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.logD
+import code.name.monkey.retromusic.views.MiniPlayerOvalController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
@@ -126,6 +132,12 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var playerFragment: AbsPlayerFragment
     private var miniPlayerFragment: MiniPlayerFragment? = null
+    private var miniPlayerOval: MiniPlayerOvalController? = null
+
+    /** True while there is nothing to show in the mini player (empty queue or hidden on purpose). */
+    private var sheetHidden = true
+    private var miniPlayerSlideProgress = 0f
+    private var appliedOvalMode: Boolean? = null
     private var nowPlayingScreen: NowPlayingScreen? = null
     private var taskColor: Int = 0
     private var paletteColor: Int = android.graphics.Color.WHITE
@@ -220,11 +232,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         setContentView(binding.root)
         binding.root.setOnApplyWindowInsetsListener { _, insets ->
             windowInsets = WindowInsetsCompat.toWindowInsetsCompat(insets)
+            updateOvalPosition()
             insets
         }
         chooseFragmentForTheme()
         setupSlidingUpPanel()
         setupBottomSheet()
+        setupMiniPlayerOval()
         updateColor()
         if (!PreferenceUtil.materialYou) {
             binding.slidingPanel.backgroundTintList = ColorStateList.valueOf(darkAccentColor())
@@ -239,9 +253,63 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private fun setupBottomSheet() {
         bottomSheetBehavior = from(binding.slidingPanel)
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
-        bottomSheetBehavior.isHideable = PreferenceUtil.swipeDownToDismiss
+        updateSheetHideable()
         bottomSheetBehavior.significantVelocityThreshold = 300
         setMiniPlayerAlphaProgress(0F)
+    }
+
+    /**
+     * In oval mode the collapsed sheet is not visible at all (peek height 0), so swiping it
+     * "hidden" would clear the queue by accident: never hideable there.
+     */
+    private fun updateSheetHideable() {
+        bottomSheetBehavior.isHideable =
+            PreferenceUtil.swipeDownToDismiss && !PreferenceUtil.isMiniPlayerOval
+    }
+
+    private fun setupMiniPlayerOval() {
+        val ovalBinding = ViewMiniPlayerOvalBinding.inflate(layoutInflater, binding.root, false)
+        binding.root.addView(ovalBinding.root)
+        miniPlayerOval = MiniPlayerOvalController(ovalBinding) { expandPanel() }
+        addMusicServiceEventListener(miniPlayerOval)
+        updateOvalPosition()
+        // The navigation rail (landscape) has no width before the first layout pass.
+        binding.root.post { updateOvalPosition() }
+        updateMiniPlayerViews()
+        appliedOvalMode = PreferenceUtil.isMiniPlayerOval
+    }
+
+    /** Pins the oval to the physical top left, below the status bar / next to the rail. */
+    private fun updateOvalPosition() {
+        val oval = miniPlayerOval ?: return
+        val insets = windowInsets?.getInsets(
+            WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+        )
+        val left = if (isLandscape && binding.navigationView.isVisible) {
+            binding.navigationView.width
+        } else {
+            0
+        }
+        oval.setPosition(left, insets?.top ?: 0)
+    }
+
+    /** Called when the style / shape / size / background preferences change. */
+    private fun applyMiniPlayerStyle() {
+        miniPlayerOval?.applySettings()
+        updateSheetHideable()
+        appliedOvalMode = PreferenceUtil.isMiniPlayerOval
+        if (!sheetHidden) {
+            // Recomputes the peek height for the new style.
+            hideBottomSheet(false)
+        } else {
+            updateMiniPlayerViews()
+        }
+    }
+
+    private fun updateMiniPlayerViews() {
+        val oval = PreferenceUtil.isMiniPlayerOval
+        miniPlayerFragment?.view?.isGone = oval || miniPlayerSlideProgress >= 1f
+        miniPlayerOval?.update(oval && !sheetHidden, 1 - miniPlayerSlideProgress / 0.2F)
     }
 
     override fun onResume() {
@@ -253,18 +321,32 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         if (bottomSheetBehavior.state == STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
         }
+        if (appliedOvalMode != PreferenceUtil.isMiniPlayerOval) {
+            applyMiniPlayerStyle()
+        }
+        miniPlayerOval?.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        miniPlayerOval?.stop()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallbackList)
+        removeMusicServiceEventListener(miniPlayerOval)
         PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         when (key) {
             SWIPE_DOWN_DISMISS -> {
-                bottomSheetBehavior.isHideable = PreferenceUtil.swipeDownToDismiss
+                updateSheetHideable()
+            }
+
+            MINI_PLAYER_STYLE, MINI_PLAYER_SHAPE, MINI_PLAYER_SIZE, MINI_PLAYER_BACKGROUND -> {
+                applyMiniPlayerStyle()
             }
 
             TOGGLE_ADD_CONTROLS -> {
@@ -334,8 +416,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private fun setMiniPlayerAlphaProgress(progress: Float) {
         if (progress < 0) return
         val alpha = 1 - progress
+        miniPlayerSlideProgress = progress
         miniPlayerFragment?.view?.alpha = 1 - (progress / 0.2F)
-        miniPlayerFragment?.view?.isGone = alpha == 0f
+        updateMiniPlayerViews()
         if (!isLandscape) {
             binding.navigationView.translationY = progress * 500
             binding.navigationView.alpha = alpha
@@ -530,6 +613,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     ) {
         val heightOfBar = windowInsets.getBottomInsets() + dip(R.dimen.mini_player_height)
         val heightOfBarWithTabs = heightOfBar + dip(R.dimen.bottom_nav_height)
+        val ovalMode = PreferenceUtil.isMiniPlayerOval
+        sheetHidden = hide || MusicPlayerRemote.playingQueue.isEmpty()
         if (hide) {
             bottomSheetBehavior.peekHeight = (-windowInsets.getBottomInsets()).coerceAtLeast(0)
             bottomSheetBehavior.state = STATE_COLLAPSED
@@ -541,7 +626,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 binding.slidingPanel.elevation = 0F
                 binding.navigationView.elevation = 5F
-                if (isBottomNavVisible) {
+                if (ovalMode) {
+                    // No bar: the sheet only shows when the full player is opened.
+                    logD("Oval")
+                    bottomSheetBehavior.peekHeight = 0
+                    libraryViewModel.setFabMargin(
+                        this,
+                        if (isBottomNavVisible) dip(R.dimen.bottom_nav_height) else 0
+                    )
+                } else if (isBottomNavVisible) {
                     logD("List")
                     if (animate) {
                         bottomSheetBehavior.peekHeightAnimate(heightOfBarWithTabs)
@@ -566,6 +659,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 }
             }
         }
+        updateMiniPlayerViews()
     }
 
     fun setAllowDragging(allowDragging: Boolean) {
