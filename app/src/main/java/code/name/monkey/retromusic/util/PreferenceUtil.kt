@@ -102,6 +102,9 @@ import code.name.monkey.retromusic.TOGGLE_HEADSET
 import code.name.monkey.retromusic.TOGGLE_HOME_BANNER
 import code.name.monkey.retromusic.TOGGLE_SUGGESTIONS
 import code.name.monkey.retromusic.HOME_COVERS_ANGLE
+import code.name.monkey.retromusic.AUTO_BACKUP_ENABLED
+import code.name.monkey.retromusic.AUTO_BACKUP_HOURS
+import code.name.monkey.retromusic.AUTO_BACKUP_KEEP
 import code.name.monkey.retromusic.BACKUP_FOLDER_URI
 import code.name.monkey.retromusic.HOME_COVERS_COUNT
 import code.name.monkey.retromusic.HOME_COVERS_PINNED
@@ -848,6 +851,20 @@ object PreferenceUtil {
     var backupFolderUri: String?
         get() = sharedPreferences.getString(BACKUP_FOLDER_URI, null)
         set(value) = sharedPreferences.edit { putString(BACKUP_FOLDER_URI, value) }
+
+    var autoBackupEnabled: Boolean
+        get() = sharedPreferences.getBoolean(AUTO_BACKUP_ENABLED, false)
+        set(value) = sharedPreferences.edit { putBoolean(AUTO_BACKUP_ENABLED, value) }
+
+    /** Hours between automatic backups. */
+    var autoBackupHours: Int
+        get() = sharedPreferences.getInt(AUTO_BACKUP_HOURS, 6)
+        set(value) = sharedPreferences.edit { putInt(AUTO_BACKUP_HOURS, value) }
+
+    /** How many automatic backups are kept; older ones are deleted. */
+    var autoBackupKeep: Int
+        get() = sharedPreferences.getInt(AUTO_BACKUP_KEEP, 5)
+        set(value) = sharedPreferences.edit { putInt(AUTO_BACKUP_KEEP, value) }
 
     val pauseHistory: Boolean
         get() = sharedPreferences.getBoolean(

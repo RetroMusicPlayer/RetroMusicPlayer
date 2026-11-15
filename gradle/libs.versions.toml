@@ -111,6 +111,7 @@ nanohttpd = { group = "org.nanohttpd", name = "nanohttpd", version.ref = "nanoht
 
 
 #androidx
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version = "2.9.1" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat_version" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version = "1.9.1" }
 androidx-constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.1" }

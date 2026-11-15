@@ -47,6 +47,7 @@ class App : Application() {
                 .commit()
         }
         wallpaperAccentManager.init()
+        code.name.monkey.retromusic.helper.AutoBackupScheduler.update(this)
 
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()

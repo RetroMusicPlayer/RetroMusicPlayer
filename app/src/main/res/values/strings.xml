@@ -590,4 +590,10 @@
     <string name="lyrics_sync_mark">Mark</string>
     <string name="lyrics_sync_undo">Undo</string>
     <string name="lyrics_sync_saved">Synced lyrics saved</string>
+    <string name="auto_backup_title">Automatic backup</string>
+    <string name="auto_backup_hint">Saved in the backup folder above. The oldest automatic backups are deleted.</string>
+    <string name="auto_backup_interval_title">Back up every</string>
+    <string name="auto_backup_every_hours">%1$d hours</string>
+    <string name="auto_backup_keep_title">Automatic backups to keep</string>
+    <string name="auto_backup_keep_count">Last %1$d</string>
 </resources>

@@ -118,6 +118,7 @@ dependencies {
     implementation(libs.gridLayout)
 
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.constraintLayout)
     implementation(libs.androidx.recyclerview)

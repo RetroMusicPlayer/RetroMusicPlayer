@@ -41,7 +41,8 @@ object BackupHelper : KoinComponent {
     private val songRepository by inject<SongRepository>()
     private val database by inject<RetroDatabase>()
 
-    suspend fun createBackup(context: Context, name: String) {
+    /** Returns true when the backup file was written. [silent] skips the toast (automatic backups). */
+    suspend fun createBackup(context: Context, name: String, silent: Boolean = false): Boolean {
         // Build the zip in the cache first, then copy it to the chosen folder.
         val tempFile = File(context.cacheDir, name + APPEND_EXTENSION)
         val zipItems = mutableListOf<ZipItem>()
@@ -52,16 +53,39 @@ object BackupHelper : KoinComponent {
         zipItems.addAll(getListeningDataZipItems(context))
         zipItems.addAll(getLyricsZipItems(context))
         val done = zipAll(zipItems, tempFile) && deliver(context, tempFile, name)
-        withContext(Dispatchers.Main) {
-            context.showToast(
-                if (done) R.string.message_backup_create_success else R.string.error_create_backup
-            )
+        if (!silent) {
+            withContext(Dispatchers.Main) {
+                context.showToast(
+                    if (done) R.string.message_backup_create_success else R.string.error_create_backup
+                )
+            }
         }
         tempFile.delete()
         // Clean Cache Playlist Directory
         File(context.filesDir, PLAYLISTS_PATH).deleteRecursively()
         File(context.filesDir, LISTENING_PATH).deleteRecursively()
+        return done
     }
+
+    /** Deletes the oldest automatic backups, keeping the newest [keep]. Manual ones are never touched. */
+    fun deleteOldAutoBackups(context: Context, keep: Int) {
+        // The sortable timestamp in the name puts the newest first when sorted in reverse.
+        val old = listBackups(context)
+            .filter { it.name.startsWith(AUTO_BACKUP_PREFIX) }
+            .sortedByDescending { it.name }
+            .drop(keep.coerceAtLeast(1))
+        old.forEach { entry ->
+            runCatching {
+                val file = entry.file
+                if (file != null) file.delete()
+                else DocumentFile.fromSingleUri(context, entry.uri)?.delete()
+            }
+        }
+    }
+
+    /** Name for an automatic backup, for example AutoBackup_2026-11-15_101500. */
+    fun autoBackupName(): String =
+        AUTO_BACKUP_PREFIX + SimpleDateFormat("yyyy-MM-dd_HHmmss", Locale.US).format(Date())
 
     private suspend fun zipAll(zipItems: List<ZipItem>, backupFile: File): Boolean =
         withContext(Dispatchers.IO) {
@@ -458,6 +482,7 @@ object BackupHelper : KoinComponent {
         )
     }
 
+    const val AUTO_BACKUP_PREFIX = "AutoBackup_"
     const val BACKUP_EXTENSION = "rmbak"
     const val APPEND_EXTENSION = ".$BACKUP_EXTENSION"
     private const val PLAYLISTS_PATH = "Playlists"

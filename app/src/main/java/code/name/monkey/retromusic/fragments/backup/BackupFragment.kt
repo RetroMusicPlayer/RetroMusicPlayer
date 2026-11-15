@@ -23,12 +23,14 @@ import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.extensions.accentOutlineColor
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.extensions.showToast
+import code.name.monkey.retromusic.helper.AutoBackupScheduler
 import code.name.monkey.retromusic.helper.BackupEntry
 import code.name.monkey.retromusic.helper.BackupHelper
 import code.name.monkey.retromusic.helper.sanitize
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.Share
 import com.afollestad.materialdialogs.input.input
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -79,6 +81,7 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
             pickBackupFolder.launch(null)
         }
         updateFolderRow()
+        setupAutoBackup()
         binding.createBackup.accentOutlineColor()
         binding.restoreBackup.accentColor()
         binding.createBackup.setOnClickListener {
@@ -87,6 +90,71 @@ class BackupFragment : Fragment(R.layout.fragment_backup), BackupAdapter.BackupC
         binding.restoreBackup.setOnClickListener {
             openFilePicker.launch(arrayOf("application/octet-stream"))
         }
+    }
+
+    private fun setupAutoBackup() {
+        binding.autoBackupSwitch.isChecked = PreferenceUtil.autoBackupEnabled
+        binding.autoBackupSwitch.setOnCheckedChangeListener { _, checked ->
+            PreferenceUtil.autoBackupEnabled = checked
+            updateAutoBackupRows()
+            AutoBackupScheduler.update(requireContext().applicationContext)
+        }
+        binding.autoBackupIntervalRow.setOnClickListener {
+            chooseNumber(
+                R.string.auto_backup_interval_title,
+                intArrayOf(3, 6, 7, 12, 24),
+                PreferenceUtil.autoBackupHours,
+                { getString(R.string.auto_backup_every_hours, it) }
+            ) {
+                PreferenceUtil.autoBackupHours = it
+                updateAutoBackupRows()
+                AutoBackupScheduler.update(requireContext().applicationContext)
+            }
+        }
+        binding.autoBackupKeepRow.setOnClickListener {
+            chooseNumber(
+                R.string.auto_backup_keep_title,
+                intArrayOf(3, 5, 10, 20),
+                PreferenceUtil.autoBackupKeep,
+                { getString(R.string.auto_backup_keep_count, it) }
+            ) {
+                PreferenceUtil.autoBackupKeep = it
+                updateAutoBackupRows()
+            }
+        }
+        updateAutoBackupRows()
+    }
+
+    private fun updateAutoBackupRows() {
+        val enabled = PreferenceUtil.autoBackupEnabled
+        binding.autoBackupIntervalValue.text =
+            getString(R.string.auto_backup_every_hours, PreferenceUtil.autoBackupHours)
+        binding.autoBackupKeepValue.text =
+            getString(R.string.auto_backup_keep_count, PreferenceUtil.autoBackupKeep)
+        binding.autoBackupIntervalRow.isEnabled = enabled
+        binding.autoBackupKeepRow.isEnabled = enabled
+        binding.autoBackupIntervalRow.alpha = if (enabled) 1f else 0.5f
+        binding.autoBackupKeepRow.alpha = if (enabled) 1f else 0.5f
+    }
+
+    private fun chooseNumber(
+        titleRes: Int,
+        values: IntArray,
+        current: Int,
+        label: (Int) -> String,
+        onPicked: (Int) -> Unit
+    ) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(titleRes)
+            .setSingleChoiceItems(
+                values.map(label).toTypedArray(),
+                values.indexOf(current).coerceAtLeast(0)
+            ) { dialog, which ->
+                onPicked(values[which])
+                dialog.dismiss()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     private fun updateFolderRow() {

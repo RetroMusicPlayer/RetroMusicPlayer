@@ -581,4 +581,10 @@
     <string name="lyrics_sync_mark">تحديد</string>
     <string name="lyrics_sync_undo">تراجع</string>
     <string name="lyrics_sync_saved">تم حفظ الكلمات المتزامنة</string>
+    <string name="auto_backup_title">نسخ احتياطي تلقائي</string>
+    <string name="auto_backup_hint">تُحفظ في فولدر النسخ الاحتياطي أعلاه، ويُحذف أقدم النسخ التلقائية.</string>
+    <string name="auto_backup_interval_title">نسخ احتياطي كل</string>
+    <string name="auto_backup_every_hours">%1$d ساعة</string>
+    <string name="auto_backup_keep_title">عدد النسخ التلقائية المحفوظة</string>
+    <string name="auto_backup_keep_count">آخر %1$d</string>
 </resources>
