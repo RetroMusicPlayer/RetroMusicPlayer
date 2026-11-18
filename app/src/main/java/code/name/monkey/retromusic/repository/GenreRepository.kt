@@ -17,7 +17,9 @@ package code.name.monkey.retromusic.repository
 import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.BaseColumns
+import android.provider.MediaStore
 import android.provider.MediaStore.Audio.Genres
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.extensions.getLong
@@ -73,10 +75,43 @@ class RealGenreRepository(
         }
     }
 
-    private fun getGenreFromCursor(cursor: Cursor): Genre {
+    /**
+     * Song counts for every genre from a single query, keyed by genre id.
+     *
+     * From Android 11 each audio row carries its genre id, so this replaces one
+     * [getSongCount] query per genre, which is slow on libraries with hundreds of
+     * genre tags. Returns null before Android 11 or if the query fails, in which
+     * case the caller falls back to counting per genre.
+     */
+    private fun getSongCountsByGenre(): Map<Long, Int>? {
+        if (!VersionUtils.hasR()) return null
+        return try {
+            contentResolver.query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                arrayOf(MediaStore.Audio.AudioColumns.GENRE_ID),
+                IS_MUSIC,
+                null,
+                null
+            )?.use { cursor ->
+                val counts = HashMap<Long, Int>()
+                val genreIdColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.GENRE_ID)
+                while (cursor.moveToNext()) {
+                    if (!cursor.isNull(genreIdColumn)) {
+                        val genreId = cursor.getLong(genreIdColumn)
+                        counts[genreId] = (counts[genreId] ?: 0) + 1
+                    }
+                }
+                counts
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun getGenreFromCursor(cursor: Cursor, songCounts: Map<Long, Int>?): Genre {
         val id = cursor.getLong(Genres._ID)
         val name = cursor.getStringOrNull(Genres.NAME)
-        val songCount = getSongCount(id)
+        val songCount = if (songCounts != null) songCounts[id] ?: 0 else getSongCount(id)
         return Genre(id, name ?: "", songCount)
     }
 
@@ -104,8 +139,9 @@ class RealGenreRepository(
         val genres = arrayListOf<Genre>()
         cursor?.use {
             if (cursor.moveToFirst()) {
+                val songCounts = getSongCountsByGenre()
                 do {
-                    val genre = getGenreFromCursor(cursor)
+                    val genre = getGenreFromCursor(cursor, songCounts)
                     if (genre.songCount > 0) {
                         genres.add(genre)
                     }
