@@ -144,16 +144,39 @@ class RealArtistRepository(
             return Artist.empty
         }
 
-        // Group songs into albums
-        val albums = albumRepository.splitIntoAlbums(songsForArtist)
+        // Generate a stable, case-insensitive ID from the artist name.
+        // Keep synthetic IDs negative to avoid collisions with MediaStore IDs and reserved constants.
+        val normalizedName = name.trim()
+        val artistId = normalizedName
+            .lowercase(java.util.Locale.ROOT)
+            .hashCode()
+            .toLong()
+            .let { if (it >= 0) -it else it }
+            .let { if (it == Artist.empty.id || it == Artist.VARIOUS_ARTISTS_ID) it - 1 else it }
+
+        // Normalize song artist fields so Artist.name / Album.artistName reflect the selected artist.
+        val normalizedSongs = songsForArtist.map { song ->
+            code.name.monkey.retromusic.model.Song(
+                id = song.id,
+                title = song.title,
+                trackNumber = song.trackNumber,
+                year = song.year,
+                duration = song.duration,
+                data = song.data,
+                dateModified = song.dateModified,
+                albumId = song.albumId,
+                albumName = song.albumName,
+                artistId = artistId,
+                artistName = normalizedName,
+                composer = song.composer,
+                albumArtist = song.albumArtist
+            )
+        }
+
+        val albums = albumRepository.splitIntoAlbums(normalizedSongs)
         logD("artistByName: Grouped into ${albums.size} albums")
 
-        // Generate a stable ID from the artist name
-        // Using hashCode ensures the same name always gets the same ID
-        val artistId = name.hashCode().toLong()
-
         return Artist(artistId, albums)
-    }
 
     override fun artists(): List<Artist> {
         val songs = songRepository.songs(
