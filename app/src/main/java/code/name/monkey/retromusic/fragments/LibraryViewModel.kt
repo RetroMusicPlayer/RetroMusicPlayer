@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.logD
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.Job
@@ -69,10 +68,15 @@ class LibraryViewModel(
     private fun loadLibraryContent() {
         libraryContentJob?.cancel()
         libraryContentJob = viewModelScope.launch(IO) {
-            val homeDeferred = async { repository.homeSections() }
-            val suggestionsDeferred = async { repository.suggestions() }
-            val genresDeferred = async { repository.fetchGenres() }
-            val playlistsDeferred = async { repository.fetchPlaylistWithSongs() }
+            // Post each section as soon as it is loaded. Awaiting them in a fixed order
+            // made every tab wait for the slowest load before it (genres can take many
+            // seconds on large libraries, which held back playlists and home).
+            launch { repository.homeSections().let { if (isActive) home.postValue(it) } }
+            launch { repository.suggestions().let { if (isActive) suggestions.postValue(it) } }
+            launch { repository.fetchGenres().let { if (isActive) genres.postValue(it) } }
+            launch {
+                repository.fetchPlaylistWithSongs().let { if (isActive) playlists.postValue(it) }
+            }
 
             val songSnapshot = repository.allSongs()
             if (!isActive) return@launch
@@ -82,11 +86,6 @@ class LibraryViewModel(
             if (!isActive) return@launch
             albums.postValue(albumSnapshot)
             artists.postValue(repository.artistsForAlbums(albumSnapshot))
-
-            suggestions.postValue(suggestionsDeferred.await())
-            genres.postValue(genresDeferred.await())
-            playlists.postValue(playlistsDeferred.await())
-            home.postValue(homeDeferred.await())
         }
     }
 
