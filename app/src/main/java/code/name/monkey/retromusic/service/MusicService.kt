@@ -824,6 +824,11 @@ class MusicService : MediaBrowserServiceCompat(),
 
     @Synchronized
     fun play() {
+        // quit() stops the service from posting its notification so the pause it triggers
+        // can't bring the notification back. If the service survived the quit (because a
+        // client is still bound) and playback is starting again, it must be allowed to go
+        // foreground again, or playback runs as a background service and gets muted.
+        isQuitting = false
         playbackManager.play { playSongAt(getPosition()) }
         if (notHandledMetaChangedForCurrentTrack) {
             handleChangeInternal(META_CHANGED)
