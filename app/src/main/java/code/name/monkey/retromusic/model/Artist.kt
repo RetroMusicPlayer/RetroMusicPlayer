@@ -10,6 +10,7 @@
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 
 package code.name.monkey.retromusic.model
@@ -89,6 +90,12 @@ data class Artist(
                         o1.duration.compareTo(
                             o2.duration
                         )
+                    }
+
+                    // Needs play counts from the database; AbsArtistDetailsFragment sorts by
+                    // them. Without counts, fall back to title order.
+                    SortOrder.ArtistSongSortOrder.SONG_PLAY_COUNT -> { o1, o2 ->
+                        collator.compare(o1.title, o2.title)
                     }
 
                     else -> {

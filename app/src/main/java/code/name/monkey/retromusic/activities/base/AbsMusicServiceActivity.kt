@@ -23,7 +23,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.db.toPlayCount
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IMusicServiceEventListener
 import code.name.monkey.retromusic.repository.RealRepository
@@ -126,11 +125,6 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), IMusicServiceEventLi
             if (!PreferenceUtil.pauseHistory) {
                 repository.upsertSongInHistory(MusicPlayerRemote.currentSong)
             }
-            val song = repository.findSongExistInPlayCount(MusicPlayerRemote.currentSong.id)
-                ?.apply { playCount += 1 }
-                ?: MusicPlayerRemote.currentSong.toPlayCount()
-
-            repository.upsertSongInPlayCount(song)
         }
     }
 

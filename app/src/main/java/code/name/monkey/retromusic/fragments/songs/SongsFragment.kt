@@ -223,6 +223,13 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             R.string.album_artist
         ).isChecked =
             currentSortOrder == SongSortOrder.SONG_ALBUM_ARTIST
+        sortOrderMenu.add(
+            0,
+            R.id.action_song_sort_order_play_count,
+            9,
+            R.string.sort_order_most_played
+        ).isChecked =
+            currentSortOrder == SongSortOrder.SONG_PLAY_COUNT
 
         sortOrderMenu.setGroupCheckable(0, true, true)
     }
@@ -298,6 +305,7 @@ class SongsFragment : AbsRecyclerViewCustomGridSizeFragment<SongAdapter, GridLay
             R.id.action_song_sort_order_date -> SongSortOrder.SONG_DATE
             R.id.action_song_sort_order_composer -> SongSortOrder.COMPOSER
             R.id.action_song_sort_order_date_modified -> SongSortOrder.SONG_DATE_MODIFIED
+            R.id.action_song_sort_order_play_count -> SongSortOrder.SONG_PLAY_COUNT
             else -> PreferenceUtil.songSortOrder
         }
         if (sortOrder != PreferenceUtil.songSortOrder) {

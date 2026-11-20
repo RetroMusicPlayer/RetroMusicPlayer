@@ -10,6 +10,7 @@
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
+ *
  */
 
 package code.name.monkey.retromusic.service
@@ -27,9 +28,14 @@ class SongPlayCountHelper {
         return song.duration * 0.5 < stopWatch.elapsedTime
     }
 
-    fun notifySongChanged(song: Song) {
+    /**
+     * Starts timing [song]. [isPlaying] restarts the timer at once: a track change while playing
+     * sends no new play-state event, so without it the next song would never be timed.
+     */
+    fun notifySongChanged(song: Song, isPlaying: Boolean) {
         synchronized(this) {
             stopWatch.reset()
+            if (isPlaying) stopWatch.start()
             this.song = song
         }
     }

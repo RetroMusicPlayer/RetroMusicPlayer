@@ -95,7 +95,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         setupRecyclerView()
 
         binding.fragmentArtistContent.playAction.apply {
-            setOnClickListener { MusicPlayerRemote.openQueue(artist.sortedSongs, 0, true) }
+            setOnClickListener { MusicPlayerRemote.openQueue(songAdapter.dataSet, 0, true) }
         }
         binding.fragmentArtistContent.shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
@@ -153,7 +153,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
         )
         binding.fragmentArtistContent.songTitle.text = songText
         binding.fragmentArtistContent.albumTitle.text = albumText
-        songAdapter.swapDataSet(artist.sortedSongs)
+        showSortedSongs()
         albumAdapter.swapDataSet(artist.albums)
     }
 
@@ -291,6 +291,7 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                         R.id.action_sort_order_album -> SortOrder.ArtistSongSortOrder.SONG_ALBUM
                         R.id.action_sort_order_year -> SortOrder.ArtistSongSortOrder.SONG_YEAR
                         R.id.action_sort_order_song_duration -> SortOrder.ArtistSongSortOrder.SONG_DURATION
+                        R.id.action_sort_order_play_count -> SortOrder.ArtistSongSortOrder.SONG_PLAY_COUNT
                         else -> {
                             throw IllegalArgumentException("invalid ${item.title}")
                         }
@@ -306,7 +307,20 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
 
     private fun setSaveSortOrder(sortOrder: String) {
         PreferenceUtil.artistDetailSongSortOrder = sortOrder
-        songAdapter.swapDataSet(artist.sortedSongs)
+        showSortedSongs()
+    }
+
+    /** Shows the artist's songs in the saved order; "Most played" reads play counts first. */
+    private fun showSortedSongs() {
+        val artist = artist
+        viewLifecycleOwner.lifecycleScope.launch {
+            val songs = if (savedSongSortOrder == SortOrder.ArtistSongSortOrder.SONG_PLAY_COUNT) {
+                withContext(Dispatchers.IO) { PlayCounts.mostPlayedFirst(artist.songs) }
+            } else {
+                artist.sortedSongs
+            }
+            songAdapter.swapDataSet(songs)
+        }
     }
 
     private fun setupAlbumSortButton() {
@@ -373,6 +387,9 @@ abstract class AbsArtistDetailsFragment : AbsMainActivityFragment(R.layout.fragm
                 true
 
             SortOrder.ArtistSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_song_duration).isChecked =
+                true
+
+            SortOrder.ArtistSongSortOrder.SONG_PLAY_COUNT -> sortOrder.findItem(R.id.action_sort_order_play_count).isChecked =
                 true
 
             else -> {

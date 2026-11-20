@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.extensions.getStringOrNull
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
+import code.name.monkey.retromusic.util.PlayCounts
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.getExternalStoragePublicDirectory
 import java.text.Collator
@@ -95,6 +96,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
             SortOrder.SongSortOrder.COMPOSER -> {
                 songs.sortedWith{ s1, s2 -> collator.compare(s1.composer, s2.composer) }
             }
+            SortOrder.SongSortOrder.SONG_PLAY_COUNT -> PlayCounts.mostPlayedFirst(songs)
             else -> songs
         }
     }
@@ -211,7 +213,7 @@ class RealSongRepository(private val context: Context) : SongRepository {
                 baseProjection,
                 selectionFinal,
                 selectionValuesFinal,
-                sortOrder
+                SortOrder.SongSortOrder.toQuery(sortOrder)
             )
         } catch (ex: SecurityException) {
             return null

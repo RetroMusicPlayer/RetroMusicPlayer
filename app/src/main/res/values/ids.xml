@@ -22,6 +22,7 @@
     <item name="action_sort_order" type="id" />
     <item name="action_song_sort_order_artist" type="id" />
     <item name="action_song_sort_order_album_artist" type="id" />
+    <item name="action_song_sort_order_play_count" type="id" />
     <item name="action_song_sort_order_album" type="id" />
     <item name="action_song_sort_order_year" type="id" />
     <item name="action_song_sort_order_date" type="id" />
