@@ -31,6 +31,15 @@ interface PlayCountDao {
     @Query("SELECT * FROM PlayCountEntity ORDER BY play_count DESC")
     fun playCountSongs(): List<PlayCountEntity>
 
+    @Query("SELECT id, play_count FROM PlayCountEntity")
+    fun playCounts(): List<SongPlayCount>
+
     @Query("DELETE FROM SongEntity WHERE id =:songId")
     fun deleteSong(songId: Long)
 }
+
+/** One song's play count, without the rest of its [PlayCountEntity] row. */
+data class SongPlayCount(
+    val id: Long,
+    @ColumnInfo(name = "play_count") val playCount: Int
+)

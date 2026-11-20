@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.extensions.getLong
 import code.name.monkey.retromusic.extensions.getStringOrNull
+import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -93,7 +94,7 @@ class RealGenreRepository(
                 baseProjection,
                 IS_MUSIC,
                 null,
-                PreferenceUtil.songSortOrder
+                SortOrder.SongSortOrder.toQuery(PreferenceUtil.songSortOrder)
             )
         } catch (e: SecurityException) {
             return null

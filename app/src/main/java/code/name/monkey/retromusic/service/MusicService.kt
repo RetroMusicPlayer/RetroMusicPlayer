@@ -88,6 +88,7 @@ import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.providers.HistoryStore
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore
 import code.name.monkey.retromusic.providers.SongPlayCountStore
+import code.name.monkey.retromusic.util.PlayCounts
 import code.name.monkey.retromusic.service.notification.PlayingNotification
 import code.name.monkey.retromusic.service.playback.Playback
 import code.name.monkey.retromusic.service.playback.Playback.PlaybackCallbacks
@@ -1168,14 +1169,19 @@ class MusicService : MediaBrowserServiceCompat(),
                 }
                 savePosition()
                 savePositionInTrack()
+                // Decide here, as the track changes, whether the previous song was listened to,
+                // and start timing the new one; only the database writes go to the background.
+                val currentSong = currentSong
+                val finishedSong = songPlayCountHelper.song
+                val countPlay = songPlayCountHelper.shouldBumpPlayCount()
+                songPlayCountHelper.notifySongChanged(currentSong, isPlaying)
                 serviceScope.launch(IO) {
-                    val currentSong = currentSong
                     HistoryStore.getInstance(this@MusicService).addSongId(currentSong.id)
-                    if (songPlayCountHelper.shouldBumpPlayCount()) {
+                    if (countPlay) {
                         SongPlayCountStore.getInstance(this@MusicService)
-                            .bumpPlayCount(songPlayCountHelper.song.id)
+                            .bumpPlayCount(finishedSong.id)
+                        PlayCounts.bump(finishedSong)
                     }
-                    songPlayCountHelper.notifySongChanged(currentSong)
                     storage.saveSong(currentSong)
                 }
             }

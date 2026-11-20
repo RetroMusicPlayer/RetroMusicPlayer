@@ -16,5 +16,8 @@
         <item
             android:id="@+id/action_sort_order_song_duration"
             android:title="@string/song_duration" />
+        <item
+            android:id="@+id/action_sort_order_play_count"
+            android:title="@string/sort_order_most_played" />
     </group>
 </menu>

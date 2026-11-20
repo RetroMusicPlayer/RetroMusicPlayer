@@ -106,6 +106,15 @@ class SortOrder {
 
             /* Song sort order composer*/
             const val COMPOSER = MediaStore.Audio.Media.COMPOSER
+
+            /*
+             * Most played first. Not a MediaStore column: songs are queried by title and then
+             * sorted by their play counts, so pass sort orders through [toQuery] before a query.
+             */
+            const val SONG_PLAY_COUNT = "most_played"
+
+            /** [order] as a MediaStore sort order. */
+            fun toQuery(order: String): String = if (order == SONG_PLAY_COUNT) SONG_A_Z else order
         }
     }
 
@@ -155,6 +164,9 @@ class SortOrder {
 
             /* Artist song sort order date */
             const val SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC"
+
+            /* Artist song sort order most played (sorted in the app, not by MediaStore) */
+            const val SONG_PLAY_COUNT = SongSortOrder.SONG_PLAY_COUNT
         }
     }
 
