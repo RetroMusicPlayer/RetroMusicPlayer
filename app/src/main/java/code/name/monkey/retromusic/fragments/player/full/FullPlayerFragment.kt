@@ -147,11 +147,12 @@ class FullPlayerFragment : AbsPlayerFragment(R.layout.fragment_full) {
     }
 
     private fun updateLabel() {
-        if ((MusicPlayerRemote.playingQueue.size - 1) == (MusicPlayerRemote.position)) {
+        val nextSong = MusicPlayerRemote.playingQueue.getOrNull(MusicPlayerRemote.position + 1)
+        if (nextSong == null) {
             binding.nextSongLabel.setText(R.string.last_song)
             binding.nextSong.hide()
         } else {
-            val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
+            val title = nextSong.title
             binding.nextSongLabel.setText(R.string.next_song)
             binding.nextSong.apply {
                 text = title

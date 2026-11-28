@@ -477,13 +477,11 @@ class GradientPlayerFragment : AbsPlayerFragment(R.layout.fragment_gradient_play
     }
 
     private fun updateLabel() {
-        (MusicPlayerRemote.playingQueue.size - 1).apply {
-            if (this == (MusicPlayerRemote.position)) {
-                binding.nextSong.text = context?.resources?.getString(R.string.last_song)
-            } else {
-                val title = MusicPlayerRemote.playingQueue[MusicPlayerRemote.position + 1].title
-                binding.nextSong.text = title
-            }
+        val nextSong = MusicPlayerRemote.playingQueue.getOrNull(MusicPlayerRemote.position + 1)
+        if (nextSong == null) {
+            binding.nextSong.text = context?.resources?.getString(R.string.last_song)
+        } else {
+            binding.nextSong.text = nextSong.title
         }
     }
 
