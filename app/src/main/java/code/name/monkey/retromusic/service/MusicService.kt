@@ -1185,6 +1185,9 @@ class MusicService : MediaBrowserServiceCompat(),
                 mediaSession?.setQueue(playingQueue.toMediaSessionQueue())
                 updateMediaSessionMetaData(::updateMediaSessionPlaybackState) // because playing queue size might have changed
                 saveQueues()
+                // The current song can move within the queue (e.g. when shuffling), so its position
+                // has to be saved together with the queue
+                savePosition()
                 if (playingQueue.size > 0) {
                     prepareNext()
                 } else {
