@@ -975,13 +975,16 @@ class MusicService : MediaBrowserServiceCompat(),
                         SAVED_POSITION_IN_TRACK, -1
                     )
                 if (restoredQueue.size > 0 && restoredQueue.size == restoredOriginalQueue.size && restoredPosition != -1) {
+                    // The saved position can point past the end of the saved queue. Start from the
+                    // first song then, as the saved position in the track belongs to another song.
+                    val restoredPositionIsValid = restoredPosition in restoredQueue.indices
                     originalPlayingQueue = ArrayList(restoredOriginalQueue)
                     playingQueue = ArrayList(restoredQueue)
-                    position = restoredPosition
+                    position = if (restoredPositionIsValid) restoredPosition else 0
                     withContext(Main) {
                         openCurrent {
                             prepareNext()
-                            if (restoredPositionInTrack > 0) {
+                            if (restoredPositionIsValid && restoredPositionInTrack > 0) {
                                 seek(restoredPositionInTrack)
                             }
                             notHandledMetaChangedForCurrentTrack = true
